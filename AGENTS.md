@@ -3,9 +3,9 @@
 > Binding for every agent (human or AI) touching this repo. This is the public-facing studio/portfolio site for the AutomatedEmpires venture system. Read it fully before doing anything.
 
 ## 0 · Prime doctrine
-**Notion decides. GitHub builds. Figma shows. Everything else runs.**
+**Notion decides and builds. GitHub reviews and ships. Figma shows. Everything else runs.**
 
-- **Notion** = product & vision truth. **This repo** = implementation truth for the marketing site only.
+- **Notion** = product & vision truth, and where the bulk of the build is authored before code moves. **This repo** = implementation truth for the marketing site only; GitHub validates, reviews, and ships it.
 - This repo is the org's public front door; it is NOT one of the product apps (Explore&Earn, BidSpace, Sweepza, LogLoads).
 
 ## 1 · What this is
