@@ -26,24 +26,24 @@
 
 ### automatedempires
 - [PR #3](https://github.com/AutomatedEmpires/automatedempires/pull/3) `ci: align runtime and reusable workflow` -> CodeRabbit success only; reusable CI status not visible in the latest API read.
-- [PR #4](https://github.com/AutomatedEmpires/automatedempires/pull/4) `docs: align venture canon copy` -> CodeRabbit success only.
+- [PR #4](https://github.com/AutomatedEmpires/automatedempires/pull/4) `docs: align venture canon copy` -> no status checks visible in the latest API read after the report update push.
 
 ### explore-and-earn
 - [PR #169](https://github.com/AutomatedEmpires/explore-and-earn/pull/169) `fix(ci): resolve pre-existing TypeScript errors blocking all CI runs` -> CodeRabbit success; Vercel failing externally; GitHub required checks not visible in the latest API read.
 - [PR #170](https://github.com/AutomatedEmpires/explore-and-earn/pull/170) `ci: standardize reusable workflow caller` -> CodeRabbit success; Vercel failing externally; GitHub required checks not visible in the latest API read.
-- [PR #171](https://github.com/AutomatedEmpires/explore-and-earn/pull/171) `docs: align product canon copy` -> `verify / design-guardrails` success; `verify / verify` and `codeql / analyze` in progress at last read; Vercel failing externally.
+- [PR #171](https://github.com/AutomatedEmpires/explore-and-earn/pull/171) `docs: align product canon copy` -> `verify / design-guardrails`, `codeql / analyze`, CodeQL, and CodeRabbit successful; `verify / verify` still in progress at last read; Vercel failing externally.
 
 ### bidspace
 - [PR #47](https://github.com/AutomatedEmpires/bidspace/pull/47) `ci: align reusable workflow and agent routing` -> previously green locally and in GitHub checks; latest API read showed CodeRabbit success only.
-- [PR #48](https://github.com/AutomatedEmpires/bidspace/pull/48) `docs: align product canon copy` -> `ci / design-guardrails` success; `ci / verify` and `codeql / analyze` in progress at last read.
+- [PR #48](https://github.com/AutomatedEmpires/bidspace/pull/48) `docs: align product canon copy` -> green, including `ci / verify`, `ci / design-guardrails`, CodeQL, and CodeRabbit.
 
 ### sweepza
 - [PR #41](https://github.com/AutomatedEmpires/sweepza/pull/41) `ci: align reusable workflow and agent routing` -> green, including CI, CodeQL, dependency review, CodeRabbit, and Vercel preview.
-- [PR #42](https://github.com/AutomatedEmpires/sweepza/pull/42) `docs: align product canon copy` -> `dependency-review` and `ci / design-guardrails` success; `ci / verify` and CodeQL in progress at last read; Vercel preview pending.
+- [PR #42](https://github.com/AutomatedEmpires/sweepza/pull/42) `docs: align product canon copy` -> GitHub CI, CodeQL, dependency review, and CodeRabbit successful; Vercel preview still pending at last read.
 
 ### logloads
 - [PR #15](https://github.com/AutomatedEmpires/logloads/pull/15) `ci: align reusable workflow and agent routing` -> green, including CI, CodeQL, and CodeRabbit.
-- [PR #19](https://github.com/AutomatedEmpires/logloads/pull/19) `docs: align product canon copy` -> `ci / design-guardrails` success; `ci / verify` and CodeQL in progress at last read.
+- [PR #19](https://github.com/AutomatedEmpires/logloads/pull/19) `docs: align product canon copy` -> green, including `ci / verify`, `ci / design-guardrails`, CodeQL, and CodeRabbit.
 
 ### traffic
 - No PR. The repo is an empty remote (`isEmpty: true`, no default branch, no branches), so it was intentionally deferred rather than scaffolded without a defined purpose.
