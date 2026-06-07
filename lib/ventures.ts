@@ -12,36 +12,36 @@ export const ventures: Venture[] = [
   {
     slug: "explore-and-earn",
     name: "Explore&Earn",
-    tagline: "Get rewarded for exploring the world.",
+    tagline: "Built by seekers, for seekers.",
     description:
-      "A location-based rewards platform that turns everyday exploration into points, perks, and real-world payouts.",
+      "A discovery marketplace that rewards real-world exploration — find places, take on quests, and earn points, perks, and payouts for getting out there.",
     status: "Building",
     accent: "#22c55e",
   },
   {
     slug: "sweepza",
     name: "Sweepza",
-    tagline: "Sweepstakes, reimagined.",
+    tagline: "Sweepstakes you can see.",
     description:
-      "A modern sweepstakes and giveaway platform with transparent odds, instant entries, and creator-friendly campaigns.",
+      "A photo-first sweepstakes discovery app — browse giveaways visually, enter in seconds, and trust every draw with transparent odds.",
     status: "Building",
     accent: "#a855f7",
   },
   {
     slug: "bidspace",
     name: "BidSpace",
-    tagline: "Live auctions for everything.",
+    tagline: "Bid on space, by the map.",
     description:
-      "A real-time bidding marketplace that makes running and winning auctions fast, fair, and fun.",
+      "A map-first marketplace for temporary commercial inventory — hosts list short-term space, bidders compete with sealed bids, and verification keeps every deal honest.",
     status: "Building",
     accent: "#f59e0b",
   },
   {
     slug: "logloads",
     name: "LogLoads",
-    tagline: "Freight, finally organized.",
+    tagline: "The Timber Truck Operating Network.",
     description:
-      "Logistics tooling that connects loads, carriers, and lanes with clean tracking and smart matching.",
+      "Logistics for log hauling — connecting drivers, outfits, and loaders with real-time hauls, clean tracking, and smart lane matching.",
     status: "Building",
     accent: "#38bdf8",
   },
