@@ -6,10 +6,13 @@ name: CI
     branches: [main]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
   cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   ci:
-    uses: AutomatedEmpires/.github/.github/workflows/reusable-ci.yml@main
+    uses: AutomatedEmpires/.github/.github/workflows/reusable-ci.yml@7f03a9b7a8304353a04addd5227f6eea87fe7769
     secrets: inherit
