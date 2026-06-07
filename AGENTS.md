@@ -29,10 +29,10 @@ This is a marketing-leaning site and does not need the full product spine, but w
 ## 5 · How we work
 - Work on lane/feature branches → small PRs → review → merge. **Never push straight to `main`.**
 - **Builder is never the approver.** Open a PR; do not merge your own work without review.
-- CI (`.github/workflows/ci.yml`) calls the org-shared reusable workflow and runs typecheck + lint + build on every PR; keep it green.
+- Before opening a PR, run `pnpm typecheck && pnpm build` and keep both green; there is no CI workflow in this repo yet.
 - Respect founder gates for anything money-moving, legally binding, or destructive.
 
 ## 6 · Repo layout
 - `app/` — Next.js App Router routes
 - `components/` — Nav, Hero, VentureCard, Footer, and related UI
-- `lib/ventures.ts` — venture list single source of truth
+- `lib/ventures.ts` — single source of truth for the venture list and its canon-aligned copy
