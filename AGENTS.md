@@ -9,12 +9,12 @@
 - This repo is the org's public front door; it is NOT one of the product apps (Explore&Earn, BidSpace, Sweepza, LogLoads).
 
 ## 1 · What this is
-The AutomatedEmpires studio site: a Next.js (App Router) marketing/portfolio surface that presents the venture portfolio. `lib/ventures.ts` is the single source of truth for the venture list rendered by the site.
+The AutomatedEmpires studio site: a Next.js (App Router) marketing/portfolio surface that presents the venture portfolio. `lib/ventures.ts` is the single source of truth for the venture list rendered by the site, and its copy must stay aligned to the locked venture canon.
 
 ## 2 · The machine
 Built on ONE machine; assume exactly:
 - Windows 11 ARM64 (Snapdragon X Elite) → WSL2 Ubuntu 24.04 → VS Code
-- Working path: `/home/jackson/automatedempires/ventures/automatedempires`
+- Working path: `/home/jackson/automatedempires/automatedempires`
 - 16 GB RAM. **One agent at a time** — no parallel heavy builds or long-running watchers.
 
 ## 3 · Runtime (pinned — do not drift)
@@ -24,15 +24,15 @@ Built on ONE machine; assume exactly:
 - Any version change requires a dated decision.
 
 ## 4 · Integration spine (cross-app standard)
-This is a marketing-leaning site and does not need the full product spine, but when it does integrate it uses the locked family providers — Secrets = Doppler, Hosting = Vercel, Analytics = PostHog, Errors = Sentry, Media = Cloudinary, Email = Resend, Icons = Streamline. Do not introduce alternates without a dated decision.
+This is a marketing-leaning site and does not need the full product spine, but when it does integrate it uses the locked family providers: Doppler, Vercel, PostHog, Sentry, Cloudinary, Resend, Clerk, Mapbox, Stripe, and Streamline. Do not introduce alternates without a dated decision.
 
 ## 5 · How we work
 - Work on lane/feature branches → small PRs → review → merge. **Never push straight to `main`.**
 - **Builder is never the approver.** Open a PR; do not merge your own work without review.
-- CI (`.github/workflows/ci.yml`) calls the org-shared reusable workflow and runs typecheck + lint + build on every PR; keep it green.
+- Before opening a PR, run `pnpm typecheck && pnpm build` and keep both green; there is no CI workflow in this repo yet.
 - Respect founder gates for anything money-moving, legally binding, or destructive.
 
 ## 6 · Repo layout
 - `app/` — Next.js App Router routes
 - `components/` — Nav, Hero, VentureCard, Footer, and related UI
-- `lib/ventures.ts` — venture list single source of truth
+- `lib/ventures.ts` — single source of truth for the venture list and its canon-aligned copy
