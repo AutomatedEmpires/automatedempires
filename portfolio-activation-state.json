@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-07T09:00:20Z",
+  "updated_at": "2026-07-07T09:01:57Z",
   "products": [
     {
       "name": "Automated Empires",
@@ -76,7 +76,7 @@
       "dns_status": "apex/www resolve to 15.197.148.33 and 3.33.130.190 and return /lander shell",
       "phone_status": "not applicable",
       "founder_gates": ["DNS provider access or DNS change approval"],
-      "last_production_verification": "2026-07-07T09:00:20Z",
+      "last_production_verification": "2026-07-07T09:01:57Z",
       "state": "OWNER-BLOCKED"
     },
     {

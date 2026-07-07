@@ -1,6 +1,6 @@
 # Portfolio Activation State
 
-Updated: 2026-07-07T09:00:20Z
+Updated: 2026-07-07T09:01:57Z
 
 This file is the central control surface for Automated Empires activation work.
 It records verified production facts only. Secret values are intentionally
@@ -36,6 +36,7 @@ omitted.
 - Vercel app URL: `https://sweepza.vercel.app` returns HTTPS 200 with title `Sweepza - Sweepstakes | Simplified`.
 - Custom domain status: `sweepza.com` returns HTTPS 200 but is served by GoDaddy DPS, not the Sweepza Vercel app; `www.sweepza.com` redirects to the GoDaddy-served apex.
 - Production health: `https://sweepza.com/api/health` returns 404 from the GoDaddy-served custom domain; `https://sweepza.vercel.app/api/health` returns 200 with Supabase public/service-role present, Clerk app present, Clerk webhook absent, Stripe app/webhook present, PostHog absent, Sentry absent, GitHub worker present, Notion worker absent.
+- Production cron: `https://sweepza.vercel.app/api/cron/expire-stale` returns 401 without the bearer token, proving the route is deployed and `CRON_SECRET` is configured.
 - GitHub: PR #45 merged into `main` at `c5045ba32bfd8123bb36bea4a8071537ed891866`; PR #46 merged into `main` at `8c39db444508c18c8424eeadd227632e29d162f5`.
 - Stripe: app/webhook environment is present per Sweepza health, but connector calls failed in this runtime, so live/test account mode and real checkout path were not externally verified. Code path now verifies webhook event subscriptions before reusing an endpoint.
 - Clerk: app keys present per health; webhook secret absent.
