@@ -1,6 +1,6 @@
 # Portfolio Activation State
 
-Updated: 2026-07-07T08:55:21Z
+Updated: 2026-07-07T09:00:20Z
 
 This file is the central control surface for Automated Empires activation work.
 It records verified production facts only. Secret values are intentionally
@@ -35,10 +35,12 @@ omitted.
 - Supabase project: `ojwhsntcpmoxnzisuomq`
 - Vercel app URL: `https://sweepza.vercel.app` returns HTTPS 200 with title `Sweepza - Sweepstakes | Simplified`.
 - Custom domain status: `sweepza.com` returns HTTPS 200 but is served by GoDaddy DPS, not the Sweepza Vercel app; `www.sweepza.com` redirects to the GoDaddy-served apex.
-- Production health: `https://sweepza.com/api/health` returns 404 from the GoDaddy-served site; generated Vercel domain health timed out during this run.
-- GitHub: PR #45 merged into `main` at `c5045ba32bfd8123bb36bea4a8071537ed891866` after review fixes; PR #46 updated to `c47fd3e5c8b77f476c7cf93db38c243b85a22cb1` and validation passed locally.
-- Stripe: connector calls failed in this runtime, so live/test account state was not verified. Code path now verifies webhook event subscriptions before reusing an endpoint.
-- Clerk, Resend, PostHog, Sentry: no authenticated admin connector available in this runtime; statuses unverified.
+- Production health: `https://sweepza.com/api/health` returns 404 from the GoDaddy-served custom domain; `https://sweepza.vercel.app/api/health` returns 200 with Supabase public/service-role present, Clerk app present, Clerk webhook absent, Stripe app/webhook present, PostHog absent, Sentry absent, GitHub worker present, Notion worker absent.
+- GitHub: PR #45 merged into `main` at `c5045ba32bfd8123bb36bea4a8071537ed891866`; PR #46 merged into `main` at `8c39db444508c18c8424eeadd227632e29d162f5`.
+- Stripe: app/webhook environment is present per Sweepza health, but connector calls failed in this runtime, so live/test account mode and real checkout path were not externally verified. Code path now verifies webhook event subscriptions before reusing an endpoint.
+- Clerk: app keys present per health; webhook secret absent.
+- Resend: unverified.
+- PostHog, Sentry: absent per health.
 - Data: Supabase has 16 listing rows and 2 app users; synthetic/live classification remains required before revenue launch.
 - Founder gate: DNS provider access or DNS change approval is required to point `sweepza.com` at Vercel. Stripe account access/KYC may also be required before live-money verification.
 - State: OWNER-BLOCKED.

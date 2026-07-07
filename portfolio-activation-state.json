@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-07T08:55:21Z",
+  "updated_at": "2026-07-07T09:00:20Z",
   "products": [
     {
       "name": "Automated Empires",
@@ -27,7 +27,7 @@
       "vercel_status": "generated domain serves app; custom domain serves GoDaddy DPS",
       "supabase_project": "ojwhsntcpmoxnzisuomq",
       "clerk_status": "unverified",
-      "stripe_status": "unverified; connector read calls failed",
+      "stripe_status": "app and webhook env present per health; connector read calls failed, so live/test account mode not externally verified",
       "resend_status": "unverified",
       "posthog_status": "unverified",
       "sentry_status": "unverified",
@@ -68,15 +68,15 @@
       "production_url": "https://pinnedatlas.vercel.app",
       "vercel_status": "generated domain serves app; custom domain serves registrar lander shell",
       "supabase_project": "mrizaiftntoznmwhulwc",
-      "clerk_status": "unverified",
+      "clerk_status": "app present per health; webhook secret absent",
       "stripe_status": "unverified",
       "resend_status": "unverified",
-      "posthog_status": "unverified",
-      "sentry_status": "unverified",
+      "posthog_status": "absent per health",
+      "sentry_status": "absent per health",
       "dns_status": "apex/www resolve to 15.197.148.33 and 3.33.130.190 and return /lander shell",
       "phone_status": "not applicable",
       "founder_gates": ["DNS provider access or DNS change approval"],
-      "last_production_verification": "2026-07-07T08:55:21Z",
+      "last_production_verification": "2026-07-07T09:00:20Z",
       "state": "OWNER-BLOCKED"
     },
     {
