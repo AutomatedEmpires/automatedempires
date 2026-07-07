@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-07T17:01:00Z",
+  "updated_at": "2026-07-07T21:55:29Z",
   "products": [
     {
       "name": "Automated Empires",
@@ -24,20 +24,26 @@
       "repository": "AutomatedEmpires/sweepza",
       "domain": "sweepza.com",
       "production_url": "https://sweepza.com",
-      "vercel_status": "custom apex/www serve app from Vercel; Vercel DNS verification valid",
+      "vercel_status": "custom apex/www serve app from Vercel; fresh prod deploy from origin/main (8c39db4, PR #45+#46) with live Stripe env; apex/www/health/public pages all HTTP 200",
       "supabase_project": "ojwhsntcpmoxnzisuomq",
-      "clerk_status": "unverified",
-      "stripe_status": "app and webhook env present per health; connector read calls failed, so live/test account mode not externally verified",
-      "resend_status": "unverified",
-      "posthog_status": "unverified",
-      "sentry_status": "unverified",
-      "dns_status": "GoDaddy authoritative DNS: apex A 216.150.1.1 and 216.150.16.1; www CNAME 8b91c0d2a92bd777.vercel-dns-017.com.; HTTPS 200; /api/health 200",
+      "clerk_status": "dedicated Sweepza DEVELOPMENT instance ins_3EhjrYiNBzhqkZlG9kIc2Gh4dSy (separate from E&E); auth E2E-proven (signup/signin/host-onboarding). Production instance + CLERK_WEBHOOK_SECRET are founder dashboard gates. On-demand app_user upsert covers signup without the webhook.",
+      "stripe_status": "LIVE and configured. Account acct_1SpxXpDtcwz0cxzo (shared founder account) KYC COMPLETE: charges_enabled+payouts_enabled+details_submitted all true. Sweepza-namespaced live products/prices provisioned: baseline $19/mo price_1TqghWDtcwz0cxzoYtZp1XYv, add-on $5/mo price_1TqghWDtcwz0cxzogpcLYkdP; live webhook we_1TqghXDtcwz0cxzobypz5Rl9 -> https://sweepza.com/api/webhooks/stripe. Live keys+prices+whsec in Doppler prd + Vercel prod. Live money path proven: cs_live_ checkout session created (livemode true, $19 USD) and expired. Full checkout->webhook->subscription->entitlement->UI loop E2E-verified in test mode with identical code. Remaining: one real-card charge (founder).",
+      "resend_status": "not activated (RESEND_API_KEY unset in prd, cleanly off). Founder gate: Resend account + API key + send.sweepza.com sending domain + DNS.",
+      "posthog_status": "off (NEXT_PUBLIC_POSTHOG_KEY unset in prd; no E&E pollution). Founder gate: create dedicated Sweepza PostHog project, then set key.",
+      "sentry_status": "off (NEXT_PUBLIC_SENTRY_DSN unset in prd). Founder gate: create dedicated Sweepza Sentry project, then set DSN/auth token.",
+      "dns_status": "GoDaddy authoritative DNS: apex A 216.150.1.1 and 216.150.16.1; www CNAME 8b91c0d2a92bd777.vercel-dns-017.com.; HTTPS 200; /api/health 200; cron 401 without bearer (CRON_SECRET active)",
       "phone_status": "not applicable",
+      "data_status": "CLEAN. All synthetic rows removed with scoped predicates (14 dev-seed listings + 2 expired demo listings + 2 hosts + 2 subscriptions + 2 synthetic users). Zero real user/host/listing data existed. Owner bootstrap user (clerk_user_id dev_owner, is_owner) retained; note it is a placeholder Clerk id, so real founder admin access requires mapping his real Clerk user to is_owner/is_admin.",
       "founder_gates": [
-        "Stripe live-mode/KYC access if not already complete"
+        "One real-card checkout on https://sweepza.com to prove live revenue (KYC already complete; money path live-configured)",
+        "Dedicated production Clerk instance (dashboard + clerk.sweepza.com DNS + OAuth secrets) to replace the dev instance",
+        "Dedicated Sweepza PostHog project (copy phc_ key + host)",
+        "Dedicated Sweepza Sentry project (copy DSN + auth token)",
+        "Resend account + API key + send.sweepza.com sending domain/DNS",
+        "Map founder's real Clerk user to is_owner/is_admin for production admin access"
       ],
-      "last_production_verification": "2026-07-07T17:01:00Z",
-      "state": "OWNER-BLOCKED"
+      "last_production_verification": "2026-07-07T21:55:29Z",
+      "state": "REVENUE PATH LIVE - AWAITING FOUNDER REAL-MONEY PROOF (Stripe live+KYC done, app deployed+healthy, data clean; prod Clerk/PostHog/Sentry/Resend are enhancement gates)"
     },
     {
       "name": "Lake and Pine Cleaning",
