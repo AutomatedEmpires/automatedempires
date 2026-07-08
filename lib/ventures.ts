@@ -11,6 +11,10 @@ export type VentureStage =
   | "Mission System"
   | "Emerging";
 
+// Crisp, badge-ready maturity grounded in verified reality (see PORTFOLIO_ACTIVATION_STATE
+// and live-domain checks). Distinct from `stage`, which is the longer classification label.
+export type VentureStatus = "Live" | "Building" | "Mission" | "Concept";
+
 export type PlatformProfile =
   | "AE Commercial Platform"
   | "AE Civic Infrastructure"
@@ -18,6 +22,18 @@ export type PlatformProfile =
   | "AE Emerging System";
 
 export type ShowcaseMode = "product" | "system" | "mission" | "operating";
+
+// The connective tissue of the portfolio: the recurring instincts that thread across
+// otherwise unrelated markets. Ventures that share a thread are genuinely related in
+// how they attack their problem, which is what the ecosystem map draws.
+export type VentureThread =
+  | "Discovery"
+  | "Marketplace"
+  | "Spatial"
+  | "Trust"
+  | "Real-world ops"
+  | "Civic"
+  | "Decision support";
 
 export type VentureProof = {
   label: string;
@@ -45,7 +61,9 @@ export type Venture = {
   fullName: string;
   classification: VentureClassification;
   stage: VentureStage;
+  status: VentureStatus;
   publicStatus: string;
+  oneLiner: string;
   thesis: string;
   problem: string;
   system: string;
@@ -55,6 +73,7 @@ export type Venture = {
   humanTruth: string;
   emotionalQuality: string;
   visualPhysics: string[];
+  threads: VentureThread[];
   industries: string[];
   capabilities: string[];
   platformProfile: PlatformProfile;
@@ -67,7 +86,7 @@ export type Venture = {
   milestones: VentureMilestone[];
 };
 
-export const ventures = [
+export const ventures: Venture[] = [
   {
     id: "explore-and-earn",
     slug: "explore-and-earn",
@@ -75,8 +94,10 @@ export const ventures = [
     fullName: "Explore&Earn",
     classification: "active-company",
     stage: "Active Build",
+    status: "Live",
+    oneLiner: "Seasonal work with housing, meals, and pay — found in one place.",
     publicStatus:
-      "Active build. Current repo evidence includes full seeker, host, admin, listing, map, swipe, and legal route structures, while canon still treats product truth as Notion-led.",
+      "Live infrastructure on exploreandearn.com. Seeker, host, admin, listing, map, swipe, and legal surfaces are deployed and healthy; marketplace liquidity is a founder/business activation step, not an engineering gap.",
     thesis:
       "A discovery marketplace built by seekers, for seekers, organized around the three questions that matter: where will I sleep, what will I eat, and what will I earn?",
     humanTruth:
@@ -93,6 +114,7 @@ export const ventures = [
       "Infrastructure for people willing to go where opportunity is.",
     emotionalQuality: "Possibility",
     visualPhysics: ["destinations", "routes", "stacked cards", "working landscapes"],
+    threads: ["Discovery", "Marketplace", "Spatial", "Trust", "Real-world ops"],
     industries: ["travel work", "seasonal labor", "hospitality", "agriculture", "maritime"],
     capabilities: [
       "Discovery cards",
@@ -103,7 +125,7 @@ export const ventures = [
     ],
     platformProfile: "AE Commercial Platform",
     repository: "https://github.com/AutomatedEmpires/explore-and-earn",
-    website: "https://explore-and-earn.vercel.app",
+    website: "https://exploreandearn.com",
     showcaseMode: "product",
     featured: true,
     palette: {
@@ -114,10 +136,10 @@ export const ventures = [
     },
     proof: [
       {
-        label: "Product principle",
+        label: "Live product",
         detail:
-          "Repo canon defines Explore&Earn as a mobile-first, card-first marketplace where housing, meals, and pay remain first-class.",
-        href: "https://github.com/AutomatedEmpires/explore-and-earn",
+          "exploreandearn.com serves the public product from Vercel over HTTPS; /api/health returns ok and the domain is verified.",
+        href: "https://exploreandearn.com",
       },
       {
         label: "Current implementation signal",
@@ -125,23 +147,23 @@ export const ventures = [
           "The active branch contains seeker, host, admin, listing detail, search, map, swipe, notifications, messages, and legal surfaces.",
       },
       {
-        label: "Public deployment",
-        detail: "GitHub metadata points to the Vercel deployment for the product.",
-        href: "https://explore-and-earn.vercel.app",
+        label: "Source proof",
+        detail: "The product repository is the implementation record for the marketplace.",
+        href: "https://github.com/AutomatedEmpires/explore-and-earn",
       },
     ],
     milestones: [
+      {
+        date: "2026-07-07",
+        title: "Production infrastructure verified",
+        detail:
+          "Domain, HTTPS, health, database (79 migrations), analytics, error monitoring, email key, and cron were verified operating; named founder gates remain for production auth and live payments.",
+      },
       {
         date: "2026-07-06",
         title: "Launch-convergence hardening",
         detail:
           "Auth matchers, keyless fallback behavior, listing creation, and mobile resume polish moved the product closer to a resilient public surface.",
-      },
-      {
-        date: "2026-07-05",
-        title: "Production-convergence proof",
-        detail:
-          "Anonymous discovery and end-to-end migration proof were closed in the active product history.",
       },
     ],
   },
@@ -152,8 +174,10 @@ export const ventures = [
     fullName: "BidSpace",
     classification: "active-company",
     stage: "Active Build",
+    status: "Building",
+    oneLiner: "A map-first market that turns physical space into biddable inventory.",
     publicStatus:
-      "Active build. The repo has shipped database, service, trust, fit, public marketplace, explore, map, opportunity, and inventory-unit detail foundations on an integration branch.",
+      "Software complete and engine-verified. 43 routes, green build, and a live internal marketplace loop (bid → counter → accept → award → booking → payment → settlement) proven against the database. Public deployment is intentionally gated on founder identity and money setup.",
     thesis:
       "A map-first marketplace for real-world commercial opportunity where physical space and audience access become structured, biddable inventory.",
     humanTruth:
@@ -170,6 +194,7 @@ export const ventures = [
       "Infrastructure for pricing, distributing, and transacting temporary physical opportunity.",
     emotionalQuality: "Opportunity in motion",
     visualPhysics: ["map activity", "inventory geometry", "bids", "market movement"],
+    threads: ["Discovery", "Marketplace", "Spatial", "Trust"],
     industries: ["spatial commerce", "events", "venues", "local retail", "sponsorship"],
     capabilities: [
       "Inventory units",
@@ -191,33 +216,34 @@ export const ventures = [
     },
     proof: [
       {
-        label: "Locked marketplace primitive",
-        detail: "Inventory Unit is the canonical primitive, separate from Opportunity.",
+        label: "Engine verified",
+        detail:
+          "The internal marketplace loop was run against the live database end to end: a $280 booking produced a 10% fee and a $252 payout, and recurring copy-forward was verified.",
         href: "https://github.com/AutomatedEmpires/bidspace",
       },
       {
         label: "Service layer evidence",
         detail:
-          "The repo includes bidding, booking, discovery, geospatial, payments, reviews, trust, venues, and inventory services.",
+          "The repo includes bidding, booking, discovery, geospatial, payments, reviews, trust, venues, and inventory services across 43 routes.",
       },
       {
         label: "Stage truth",
         detail:
-          "Map/list discovery and payments have backend foundations; several UI and live-provider pieces remain pending by roadmap.",
+          "Software is complete and Stripe Connect is modernized to controller-property accounts; deployment is deliberately held on founder Clerk and Stripe KYC so nothing broken ships.",
       },
     ],
     milestones: [
+      {
+        date: "2026-07-07",
+        title: "Software complete, Connect modernized",
+        detail:
+          "Reached software-complete with the payment engine verified and Stripe Connect moved off the deprecated express type, with webhook settlement hardened against mid-flight crashes.",
+      },
       {
         date: "2026-07-06",
         title: "Public marketplace pass",
         detail:
           "Homepage, explore, map, opportunity, and inventory-unit detail surfaces landed on the recovered-product integration branch.",
-      },
-      {
-        date: "2026-07-06",
-        title: "Network, trust, and fit layer",
-        detail:
-          "Repository history added trust provenance, fit logic, listing queries, and a product-specific design system.",
       },
     ],
   },
@@ -228,8 +254,10 @@ export const ventures = [
     fullName: "LogLoads",
     classification: "active-company",
     stage: "Active Build",
+    status: "Building",
+    oneLiner: "The operating network for timber trucking — loads and capacity, matched.",
     publicStatus:
-      "Active build. Current branch contains authenticated driver, fleet, host, and admin cockpit work plus services for loads, routes, assignments, equipment, messaging, billing, and notifications.",
+      "Security-verified and deployment-ready. The core operating loop (request → approve → trip progress → message) is proven with 22/22 end-to-end tests; a critical data exposure was found and closed. Single-node launch is prepared to the last inch and gated on approving a host.",
     thesis:
       "The timber truck operating network, connecting available timber loads with transportation capacity across routes, mills, landings, carriers, timing, and regional capacity.",
     humanTruth:
@@ -246,6 +274,7 @@ export const ventures = [
       "A connected operating network for timber transportation.",
     emotionalQuality: "Movement. Infrastructure. Coordination.",
     visualPhysics: ["roads", "topography", "industrial movement", "capacity"],
+    threads: ["Marketplace", "Spatial", "Real-world ops", "Trust"],
     industries: ["timber", "logistics", "trucking", "forestry", "regional operations"],
     capabilities: [
       "Driver cockpit",
@@ -267,14 +296,15 @@ export const ventures = [
     },
     proof: [
       {
-        label: "Name and domain locked",
-        detail: "Repo canon locks LogLoads and logloads.com; retired placeholders are explicitly banned.",
+        label: "Security verified",
+        detail:
+          "A full-state PII table was found anonymously readable and writable, then locked to service-role only and proven denied from outside; 35 of 36 public tables now enforce row-level security.",
         href: "https://github.com/AutomatedEmpires/logloads",
       },
       {
-        label: "Backend reality",
+        label: "Core loop proven",
         detail:
-          "Contracts, seed data, snapshot persistence, network read models, server actions, route handlers, and service packages are implemented.",
+          "Request, approve, trip progress, and message pass end to end with 22/22 Playwright tests across mobile and desktop and a green validate pipeline.",
       },
       {
         label: "Safety boundary",
@@ -284,16 +314,16 @@ export const ventures = [
     ],
     milestones: [
       {
+        date: "2026-07-07",
+        title: "Security reconciled, deployment prepared",
+        detail:
+          "Row-level security coverage was reconciled and the critical exposure closed; Dockerfile, fly config, deployment docs, and a post-deploy smoke test reduce launch to approving a host.",
+      },
+      {
         date: "2026-07-06",
         title: "V3 cockpit build fleet",
         detail:
           "Driver, host, fleet, admin, map, public, messages, and monetization surfaces were built around session-based identity.",
-      },
-      {
-        date: "2026-07-06",
-        title: "Billing and service registration polish",
-        detail:
-          "Billing webhook and service registration work moved the operating network closer to provider-backed readiness.",
       },
     ],
   },
@@ -304,8 +334,10 @@ export const ventures = [
     fullName: "Sweepza",
     classification: "active-company",
     stage: "Active Build",
+    status: "Live",
+    oneLiner: "Sweepstakes, simplified — a photo-first way to find and win the real ones.",
     publicStatus:
-      "Active build with a live Vercel alias. The repo contains Today, Discover, My Sweeps, Winners, Profile, Host, Admin, search, seeker state, billing, reports, and winner submission surfaces.",
+      "Live on sweepza.com with billing configured. Public pages are deployed and healthy, live Stripe checkout creation is proven end to end, and production data is clean. The last step is a single real-card checkout to prove revenue; observability and production identity are named follow-ups.",
     thesis:
       "Sweepstakes, simplified: a fast, photo-first consumer operating system for discovering, organizing, entering, re-entering, tracking, and winning legitimate sweepstakes.",
     humanTruth:
@@ -322,6 +354,7 @@ export const ventures = [
       "A trusted discovery layer for legitimate chances to win.",
     emotionalQuality: "Anticipation",
     visualPhysics: ["reveals", "cards", "countdowns", "visual discovery"],
+    threads: ["Discovery", "Trust"],
     industries: ["sweepstakes", "consumer promotions", "creator campaigns", "brand growth"],
     capabilities: [
       "Today dashboard",
@@ -334,7 +367,7 @@ export const ventures = [
     ],
     platformProfile: "AE Commercial Platform",
     repository: "https://github.com/AutomatedEmpires/sweepza",
-    website: "https://sweepza.vercel.app",
+    website: "https://sweepza.com",
     showcaseMode: "product",
     featured: true,
     palette: {
@@ -345,9 +378,10 @@ export const ventures = [
     },
     proof: [
       {
-        label: "Live alias",
-        detail: "The repo provider runbook lists the current production alias as sweepza.vercel.app.",
-        href: "https://sweepza.vercel.app",
+        label: "Live with billing configured",
+        detail:
+          "sweepza.com serves the public product from Vercel; a live Stripe checkout session was created against a KYC-complete account, proving app to live product to live checkout.",
+        href: "https://sweepza.com",
       },
       {
         label: "Consumer OS surfaces",
@@ -355,23 +389,104 @@ export const ventures = [
           "Routes include Today, Discover, Swipe, My Sweeps, Winners, Host, Admin, Profile, Search, Saved, and listing detail.",
       },
       {
-        label: "Provider truth",
+        label: "Honest empty state",
         detail:
-          "Supabase and Vercel are provisioned; remaining Clerk, Stripe, PostHog, and Sentry keys are documented as provider-side follow-ups.",
+          "All synthetic seed rows were removed with scoped predicates, so production starts from a clean, honest zero rather than fake traction.",
       },
     ],
     milestones: [
+      {
+        date: "2026-07-07",
+        title: "Live billing configured, data cleaned",
+        detail:
+          "Sweepza-namespaced live products, prices, and webhook were provisioned; a live checkout session was created and expired cleanly, and all synthetic data was removed.",
+      },
       {
         date: "2026-07-06",
         title: "Consumer operating system convergence",
         detail:
           "Today, My Sweeps, and unified Discover moved into a more complete routine-first product pass.",
       },
+    ],
+  },
+  {
+    id: "pinnedatlas",
+    slug: "pinnedatlas",
+    name: "PinnedAtlas",
+    fullName: "PinnedAtlas",
+    classification: "active-company",
+    stage: "Operating Company",
+    status: "Live",
+    oneLiner: "A living map of caves, waterfalls, springs, and hot springs worth finding.",
+    publicStatus:
+      "Operating on pinnedatlas.com. The free, map-first product is fully live: a viewport-synced listing panel over roughly 14,900 real natural locations, with type filters, name search, and geolocation. Accounts and payments are implemented but dormant behind founder gates — the core product needs neither.",
+    thesis:
+      "A map-first atlas of the natural world, treating the map itself as the interface to spatial knowledge about places worth visiting.",
+    humanTruth:
+      "The best places are already out there. The hard part is knowing where they are and trusting what you find.",
+    problem:
+      "Knowledge about natural places is scattered across forums, PDFs, old listings, and word of mouth, with no trustworthy map-first way to browse, filter, and compare what is actually near you.",
+    system:
+      "A full MapLibre map on the landing surface with a viewport-synced listing panel ordered nearest-to-center, list and pin hover sync, a mobile map/list toggle, type filters, name search, and geolocation over verified public location data.",
+    dataAdvantage:
+      "The compounding asset is a structured, deduplicated corpus of natural locations with type, provenance, and spatial relationships — a base that grows more valuable as coverage, corrections, and community signal accumulate.",
+    business:
+      "The map and browse experience is free and public. Optional accounts (saves, visit logs, notes, submissions) and premium access are fully built but intentionally dormant until they earn activation.",
+    vision:
+      "A trusted spatial interface to the natural world.",
+    emotionalQuality: "Wonder, made findable",
+    visualPhysics: ["maps", "pins", "layers", "viewport"],
+    threads: ["Discovery", "Spatial", "Civic"],
+    industries: ["outdoor recreation", "geospatial", "travel", "public knowledge"],
+    capabilities: [
+      "Full-map landing",
+      "Viewport-synced list",
+      "Type filters",
+      "Name search",
+      "Geolocation",
+      "Mobile map/list toggle",
+    ],
+    platformProfile: "AE Commercial Platform",
+    repository: "https://github.com/AutomatedEmpires/pinnedatlas",
+    website: "https://pinnedatlas.com",
+    showcaseMode: "product",
+    featured: true,
+    palette: {
+      base: "#1d3b46",
+      accent: "#4bb0a6",
+      support: "#e0b15a",
+      wash: "#eaf4f2",
+    },
+    proof: [
       {
-        date: "2026-06-07",
-        title: "Winner wall and observability",
+        label: "Live free product",
         detail:
-          "Winner posts, reactions, submission flow, PostHog, and Sentry integration slices landed in product history.",
+          "pinnedatlas.com serves a map-first homepage over HTTPS with roughly 14,900 real locations — about 11,200 springs, 2,700 waterfalls, 650 caves, and 370 hot springs.",
+        href: "https://pinnedatlas.com",
+      },
+      {
+        label: "No-token map stack",
+        detail:
+          "The map runs on MapLibre GL with free CARTO vector tiles and correct OpenStreetMap attribution — no proprietary token required to operate.",
+      },
+      {
+        label: "Honest gating",
+        detail:
+          "Accounts, saves, submissions, and paid access are implemented but dormant; the core browse product is fully public and needs none of them.",
+      },
+    ],
+    milestones: [
+      {
+        date: "2026-07-08",
+        title: "Map-first product operating on its own domain",
+        detail:
+          "The owned domain was verified over SSL and the map-first homepage went live with the viewport-synced listing panel and roughly 14,900 locations serving from the API.",
+      },
+      {
+        date: "2026-07-06",
+        title: "Coverage and spatial browse",
+        detail:
+          "Type filters, name search, geolocation, and nearest-to-center ordering established the map as the primary interface to the location corpus.",
       },
     ],
   },
@@ -379,11 +494,13 @@ export const ventures = [
     id: "lake-and-pine",
     slug: "lake-and-pine",
     name: "Lake & Pine",
-    fullName: "Lake & Pine",
+    fullName: "Lake & Pine Cleaning Co.",
     classification: "operating-business",
     stage: "Operating Company",
+    status: "Live",
+    oneLiner: "Premium home cleaning in Coeur d'Alene and Spokane, run like software.",
     publicStatus:
-      "Operating business with a recovered product prototype and a production Next.js foundation branch. The software is being shaped around estimate, booking, customer dashboard, and repeat-service operations.",
+      "Operating business live on lakeandpinecleaning.com. The production Next.js site is deployed and verified, with placeholder contact details removed so nothing dishonest is shown. It proves the AutomatedEmpires instinct applies to a real service company, not only software concepts.",
     thesis:
       "A real cleaning company proving the AutomatedEmpires instinct applies beyond software concepts: brand, booking, operations, communication, trust, and repeatability.",
     humanTruth:
@@ -400,6 +517,7 @@ export const ventures = [
       "A cleaner, calmer operating system for a local service business.",
     emotionalQuality: "Relief",
     visualPhysics: ["calm", "order", "space", "restoration"],
+    threads: ["Real-world ops", "Trust"],
     industries: ["home services", "cleaning", "local operations", "customer experience"],
     capabilities: [
       "Service modules",
@@ -411,6 +529,7 @@ export const ventures = [
     ],
     platformProfile: "AE Operating Business",
     repository: "https://github.com/AutomatedEmpires/lakeandpine",
+    website: "https://lakeandpinecleaning.com",
     showcaseMode: "operating",
     featured: true,
     palette: {
@@ -421,28 +540,28 @@ export const ventures = [
     },
     proof: [
       {
-        label: "Operating business truth",
+        label: "Live operating business",
         detail:
-          "The recovered prototype documents services, pricing, booking, service areas, reviews, customer dashboard, billing, and concierge states.",
-        href: "https://github.com/AutomatedEmpires/lakeandpine",
+          "lakeandpinecleaning.com and its www host serve the production site from Vercel over HTTPS with a verified custom domain.",
+        href: "https://lakeandpinecleaning.com",
       },
       {
         label: "Production foundation",
         detail:
-          "The production branch establishes a Next.js App Router foundation rather than directly shipping the recovered prototype.",
+          "The production branch establishes a typed Next.js App Router foundation grounded in recovered product truth rather than a premature port.",
       },
       {
         label: "Scope honesty",
         detail:
-          "Invoices, referrals, support, and concierge are represented concepts until production infrastructure is wired.",
+          "Placeholder phone details were removed and CTAs are suppressed until a real business number exists; invoices, referrals, and concierge remain represented concepts.",
       },
     ],
     milestones: [
       {
         date: "2026-07-06",
-        title: "Production foundation",
+        title: "Production site live, placeholders removed",
         detail:
-          "The repo established a typed Next.js application foundation grounded in recovered product truth.",
+          "The site verified on its custom domain and a placeholder phone number was removed from every production contact path so nothing misleading is shown.",
       },
       {
         date: "2026-06-24",
@@ -459,6 +578,8 @@ export const ventures = [
     fullName: "Open Resource Access Network",
     classification: "mission-system",
     stage: "Mission System",
+    status: "Mission",
+    oneLiner: "Public infrastructure for finding the right help in time.",
     publicStatus:
       "Mission-driven system with substantial docs, migrations, workflows, Azure-first platform canon, deterministic scoring, verification workflow, and safety-critical product rules.",
     thesis:
@@ -477,6 +598,7 @@ export const ventures = [
       "A trusted operating layer between people, organizations, and real-world services.",
     emotionalQuality: "Clarity under pressure",
     visualPhysics: ["verified networks", "evidence", "eligibility", "action"],
+    threads: ["Discovery", "Trust", "Civic", "Decision support"],
     industries: ["civic technology", "resource navigation", "human services", "public infrastructure"],
     capabilities: [
       "Retrieval-first chat",
@@ -536,6 +658,8 @@ export const ventures = [
     fullName: "AutomatedInterviewer",
     classification: "emerging-system",
     stage: "Emerging",
+    status: "Concept",
+    oneLiner: "Structured interviews that turn conversations into defensible decisions.",
     publicStatus:
       "Emerging concept. The public GitHub repository currently has no committed implementation, so the site presents only the strategic space, not a shipped product.",
     thesis:
@@ -554,6 +678,7 @@ export const ventures = [
       "A reusable qualification layer for opportunities that require judgment.",
     emotionalQuality: "Discernment",
     visualPhysics: ["conversation", "criteria", "evidence", "decision structure"],
+    threads: ["Decision support", "Trust"],
     industries: ["recruiting", "marketplaces", "screening", "operations"],
     capabilities: ["Structured interviews", "Evidence capture", "Rubric scoring", "Human decision support"],
     platformProfile: "AE Emerging System",
@@ -588,7 +713,7 @@ export const ventures = [
       },
     ],
   },
-] satisfies Venture[];
+];
 
 export const featuredVentures = ventures.filter((venture) => venture.featured);
 
@@ -612,12 +737,41 @@ export function getVenture(slug: string) {
   return ventures.find((venture) => venture.slug === slug);
 }
 
+export const statusMeta: Record<VentureStatus, { label: string; blurb: string }> = {
+  Live: { label: "Live", blurb: "Public and reachable on its own domain." },
+  Building: { label: "Building", blurb: "Software proven; deployment founder-gated." },
+  Mission: { label: "Mission system", blurb: "Civic infrastructure, canon-first." },
+  Concept: { label: "Concept", blurb: "Strategic space; no shipped product yet." },
+};
+
+// Ordered vocabulary for the ecosystem map. The description names the shared instinct so the
+// relationship between ventures reads as meaning, not decoration.
+export const threadMeta: Record<VentureThread, { description: string }> = {
+  Discovery: { description: "Making something valuable easy to find." },
+  Marketplace: { description: "Two-sided liquidity between supply and demand." },
+  Spatial: { description: "Map-first products where place is the interface." },
+  Trust: { description: "Making trust and provenance visible before action." },
+  "Real-world ops": { description: "Software grounded in physical operations." },
+  Civic: { description: "Built for public benefit, not only commercial return." },
+  "Decision support": { description: "Turning evidence into defensible decisions." },
+};
+
+export const allThreads = Object.keys(threadMeta) as VentureThread[];
+
+export function venturesByThread(thread: VentureThread) {
+  return ventures.filter((venture) => venture.threads.includes(thread));
+}
+
+export function sharedThreads(a: Venture, b: Venture) {
+  return a.threads.filter((thread) => b.threads.includes(thread));
+}
+
 export const platformProfiles = [
   {
     name: "AE Commercial Platform" as const,
     description:
-      "Shared operating standards for commercial software ventures: TypeScript, Next.js, pnpm, Vercel, Supabase/Postgres where useful, Clerk, Stripe, Mapbox for spatial products, Doppler, PostHog, Sentry, Cloudinary, and product-specific restraint.",
-    members: ["Explore&Earn", "BidSpace", "LogLoads", "Sweepza"],
+      "Shared operating standards for commercial software ventures: TypeScript, Next.js, pnpm, Vercel, Supabase/Postgres where useful, Clerk, Stripe, MapLibre/Mapbox for spatial products, Doppler, PostHog, Sentry, Cloudinary, and product-specific restraint.",
+    members: ["Explore&Earn", "BidSpace", "LogLoads", "Sweepza", "PinnedAtlas"],
   },
   {
     name: "AE Civic Infrastructure" as const,
