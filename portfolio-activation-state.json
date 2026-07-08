@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-08T02:49:52Z",
+  "updated_at": "2026-07-08T02:50:44Z",
   "products": [
     {
       "name": "Automated Empires",
@@ -122,38 +122,54 @@
     {
       "name": "LogLoads",
       "repository": "AutomatedEmpires/logloads",
+      "branch": "feature/backend-foundation",
+      "head_commit": "b77347e",
       "domain": "logloads.com",
       "production_url": null,
-      "vercel_status": "no project found in Automated Empires Vercel team",
+      "hosting_status": "PREPARED, not purchased. Single-writer architecture -> Fly.io (Dockerfile + fly.toml committed: 1 machine, /data 1GB volume, port 3002, /api/health). NOT Vercel (in-memory single-writer state does not fit serverless). Gate reduced to approve/create the Fly.io app + volume; deploy is mechanical. docs/DEPLOYMENT.md covers migration order, first-boot, backup/restore, rollback.",
       "supabase_project": "fdzohbiiyzgvjzfsjyxo",
-      "clerk_status": "unverified",
-      "stripe_status": "unverified",
-      "resend_status": "unverified",
-      "posthog_status": "unverified",
-      "sentry_status": "unverified",
-      "dns_status": "logloads.com discovered; left unchanged because no verified Vercel hosting target exists",
-      "phone_status": "dedicated operations/sales number not verified",
-      "founder_gates": ["hosting target/domain activation plan", "service admin access for Clerk/Stripe/Resend"],
-      "last_production_verification": "2026-07-07T08:55:21Z",
-      "state": "OWNER-BLOCKED"
+      "security_status": "VERIFIED. RLS discrepancy reconciled+fixed. Root cause: foundation migration predated RLS, left 14 tables uncovered; phase-2 protected a different subset (both prior reports true subsets). CRITICAL exposure closed: operating_state (full-state PII blob) was anon read/write -> now service-role only, proven denied from outside with the live anon key. 36 public tables -> 35 RLS-enabled; spatial_ref_sys is the one accepted PostGIS exception. Migration 20260707050000. Advisor: zero app-table ERRORs. docs/SECURITY.md.",
+      "core_loop_status": "VERIFIED AFTER security fix (request->approve->trip->message). validate green (lint 5/5, typecheck 9/9, 36 unit tests, build 31/31, guardrails); Playwright 22/22 mobile+desktop.",
+      "clerk_status": "FOUNDER-GATED, code complete. Sign-in loop fixed (no-profile Clerk user -> onboarding). No Clerk Organizations/webhook/JWT-template needed for launch. Gate: create LogLoads Clerk app + keys. docs/ACTIVATION_CLERK.md.",
+      "stripe_status": "FOUNDER-GATED, code complete. Checkout + portal + webhook (/api/billing/webhook; 3 events) wired; state mapping unit-tested. Prices STRIPE_PRICE_FLEET ($149/mo) + STRIPE_PRICE_HOST ($249/mo) with inline fallback. Can reuse shared KYC-complete account acct_1SpxXpDtcwz0cxzo. docs/ACTIVATION_STRIPE.md; tools/verify-billing.mjs.",
+      "resend_status": "FOUNDER-GATED, code complete + fail-open honest. Gate: account + send.logloads.com domain/DNS + RESEND_API_KEY. docs/ACTIVATION_RESEND.md.",
+      "posthog_status": "code ready, project key missing. 7-event taxonomy (UUID distinct_ids, no PII/secrets/message-content). Gate: create project, set NEXT_PUBLIC_POSTHOG_KEY. docs/OBSERVABILITY.md.",
+      "sentry_status": "code ready, DSN missing. Server capture via instrumentation.ts, sendDefaultPii:false. Gate: create project, set SENTRY_DSN.",
+      "dns_status": "logloads.com unchanged; waits on a verified host. After host: fly certs add logloads.com/www + apex A/AAAA + www CNAME.",
+      "phone_status": "not applicable",
+      "founder_gates": [
+        "Approve/create the Fly.io host + 1 GB /data volume (deploy mechanical: Dockerfile + fly.toml ready)",
+        "Create the LogLoads Clerk application and provide production keys",
+        "Bind the LogLoads Stripe account (reuse acct_1SpxXpDtcwz0cxzo), create 2 prices + webhook",
+        "Authorize Resend (+ send.logloads.com DNS), PostHog, and Sentry resources and provide keys",
+        "After the host is verified, attach logloads.com (apex + www) and confirm SSL"
+      ],
+      "last_production_verification": "2026-07-08T01:20:00Z",
+      "state": "SECURITY VERIFIED · CORE LOOP VERIFIED · SINGLE-NODE DEPLOYMENT-READY · EXTERNAL SERVICES FOUNDER-GATED"
     },
     {
       "name": "BidSpace",
       "repository": "AutomatedEmpires/bidspace",
+      "branch": "integration/recovered-bidspace-product (PR #58 -> main, mergeable)",
       "domain": null,
       "production_url": null,
-      "vercel_status": "no project found in Automated Empires Vercel team",
+      "software_status": "SOFTWARE COMPLETE. 43 routes, typecheck 5/5, 62 unit tests, green build, all pushed to origin.",
+      "internal_marketplace_loop": "VERIFIED against live DB via tools/live-loop-check.ts: bid->counter->accept->award->booking->payment->settlement, $280 gross / $28 fee (10%, D018) / $252 payout; recurring copy-forward also verified.",
+      "live_database": "VERIFIED. Supabase hnjjcgxflxlfsqslgxcv (us-west-1); migrations 0001-0011 + advisor hardening applied; demo seed loaded; public pages + viewport API serve real data.",
+      "connect_architecture": "MODERNIZED (D028): connected accounts via controller properties (Express-equivalent), off the deprecated type:express; destination charges + application_fee + transfer_data.destination unchanged (current per Stripe docs). Webhook settlement hardened to process-first/record-on-success so a crash mid-settlement cannot strand a paid booking.",
+      "vercel_status": "no project yet (team AutomatedEmpires team_0IgwjPKkR3NmPUC5ugTK3cfi). Repo is deploy-ready: apps/web/vercel.json added, turbo.json cache exclusion fixed, exact settings in docs/PRODUCTION-ACTIVATION.md. Deploy is intentionally gated on Clerk (ClerkProvider+middleware 500 every route without real keys) — do not ship a broken artifact.",
       "supabase_project": "hnjjcgxflxlfsqslgxcv",
-      "clerk_status": "unverified",
-      "stripe_status": "Connect path unverified; KYC likely required before live money",
-      "resend_status": "unverified",
-      "posthog_status": "unverified",
-      "sentry_status": "unverified",
-      "dns_status": "public domain not selected",
+      "clerk_status": "CODE CONTRACT COMPLETE + verified current (Clerk v7 clerkMiddleware/auth/clerkClient; no deprecated authMiddleware). docs/CLERK-CONTRACT.md is the exact hand-off. No Clerk API/MCP exists for the agent; app creation is dashboard-only (FOUNDER GATE). CLERK_ENCRYPTION_KEY required in prod. No Clerk webhook consumer (sync is synchronous in /onboarding/complete).",
+      "stripe_status": "CODE COMPLETE + activation runbook (docs/CONNECT-RUNBOOK.md, docs/MONEY-PROOF-FIXTURE.md). Docker Stripe MCP not bound to an account (retrieve_balance failed); no Stripe account here. Activation needs founder KYC/beneficial-owner/bank (FOUNDER GATE). Internal fee/split proven; external money loop pre-designed, no new work after KYC.",
+      "resend_status": "not wired (not in scope for BidSpace launch)",
+      "posthog_status": "INSTRUMENTED, off until key set. 7 server events (opportunity_published/duplicated, bid_submitted, bid_awarded, booking_paid, review_submitted, network_invited) + client $pageview, env-gated on NEXT_PUBLIC_POSTHOG_KEY (own env, NOT E&E's key); distinctId = org uuid, properties = ids/cents/enums, no PII. Founder gate: create BidSpace PostHog project, set key.",
+      "sentry_status": "not wired (Next 16 SDK-compat risk to the green build). Branded error boundaries (not-found + error + global-error) added as the Sentry capture seam with sendDefaultPii guidance. Founder gate + exact wiring steps in docs/PRODUCTION-ACTIVATION.md §5.",
+      "mapbox_status": "code complete; /map degrades honestly to a list link when NEXT_PUBLIC_MAPBOX_TOKEN absent (browser-safe public token, restrict by URL). Docker Mapbox MCP token invalid (cannot mint). Founder gate: create + restrict token.",
+      "dns_status": "public domain not selected (out of scope); use a temporary *.vercel.app host",
       "phone_status": "not applicable",
-      "founder_gates": ["Stripe Connect KYC/beneficial-owner verification", "public domain decision"],
-      "last_production_verification": "2026-07-07T08:55:21Z",
-      "state": "OWNER-BLOCKED"
+      "founder_gates": ["Clerk application creation + production keys (no non-interactive path)", "Stripe Connect KYC / beneficial-owner / bank"],
+      "last_production_verification": "2026-07-08T02:50:44Z",
+      "state": "SOFTWARE COMPLETE · INTERNAL ENGINE VERIFIED · CONNECT MODERNIZED · EXTERNAL IDENTITY & MONEY FOUNDER-GATED"
     }
   ]
 }

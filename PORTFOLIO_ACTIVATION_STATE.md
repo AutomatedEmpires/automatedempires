@@ -15,8 +15,8 @@ omitted.
 | Lake and Pine Cleaning | AutomatedEmpires/lakeandpine | lakeandpinecleaning.com | https://lakeandpinecleaning.com | OWNER-BLOCKED |
 | PinnedAtlas | AutomatedEmpires/pinnedatlas | pinnedatlas.com | https://pinnedatlas.com | BUILD |
 | Explore and Earn | AutomatedEmpires/explore-and-earn | exploreandearn.com | https://exploreandearn.com | INFRA OPERATING · LIQUIDITY NOT ACTIVATED |
-| LogLoads | AutomatedEmpires/logloads | logloads.com | none verified | OWNER-BLOCKED |
-| BidSpace | AutomatedEmpires/bidspace | not selected | none verified | OWNER-BLOCKED |
+| LogLoads | AutomatedEmpires/logloads | logloads.com | none verified | SECURITY VERIFIED · DEPLOYMENT-READY · SERVICES FOUNDER-GATED |
+| BidSpace | AutomatedEmpires/bidspace | not selected | none verified | SOFTWARE COMPLETE · ENGINE VERIFIED · FOUNDER-GATED (Clerk + Stripe) |
 
 ## Product Tracks
 
@@ -96,28 +96,33 @@ Infrastructure pass verified 2026-07-07 (Claude, repo-resident). Secret values o
 
 ### LogLoads
 
-- Repository: `AutomatedEmpires/logloads`
-- Supabase project: `fdzohbiiyzgvjzfsjyxo`
-- Domain: `logloads.com` discovered in GoDaddy/public DNS inventory.
-- Hosting: no Vercel project found in the Automated Empires Vercel team.
-- DNS status: left unchanged; no verified hosting target exists in the Vercel team.
-- Supabase advisory: 15 public application tables have RLS disabled, including `driver_profiles`, `availability_windows`, `trailer_profiles`, `loader_profiles`, `notifications`, `dispatcher_profiles`, `rates`, `audit_events`, `haul_routes`, `message_threads`, `mills`, `message_events`, `truck_profiles`, and `landings`; `spatial_ref_sys` also has RLS disabled.
-- Clerk, Stripe, Resend, PostHog, Sentry: unverified in this runtime.
-- Founder gate: hosting target/domain activation plan and service admin access are required before production activation.
-- State: OWNER-BLOCKED.
+- Repository: `AutomatedEmpires/logloads` (branch `feature/backend-foundation`, HEAD `b77347e`).
+- Supabase project: `fdzohbiiyzgvjzfsjyxo` (live).
+- Domain: `logloads.com` (unchanged — waits on a verified host).
+- **Security: VERIFIED.** The RLS discrepancy is reconciled and fixed. Root cause: the foundation migration predated RLS and left 14 tables uncovered; phase-2 protected a different subset (both prior reports were true subsets). **Critical exposure found and closed:** `operating_state` (full-state PII blob) was anon read/write → now service-role only, proven denied from outside with the live anon key. 36 public tables → **35 RLS-enabled**; `spatial_ref_sys` is the one accepted PostGIS exception. Migration `20260707050000_security_rls_coverage.sql`; full record in `docs/SECURITY.md`. Supabase advisor: zero app-table ERRORs.
+- **Core operating loop: VERIFIED AFTER the security fix** — request → approve → trip progress → message. `pnpm validate` green (lint 5/5, typecheck 9/9, 36 unit tests, build 31/31, guardrails); **Playwright 22/22** (mobile + desktop).
+- Architecture: single-writer in-memory engine + local disk snapshot + Supabase mirror (service-role only). SINGLE-NODE LAUNCH: acceptable/verified. Horizontal scaling deferred (Postgres must become canonical first).
+- **Deployment: prepared to the last inch.** `Dockerfile` + `fly.toml` (single machine, `/data` 1 GB volume, port 3002, `/api/health`), `docs/DEPLOYMENT.md` (migration order, first-boot, backup/restore, rollback), `ops/production-env-contract.json` (all 24 env vars), and `tools/production-smoke.mjs` (post-deploy proof, verified locally). Founder gate reduces to "approve/create the Fly.io app + volume."
+- **Clerk: FOUNDER-GATED (code complete).** Sign-in loop fixed; a signed-in Clerk user with no profile routes to onboarding. No Clerk Organizations/webhook/JWT-template needed for launch. Runbook `docs/ACTIVATION_CLERK.md` → gate = create the LogLoads Clerk app + 2 keys.
+- **Stripe: FOUNDER-GATED (code complete).** Checkout + billing portal + webhook (`/api/billing/webhook`, 3 events) wired; expects Prices `STRIPE_PRICE_FLEET` ($149/mo), `STRIPE_PRICE_HOST` ($249/mo) with inline fallback; unit-tested state mapping. Can reuse the shared KYC-complete founder account `acct_1SpxXpDtcwz0cxzo`. Runbook `docs/ACTIVATION_STRIPE.md` + `tools/verify-billing.mjs`.
+- **Resend: FOUNDER-GATED (code complete, fail-open honest).** `docs/ACTIVATION_RESEND.md` → gate = account + `send.logloads.com` domain/DNS + API key.
+- **PostHog: code ready, project key missing.** 7-event taxonomy wired (UUID distinct_ids, no PII/secrets). Gate = create LogLoads project, set `NEXT_PUBLIC_POSTHOG_KEY`.
+- **Sentry: code ready, DSN missing.** Server capture via `instrumentation.ts`, `sendDefaultPii:false`. Gate = create LogLoads project, set `SENTRY_DSN`.
+- Founder gates (smallest possible): (1) approve/create the Fly.io host + 1 GB volume; (2) create the LogLoads Clerk app + keys; (3) bind the Stripe account + 2 prices + webhook; (4) Resend/PostHog/Sentry keys + Resend DNS. After the host exists, attach `logloads.com`.
+- State: **SECURITY VERIFIED · CORE LOOP VERIFIED · SINGLE-NODE DEPLOYMENT-READY · EXTERNAL SERVICES FOUNDER-GATED.**
 
 ### BidSpace
 
-- Repository: `AutomatedEmpires/bidspace`
-- Supabase project: `hnjjcgxflxlfsqslgxcv`
-- Domain: no public domain selected; premium `.com` purchase remains out of scope.
-- Hosting: no Vercel project found in the Automated Empires Vercel team.
-- Data: seeded marketplace exists (`users`, `orgs`, venues, events, opportunities, inventory units, bids, documents).
-- Supabase advisory: app tables have RLS enabled; `public.spatial_ref_sys` has RLS disabled.
-- Stripe Connect: implementation still requires external account/path verification before real money.
-- Clerk, Mapbox, PostHog, Sentry: unverified in this runtime.
-- Founder gate: Stripe Connect KYC/beneficial-owner details and final domain decision are human-only gates.
-- State: OWNER-BLOCKED.
+- Repository: `AutomatedEmpires/bidspace` — branch `integration/recovered-bidspace-product` (PR #58 → main, mergeable). All work pushed to origin.
+- Software: **SOFTWARE COMPLETE** — 43 routes, typecheck 5/5, 62 unit tests, green build.
+- Internal marketplace loop: **VERIFIED** against the live DB (`tools/live-loop-check.ts`): bid → counter → accept → award → booking → payment → settlement; $280 gross / $28 fee (10%, D018) / $252 payout; recurring copy-forward also verified.
+- Supabase project: `hnjjcgxflxlfsqslgxcv` — migrations 0001–0011 + advisor hardening applied, demo seed loaded, public pages + viewport API serve real data. (0011 revokes `spatial_ref_sys`/`st_estimatedextent` from API roles; deny-all RLS is the intentional D025 posture.)
+- Stripe Connect: **architecture MODERNIZED (D028)** — controller-property accounts (off deprecated `type:express`); destination-charge/fee/webhook code current and unchanged; webhook settlement hardened (process-first, record-on-success) so a crash mid-settlement can’t strand a paid booking. Activation gated on founder KYC; runbooks: `docs/CONNECT-RUNBOOK.md`, `docs/MONEY-PROOF-FIXTURE.md`.
+- Clerk: **code contract complete** + verified current (v7). Exact hand-off in `docs/CLERK-CONTRACT.md`. No Clerk API/MCP — app creation is dashboard-only (founder gate). `CLERK_ENCRYPTION_KEY` required in prod; no Clerk webhook consumer.
+- Vercel: no project yet; **deploy-ready** (`apps/web/vercel.json`, turbo cache fix, exact settings in `docs/PRODUCTION-ACTIVATION.md`). Deploy intentionally gated on Clerk — no broken artifact shipped.
+- Mapbox / PostHog / Sentry: code complete and env-gated; `/map` degrades honestly; 7 PII-free analytics events instrumented; branded error boundaries added as the Sentry seam. All need only a founder-supplied key/project. Env contract: `docs/ENVIRONMENT.md`.
+- Founder gates (only two): **(1)** create the Clerk application + provide production keys; **(2)** Stripe Connect KYC / beneficial-owner / bank. Everything else is a key paste.
+- State: **SOFTWARE COMPLETE · INTERNAL ENGINE VERIFIED · CONNECT MODERNIZED · EXTERNAL IDENTITY & MONEY FOUNDER-GATED**.
 
 ## Current Smallest Founder Gates
 
@@ -126,7 +131,7 @@ Infrastructure pass verified 2026-07-07 (Claude, repo-resident). Secret values o
 2b. Sweepza — dedicated production Clerk instance (dashboard + `clerk.sweepza.com` DNS + OAuth secrets) to replace the working dev instance; then map the founder's real Clerk user to `is_owner`/`is_admin`, and (optional) set `CLERK_WEBHOOK_SECRET`.
 2c. Sweepza — dedicated PostHog project, dedicated Sentry project, and a Resend account + `send.sweepza.com` sending domain/DNS (all currently off, not misconfigured).
 3. Real Lake and Pine local phone number approval/purchase.
-4. LogLoads hosting target/domain activation plan before changing `logloads.com`.
+4. LogLoads — approve/create the Fly.io host + 1 GB `/data` volume (deploy is mechanical: `Dockerfile` + `fly.toml` ready); then create the LogLoads Clerk app + keys, bind Stripe (reuse `acct_1SpxXpDtcwz0cxzo` + 2 prices + webhook), and set Resend/PostHog/Sentry keys. Security is already verified (RLS fixed, `operating_state` locked); core loop proven 22/22. Runbooks: `docs/ACTIVATION_{CLERK,STRIPE,RESEND}.md`, `docs/DEPLOYMENT.md`.
 5. Explore & Earn — production Clerk instance (dashboard + custom-domain DNS + OAuth), then key swap in Vercel + `CLERK_WEBHOOK_SECRET`. Prod currently runs the dev Clerk instance.
 6. Explore & Earn — confirm the production Stripe account + mode and complete KYC; prod's `STRIPE_SECRET_KEY` is not the CLI's test account, so the money path can't be provisioned from repo tooling.
 7. Explore & Earn — add the Resend DKIM/SPF/MX records for `exploreandearn.com` at GoDaddy and verify (domain already registered in Resend).
