@@ -558,11 +558,13 @@ p {
 .venture-card-top {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
-.venture-card-top span,
+.venture-profile,
 .venture-physics span,
 .profile-members span {
   border: 1px solid var(--line);
@@ -1110,6 +1112,508 @@ p {
   color: var(--muted);
   font-size: 14px;
   margin-top: 8px;
+}
+
+/* ---------------------------------------------------------------------------
+   Status badges
+--------------------------------------------------------------------------- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 5px 11px 5px 9px;
+  font-size: 12px;
+  font-weight: 720;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.status-live {
+  color: var(--tone-live);
+  background: rgba(79, 157, 111, 0.14);
+  border-color: rgba(79, 157, 111, 0.34);
+}
+
+.status-live .status-dot {
+  animation: status-pulse 2.6s var(--ease-in-out) infinite;
+}
+
+.status-building {
+  color: var(--tone-building);
+  background: rgba(199, 154, 74, 0.16);
+  border-color: rgba(199, 154, 74, 0.36);
+}
+
+.status-mission {
+  color: var(--tone-mission);
+  background: rgba(75, 159, 176, 0.16);
+  border-color: rgba(75, 159, 176, 0.36);
+}
+
+.status-concept {
+  color: var(--tone-concept);
+  background: rgba(143, 139, 192, 0.16);
+  border-color: rgba(143, 139, 192, 0.36);
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 157, 111, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(79, 157, 111, 0);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Venture card additions
+--------------------------------------------------------------------------- */
+.venture-card {
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+
+.venture-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--venture-accent) 55%, transparent);
+  box-shadow: var(--shadow-2);
+}
+
+.venture-card::before {
+  transition: height var(--dur-2) var(--ease-out);
+}
+
+.venture-card:hover::before {
+  height: 10px;
+}
+
+.venture-oneliner {
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 560;
+  line-height: 1.38;
+  margin-bottom: 4px;
+}
+
+.venture-threads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 20px 0 4px;
+}
+
+.thread-chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 660;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+button.thread-chip.is-interactive {
+  cursor: pointer;
+  transition:
+    border-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+
+button.thread-chip.is-interactive:hover {
+  color: var(--ink);
+  border-color: var(--line-strong);
+  background: var(--paper-2);
+}
+
+.venture-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.venture-card-foot .text-link {
+  margin-top: 0;
+}
+
+.venture-live-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold-deep);
+  font-size: 13px;
+  font-weight: 720;
+}
+
+.venture-live-link::after {
+  content: "\2197";
+}
+
+.venture-live-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------------
+   Ecosystem map
+--------------------------------------------------------------------------- */
+.ecosystem {
+  display: grid;
+  gap: 24px;
+}
+
+.ecosystem-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.thread-filter {
+  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 680;
+  min-height: 38px;
+  padding: 7px 14px;
+  transition:
+    border-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+
+.thread-filter:hover {
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.thread-filter.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.ecosystem-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.85fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.ecosystem-stage {
+  position: relative;
+  min-height: 540px;
+  overflow: hidden;
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(80% 70% at 50% 45%, rgba(38, 50, 48, 0.6), transparent 70%),
+    linear-gradient(rgba(245, 240, 231, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 240, 231, 0.05) 1px, transparent 1px),
+    var(--ink);
+  background-size:
+    100% 100%,
+    52px 52px,
+    52px 52px;
+}
+
+.ecosystem-edges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.eco-edge {
+  transition:
+    stroke var(--dur-2) var(--ease-out),
+    stroke-width var(--dur-2) var(--ease-out);
+}
+
+.eco-edge-base {
+  stroke: rgba(245, 240, 231, 0.09);
+  stroke-width: 1;
+}
+
+.eco-edge-on {
+  stroke: rgba(210, 180, 110, 0.6);
+  stroke-width: 1.5;
+}
+
+.eco-edge-off {
+  stroke: rgba(245, 240, 231, 0.03);
+  stroke-width: 1;
+}
+
+.ecosystem-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(245, 240, 231, 0.28);
+  border-radius: 999px;
+  color: rgba(245, 240, 231, 0.8);
+  font-size: 15px;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  background: radial-gradient(circle, rgba(245, 240, 231, 0.12), transparent 70%);
+  animation: core-beat 5s var(--ease-in-out) infinite;
+}
+
+@keyframes core-beat {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 240, 231, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(245, 240, 231, 0);
+  }
+}
+
+.eco-nodes {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eco-node {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform: translate(-50%, -50%);
+  animation: eco-float 9s var(--ease-in-out) infinite;
+  animation-delay: calc(var(--i) * -1.3s);
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+@keyframes eco-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+.eco-node-off {
+  opacity: 0.26;
+}
+
+.eco-node-hit {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 12px 7px 8px;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  background: rgba(16, 19, 19, 0.72);
+  backdrop-filter: blur(6px);
+  color: var(--paper);
+  transition:
+    border-color var(--dur-1) var(--ease-out),
+    transform var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+
+.eco-node-hit:hover,
+.eco-node-on .eco-node-hit {
+  border-color: color-mix(in srgb, var(--venture-accent) 70%, transparent);
+  background: rgba(16, 19, 19, 0.9);
+  transform: scale(1.05);
+}
+
+.eco-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: var(--venture-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--venture-accent) 22%, transparent);
+  flex: none;
+}
+
+.eco-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.eco-name {
+  font-size: 13.5px;
+  font-weight: 720;
+}
+
+.eco-status {
+  font-size: 10.5px;
+  font-weight: 680;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted-on-ink);
+}
+
+.eco-status[data-status="Live"] {
+  color: var(--tone-live);
+}
+
+.ecosystem-readout {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.5);
+  padding: 26px;
+}
+
+.ecosystem-readout h3 {
+  font-size: 26px;
+  margin: 14px 0 10px;
+}
+
+.readout-venture {
+  border-left: 3px solid var(--venture-accent);
+  padding-left: 18px;
+}
+
+.readout-threads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 16px 0;
+}
+
+.readout-thread .eyebrow,
+.readout-default .eyebrow {
+  margin-bottom: 8px;
+}
+
+.readout-members {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.readout-members li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+
+.readout-members a {
+  font-weight: 680;
+}
+
+.readout-members a:hover {
+  color: var(--gold-deep);
+}
+
+.readout-status,
+.eco-status {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.readout-status {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.readout-status[data-status="Live"] {
+  color: var(--tone-live);
+}
+
+.readout-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 20px;
+}
+
+.ecosystem-cta {
+  margin-top: 26px;
+}
+
+/* Ecosystem transforms completely below the map breakpoint: the spatial
+   constellation becomes a filterable, tappable list. */
+@media (max-width: 900px) {
+  .ecosystem-body {
+    grid-template-columns: 1fr;
+  }
+
+  .ecosystem-stage {
+    min-height: auto;
+    padding: 16px;
+    background:
+      radial-gradient(90% 60% at 50% 0%, rgba(38, 50, 48, 0.5), transparent 70%),
+      var(--ink);
+  }
+
+  .ecosystem-edges,
+  .ecosystem-core {
+    display: none;
+  }
+
+  .eco-nodes {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .eco-node {
+    position: static;
+    transform: none;
+    animation: none;
+  }
+
+  .eco-node-off {
+    opacity: 0.42;
+  }
+
+  .eco-node-hit {
+    width: 100%;
+    justify-content: flex-start;
+    border-radius: var(--radius);
+  }
+
+  .eco-label {
+    white-space: normal;
+  }
 }
 
 @media (max-width: 1060px) {

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { StatusBadge } from "@/components/StatusBadge";
 import type { Venture } from "@/lib/ventures";
 
 export function VentureCard({ venture }: { venture: Venture }) {
@@ -12,24 +13,38 @@ export function VentureCard({ venture }: { venture: Venture }) {
   return (
     <article className={`venture-card ${venture.classification}`} style={style}>
       <div className="venture-card-top">
-        <span>{venture.stage}</span>
-        <span>{venture.platformProfile}</span>
+        <StatusBadge status={venture.status} />
+        <span className="venture-profile">{venture.platformProfile}</span>
       </div>
       <h3>{venture.name}</h3>
-      <p className="venture-thesis">{venture.thesis}</p>
-      <div className="venture-physics" aria-label={`${venture.name} visual physics`}>
-        {venture.visualPhysics.slice(0, 3).map((item) => (
-          <span key={item}>{item}</span>
+      <p className="venture-oneliner">{venture.oneLiner}</p>
+      <div className="venture-threads" aria-label={`${venture.name} shared instincts`}>
+        {venture.threads.slice(0, 4).map((thread) => (
+          <span className="thread-chip" key={thread}>
+            {thread}
+          </span>
         ))}
       </div>
-      <p className="venture-status">{venture.publicStatus}</p>
-      <Link
-        className="text-link"
-        data-analytics={`venture_${venture.slug}`}
-        href={`/ventures/${venture.slug}`}
-      >
-        View case study
-      </Link>
+      <div className="venture-card-foot">
+        <Link
+          className="text-link"
+          data-analytics={`venture_${venture.slug}`}
+          href={`/ventures/${venture.slug}`}
+        >
+          Open case study
+        </Link>
+        {venture.website ? (
+          <a
+            className="venture-live-link"
+            data-analytics={`venture_live_${venture.slug}`}
+            href={venture.website}
+            rel="noreferrer"
+            target="_blank"
+          >
+            Visit live
+          </a>
+        ) : null}
+      </div>
     </article>
   );
 }

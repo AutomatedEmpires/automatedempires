@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EcosystemMap } from "@/components/EcosystemMap";
 import { VentureCard } from "@/components/VentureCard";
 import {
   activeCompanies,
@@ -28,6 +29,21 @@ export default function VenturesPage() {
             real-world businesses, and emerging systems so maturity and intent
             stay truthful.
           </p>
+        </div>
+      </section>
+
+      <section className="section-block ecosystem-section" aria-labelledby="registry-map">
+        <div className="section-inner">
+          <div className="section-heading">
+            <p className="eyebrow">Relationships</p>
+            <h2 id="registry-map">Start with the connections.</h2>
+            <p>
+              Filter by a shared instinct to see which products carry it, or hover
+              a node to trace what a single venture is connected to. The detailed
+              registry, grouped by maturity, follows below.
+            </p>
+          </div>
+          <EcosystemMap />
         </div>
       </section>
 

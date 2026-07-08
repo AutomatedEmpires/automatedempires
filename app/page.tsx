@@ -1,10 +1,9 @@
 import Link from "next/link";
+import { EcosystemMap } from "@/components/EcosystemMap";
 import { SystemField } from "@/components/SystemField";
-import { VentureCard } from "@/components/VentureCard";
 import { VentureVisual } from "@/components/VentureVisual";
 import { buildSignals } from "@/lib/build-log";
 import {
-  activeCompanies,
   missionSystems,
   operatingBusinesses,
   platformProfiles,
@@ -63,21 +62,23 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-block" aria-labelledby="active-heading">
+      <section className="section-block ecosystem-section" aria-labelledby="ecosystem-heading">
         <div className="section-inner">
           <div className="section-heading">
-            <p className="eyebrow">Active companies</p>
-            <h2 id="active-heading">Different markets, separate product physics.</h2>
+            <p className="eyebrow">The venture ecosystem</p>
+            <h2 id="ecosystem-heading">Independent products. One operating instinct.</h2>
             <p>
-              These are not one template wearing different colors. Each product
-              expresses a different world while sharing a disciplined operating
-              standard.
+              Every venture attacks a different broken market. What connects them
+              is how they attack it — the same instincts recur across maps,
+              marketplaces, trust, and real-world operations. Trace a thread, or
+              open any venture.
             </p>
           </div>
-          <div className="venture-grid">
-            {activeCompanies.map((venture) => (
-              <VentureCard key={venture.id} venture={venture} />
-            ))}
+          <EcosystemMap />
+          <div className="ecosystem-cta">
+            <Link className="text-link" data-analytics="home_all_ventures" href="/ventures">
+              See the full registry with maturity and evidence
+            </Link>
           </div>
         </div>
       </section>
