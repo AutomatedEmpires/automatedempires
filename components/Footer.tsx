@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { contactIntents, mailtoFor, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -20,16 +20,16 @@ export function Footer() {
           <Link href="/founder">Founder</Link>
           <Link href="/contact">Contact</Link>
         </div>
-        <div className="footer-intents">
-          {contactIntents.slice(0, 3).map((intent) => (
-            <a
-              data-analytics={`footer_${intent.label.toLowerCase()}`}
-              href={mailtoFor(intent.subject)}
-              key={intent.label}
-            >
-              {intent.label}
-            </a>
-          ))}
+        <div className="footer-intents" aria-label="Get involved">
+          <Link data-analytics="footer_invest" href="/contact">
+            Invest or partner
+          </Link>
+          <Link data-analytics="footer_build" href="/contact">
+            Build with us
+          </Link>
+          <Link data-analytics="footer_problem" href="/contact">
+            Bring a problem
+          </Link>
         </div>
       </div>
       <div className="section-inner footer-base">

@@ -382,11 +382,56 @@ export function SystemField() {
     const rafRef = { current: 0 as number };
 
     function renderStatic() {
-      // Single composed frame for reduced-motion.
+      // Reduced motion: a calm, intentional system map — every venture labeled
+      // and wired to the core — instead of the animated field.
       resize();
-      last = 0;
       running = false;
-      frame(0);
+      const cx = CORE_X * width;
+      const cy = CORE_Y * height;
+      ctx!.clearRect(0, 0, width, height);
+
+      for (const f of fragments) {
+        const t = nodes[f.target ?? ventureStart];
+        ctx!.strokeStyle = "rgba(245, 240, 231, 0.06)";
+        ctx!.lineWidth = 1;
+        ctx!.beginPath();
+        ctx!.moveTo(f.bx * width, f.by * height);
+        ctx!.lineTo(t.bx * width, t.by * height);
+        ctx!.stroke();
+      }
+      for (let k = ventureStart; k < ventureEnd; k++) {
+        const n = nodes[k];
+        ctx!.strokeStyle = "rgba(245, 240, 231, 0.16)";
+        ctx!.lineWidth = 1;
+        ctx!.beginPath();
+        ctx!.moveTo(n.bx * width, n.by * height);
+        ctx!.lineTo(cx, cy);
+        ctx!.stroke();
+      }
+      for (const f of fragments) {
+        dot(f.bx * width, f.by * height, 2, f.color, 0.5);
+      }
+      ctx!.font = "700 13px Inter, system-ui, sans-serif";
+      ctx!.textAlign = "center";
+      ctx!.textBaseline = "middle";
+      for (let k = ventureStart; k < ventureEnd; k++) {
+        const n = nodes[k];
+        const x = n.bx * width;
+        const y = n.by * height;
+        glow(x, y, 12, n.color, 0.7);
+        dot(x, y, 4.5, n.color, 1);
+        ctx!.fillStyle = "rgba(245, 240, 231, 0.82)";
+        ctx!.fillText(n.label, x, y - 15);
+      }
+      glow(cx, cy, 24, "#f4efe3", 0.8);
+      ctx!.globalAlpha = 0.9;
+      ctx!.strokeStyle = "#f4efe3";
+      ctx!.lineWidth = 1.4;
+      ctx!.beginPath();
+      ctx!.arc(cx, cy, 20, 0, Math.PI * 2);
+      ctx!.stroke();
+      ctx!.globalAlpha = 1;
+      dot(cx, cy, 6, "#f4efe3", 1);
     }
 
     function start() {
@@ -428,8 +473,8 @@ export function SystemField() {
     }
 
     const ro = new ResizeObserver(() => {
-      resize();
-      if (reduce.matches) frame(0);
+      if (reduce.matches) renderStatic();
+      else resize();
     });
     ro.observe(container);
 

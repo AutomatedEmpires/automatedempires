@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { contactIntents, mailtoFor, site } from "@/lib/site";
+import { InvolvementPicker } from "@/components/InvolvementPicker";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Get involved",
   description:
-    "Contact AutomatedEmpires by intent: invest, partner, collaborate, product inquiry, work with the company, or general conversation.",
+    "Get involved with AutomatedEmpires: invest or partner, build with us, bring a problem worth solving, use a product, work with the company, or just explore.",
   alternates: {
     canonical: "/contact",
   },
@@ -15,11 +16,12 @@ export default function ContactPage() {
     <main id="main">
       <section className="page-hero">
         <div className="section-inner narrow">
-          <p className="eyebrow">Contact</p>
-          <h1>Start the right conversation.</h1>
+          <p className="eyebrow">Get involved</p>
+          <h1>What brought you here?</h1>
           <p>
-            The most reliable contact surface today is direct email with clear
-            intent. No fake form, no silent submission path.
+            There is no single right way in. Tell the site what you are here for
+            and it shapes the next step — including a pre-titled email straight to
+            the founder. No fake form, no silent submission path.
           </p>
           <a className="primary-action compact" data-analytics="contact_email" href={`mailto:${site.email}`}>
             {site.email}
@@ -29,19 +31,7 @@ export default function ContactPage() {
 
       <section className="section-block">
         <div className="section-inner">
-          <div className="intent-grid">
-            {contactIntents.map((intent) => (
-              <a
-                className="intent-card"
-                data-analytics={`contact_${intent.label.toLowerCase().replaceAll(" ", "_")}`}
-                href={mailtoFor(intent.subject)}
-                key={intent.label}
-              >
-                <span>{intent.label}</span>
-                <p>{intent.description}</p>
-              </a>
-            ))}
-          </div>
+          <InvolvementPicker />
         </div>
       </section>
     </main>

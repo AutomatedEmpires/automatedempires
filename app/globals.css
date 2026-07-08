@@ -353,6 +353,35 @@ p {
   }
 }
 
+/* Scroll reveal — JS arms only below-the-fold elements (.will-reveal), so
+   content is never hidden before/without JS. Pure enhancement. */
+.will-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+}
+
+.will-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.venture-grid > *:nth-child(2n) {
+  transition-delay: 0.08s;
+}
+
+.profile-grid > *:nth-child(2) {
+  transition-delay: 0.06s;
+}
+.profile-grid > *:nth-child(3) {
+  transition-delay: 0.12s;
+}
+.profile-grid > *:nth-child(4) {
+  transition-delay: 0.18s;
+}
+
 .eyebrow {
   color: var(--gold);
   font-size: 13px;
@@ -367,6 +396,12 @@ p {
 .page-hero h1 {
   color: inherit;
   margin-bottom: 22px;
+}
+
+/* The brand name is one long unbreakable word — size it to the viewport so it
+   never overflows on narrow screens. */
+.hero-section h1 {
+  font-size: clamp(2rem, 8vw, 4.9rem);
 }
 
 .hero-statement {
@@ -1108,6 +1143,138 @@ p {
   background: #4a5263;
 }
 
+/* PinnedAtlas — map + pins */
+.atlas-visual {
+  background: var(--venture-wash);
+}
+
+.atlas-field {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 32% 38%, color-mix(in srgb, var(--venture-accent) 20%, transparent), transparent 46%),
+    linear-gradient(90deg, rgba(29, 59, 70, 0.14) 1px, transparent 1px),
+    linear-gradient(rgba(29, 59, 70, 0.14) 1px, transparent 1px),
+    var(--venture-wash);
+  background-size:
+    100% 100%,
+    40px 40px,
+    40px 40px;
+}
+
+.atlas-pin {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  background: rgba(16, 19, 19, 0.82);
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 720;
+  animation: atlas-float 8s var(--ease-in-out) infinite;
+}
+
+.atlas-pin i {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--venture-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--venture-accent) 26%, transparent);
+}
+
+.pin-a {
+  left: 15%;
+  top: 22%;
+}
+
+.pin-b {
+  right: 11%;
+  top: 43%;
+  animation-delay: -2.4s;
+}
+
+.pin-c {
+  left: 22%;
+  bottom: 19%;
+  animation-delay: -4.8s;
+}
+
+.atlas-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--venture-base);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--venture-base) 16%, transparent);
+}
+
+.dot-a {
+  left: 53%;
+  top: 29%;
+}
+.dot-b {
+  right: 25%;
+  top: 65%;
+}
+.dot-c {
+  left: 41%;
+  top: 55%;
+}
+.dot-d {
+  left: 71%;
+  top: 37%;
+}
+.dot-e {
+  left: 31%;
+  top: 73%;
+}
+
+.atlas-ping {
+  position: absolute;
+  left: 62%;
+  top: 52%;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid var(--venture-accent);
+  animation: atlas-ping 3.2s var(--ease-out) infinite;
+}
+
+@keyframes atlas-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+@keyframes atlas-ping {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(2.7);
+    opacity: 0;
+  }
+}
+
+/* A little ambient life for the other product surfaces (stilled by reduced-motion). */
+.sweep-card {
+  animation: atlas-float 9s var(--ease-in-out) infinite;
+}
+.card-two {
+  animation-delay: -3s;
+}
+.card-three {
+  animation-delay: -6s;
+}
+
 .proof-line {
   color: var(--muted);
   font-size: 14px;
@@ -1568,6 +1735,153 @@ button.thread-chip.is-interactive:hover {
   margin-top: 26px;
 }
 
+/* ---------------------------------------------------------------------------
+   Involvement picker (adaptive contact)
+--------------------------------------------------------------------------- */
+.involvement {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.involvement-options {
+  display: grid;
+  gap: 10px;
+}
+
+.involvement-option {
+  cursor: pointer;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 620;
+  min-height: 54px;
+  padding: 14px 18px;
+  transition:
+    border-color var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+}
+
+.involvement-option:hover {
+  border-color: var(--line-strong);
+  transform: translateX(3px);
+}
+
+.involvement-option.is-active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.involvement-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.55);
+  padding: 28px;
+}
+
+.involvement-empty p {
+  color: rgba(16, 19, 19, 0.66);
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 46ch;
+}
+
+.involvement-prompt {
+  font-family: var(--font-display);
+  font-size: 27px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.14;
+  margin-bottom: 12px;
+}
+
+.involvement-include-label {
+  color: var(--gold-deep);
+  font-size: 13px;
+  font-weight: 760;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-top: 22px;
+}
+
+.involvement-bullets {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 26px;
+  padding: 0;
+  list-style: none;
+}
+
+.involvement-bullets li {
+  position: relative;
+  padding-left: 22px;
+  color: rgba(16, 19, 19, 0.74);
+}
+
+.involvement-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--gold);
+}
+
+/* ---------------------------------------------------------------------------
+   Founder pattern grid
+--------------------------------------------------------------------------- */
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.pattern-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.5);
+  padding: 22px;
+}
+
+.pattern-domain {
+  color: var(--gold-deep);
+  font-size: 13px;
+  font-weight: 760;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.pattern-row p {
+  color: rgba(16, 19, 19, 0.74);
+}
+
+.pattern-link {
+  margin-top: auto;
+  color: var(--ink);
+  font-weight: 720;
+}
+
+.pattern-link::after {
+  content: " \2192";
+}
+
+.pattern-link:hover {
+  color: var(--gold-deep);
+}
+
 /* Ecosystem transforms completely below the map breakpoint: the spatial
    constellation becomes a filterable, tappable list. */
 @media (max-width: 900px) {
@@ -1629,7 +1943,8 @@ button.thread-chip.is-interactive:hover {
   }
 
   .profile-grid,
-  .model-grid {
+  .model-grid,
+  .pattern-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1678,8 +1993,8 @@ button.thread-chip.is-interactive:hover {
   }
 
   .hero-section {
-    min-height: min(88vh, 720px);
-    padding: 96px 0 64px;
+    min-height: min(82vh, 640px);
+    padding: 92px 0 56px;
   }
 
   .page-hero,
@@ -1689,13 +2004,8 @@ button.thread-chip.is-interactive:hover {
 
   .hero-scrim {
     background:
-      linear-gradient(
-        90deg,
-        rgba(16, 19, 19, 0.9) 0%,
-        rgba(16, 19, 19, 0.66) 55%,
-        rgba(16, 19, 19, 0.4) 100%
-      ),
-      linear-gradient(rgba(16, 19, 19, 0.2), rgba(16, 19, 19, 0.55));
+      linear-gradient(rgba(16, 19, 19, 0.82), rgba(16, 19, 19, 0.92)),
+      linear-gradient(90deg, rgba(16, 19, 19, 0.5), rgba(16, 19, 19, 0.18));
   }
 
   .hero-statement {
@@ -1729,7 +2039,9 @@ button.thread-chip.is-interactive:hover {
   .proof-grid,
   .intent-grid,
   .profile-grid,
-  .model-grid {
+  .model-grid,
+  .pattern-grid,
+  .involvement {
     grid-template-columns: 1fr;
   }
 

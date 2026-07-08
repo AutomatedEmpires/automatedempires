@@ -15,14 +15,14 @@ import {
 // Designed constellation (normalized % within the stage) — stable, legible, and
 // weighted so related ventures sit near each other.
 const POSITIONS: Record<string, [number, number]> = {
-  "explore-and-earn": [20, 30],
-  bidspace: [46, 18],
-  pinnedatlas: [76, 24],
-  logloads: [86, 56],
-  sweepza: [64, 76],
-  "lake-and-pine": [38, 82],
-  oran: [15, 62],
-  "automated-interviewer": [56, 50],
+  "explore-and-earn": [19, 30],
+  bidspace: [44, 17],
+  pinnedatlas: [77, 22],
+  logloads: [87, 52],
+  sweepza: [66, 78],
+  "lake-and-pine": [37, 83],
+  oran: [14, 60],
+  "automated-interviewer": [67, 41],
 };
 
 function positionFor(slug: string, index: number): [number, number] {

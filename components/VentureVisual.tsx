@@ -88,6 +88,33 @@ export function VentureVisual({ venture, compact = false }: { venture: Venture; 
     );
   }
 
+  if (venture.slug === "pinnedatlas") {
+    return (
+      <div className="venture-visual atlas-visual" style={style}>
+        <div className="atlas-field" aria-hidden="true">
+          <span className="atlas-pin pin-a">
+            <i />
+            Waterfall
+          </span>
+          <span className="atlas-pin pin-b">
+            <i />
+            Cave
+          </span>
+          <span className="atlas-pin pin-c">
+            <i />
+            Hot spring
+          </span>
+          <span className="atlas-dot dot-a" />
+          <span className="atlas-dot dot-b" />
+          <span className="atlas-dot dot-c" />
+          <span className="atlas-dot dot-d" />
+          <span className="atlas-dot dot-e" />
+          <span className="atlas-ping" />
+        </div>
+      </div>
+    );
+  }
+
   if (venture.slug === "lake-and-pine") {
     return (
       <div className="venture-visual lake-visual" style={style}>

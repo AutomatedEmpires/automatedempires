@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { Analytics } from "@/components/Analytics";
 import { Footer } from "@/components/Footer";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { SiteHeader } from "@/components/SiteHeader";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -90,6 +91,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <Footer />
+        <ScrollReveal />
         <Analytics />
         <script
           type="application/ld+json"
