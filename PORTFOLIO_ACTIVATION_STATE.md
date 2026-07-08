@@ -13,7 +13,7 @@ omitted.
 | Automated Empires | AutomatedEmpires/automatedempires | automatedempires.com | https://automatedempires.com | OWNER-BLOCKED |
 | Sweepza | AutomatedEmpires/sweepza | sweepza.com | https://sweepza.com | DEPLOYED · LIVE BILLING CONFIGURED · REAL REVENUE PROOF PENDING |
 | Lake and Pine Cleaning | AutomatedEmpires/lakeandpine | lakeandpinecleaning.com | https://lakeandpinecleaning.com | OWNER-BLOCKED |
-| PinnedAtlas | AutomatedEmpires/pinnedatlas | pinnedatlas.com | https://pinnedatlas.com | BUILD |
+| PinnedAtlas | AutomatedEmpires/pinnedatlas | pinnedatlas.com | https://pinnedatlas.com | OPERATING (free product live; accounts/payments founder-gated, non-blocking) |
 | Explore and Earn | AutomatedEmpires/explore-and-earn | exploreandearn.com | https://exploreandearn.com | INFRA OPERATING · LIQUIDITY NOT ACTIVATED |
 | LogLoads | AutomatedEmpires/logloads | logloads.com | none verified | SECURITY VERIFIED · DEPLOYMENT-READY · SERVICES FOUNDER-GATED |
 | BidSpace | AutomatedEmpires/bidspace | not selected | none verified | SOFTWARE COMPLETE · ENGINE VERIFIED · FOUNDER-GATED (Clerk + Stripe) |
@@ -64,17 +64,20 @@ Provisioning pass 2026-07-07T21:55Z (Claude Opus 4.8, repo-resident). Secret val
 
 ### PinnedAtlas
 
-- Repository: `AutomatedEmpires/pinnedatlas`
-- Supabase project: `mrizaiftntoznmwhulwc`
-- Vercel app URL: `https://pinnedatlas.vercel.app` returns HTTPS 200 with title `PinnedAtlas - Caves, Waterfalls & Hot Springs`.
-- Custom domain status: `https://pinnedatlas.com` and `https://www.pinnedatlas.com` return HTTPS 200 from Vercel.
-- DNS status: GoDaddy authoritative DNS has apex A records `216.150.1.1` and `216.150.16.1`; `www` CNAME is `8546866c305c3a77.vercel-dns-017.com.`.
-- Vercel domain status: `pinnedatlas.com` and `www.pinnedatlas.com` verify as valid for project `pinnedatlas`.
-- Data: `location` table has 3,725 rows.
-- Supabase advisory: `public.spatial_ref_sys` has RLS disabled; do not enable blindly without confirming PostGIS access requirements.
-- Clerk, Stripe, Resend, PostHog, Sentry: unverified in this runtime.
-- Founder gate: service admin access may be required before monetized/account features can be externally verified.
-- State: BUILD.
+Verified 2026-07-08 (Fable 5, repo-resident). Deployed commit `97381bd`; CI + CodeQL green.
+
+- Repository: `AutomatedEmpires/pinnedatlas`; Supabase project: `mrizaiftntoznmwhulwc`.
+- Owned domain: VERIFIED. `https://pinnedatlas.com` and `https://www.pinnedatlas.com` return HTTPS 200 over valid SSL with HSTS; `www` 308-redirects to the apex; canonical/OG/sitemap use the owned domain.
+- Product: map-first homepage is LIVE — full MapLibre map on landing with a Zillow-style listing panel synced to the viewport (nearest-to-center order, list/pin hover sync, mobile map/list toggle), type filters, name search, geolocation.
+- Map provider: MapLibre GL + free CARTO dark vector tiles (no token). On-map OSM (ODbL) + CARTO attribution present. Mapbox is OPTIONAL (one-variable `STYLE_URL` swap), not a blocker; dead Mapbox env config removed.
+- Data: `location` table has 14,894 public rows — 11,162 springs, 2,710 waterfalls, 654 caves, 368 hot springs (OSM/Overpass, `community` status). Verified live: geojson serves all 14,894; `spring` filter 11,162; `cave` 654; sitemap lists 14,900 URLs.
+- Auth (Clerk): NOT configured; the core map/browse/search/detail product is fully public and requires none. Only secondary features (saves, visit log, notes, submissions, reports, admin, premium) are gated → dormant, non-blocking.
+- Money (Stripe): NOT configured. The paid-access flow (pricing, server-enforced entitlements, checkout, portal, webhook) is fully implemented but dormant; the free product operates without it. FUTURE monetization.
+- Analytics (PostHog): product events instrumented in code (map_opened, viewport_changed, filter_applied, search_used, list_opened_mobile, spot_opened; privacy-conscious — zoom + counts, no coordinates). Dedicated project NOT created (MCP has no project-create; must not reuse the `exploreandearn` project). Founder gate: create project + set `NEXT_PUBLIC_POSTHOG_KEY`.
+- Errors (Sentry): NOT installed; connector needs interactive OAuth. Error visibility today = Vercel runtime logs. Founder gate: authorize connector or provide DSN.
+- Supabase advisory: `public.spatial_ref_sys` (PostGIS system table) reports RLS disabled — expected for PostGIS; do not "fix" blindly.
+- True founder gates (all optional/future, none blocking the operating free product): PostHog key, Sentry DSN, Clerk keys (accounts), Stripe keys+prices+webhook (monetization), legal counsel-confirm of `/legal/terms` before paid scale.
+- State: OPERATING (free product live; account + payment features founder-gated and non-blocking).
 
 ### Explore and Earn
 
