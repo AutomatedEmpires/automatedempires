@@ -1,38 +1,51 @@
 import Link from "next/link";
-import { SystemsCanvas } from "@/components/SystemsCanvas";
+import { SystemField } from "@/components/SystemField";
 import { VentureCard } from "@/components/VentureCard";
 import { VentureVisual } from "@/components/VentureVisual";
 import { buildSignals } from "@/lib/build-log";
-import { activeCompanies, missionSystems, operatingBusinesses, platformProfiles } from "@/lib/ventures";
+import {
+  activeCompanies,
+  missionSystems,
+  operatingBusinesses,
+  platformProfiles,
+  ventures,
+} from "@/lib/ventures";
 
 export default function Home() {
   const oran = missionSystems[0];
   const lakeAndPine = operatingBusinesses[0];
+  const liveCount = ventures.filter((venture) => venture.status === "Live").length;
 
   return (
     <main id="main">
       <section className="hero-section">
-        <div className="section-inner hero-grid">
+        <SystemField />
+        <div className="hero-scrim" aria-hidden="true" />
+        <div className="section-inner hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow">Independent venture studio and operating company</p>
-            <h1>AutomatedEmpires</h1>
-            <p className="hero-statement">
+            <p className="eyebrow reveal-item">Independent venture studio and operating company</p>
+            <h1 className="reveal-item">AutomatedEmpires</h1>
+            <p className="hero-statement reveal-item">
               The world is full of systems that almost work.
             </p>
-            <p className="hero-body">
+            <p className="hero-body reveal-item">
               Different industries. Same instinct. Find what is fragmented,
               understand who it fails, and build the system that should exist.
             </p>
-            <div className="hero-actions" aria-label="Primary actions">
+            <div className="hero-actions reveal-item" aria-label="Primary actions">
               <Link className="primary-action" data-analytics="hero_ventures" href="/ventures">
-                Explore the portfolio
+                Explore the ecosystem
               </Link>
               <Link className="secondary-action" data-analytics="hero_build" href="/build">
                 See what shipped
               </Link>
             </div>
+            <p className="hero-meta reveal-item">
+              <span>{ventures.length} ventures</span>
+              <span>{liveCount} live in production</span>
+              <span>one operating instinct</span>
+            </p>
           </div>
-          <SystemsCanvas />
         </div>
       </section>
 
