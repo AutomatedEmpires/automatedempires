@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-07T21:55:29Z",
+  "updated_at": "2026-07-08T02:49:52Z",
   "products": [
     {
       "name": "Automated Empires",
@@ -27,7 +27,7 @@
       "vercel_status": "custom apex/www serve app from Vercel; fresh prod deploy from origin/main (8c39db4, PR #45+#46) with live Stripe env; apex/www/health/public pages all HTTP 200",
       "supabase_project": "ojwhsntcpmoxnzisuomq",
       "clerk_status": "dedicated Sweepza DEVELOPMENT instance ins_3EhjrYiNBzhqkZlG9kIc2Gh4dSy (separate from E&E); auth E2E-proven (signup/signin/host-onboarding). Production instance + CLERK_WEBHOOK_SECRET are founder dashboard gates. On-demand app_user upsert covers signup without the webhook.",
-      "stripe_status": "LIVE and configured. Account acct_1SpxXpDtcwz0cxzo (shared founder account) KYC COMPLETE: charges_enabled+payouts_enabled+details_submitted all true. Sweepza-namespaced live products/prices provisioned: baseline $19/mo price_1TqghWDtcwz0cxzoYtZp1XYv, add-on $5/mo price_1TqghWDtcwz0cxzogpcLYkdP; live webhook we_1TqghXDtcwz0cxzobypz5Rl9 -> https://sweepza.com/api/webhooks/stripe. Live keys+prices+whsec in Doppler prd + Vercel prod. Live money path proven: cs_live_ checkout session created (livemode true, $19 USD) and expired. Full checkout->webhook->subscription->entitlement->UI loop E2E-verified in test mode with identical code. Remaining: one real-card charge (founder).",
+      "stripe_status": "LIVE BILLING CONFIGURED AND CHECKOUT CREATION PROVEN (not yet real revenue). Account acct_1SpxXpDtcwz0cxzo (shared founder account, also E&E) KYC COMPLETE: charges_enabled+payouts_enabled+details_submitted all true. Sweepza-namespaced live products/prices: baseline $19/mo price_1TqghWDtcwz0cxzoYtZp1XYv, add-on $5/mo price_1TqghWDtcwz0cxzogpcLYkdP (metadata venture=sweepza); live webhook we_1TqghXDtcwz0cxzobypz5Rl9 -> https://sweepza.com/api/webhooks/stripe (subscription events), separate from E&E's webhook. Live keys+prices+whsec in Doppler prd + Vercel prod; fresh prod build. A cs_live_ Checkout Session was created (livemode true, $19 USD) and expired cleanly, proving app->live account->live product->live price->live checkout creation. It does NOT prove real payment->signed webhook->subscription row->entitlement->billing UI->cancellation; that final loop is the last revenue proof and needs one real-card checkout (founder). The identical loop is E2E-verified in TEST mode. scripts/verify-live-checkout.mjs is ready to confirm the loop post-payment.",
       "resend_status": "not activated (RESEND_API_KEY unset in prd, cleanly off). Founder gate: Resend account + API key + send.sweepza.com sending domain + DNS.",
       "posthog_status": "off (NEXT_PUBLIC_POSTHOG_KEY unset in prd; no E&E pollution). Founder gate: create dedicated Sweepza PostHog project, then set key.",
       "sentry_status": "off (NEXT_PUBLIC_SENTRY_DSN unset in prd). Founder gate: create dedicated Sweepza Sentry project, then set DSN/auth token.",
@@ -42,8 +42,26 @@
         "Resend account + API key + send.sweepza.com sending domain/DNS",
         "Map founder's real Clerk user to is_owner/is_admin for production admin access"
       ],
-      "last_production_verification": "2026-07-07T21:55:29Z",
-      "state": "REVENUE PATH LIVE - AWAITING FOUNDER REAL-MONEY PROOF (Stripe live+KYC done, app deployed+healthy, data clean; prod Clerk/PostHog/Sentry/Resend are enhancement gates)"
+      "facet_status": {
+        "domain": "VERIFIED",
+        "https": "VERIFIED",
+        "api_health": "VERIFIED",
+        "cron": "VERIFIED",
+        "production_data": "CLEAN",
+        "stripe_account": "LIVE ACCOUNT IDENTIFIED (acct_1SpxXpDtcwz0cxzo)",
+        "kyc": "COMPLETE",
+        "products_prices": "LIVE",
+        "webhook": "LIVE",
+        "live_checkout_creation": "VERIFIED",
+        "real_payment": "NOT YET PROVEN",
+        "production_clerk": "BLOCKED - DEV INSTANCE STILL ACTIVE",
+        "posthog": "NOT PROVISIONED",
+        "sentry": "NOT PROVISIONED",
+        "resend": "NOT PROVISIONED"
+      },
+      "runbook": "AutomatedEmpires/sweepza docs/LAUNCH_RUNBOOK.md + scripts/verify-live-checkout.mjs (every remaining founder gate reduced to its smallest external action)",
+      "last_production_verification": "2026-07-08T02:49:52Z",
+      "state": "PRODUCTION DEPLOYED - LIVE BILLING CONFIGURED - REAL REVENUE PROOF PENDING - PRODUCTION IDENTITY PENDING - OBSERVABILITY/EMAIL PENDING"
     },
     {
       "name": "Lake and Pine Cleaning",
