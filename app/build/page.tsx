@@ -4,13 +4,16 @@ import { buildSignals } from "@/lib/build-log";
 export const metadata: Metadata = {
   title: "Build Log",
   description:
-    "A public evidence-of-shipping surface for AutomatedEmpires, translating real repository progress into product milestones.",
+    "A public evidence-of-shipping surface for AutomatedEmpires, translating real repository and production progress into product milestones.",
   alternates: {
     canonical: "/build",
   },
 };
 
 export default function BuildPage() {
+  const ventureCount = new Set(buildSignals.map((signal) => signal.venture)).size;
+  const latest = buildSignals[0]?.date;
+
   return (
     <main id="main">
       <section className="page-hero">
@@ -19,8 +22,21 @@ export default function BuildPage() {
           <h1>Real progress, translated into product language.</h1>
           <p>
             This is not a raw commit dump. Each signal is grounded in repository
-            history or canonical docs and framed by the actual maturity of the
-            venture.
+            history, production checks, or canonical docs, and framed by the
+            actual maturity of the venture.
+          </p>
+          <p className="build-summary">
+            <span>
+              <b>{buildSignals.length}</b> recent signals
+            </span>
+            <span>
+              across <b>{ventureCount}</b> ventures
+            </span>
+            {latest ? (
+              <span>
+                latest <b>{latest}</b>
+              </span>
+            ) : null}
           </p>
         </div>
       </section>
@@ -32,7 +48,7 @@ export default function BuildPage() {
               <article className="timeline-item" key={`${signal.venture}-${signal.title}`}>
                 <time dateTime={signal.date}>{signal.date}</time>
                 <div>
-                  <span>{signal.venture}</span>
+                  <span className="timeline-venture">{signal.venture}</span>
                   <h2>{signal.title}</h2>
                   <p>{signal.summary}</p>
                   <p className="proof-line">{signal.proof}</p>
@@ -42,7 +58,13 @@ export default function BuildPage() {
                     </a>
                   ) : null}
                 </div>
-                <strong>{signal.state}</strong>
+                <span
+                  className={`build-state build-state-${signal.state
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
+                >
+                  {signal.state}
+                </span>
               </article>
             ))}
           </div>

@@ -775,6 +775,36 @@ p {
   background: rgba(16, 19, 19, 0.16);
 }
 
+.venture-hero-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.venture-hero-profile {
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(245, 240, 231, 0.72);
+}
+
+.venture-hero-threads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 26px;
+}
+
+.thread-chip.on-ink {
+  border-color: var(--line-dark-strong);
+  color: rgba(245, 240, 231, 0.82);
+  background: rgba(245, 240, 231, 0.06);
+}
+
 .portfolio-group {
   padding-top: 72px;
 }
@@ -1273,6 +1303,70 @@ p {
 }
 .card-three {
   animation-delay: -6s;
+}
+
+/* ORAN — a signal travels the evidence pipeline: Need -> Verify -> Score -> Match -> Action */
+.evidence-network span {
+  animation: evidence-wave 6s var(--ease-in-out) infinite;
+}
+.evidence-network span:nth-child(1) {
+  animation-delay: 0s;
+}
+.evidence-network span:nth-child(2) {
+  animation-delay: 0.55s;
+}
+.evidence-network span:nth-child(3) {
+  animation-delay: 1.1s;
+}
+.evidence-network span:nth-child(4) {
+  animation-delay: 1.65s;
+}
+.evidence-network span:nth-child(5) {
+  animation-delay: 2.2s;
+}
+
+@keyframes evidence-wave {
+  0%,
+  12%,
+  100% {
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+  5% {
+    box-shadow: inset 0 0 0 2px var(--venture-accent);
+  }
+}
+
+/* BidSpace — bids drift like live market movement */
+.market-bid {
+  animation: atlas-float 7s var(--ease-in-out) infinite;
+}
+.bid-b {
+  animation-delay: -2.3s;
+}
+.bid-c {
+  animation-delay: -4.6s;
+}
+
+/* LogLoads — the route lights up landing -> truck -> mill */
+.route-point {
+  animation: route-pulse 4.5s var(--ease-in-out) infinite;
+}
+.route-point.middle {
+  animation-delay: 0.7s;
+}
+.route-point.end {
+  animation-delay: 1.4s;
+}
+
+@keyframes route-pulse {
+  0%,
+  30%,
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+  12% {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 55%, transparent);
+  }
 }
 
 .proof-line {
@@ -1882,6 +1976,204 @@ button.thread-chip.is-interactive:hover {
   color: var(--gold-deep);
 }
 
+/* ---------------------------------------------------------------------------
+   Company — method steps + status board
+--------------------------------------------------------------------------- */
+.method-steps {
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.method-step {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 22px;
+  align-items: start;
+  border-bottom: 1px solid var(--line);
+  padding: 26px 0;
+}
+
+.method-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--gold-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+.method-step h3 {
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+
+.method-step p {
+  color: rgba(16, 19, 19, 0.72);
+  max-width: 70ch;
+}
+
+.status-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.status-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+}
+
+.status-col-live {
+  border-top-color: var(--tone-live);
+}
+.status-col-building {
+  border-top-color: var(--tone-building);
+}
+.status-col-mission {
+  border-top-color: var(--tone-mission);
+}
+.status-col-concept {
+  border-top-color: var(--tone-concept);
+}
+
+.status-column header {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.status-count {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.status-column h3 {
+  font-size: 16px;
+  margin-bottom: 3px;
+}
+
+.status-column header p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.status-column ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 14px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.status-column li a {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 640;
+}
+
+.status-column li a:hover {
+  color: var(--gold-deep);
+}
+
+/* ---------------------------------------------------------------------------
+   Build log — summary line + state chips
+--------------------------------------------------------------------------- */
+.build-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  row-gap: 6px;
+  margin-top: 22px;
+  font-size: 14px;
+  color: var(--muted-on-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.build-summary span {
+  /* inline-block keeps the space between the bold number and its label */
+  display: inline-block;
+}
+
+.build-summary b {
+  color: var(--paper);
+  font-weight: 720;
+}
+
+.build-summary span + span {
+  position: relative;
+  margin-left: 18px;
+  padding-left: 18px;
+}
+
+.build-summary span + span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--gold);
+  opacity: 0.7;
+}
+
+.timeline-venture {
+  /* keeps the muted uppercase label style from .timeline-item span */
+  color: var(--muted);
+}
+
+.timeline-item .build-state {
+  align-self: start;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 720;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.42);
+  white-space: nowrap;
+}
+
+.build-state-live,
+.build-state-shipped-to-main {
+  color: var(--tone-live);
+  border-color: rgba(79, 157, 111, 0.4);
+  background: rgba(79, 157, 111, 0.1);
+}
+
+.build-state-active-branch {
+  color: var(--tone-building);
+  border-color: rgba(199, 154, 74, 0.4);
+  background: rgba(199, 154, 74, 0.1);
+}
+
+.build-state-documented-canon {
+  color: var(--tone-mission);
+  border-color: rgba(75, 159, 176, 0.4);
+  background: rgba(75, 159, 176, 0.1);
+}
+
 /* Ecosystem transforms completely below the map breakpoint: the spatial
    constellation becomes a filterable, tappable list. */
 @media (max-width: 900px) {
@@ -1944,7 +2236,8 @@ button.thread-chip.is-interactive:hover {
 
   .profile-grid,
   .model-grid,
-  .pattern-grid {
+  .pattern-grid,
+  .status-board {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -2041,6 +2334,7 @@ button.thread-chip.is-interactive:hover {
   .profile-grid,
   .model-grid,
   .pattern-grid,
+  .status-board,
   .involvement {
     grid-template-columns: 1fr;
   }

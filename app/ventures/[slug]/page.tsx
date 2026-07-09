@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
+import { StatusBadge } from "@/components/StatusBadge";
 import { VentureVisual } from "@/components/VentureVisual";
 import { getVenture, ventures } from "@/lib/ventures";
 
@@ -65,10 +66,20 @@ export default async function VenturePage({ params }: PageProps) {
       <section className="venture-hero">
         <div className="section-inner venture-hero-grid">
           <div>
-            <p className="eyebrow">{venture.stage}</p>
+            <div className="venture-hero-top">
+              <StatusBadge status={venture.status} />
+              <span className="venture-hero-profile">{venture.stage}</span>
+            </div>
             <h1>{venture.name}</h1>
             <p className="hero-statement">{venture.humanTruth}</p>
             <p className="hero-body">{venture.thesis}</p>
+            <div className="venture-hero-threads" aria-label={`${venture.name} shared instincts`}>
+              {venture.threads.map((thread) => (
+                <span className="thread-chip on-ink" key={thread}>
+                  {thread}
+                </span>
+              ))}
+            </div>
             <div className="hero-actions">
               {venture.website ? (
                 <a
