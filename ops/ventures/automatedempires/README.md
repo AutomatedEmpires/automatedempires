@@ -18,7 +18,7 @@ This pack describes the parent portfolio site's runtime boundary. AutomatedEmpir
 | Role | **Observed in repository** | Public Next.js studio and portfolio site; not a product application. | `AGENTS.md`, `README.md`, `lib/ventures.ts` |
 | GitHub | **Observed in repository** | Canonical repository is `AutomatedEmpires/automatedempires`. | `EMPIRE_INFRA_ALIGNMENT_PLAN.md` §2 |
 | Secrets inventory | **Verified current** | Doppler project `automatedempires` exists with `dev`, `stg`, and `prd` configs; the supplied inventory found Doppler metadata only. | Provider fact supplied for this alignment pass |
-| Hosting | **Verified current** | Vercel project is connected to the canonical repo/main/root and has a protected `READY` PR preview after the Next.js security patch; no production deployment or domain is attached. | Authenticated Vercel inventory/build |
+| Hosting | **Verified current** | Vercel project is connected to the canonical repo/main/root. Pass 2 preview `dpl_7eWQBY2ULsfcPTnQ17aSmN3EAhm9` is `READY`; an earlier production-target artifact is `ERROR`, so no functional production or custom domain is attached. | Authenticated Vercel inventory/build |
 | Database | **Verified current** | No Supabase project is required for the current portfolio site. | Provider fact supplied for this alignment pass |
 | Domain | **Verified current** | `automatedempires.com` is registered at GoDaddy and currently serves GoDaddy Website Builder; Outlook MX and a possible duplicate-SPF condition are present. | Public RDAP/DNS and HTTP snapshot |
 | Optional integrations | **Observed in repository** | The repo contract names Resend, PostHog, Cloudinary, and Sentry as the provider family to use if features require them. | `AGENTS.md` §4 |

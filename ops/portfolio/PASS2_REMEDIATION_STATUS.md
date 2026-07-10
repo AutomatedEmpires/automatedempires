@@ -28,4 +28,4 @@
 
 - **Provider remediations completed:** none were safe to execute without the missing authenticated Chrome session, a founder payment/ownership choice, or a production-risk gate.
 - **Safely fixed now:** the LogLoads operating/provenance decision was corrected so an unsafe Vercel promotion is no longer the prescribed action; current provider counts/statuses and exact gates replaced ambiguous Pass 1 assumptions.
-- **No production mutations:** no live Stripe, DNS, Clerk, Resend, Mapbox, Cloudinary, media, deployment, domain, customer, subscription, invoice, or provider-project mutation occurred.
+- **No production mutations:** no live Stripe, DNS, Clerk, Resend, Mapbox, Cloudinary, media, production deployment, domain, customer, subscription, invoice, or provider-project mutation occurred. The documentation push triggered an expected protected PR preview, which completed `READY`.

@@ -10,7 +10,7 @@ This file maps environment ownership without recording values.
 | --- | --- | --- | --- | --- |
 | Development | Doppler `automatedempires` / `dev` exists; supplied inventory found metadata only. | Local Next.js development is documented. | Localhost only. | **Verified current** for Doppler; **Observed in repository** for local development |
 | Staging | Doppler `automatedempires` / `stg` exists; metadata only. | Protected Vercel PR preview is `READY`. | Provider preview hostname, protected by Vercel authentication. | **Verified current** |
-| Production | Doppler `automatedempires` / `prd` exists; metadata only. | Vercel project is connected to main at root `.`; no deployment exists. | `automatedempires.com` remains on GoDaddy Website Builder. | **Verified current**; deployment and cutover pending |
+| Production | Doppler `automatedempires` / `prd` exists; metadata only. | Vercel project is connected to main at root `.`; production-target artifact `dpl_3FCYsGgYNJEnJJEMhmQjksbjL7zm` is `ERROR`, so no functional production deployment exists. | `automatedempires.com` remains on GoDaddy Website Builder. | **Verified current**; clean main production and cutover pending |
 
 ## Runtime configuration surface
 
