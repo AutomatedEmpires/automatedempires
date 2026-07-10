@@ -4,7 +4,7 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 
 ## Current operating posture
 
-Lake & Pine has a healthy Vercel application, but its aliased production deployment is a dirty redeploy from `feat/production-foundation` while the configured production branch is `main`. Preserve the prototype as historical evidence and make the deployed application reproducible before normal operation.
+Lake & Pine has a healthy Vercel application at deployment `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`, but it is a dirty redeploy from `feat/production-foundation`. Clean candidate `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` is five commits ahead of prototype-only `main` `0b7116f72878ba3f67e3ff9948a11da83cc5bab7`, which lacks configured root `apps/web`. Preserve the prototype and current deployment as evidence while making the release reproducible.
 
 ## Safety rules
 
@@ -15,9 +15,9 @@ Lake & Pine has a healthy Vercel application, but its aliased production deploym
 
 ## Verification sequence
 
-1. Confirm GitHub repository `AutomatedEmpires/lakeandpine`.
+1. Confirm GitHub repository `AutomatedEmpires/lakeandpine`, `main` `0b7116f72878ba3f67e3ff9948a11da83cc5bab7`, and candidate `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` before review.
 2. Confirm Doppler project `lake-and-pine`: dev is metadata-only; stg/prd contain the verified runtime contract imported without displaying values.
-3. Confirm Vercel project `lakeandpine`, root `apps/web`, intended production branch `main`, and current alias source before deploy.
+3. Confirm Vercel project `lakeandpine`, root `apps/web`, intended production branch `main`, and deployment `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`; capture its source metadata, aliases, creation time, and rollback owner before replacement.
 4. Confirm Supabase ref `fftnqsvxxsxcsiwvtmwr`, 14 RLS/policy-covered tables, and two remote migrations before any database write.
 5. Review `docs/product/recovered-product-truth.md` and the prototype as requirements evidence, not infrastructure truth.
 
@@ -32,13 +32,27 @@ Before production normalization, approve:
 - quoting, booking, scheduling, and payment boundaries;
 - email, analytics, error monitoring, and domain/DNS ownership.
 
-First merge or faithfully reproduce `feat/production-foundation` on the intended branch, commit the environment contract, and prove a clean preview. Only then replace the current production alias or attach an owned domain.
+First review and merge or faithfully reproduce exact candidate `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` on the intended branch. Add CI for frozen install, lint, typecheck, and build; commit the environment contract; and prove a clean exact-SHA preview. Only then replace the current production alias or attach an owned domain.
 
 ## Deployment
 
-- **Verified current:** canonical Git connection, root `apps/web`, project, ready alias, and Vercel/Supabase environment binding.
-- **Blocked:** the ready alias was redeployed from a dirty `feat/production-foundation` source rather than reproducible `main`.
-- **Target state:** clean branch/commit → Preview with stg → reviewed main Production with prd → owned domain after purchase.
+- **Verified current:** canonical Git connection, root `apps/web`, project, ready deployment `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`, and Vercel/Supabase environment binding.
+- **Blocked:** the ready artifact came from dirty feature source; `main` lacks `apps/web`, no CI exists, and the live artifact is not proven equal to the clean candidate SHA.
+- **Target state:** reviewed candidate → exact-SHA Preview with `stg` → reviewed `main` Production with `prd` → owned domain after purchase.
+
+## Acceptance gates
+
+1. Preserve the current deployment metadata and do not move its alias until the candidate passes.
+2. Review the five-commit application introduction and ensure prototype/recovery evidence remains intact.
+3. Require clean-checkout frozen install, lint, typecheck, and build; record the exact passing commit.
+4. Preview with staging-only resources and verify public pages, contact rendering, quote/booking boundaries, auth-disabled behavior, RLS, logs, and fail-closed missing-provider behavior without production writes.
+5. Deploy reviewed `main` to a provider hostname with `prd`; compare it to the accepted Preview before alias replacement. Domain work remains separately blocked.
+
+## Rollback
+
+- Keep `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt` available until the clean main deployment is accepted. If the candidate fails, restore the alias to that recorded deployment.
+- Do not reset, reseed, or reverse the Supabase schema as a code rollback. Preserve data and use a reviewed forward fix if schema behavior is involved.
+- Because the existing deployment is dirty and unreproducible, replace it with a second verified deployment before treating rollback as transfer-ready.
 
 ## Database
 

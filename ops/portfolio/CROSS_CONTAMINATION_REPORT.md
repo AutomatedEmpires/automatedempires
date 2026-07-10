@@ -1,6 +1,6 @@
 # Cross-Contamination Report
 
-**Verified snapshot:** 2026-07-10
+**Verified snapshot:** 2026-07-10 (Pass 2 refresh)
 
 The review compared repository configuration names, Doppler value fingerprints without displaying values, Vercel/GitHub metadata, and provider account identities. Confirmed findings are separated from suspected or acceptable shared ownership.
 
@@ -8,20 +8,23 @@ The review compared repository configuration names, Doppler value fingerprints w
 
 | Finding | Ventures | Severity | Evidence | Status | Safe remediation |
 |---|---|---:|---|---|---|
-| One live Stripe account contains Sweepza products and webhooks for both sweepza.com and exploreandearn.com; the Stripe business name still references Explore&Earn | Explore&Earn, Sweepza | Critical | Authoritative live Stripe account, product, price, and webhook inventory | **Unresolved: identity and money-moving gate** | Founder chooses legal/account structure; create or identify separate live accounts, map products/webhooks, test in sandbox, then migrate without moving customer/payment data unless explicitly approved |
-| Distinct Resend credentials for Explore&Earn and LogLoads reach the same account and its sole Explore&Earn domain | Explore&Earn, LogLoads | High | Authoritative Resend account/domain inventory; LogLoads domain creation returned HTTP 403 because the plan permits one domain | **Unresolved: paid/account gate** | Upgrade only with approval or create a separate LogLoads Resend account; add a LogLoads-owned sending domain, deploy its scoped credential, verify delivery, then rotate the old credential |
-| One public Mapbox token is configured in three venture contexts | Explore&Earn, BidSpace, LogLoads | Medium | Redacted cross-Doppler fingerprint comparison and Mapbox token validation | **Unresolved: management permission gate** | Create venture/environment-specific least-privilege public tokens, restrict allowed URLs, deploy and verify replacements, then retire the shared token |
-| One free Cloudinary cloud contains venture folders for Explore&Earn, BidSpace, LogLoads, Sweepza, and unrelated namespaces | Multiple ventures | Medium | Authenticated Cloudinary cloud, preset, and root-folder inventory | **Documented limitation** | Preserve strict folders and signed presets now; move to separate environments/subaccounts only with plan support and a tested media migration |
+| One live Stripe account contains the Sweepza-oriented catalog and webhooks for both sweepza.com and exploreandearn.com while account identity remains mixed | Explore&Earn, Sweepza | Critical | Authoritative live Stripe inventory; Pass 2 counted two customers, no stored payment methods/subscriptions/charges, and one draft invoice without displaying customer data | **Unresolved: identity, founder decision, and live-money gate; written plan complete** | Founder selects which venture retains the account, assigns the two customers/draft invoice, activates replacements, proves sandbox/live smoke and rollback, then separately authorizes any live mutation |
+| Distinct broad Resend credentials for Explore&Earn and LogLoads reach the same team and its sole failed Explore&Earn domain | Explore&Earn, LogLoads | High | Both keys list the same team resources; domain has one failed DKIM and two failed SPF checks; current one-domain behavior is consistent with Free but billing plan is API-unverified | **Unresolved: domain quota, payment, DNS, and account-owner gate** | Verify Explore&Earn DNS first; create a separate LogLoads team after founder cost approval; deploy sending-only venture keys and verified from addresses before retiring broad keys |
+| One apparently unrestricted public Mapbox token is configured in three venture contexts; LogLoads also stores that same public token under a server-shaped variable | Explore&Earn, BidSpace, LogLoads | Medium | Redacted equality comparison, successful style read, and unrelated-Origin probe; current auth lacks token-management scopes | **Unresolved: authenticated token-owner permission gate** | Create venture/environment public tokens with SDK-only scopes and narrow origins; do not create server tokens without a server consumer; retire the shared token only after usage is zero |
 
 ## Environment contamination within a venture
 
 | Finding | Severity | Status | Safe remediation |
 |---|---:|---|---|
-| Sweepza dev, staging, and production configuration resolve to the same Clerk development instance; no custom domain or allowed-origin separation was observed | High | Unresolved | Create a production Clerk instance, configure domains/OAuth/JWT/webhook, test preview, then replace production keys |
-| LogLoads dev and staging resolve to the same Clerk development instance; production Clerk configuration is absent | High | Unresolved | Keep non-production explicitly labeled, create production identity only after the production runtime/domain is stable, and never promote the development keys |
-| Explore&Earn production configuration cannot be proven separate because Doppler stg/prd are metadata-only and Vercel values are write-only | High | Unresolved | Provision authoritative production resources and migrate via Doppler after preview tests |
+| Sweepza dev, staging, and production resolve to the same Clerk development instance and reuse the same webhook signing configuration; the instance has one user | High | Unresolved | Activate a dark production instance, configure domain/OAuth/production webhook, test the complete role/profile flow, then replace `prd`; decide whether `stg` is ephemeral-dev or a separate app/domain |
+| LogLoads dev and staging resolve to the same Clerk development instance with zero users; production Clerk configuration is absent | High | Unresolved | Keep non-production explicitly labeled and activate production identity only after the runtime architecture and auth/webhook contracts are stable |
+| Explore&Earn has one development user, but only `dev` is configured; `stg`/`prd` and production webhook config are absent | High | Unresolved | Activate and verify the production instance without overwriting dev; the dev user cannot be transferred and must re-register if needed |
 
-## Corrected during this pass
+## Cloudinary structural sharing (not active cross-venture writes)
+
+The Free Cloudinary account has one product environment. Six venture-shaped root folders exist, but only `explore-and-earn` contains assets; the other five are empty. Only Explore&Earn `dev` has Cloudinary credentials. No active cross-venture writes or credential reuse were confirmed. This remains a transfer limitation because the signed Explore&Earn presets are not folder-bound and allow overwrite, and the single admin boundary can access the whole environment. The transfer-grade account/paid-plan decision is documented; no media was migrated.
+
+## Corrected safely in Pass 1
 
 | Finding | Correction | Verification |
 |---|---|---|
@@ -38,7 +41,13 @@ The review compared repository configuration names, Doppler value fingerprints w
 - A shared Sentry organization is acceptable because Explore&Earn has a separate project; other ventures still need project-level verification.
 - Repeated Doppler metadata variables and common local development URLs are structural defaults, not shared secrets.
 - Explore&Earn and LogLoads Resend credentials are different. The contamination is account/domain coupling, not credential reuse.
+- The three Clerk instance IDs are distinct. The problem is missing production and within-venture environment coupling, not cross-venture Clerk reuse.
+- Empty Cloudinary folders do not prove active venture environments or credential sharing.
 - No committed live-key pattern or identical secret fingerprint was found across the seven default-branch repository snapshots.
+
+## Pass 2 remediation boundary
+
+Pass 2 produced approved-safe read-only evidence and executable Stripe, Clerk, Resend, Mapbox, Cloudinary, provenance, and ORAN cutover plans. Plan completion is not provider remediation. The live Stripe account, Clerk production instances, Resend team/domain/DNS state, shared Mapbox token, and Cloudinary ownership boundary remain open until their recorded founder, payment, authenticated-dashboard, or production-risk gates are satisfied.
 
 ## Delete-review anomalies
 

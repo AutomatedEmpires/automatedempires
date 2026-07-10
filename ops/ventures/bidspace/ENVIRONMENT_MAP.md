@@ -1,10 +1,12 @@
 # BidSpace environment map
 
+Pass 2 provider refresh: 2026-07-10; Mapbox and Cloudinary status was refreshed read-only without recording credential material.
+
 ## Environment ownership
 
 | Logical environment | Secrets source | Deployment target | Database target | Status |
 |---|---|---|---|---|
-| Local development | Doppler `bidspace` / `dev`, 16 names | Local Next.js workspace | Dedicated Supabase project and Clerk development instance `ins_3EhjtEaNHw8zCMMwPWby7O6tsWB` | **Verified provider identities**; end-to-end runtime not tested |
+| Local development | Doppler `bidspace` / `dev`, 16 names | Local Next.js workspace | Dedicated Supabase project and Clerk development instance `ins_3EhjtEaNHw8zCMMwPWby7O6tsWB`; shared public Mapbox token; empty Cloudinary placeholder folder with no credential | **Verified provider identities/placeholders**; end-to-end runtime not tested |
 | Staging / preview | Doppler `bidspace` / `stg` | Vercel project `bidspace` Preview | BidSpace-only staging boundary | Mapping is **target state** |
 | Production | Doppler `bidspace` / `prd`, metadata only | Vercel project `bidspace`, Git/main/root configured but undeployed | Supabase ref `hnjjcgxflxlfsqslgxcv`; no production Clerk/domain/Stripe | **Not production-ready** |
 
@@ -28,9 +30,16 @@ The following names were extracted from committed `.env.example` files; values w
 | OpenAI | `OPENAI_API_KEY` |
 | GitHub/Notion worker tools | `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_TOKEN`, `NOTION_API_TOKEN` |
 
+## Pass 2 provider findings
+
+- Only `NEXT_PUBLIC_MAPBOX_TOKEN` is configured in Doppler. It is active and identical to the Explore&Earn and LogLoads public token; no separate `MAPBOX_ACCESS_TOKEN` is configured.
+- Current Mapbox authorization cannot list token metadata or create replacements. Management requires `tokens:read` and `tokens:write`; runtime tokens must not receive those scopes.
+- Cloudinary names exist in repository examples, but no BidSpace Cloudinary credential is present in Doppler. The `bidspace` root folder is empty and is not an active venture media boundary.
+
 ## Rules
 
 - Public-prefixed values may be browser-readable, but still belong to the BidSpace resource boundary.
 - Server, database, webhook, CI, and provider-management variables must never be exposed to the client.
 - A variable name documents a potential consumer; it is not proof that the provider resource exists or is ready.
 - Keep CI/admin credentials out of Vercel runtime environments unless a deployed process demonstrably consumes them.
+- Final Mapbox URL restrictions remain blocked until the production domain is selected. Do not treat the shared public token as a server credential.

@@ -1,5 +1,7 @@
 # BidSpace provider links
 
+Pass 2 provider refresh: 2026-07-10; sanitized status only.
+
 These are non-secret navigation aids. A dashboard link does not prove resource ownership or readiness.
 
 | Provider | Resource locator | Status | Link / evidence |
@@ -10,8 +12,8 @@ These are non-secret navigation aids. A dashboard link does not prove resource o
 | Supabase | Ref `hnjjcgxflxlfsqslgxcv` | **Verified current** | https://supabase.com/dashboard/project/hnjjcgxflxlfsqslgxcv |
 | Clerk | Development instance `ins_3EhjtEaNHw8zCMMwPWby7O6tsWB` on `factual-puma-97` | **Verified development**; production missing | https://dashboard.clerk.com/ |
 | Stripe | BidSpace-specific Connect platform/account | **Observed in repository**; account identity **unknown** | https://dashboard.stripe.com/ |
-| Mapbox | Current browser token shared with Explore&Earn and LogLoads | **Confirmed coupling**; replacement blocked until domain/token-write access | https://account.mapbox.com/ |
-| Cloudinary | Shared free cloud `dwiwyt9vi`, BidSpace root folder | **Verified folder-only boundary** | https://console.cloudinary.com/ |
+| Mapbox | Current browser token shared with Explore&Earn and LogLoads | **Confirmed coupling; active and apparently unrestricted; metadata/replacement blocked by missing `tokens:read`/`tokens:write` and domain decision** | https://account.mapbox.com/ |
+| Cloudinary | Free cloud `dwiwyt9vi`, empty BidSpace root folder | **Placeholder only; no assets and no BidSpace credential** | https://console.cloudinary.com/ |
 | PostHog | Product analytics project | **Observed in repository**; project identity **unknown** | https://app.posthog.com/ |
 | Sentry | Error/performance project | **Observed in repository**; org/project identity **unknown** | https://sentry.io/ |
 | Domain/DNS | No discovered candidate | **Unknown / founder verification required** | No domain link recorded |

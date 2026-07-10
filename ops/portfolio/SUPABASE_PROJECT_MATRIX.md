@@ -10,11 +10,11 @@ Supabase project references are non-secret identifiers. URLs, anon keys, service
 |---|---|---|---|---|
 | AutomatedEmpires | — | — | Not applicable | No Supabase project exists and none is currently needed for the public studio site |
 | Explore&Earn | `mamosbzcbigcclafhmmr` | `us-west-2` | Healthy | Dedicated venture project |
-| ORAN | `tpatxospkuqvajusuryw` | `us-east-1` | Healthy | Dedicated venture project referenced by the Azure-to-Vercel convergence work; remote migration history is not reconciled |
+| ORAN | `tpatxospkuqvajusuryw` | `us-east-1` | Healthy | Dedicated venture project referenced by candidate `217cd962de1633321cae49327dbc089fc4ad7377`; remote migration history is not reconciled and blocks preview writes/cutover |
 | BidSpace | `hnjjcgxflxlfsqslgxcv` | `us-west-1` | Healthy | Dedicated venture project |
-| Lake & Pine | `fftnqsvxxsxcsiwvtmwr` | `us-west-1` | Healthy | Dedicated venture project; the current Vercel binding was verified and imported into Doppler staging and production |
+| Lake & Pine | `fftnqsvxxsxcsiwvtmwr` | `us-west-1` | Healthy | Dedicated venture project; current Vercel binding was verified/imported, but source normalization from `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` must not include schema writes |
 | Sweepza | `ojwhsntcpmoxnzisuomq` | `us-east-1` | Healthy | Dedicated venture project |
-| LogLoads | `fdzohbiiyzgvjzfsjyxo` | `us-west-1` | Healthy | Dedicated venture project |
+| LogLoads | `fdzohbiiyzgvjzfsjyxo` | `us-west-1` | Healthy | Dedicated venture project currently used as a snapshot mirror; process-local JSON state remains primary, so this project does not yet make the app stateless or Vercel-safe |
 
 ## Schema and security posture
 
@@ -49,4 +49,5 @@ These are read-only Management API observations from 2026-07-10. A table with RL
 4. Inventory RLS, storage buckets, auth providers, edge functions, database webhooks, and scheduled jobs.
 5. For ORAN, reconcile committed migrations, the single-row remote migration ledger, and the existing 97-table schema before any cutover or schema write.
 6. For Lake & Pine, preserve the verified Vercel/Supabase binding and validate migrations before seeding content or creating auth/payment dependencies.
-7. Record secret names and ownership in the venture's Doppler map only after the project-to-venture match is verified; never copy secret values into this matrix.
+7. For LogLoads, do not treat the `operating_state` mirror as a canonical transactional data layer. Choose the single-node host or complete a reviewed async-database refactor before any Vercel production decision.
+8. Record secret names and ownership in the venture's Doppler map only after the project-to-venture match is verified; never copy secret values into this matrix.
