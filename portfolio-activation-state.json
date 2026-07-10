@@ -172,16 +172,21 @@
       "vercel_status": "no project yet (team AutomatedEmpires team_0IgwjPKkR3NmPUC5ugTK3cfi). Repo is deploy-ready: apps/web/vercel.json added, turbo.json cache exclusion fixed, exact settings in docs/PRODUCTION-ACTIVATION.md. Deploy is intentionally gated on Clerk (ClerkProvider+middleware 500 every route without real keys) — do not ship a broken artifact.",
       "supabase_project": "hnjjcgxflxlfsqslgxcv",
       "clerk_status": "CODE CONTRACT COMPLETE + verified current (Clerk v7 clerkMiddleware/auth/clerkClient; no deprecated authMiddleware). docs/CLERK-CONTRACT.md is the exact hand-off. No Clerk API/MCP exists for the agent; app creation is dashboard-only (FOUNDER GATE). CLERK_ENCRYPTION_KEY required in prod. No Clerk webhook consumer (sync is synchronous in /onboarding/complete).",
-      "stripe_status": "CODE COMPLETE + activation runbook (docs/CONNECT-RUNBOOK.md, docs/MONEY-PROOF-FIXTURE.md). Docker Stripe MCP not bound to an account (retrieve_balance failed); no Stripe account here. Activation needs founder KYC/beneficial-owner/bank (FOUNDER GATE). Internal fee/split proven; external money loop pre-designed, no new work after KYC.",
+      "stripe_status": "CODE COMPLETE + activation runbook (docs/CONNECT-RUNBOOK.md, docs/MONEY-PROOF-FIXTURE.md). claude.ai Stripe connector (new 2026-07-10) is bound to account acct_1RMjIWIH4Hw2pSG9, display name 'explore&earn' -- NOTE this is a DIFFERENT account id than acct_1SpxXpDtcwz0cxzo, the shared KYC-complete account Sweepza/LogLoads reuse. Read-only check: GetAccounts returns zero connected accounts on acct_1RMjIWIH4Hw2pSG9 (Connect not yet used on it either way). Did not bind BidSpace to either account -- which Stripe account/KYC identity to use is a founder decision, not resolved unilaterally. Internal fee/split proven; external money loop pre-designed, no new engineering after the account decision + KYC.",
       "resend_status": "not wired (not in scope for BidSpace launch)",
-      "posthog_status": "INSTRUMENTED, off until key set. 7 server events (opportunity_published/duplicated, bid_submitted, bid_awarded, booking_paid, review_submitted, network_invited) + client $pageview, env-gated on NEXT_PUBLIC_POSTHOG_KEY (own env, NOT E&E's key); distinctId = org uuid, properties = ids/cents/enums, no PII. Founder gate: create BidSpace PostHog project, set key.",
-      "sentry_status": "not wired (Next 16 SDK-compat risk to the green build). Branded error boundaries (not-found + error + global-error) added as the Sentry capture seam with sendDefaultPii guidance. Founder gate + exact wiring steps in docs/PRODUCTION-ACTIVATION.md §5.",
+      "posthog_status": "INSTRUMENTED, off until key set. 7 server events (opportunity_published/duplicated, bid_submitted, bid_awarded, booking_paid, review_submitted, network_invited) + client $pageview, env-gated on NEXT_PUBLIC_POSTHOG_KEY (own env, NOT E&E's key); distinctId = org uuid, properties = ids/cents/enums, no PII. claude.ai PostHog connector is query/analytics-only (no project-create tool) and scoped to the exploreandearn project -- cannot provision a dedicated BidSpace project from here. Founder gate: create BidSpace PostHog project at https://app.posthog.com/, set key.",
+      "sentry_status": "DONE. Project 'bidspace' created in Sentry org automated-empires via the claude.ai Sentry connector (https://automated-empires.sentry.io/projects/bidspace/). @sentry/nextjs wired (instrumentation.ts server/edge, instrumentation-client.ts browser, withSentryConfig, sendDefaultPii:false); error.tsx/global-error.tsx report via Sentry.captureException. Event delivery PROVEN: tools/verify-sentry.ts fired a real event, confirmed landing as issue BIDSPACE-1 via the Sentry API, then resolved as a deliberate test. DSN in Doppler bidspace/dev + .env.local; copy to bidspace/prd when promoting. No founder action needed for Sentry. Verified both DSN-present and DSN-absent build cleanly.",
       "mapbox_status": "code complete; /map degrades honestly to a list link when NEXT_PUBLIC_MAPBOX_TOKEN absent (browser-safe public token, restrict by URL). Docker Mapbox MCP token invalid (cannot mint). Founder gate: create + restrict token.",
       "dns_status": "public domain not selected (out of scope); use a temporary *.vercel.app host",
       "phone_status": "not applicable",
-      "founder_gates": ["Clerk application creation + production keys (no non-interactive path)", "Stripe Connect KYC / beneficial-owner / bank"],
-      "last_production_verification": "2026-07-08T02:50:44Z",
-      "state": "SOFTWARE COMPLETE · INTERNAL ENGINE VERIFIED · CONNECT MODERNIZED · EXTERNAL IDENTITY & MONEY FOUNDER-GATED"
+      "founder_gates": [
+        "Clerk application creation + production keys (no non-interactive path)",
+        "Decide which Stripe account BidSpace uses (new acct_1RMjIWIH4Hw2pSG9 'explore&earn' vs shared KYC-complete acct_1SpxXpDtcwz0cxzo vs a fresh account) + complete KYC/beneficial-owner/bank on the chosen one",
+        "PostHog project + key (small; connector cannot provision it)",
+        "Mapbox token, restricted to the prod host (small; no connector available)"
+      ],
+      "last_production_verification": "2026-07-10T05:39:00Z",
+      "state": "SOFTWARE COMPLETE · INTERNAL ENGINE VERIFIED · CONNECT MODERNIZED · SENTRY LIVE · EXTERNAL IDENTITY & MONEY FOUNDER-GATED"
     }
   ]
 }
