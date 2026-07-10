@@ -11,7 +11,7 @@ This plan contains resource names and configuration-variable names only. It must
 
 | Venture | Canonical slug | Role | Current implementation state |
 |---|---|---|---|
-| AutomatedEmpires | `automatedempires` | Parent / portfolio authority | Next.js public studio site; Vercel project provisioned, no deployment yet |
+| AutomatedEmpires | `automatedempires` | Parent / portfolio authority | Next.js public studio site; protected Vercel PR preview is `READY` after the security dependency patch |
 | Explore&Earn | `explore-and-earn` | Standalone marketplace venture | Mature Next.js monorepo; canonical Vercel production is `READY` and a dedicated Supabase project is healthy |
 | ORAN | `oran` | Standalone civic-infrastructure venture | Mature Next.js application; an unmerged branch intentionally removes Azure deployment assets for Vercel, and an empty Vercel shell is reserved but deliberately unconnected/undeployed |
 | BidSpace | `bidspace` | Standalone auction venture | Early Next.js monorepo; Vercel Git connection and healthy Supabase project verified, initial deployment pending |
@@ -41,7 +41,7 @@ Repository-level dependency discovery and subsequent provider verification found
 
 | Venture | Provider surface evidenced in code or committed documentation |
 |---|---|
-| AutomatedEmpires | GitHub; Doppler project with `dev`/`stg`/`prd` metadata only; Vercel project with Git connected but no deployment; Resend, PostHog, Cloudinary, and Sentry remain referenced/planned |
+| AutomatedEmpires | GitHub; Doppler project with `dev`/`stg`/`prd` metadata only; Vercel project with Git connected and a `READY` protected PR preview; Resend, PostHog, Cloudinary, and Sentry remain referenced/planned |
 | Explore&Earn | GitHub; Doppler project (`dev` populated by name, `stg`/`prd` metadata only); Vercel production `READY`; healthy Supabase project; Clerk, Stripe, Resend, PostHog, Cloudinary, Mapbox, and Sentry integration names present; OpenAI/AI Gateway also referenced |
 | ORAN | GitHub; current Azure App Service/PostgreSQL/Key Vault/Maps/AI/Communication Services architecture; Doppler metadata-only configs; healthy Supabase project referenced by the convergence work; empty deferred Vercel shell; Sentry and remaining Azure resources require ownership reconciliation |
 | BidSpace | GitHub; Doppler project (`dev` populated by name, `stg`/`prd` metadata only); Vercel Git connected with no deployment; healthy Supabase project; Clerk, Stripe Connect, PostHog, Cloudinary, Mapbox, Sentry, and OpenAI referenced |
@@ -88,7 +88,7 @@ The BidSpace state is **not discovered**, not proof that the user lacks every po
 The initial all-provider unknown state is no longer current:
 
 - **Doppler:** all seven venture projects exist with root `dev`, `stg`, and `prd` configs. AutomatedEmpires and ORAN contain metadata only. Detailed names-only state is recorded under `ops/secrets/`.
-- **Vercel:** venture projects exist for all seven slugs. ORAN is an intentionally empty shell pending merge/preview verification of the existing convergence branch. AutomatedEmpires and BidSpace have no deployment; Explore&Earn, Lake & Pine, and Sweepza are `READY`; LogLoads preview is `READY` while production fails with `ENOENT`.
+- **Vercel:** venture projects exist for all seven slugs. ORAN is an intentionally empty shell pending merge/preview verification of the existing convergence branch. AutomatedEmpires has a `READY` protected PR preview; BidSpace has no deployment; Explore&Earn, Lake & Pine, and Sweepza are `READY`; LogLoads preview is `READY` while production fails with `ENOENT`.
 - **Supabase:** healthy dedicated project references exist for Explore&Earn, ORAN, BidSpace, Lake & Pine, Sweepza, and LogLoads. AutomatedEmpires has no project and no current need. ORAN's project is referenced by the convergence work, but its one-row remote migration ledger does not explain the deployed schema.
 - **Domains/DNS:** public RDAP and DNS state is recorded in `ops/portfolio/DOMAIN_DNS_MATRIX.md`. Public records do not prove authenticated registrar control.
 - **Still unresolved:** production boundaries for Clerk, Stripe, Resend, Mapbox, some PostHog/Sentry resources, Cloudinary transfer isolation, webhooks, and the live Azure estate remain blocked or incomplete. Provider-specific matrices record the verified identities and exact gaps.

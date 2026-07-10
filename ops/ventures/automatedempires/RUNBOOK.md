@@ -39,7 +39,7 @@ Use this runbook for the parent portfolio site only. Do not use it to operate a 
 ## Incident response
 
 1. **Target state** — Record the affected deployment, first observed time, user-visible symptom, and whether the issue is limited to content or affects all requests.
-2. **Verified current** — The Vercel project is connected to the canonical repo/main/root with Next.js/Node 24 but has no deployment or domain. Deploy and verify provider hosts before any DNS change.
+2. **Verified current** — The Vercel project is connected to canonical repo/main/root with Next.js/Node 24 and the protected PR preview is `READY`; deploy/verify `main` before any DNS change.
 3. **Target state** — If the regression is deployment-specific, restore the last known-good Vercel deployment without changing child-venture systems.
 4. **Target state** — If DNS is implicated, preserve current records before any edit and obtain owner approval.
 5. **Target state** — Re-run the smoke tests and document the restoration commit or deployment.

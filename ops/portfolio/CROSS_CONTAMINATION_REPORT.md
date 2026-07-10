@@ -29,7 +29,7 @@ The review compared repository configuration names, Doppler value fingerprints w
 | Lake & Pine had runtime values only in Vercel and empty Doppler application configs | Imported the verified Lake & Pine Vercel/Supabase environment into Doppler staging and production without printing values | Names-only Doppler validation and Supabase project-ref comparison passed |
 | LogLoads Vercel project had no Git source binding | Connected the canonical GitHub repository, production branch main, and root apps/web | Vercel project metadata now shows the intended binding; no production promotion occurred |
 | AutomatedEmpires, ORAN, and Lake & Pine lacked the required Doppler project/config structure | Created dedicated projects and dev/stg/prd configs | Doppler names-only inventory passed |
-| AutomatedEmpires, BidSpace, and ORAN lacked dedicated canonical Vercel shells | Created business-specific shells and set framework/root/Node settings where known | Vercel project inventory passed; none was deployed blindly |
+| AutomatedEmpires, BidSpace, and ORAN lacked dedicated canonical Vercel shells | Created business-specific projects and set framework/root/Node settings where known | AutomatedEmpires now has a reviewed PR preview; BidSpace and ORAN remain intentionally undeployed |
 
 ## Reviewed and not classified as contamination
 

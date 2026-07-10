@@ -17,7 +17,7 @@ This sequence completes the highest-risk separation work without mixing it with 
 1. Lake & Pine: merge or faithfully reproduce `feat/production-foundation` in clean Git history, commit the environment contract, deploy a clean preview, then replace the dirty production redeploy from main.
 2. LogLoads: reproduce and fix the production build from main, verify the Next.js runtime artifact, deploy a clean preview, then deploy production. Keep logloads.com on GoDaddy until the canonical Vercel deployment and rollback target pass.
 3. ORAN: reconcile the Azure-to-Vercel branch with the Supabase schema/ledger, add the missing cron and public-site environment contract, remove stale Azure CSP/docs, and verify all cron routes in preview. Connect Git and change DNS only after merge approval.
-4. AutomatedEmpires and BidSpace: create reviewed deployable previews from their dedicated Vercel shells before attaching domains or production variables.
+4. AutomatedEmpires: review/merge the green protected preview, then verify a `main` production provider host before DNS. BidSpace: create its first reviewed preview before attaching domains or production variables.
 5. Re-run page, health, console, webhook-route, and deployment checks for every affected runtime.
 
 ## Engineering pass 2: identity, money, and email separation

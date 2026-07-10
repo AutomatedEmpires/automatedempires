@@ -9,7 +9,7 @@ This file maps environment ownership without recording values.
 | Environment | Secrets/config | Deployment | Domain | Status |
 | --- | --- | --- | --- | --- |
 | Development | Doppler `automatedempires` / `dev` exists; supplied inventory found metadata only. | Local Next.js development is documented. | Localhost only. | **Verified current** for Doppler; **Observed in repository** for local development |
-| Staging | Doppler `automatedempires` / `stg` exists; metadata only. | Vercel Preview is configured through the canonical Git connection; no deployment exists yet. | No staging hostname is documented. | **Verified current** for control planes; initial preview pending |
+| Staging | Doppler `automatedempires` / `stg` exists; metadata only. | Protected Vercel PR preview is `READY`. | Provider preview hostname, protected by Vercel authentication. | **Verified current** |
 | Production | Doppler `automatedempires` / `prd` exists; metadata only. | Vercel project is connected to main at root `.`; no deployment exists. | `automatedempires.com` remains on GoDaddy Website Builder. | **Verified current**; deployment and cutover pending |
 
 ## Runtime configuration surface
@@ -18,7 +18,7 @@ This file maps environment ownership without recording values.
 | --- | --- | --- |
 | Application variables | **Observed in repository** | No application-level `process.env` or `NEXT_PUBLIC_` reads were found in `app/`, `components/`, `lib/`, or `next.config.mjs` during this pass. |
 | Database | **Verified current** | No Supabase project or database runtime is needed for the current site. |
-| Vercel environment bindings | **Verified current** | Canonical repo, root `.`, branch `main`, Next.js, and Node 24 are configured; no application environment is needed today and no deployment exists. |
+| Vercel environment bindings | **Verified current** | Canonical repo, root `.`, branch `main`, Next.js, and Node 24 are configured; no application environment is needed and the PR preview is `READY`. |
 | Doppler-to-Vercel flow | **Target state** | Each config maps only to its same-purpose environment; do not reuse another venture's service token or runtime identity. |
 | Domain and DNS | **Verified public / authenticated control pending** | GoDaddy registration/nameservers and Website Builder routing are public; export the authenticated zone and verify possible duplicate SPF before any Vercel attachment. |
 

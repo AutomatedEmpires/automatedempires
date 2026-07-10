@@ -8,7 +8,7 @@ Project IDs are non-secret resource identifiers. Environment-variable values and
 
 | Venture | Project label | Vercel project ID | Git connection | Production branch | Root directory | Deployment / domain state | Classification |
 |---|---|---|---|---|---|---|---|
-| AutomatedEmpires | `automatedempires` | `prj_eNjb9e1f7GONqtKQHYFkTxHhy9w1` | Connected to the venture GitHub repository | `main` | `.` | No deployment observed; `automatedempires.com` still resolves to GoDaddy Website Builder | Canonical; provisioned but not deployed |
+| AutomatedEmpires | `automatedempires` | `prj_eNjb9e1f7GONqtKQHYFkTxHhy9w1` | Connected to the venture GitHub repository | `main` | `.` | Protected PR preview `dpl_ePztayqv8K2wWHZZ9CKYjZQFT461` is `READY`; no production deployment/domain; `automatedempires.com` remains on GoDaddy Website Builder | Canonical; preview-verified |
 | Explore&Earn | Canonical Explore&Earn project | `prj_yzc9KMx1YpC3n3NMAV1skMkwxt2D` | `AutomatedEmpires/explore-and-earn` | `main` | `apps/web` | Production `READY`; serves `exploreandearn.com` | Canonical and active |
 | ORAN | `oran` | `prj_pQlCLP4RXGr2eJTo7fzZyMPX9QLy` | Unconnected | Not configured | `.` | Empty Next.js/Node 24 shell: no deployment or domain; deliberately deferred until the Azure-to-Vercel branch is merged and verified | Canonical shell; deliberate defer |
 | BidSpace | `bidspace` | `prj_ZumWyHo2GSF59j7dWQkkX6NGZlwO` | Connected to the venture GitHub repository | `main` | `apps/web` | No deployment observed; no production domain decision | Canonical; connection complete, initial deployment pending |
@@ -27,7 +27,7 @@ Neither candidate is authorized for deletion by this record.
 
 ## Required follow-up
 
-1. Deploy AutomatedEmpires from `main` with root `.` and verify the provider hostname before planning any `automatedempires.com` DNS cutover.
+1. Review/merge the patched AutomatedEmpires preview, deploy `main`, and verify the production provider hostname before planning any `automatedempires.com` DNS cutover.
 2. Trigger BidSpace's first safe deployment only after its required environment names and build expectations are verified.
 3. Repair LogLoads production `ENOENT` while preserving the known-good preview; verify the production build uses root `apps/web` and the connected `main` branch.
 4. Merge/reproduce Lake & Pine's production-foundation work cleanly on the intended branch and prove a main-based deployment before treating the ready alias as transferable.
