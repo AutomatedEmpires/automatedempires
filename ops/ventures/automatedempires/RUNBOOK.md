@@ -50,6 +50,10 @@ Use this runbook for the parent portfolio site only. Do not use it to operate a 
 - **Target state** — Do not rotate secrets as a generic rollback step; rotate only after a confirmed exposure or provider-specific incident plan.
 - **Target state** — Never delete the Vercel project, Doppler project/config, or DNS zone during incident response.
 
+## Runtime security baseline
+
+The dated decision at docs/decisions/2026-07-10-nextjs-security-patch.md pins the patched Next.js 15.5 and React 19.0 releases selected after Vercel blocked the first preview and the package audit exposed later advisories. Keep the pnpm lockfile synchronized and do not downgrade below that baseline.
+
 ## Evidence notes
 
 - Engineering contract: `AGENTS.md`
