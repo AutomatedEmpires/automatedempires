@@ -2,19 +2,19 @@
 
 **Verified snapshot:** 2026-07-10
 
-Supabase project references are non-secret identifiers. URLs, anon keys, service-role keys, database credentials, and secret fingerprints are intentionally excluded.
+This public matrix keeps only short project fingerprints. Full references/URLs, keys, credentials, and secret fingerprints are excluded.
 
 ## Current projects
 
 | Venture | Supabase project ref | Region | Provider health | Current interpretation |
 |---|---|---|---|---|
 | AutomatedEmpires | — | — | Not applicable | No Supabase project exists and none is currently needed for the public studio site |
-| Explore&Earn | `mamosbzcbigcclafhmmr` | `us-west-2` | Healthy | Dedicated venture project |
-| ORAN | `tpatxospkuqvajusuryw` | `us-east-1` | Healthy | Dedicated venture project referenced by candidate `217cd962de1633321cae49327dbc089fc4ad7377`; remote migration history is not reconciled and blocks preview writes/cutover |
-| BidSpace | `hnjjcgxflxlfsqslgxcv` | `us-west-1` | Healthy | Dedicated venture project |
-| Lake & Pine | `fftnqsvxxsxcsiwvtmwr` | `us-west-1` | Healthy | Dedicated venture project; current Vercel binding was verified/imported, but source normalization from `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` must not include schema writes |
-| Sweepza | `ojwhsntcpmoxnzisuomq` | `us-east-1` | Healthy | Dedicated venture project |
-| LogLoads | `fdzohbiiyzgvjzfsjyxo` | `us-west-1` | Healthy | Dedicated venture project currently used as a snapshot mirror; process-local JSON state remains primary, so this project does not yet make the app stateless or Vercel-safe |
+| Explore&Earn | `…lafhmmr` | `us-west-2` | Healthy | Dedicated venture project |
+| ORAN | `…vajusuryw` | `us-east-1` | Healthy | Dedicated project; remote migration history unreconciled and blocks writes/cutover |
+| BidSpace | `…fsqslgxcv` | `us-west-1` | Healthy | Dedicated venture project |
+| Lake & Pine | `…siwvtmwr` | `us-west-1` | Healthy | Dedicated project; preserve binding during source normalization |
+| Sweepza | `…nzisuomq` | `us-east-1` | Healthy | Dedicated venture project |
+| LogLoads | `…zfsjyxo` | `us-west-1` | Healthy | Supabase-canonical PR #6 final source `f280ef4…` is merged to default `9c9e107…` and clean main production `dpl_Xxr…8dPtF` is `READY`; live Supabase/data/provider cutover did not occur |
 
 ## Schema and security posture
 
@@ -25,7 +25,7 @@ Supabase project references are non-secret identifiers. URLs, anon keys, service
 | BidSpace | 26 public tables, including the PostGIS system table | 25 application tables have RLS but no policies | No buckets, auth users, or edge functions observed | 13 remote migrations; Data API access is effectively deny-all unless service-role use is intentional |
 | Lake & Pine | 14 public tables | RLS and policies observed on all | No buckets, auth users, or edge functions observed | Two remote migrations |
 | Sweepza | 17 public tables | RLS and policies observed on all | No buckets, auth users, or edge functions observed | Eight remote migrations |
-| LogLoads | 37 public tables, including the PostGIS system table | 36 application tables have RLS; `operating_state` has no policy | No buckets, auth users, or edge functions observed | Six remote migrations |
+| LogLoads | Live: 37 public tables including system table | Live mirror policy incomplete. Local candidate enables RLS and limits service-role operations to select/insert/update | No buckets, auth users, or edge functions observed | Six live migrations; candidate fresh PostgreSQL 17 reset passes, but no live migration occurred |
 | AutomatedEmpires | None | Not applicable | Not applicable | Not applicable |
 
 These are read-only Management API observations from 2026-07-10. A table with RLS and no policies denies ordinary Data API access; it may be deliberate for service-only tables, but intent must be confirmed.
@@ -49,5 +49,5 @@ These are read-only Management API observations from 2026-07-10. A table with RL
 4. Inventory RLS, storage buckets, auth providers, edge functions, database webhooks, and scheduled jobs.
 5. For ORAN, reconcile committed migrations, the single-row remote migration ledger, and the existing 97-table schema before any cutover or schema write.
 6. For Lake & Pine, preserve the verified Vercel/Supabase binding and validate migrations before seeding content or creating auth/payment dependencies.
-7. For LogLoads, do not treat the `operating_state` mirror as a canonical transactional data layer. Choose the single-node host or complete a reviewed async-database refactor before any Vercel production decision.
+7. For LogLoads, PR #6 final source `f280ef4…` passed canonical-state, PostgreSQL 17 reset, RLS/grant, unit/build, E2E, `verify`, `migrations`, and `dependency-review`, merged to default `9c9e107…`, and produced clean main production `dpl_Xxr…8dPtF`. Before live use: back up, prove upgrade against production shape, verify environment provenance/distributed rate limiting, and prove functional rollback; do not infer a live data cutover from deployment readiness.
 8. Record secret names and ownership in the venture's Doppler map only after the project-to-venture match is verified; never copy secret values into this matrix.

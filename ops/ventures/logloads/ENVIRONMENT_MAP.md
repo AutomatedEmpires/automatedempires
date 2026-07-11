@@ -1,23 +1,22 @@
 # LogLoads environment map
 
-Pass 3 refresh: authenticated GoDaddy/Clerk/Resend plus branch-qualified Mapbox/email and Sentry evidence; no credential material is recorded.
+Pass 4 refresh: Supabase-canonical target and corrected provider gates added; no credential material is recorded.
 
 ## Environment ownership
 
 | Logical environment | Doppler | Vercel | Supabase | Status |
 |---|---|---|---|---|
-| Local development | `logloads` / `dev` (18 names) | Local pnpm workspace | Dedicated Supabase; zero-user Clerk development instance; shared public Mapbox stored under both public and server-looking names; broad Resend key reaches the Explore&Earn team | **Partially verified; shared-provider gaps** |
-| Staging / preview | `logloads` / `stg` (7 names) | Dirty Vercel preview `dpl_Ejx66Z9wZFJiPJ5341j61voT7cHF` is `READY` | Same zero-user Clerk development instance as dev; data lane separation unproven | **Diagnostic only:** healthy HTTP does not prove single-writer persistence or reproducible source |
-| Production | `logloads` / `prd` (14 names) | Dirty Vercel production `dpl_5LdZ4qWv7P1B68iYi3zZoJBM7wLN` is `ERROR` | Supabase mirror. Dark Clerk DNS Verified/SSL Issued; config/runtime keys pending. Broad Resend key, no sender/domain; shared Mapbox; dev-login name | **Blocked:** architecture/source precedes auth/email/build/web cutover |
+| Local development | `logloads` / `dev` (22 pre-convergence names) | Local pnpm workspace | Dedicated Supabase; zero-user Clerk development instance; shared public Mapbox under public/server-looking names; broad same-team Resend key | **Partially verified; shared-provider gaps** |
+| Staging / preview | `logloads` / `stg` (11 pre-convergence names) | Final-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4` from `f280ef4fef4b992f94457aad61cfe27e8ec91791` is `READY` | Same zero-user Clerk development instance; data lane separation unproven; no Resend/Mapbox names | **Source/build proven; data/provider runtime gates remain** |
+| Production | `logloads` / `prd` (18 pre-convergence names) | Clean production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` from current `main` `9c9e107082942e5bce782eac2ce71aa63eb7d9c0` is `READY` | Live Supabase remains pre-Pass-4. Dark Clerk DNS/SSL is verified but runtime cutover is absent. Broad same-team Resend key/no sender/domain, shared Mapbox, and dev-login name remain gated. | **Source/main deployed; live data/provider cutover and rollback proof blocked by production risk** |
 
-The Supabase project has 36 application tables with RLS, one zero-policy table (`operating_state`), and six remote migrations. The current application writes authoritative state to a local JSON snapshot and mirrors it to Supabase; the mirror does not make serverless instances stateless. Verify policy intent, backups, and lane separation before writes.
+Live Supabase remains the pre-Pass-4 mirror. Local `135cff6…` makes state canonical, enables RLS, and limits service-role operations to select/insert/update; fresh PostgreSQL 17 reset passes. No live migration occurred. Backup/live-shape upgrade and lane provenance remain before writes.
 
 ## Runtime architecture gate
 
-- **Current approved launch model:** exactly one Node process with a persistent `/data` volume and `LOGLOADS_STATE_FILE`; use a host that guarantees one writer and durable volume semantics.
-- **Vercel alternative:** first move authoritative state and distributed coordination/rate limiting into a transactional async data layer, then prove restart and concurrent-instance behavior. Update the dated decision before promotion.
-- Vercel project root `apps/web` and Node 24 settings are already aligned. The uncommitted output-tracing change may address packaging `ENOENT`, but cannot resolve process-local state authority.
-- No production environment or domain cutover is valid until one path is selected, tested, and given a host-specific rollback.
+- **Implemented and merged:** `135cff6…` provides awaited atomic Supabase authority, version/schema compatibility, compare-and-swap/retry, non-production fallback, and concurrency/cold-start tests; final PR #6 source is `f280ef4fef4b992f94457aad61cfe27e8ec91791`.
+- `extended-validation`, `ci/verify`, `migrations`, `dependency-review`, and CodeQL passed; PR #6 merged as current `main` `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`. Final-source Preview and current-main production are `READY`, but live Supabase/provider state is unchanged.
+- Next gates: backup/live upgrade, environment provenance, distributed rate limiting, provider activation, and functional production rollback.
 
 ## Observed variable-name contract
 
@@ -43,8 +42,8 @@ Names were extracted from the committed example; values were not read or copied.
 - `MAPBOX_ACCESS_TOKEN` duplicates `NEXT_PUBLIC_MAPBOX_TOKEN`; it is not a server credential. Feature `cce1c449…` has an actual optional Mapbox GL consumer and a keyless MapLibre/Carto fallback; `main` has no runtime consumer.
 - One broad LogLoads key is reused in `dev`/`prd`, absent in `stg`, and shares the Explore&Earn 1/1-domain team. Feature code sends contact inquiries using `RESEND_API_KEY`, `LOGLOADS_EMAIL_FROM`, and `LOGLOADS_CONTACT_EMAIL`; there is no domain/from identity, so activation is intentionally deferred.
 - Clerk `dev`/`stg` share a zero-user dev instance. Separate dark production has DNS Verified/SSL Issued; config/runtime install pending.
-- A distinct LogLoads Sentry project/DSN exists but has no first event or environment. No LogLoads PostHog project exists.
-- Cloudinary names exist in the repository scaffold, but no Cloudinary credential exists in LogLoads Doppler. Its root folder is empty.
+- The distinct LogLoads Sentry project now has ownership routing, one alert, scrubbers, and IP scrubbing, but no first event/environment. No LogLoads PostHog project exists.
+- Cloudinary names exist in the scaffold, but no credential exists in LogLoads Doppler. Required empty `logloads/` namespace exists; it is organization only.
 
 ## Rules
 
@@ -54,4 +53,4 @@ Names were extracted from the committed example; values were not read or copied.
 - Server, database, webhook, CI, and provider-management values remain server-only.
 - A separate staging database decision is still required; do not assume one Supabase ref is safe for every environment.
 - `LOGLOADS_ENABLE_DEV_LOGIN` exists by name in production. Confirm production behavior is disabled without copying its value into documentation.
-- Do not treat public Mapbox access as a server secret. Authenticated dashboard write control is available, but create restricted replacements only after explicit credential approval and never grant management scopes to runtime tokens.
+- Do not treat public Mapbox access as a server secret. Replacement creation is approved but blocked by provider owner confirmation; never grant management scopes to runtime tokens.

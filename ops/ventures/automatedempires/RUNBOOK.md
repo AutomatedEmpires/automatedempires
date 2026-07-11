@@ -9,7 +9,8 @@ Use this runbook for the parent portfolio site only. Do not use it to operate a 
 | Fact | Status | Evidence |
 | --- | --- | --- |
 | Vercel project `automatedempires` exists. | **Verified current** | Provider fact supplied for this alignment pass |
-| Doppler project `automatedempires` has `dev`, `stg`, and `prd`; only metadata was found in the supplied inventory. | **Verified current** | Provider fact supplied for this alignment pass |
+| Doppler project `automatedempires` has `dev`, `stg`, and `prd`; own Sentry identifiers are installed write-only in all lanes. | **Verified current** | Pass 4 provider evidence |
+| Current `main` `ed91ece423583318fd7481278a7478311d867add` is deployed as `dpl_5scDXWyVV2wq1ypwhcjmiBkQLpzT` and is `READY`. | **Verified current** | Pass 4 GitHub/Vercel evidence |
 | The site uses Next.js and pins Node 24.16.0 and pnpm 10.12.4. | **Observed in repository** | `.nvmrc`, `package.json`, `AGENTS.md` |
 | The current application has no database requirement. | **Verified current** | Supplied parent-venture provider decision |
 
@@ -17,7 +18,7 @@ Use this runbook for the parent portfolio site only. Do not use it to operate a 
 
 1. **Target state** — Work on a lane or feature branch and open a reviewed pull request. Do not push directly to `main`.
 2. **Target state** — Confirm the change affects only the portfolio site and does not introduce a child venture's runtime configuration.
-3. **Target state** — Select the matching Doppler config: `dev` for local development, `stg` for pre-production validation, and `prd` for production. Because the supplied inventory found metadata only, do not assume a runtime value exists.
+3. **Target state** — Select the matching Doppler config: `dev` for local development, `stg` for pre-production validation, and `prd` for production. Only the parent Sentry identity is currently present beyond metadata; do not assume any other runtime value exists.
 4. **Observed in repository** — Install and validate with the pinned toolchain:
 
    ```text
@@ -26,20 +27,20 @@ Use this runbook for the parent portfolio site only. Do not use it to operate a 
    pnpm build
    ```
 
-5. **Unknown / founder verification required** — Confirm Vercel's Git integration, root directory, branch policy, environment-variable bindings, and production domain before relying on automatic deployment.
+5. **Verified current / remaining runtime gate** — Git/root/branch policy and clean production are verified. Confirm environment bindings, functional rollback, and domain attachment before relying on cutover automation.
 6. **Target state** — Deploy first to a non-production Vercel environment, review the rendered portfolio, then promote the exact reviewed commit.
 7. **Target state** — Smoke-test the home page, venture cards, navigation, contact link, metadata, canonical URL, and common mobile widths.
 
 ## Production change gates
 
-- **Unknown / founder verification required** — DNS changes, domain transfers, billing changes, access removal, and provider-resource deletion require the founder or recorded owner.
+- **Owner/approval boundary** — DNS changes, domain transfers, billing changes, access removal, and provider-resource deletion require the recorded owner and the applicable paid/destructive/production-risk gate.
 - **Target state** — Add a provider only when a site feature consumes it; record the provider resource and environment in `PROVIDER_LINKS.md` and `ENVIRONMENT_MAP.md` first.
 - **Target state** — Store values only in the venture-specific secrets system and deployment environment. Documentation records names and ownership, never values.
 
 ## Incident response
 
 1. **Target state** — Record the affected deployment, first observed time, user-visible symptom, and whether the issue is limited to content or affects all requests.
-2. **Verified current** — The Vercel project is connected to canonical repo/main/root with Next.js/Node 24 and the protected PR preview is `READY`; deploy/verify `main` before any DNS change.
+2. **Verified current** — Current `main` `ed91ece423583318fd7481278a7478311d867add` is cleanly deployed as `dpl_5scDXWyVV2wq1ypwhcjmiBkQLpzT` and `READY`; verify functional provider-host smoke and rollback before any DNS change.
 3. **Target state** — If the regression is deployment-specific, restore the last known-good Vercel deployment without changing child-venture systems.
 4. **Target state** — If DNS is implicated, preserve current records before any edit and obtain owner approval.
 5. **Target state** — Re-run the smoke tests and document the restoration commit or deployment.

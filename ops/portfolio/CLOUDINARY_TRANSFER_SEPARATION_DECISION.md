@@ -1,12 +1,13 @@
 # Cloudinary Transfer-Grade Separation Decision
 
-**Prepared:** 2026-07-10  
-**Current cloud:** `dwiwyt9vi`  
-**Execution state:** **requires founder decision**; authenticated inventory is complete, but no media, preset, transformation, credential, folder, account, product environment, or delivery URL was changed. Media migration remains **blocked by production risk** until asset classification, destination ownership/capacity, verification, and rollback gates pass.
+**Prepared:** 2026-07-10
+
+**Current environment fingerprint:** `dwi…t9vi`
+**Execution state:** Pass 4 safely created the nine required top-level namespaces without moving or deleting media. No preset, transformation, credential, account, product environment, or delivery URL changed. Transfer separation remains **blocked by payment/plan**; media/preset mutation remains **blocked by production risk** until classification, destination ownership/capacity, verification, and rollback gates pass.
 
 ## Current boundary
 
-The inspected Free account has one dynamic-folder product environment, a 25-credit monthly limit, current usage of 1.93 credits (7.72%), and last usage observed 2026-07-09. It contains 1,009 source assets plus 156 derived resources, or 1,165 objects in total. Of the source assets, 974 are in the Explore&Earn namespace and 35 are outside it: 31 sample/provider assets and 4 root assets requiring classification. The BidSpace, LogLoads, Sweepza, AutomatedInterviewer, and other venture-shaped placeholders are empty, and no AutomatedEmpires parent folder exists. Only Explore&Earn has confirmed active delivery and upload tooling in current source.
+The inspected Free account has one dynamic-folder product environment, a 25-credit monthly limit, current usage of 1.93 credits (7.72%), and last usage observed 2026-07-09. It contains 1,009 source assets plus 156 derived resources, or 1,165 objects in total. Of the source assets, 974 were in the Explore&Earn namespace and 35 outside it: 31 sample/provider assets and 4 root assets requiring classification. Pass 4 created `automatedempires/`, `explore-and-earn/`, `oran/`, `bidspace/`, `lake-and-pine/`, `sweepza/`, `logloads/`, `archived/`, and `retired/` without moving assets. Only Explore&Earn has confirmed active delivery/upload tooling. Fifty-five former Explore&Earn icon raws are no longer runtime icon references but still need manifest/documentation classification.
 
 Explore&Earn hardcodes the cloud name in its delivery helper and setup scripts, depends on `explore-and-earn/*` public IDs, and uses three signed `ee-*` upload presets plus named transformations. Those presets and the signed provider default are folder- and asset-folder-unbound and allow overwrite; the Explore&Earn presets also lack explicit filename/unique-filename controls. BidSpace and LogLoads currently expose configuration placeholders but no active Cloudinary consumer was found; Sweepza is planning-only. Only Explore&Earn `dev` currently has Cloudinary credentials in Doppler, so no active cross-venture credential reuse was found.
 
@@ -16,28 +17,26 @@ Folder names are useful operating controls, but they do not create separate bill
 
 | Option | Cost / plan effect | Transfer quality | Risk | Decision |
 |---|---|---|---|---|
-| A — retain the shared Free environment with strict folder/preset rules | No provider upgrade | Not independently transferable | All ventures share account ownership, quota, credentials, and recovery; one bad write can affect another venture | **requires founder decision**; acceptable only as a documented temporary state |
-| B — upgrade the parent account and create one product environment per active venture | Current public pricing lists Plus at $99/month ($89/month billed yearly) with two account/product-environment slots; more environments may require a larger plan or add-on | Better operational isolation, but still parent-owned and jointly billed | Migration and code changes are still required; parent account ownership remains a transfer dependency | **blocked by payment/plan** and **requires founder decision**; use only when centralized parent billing is intentional and later transfer support is contractually confirmed |
-| C — create a standalone Cloudinary account/environment per venture | May fit separate Free accounts initially, but capacity, migration traffic, backups, add-ons, and future usage can trigger independent plan cost | Strongest sale/transfer boundary | Requires a controlled asset and URL migration; duplicate storage/transformations can consume quota | **requires founder decision**; recommended target for independently saleable ventures, beginning with Explore&Earn. Migration remains **blocked by production risk** until all gates pass |
+| A — retain the shared Free environment with strict folder/preset rules | No provider upgrade | Not independently transferable | Shared account/quota/recovery; folder names are not access control | **Current Pass 4 operating decision.** Nine namespaces created; media/preset proof still open |
+| B — upgrade the parent account and create one product environment per active venture | Paid plan | Better operational isolation, still parent-owned/jointly billed | Migration/code changes still required | **Blocked by payment/plan** and explicitly deferred |
+| C — create standalone venture environments/accounts | May fit Free separately but can create future cost/ownership work | Strongest sale/transfer boundary | Controlled asset/URL migration required | **Deferred**; migration remains **blocked by production risk** and any paid capacity by payment/plan |
 
 Cloudinary documentation states that Free accounts support one product environment; multiple product environments are a paid-plan capability. The Provisioning API is an Enterprise feature and is not available for automating this Free account, and the inspected access did not provide safe product-environment provisioning authority. Cloudinary also permits separate accounts. Because multiple environments inside one parent account remain jointly owned, they improve operations but do not by themselves satisfy the requested independent-transfer standard.
 
-## Founder decision
+## Pass 4 operating decision
 
-Choose one:
+Retain the Free environment temporarily, with Explore&Earn as the only confirmed active consumer and the nine top-level namespaces as organizational controls. Do not upgrade. Do not grant placeholder ventures shared write authority. This explicitly accepts that Cloudinary remains a transfer blocker.
 
-1. **Temporary shared boundary:** authorize A, designate the current environment as Explore&Earn, and accept that Cloudinary remains a documented transfer blocker.
-2. **Parent-managed environments:** authorize a paid-plan quote/upgrade for B and confirm that joint billing is the intended ownership model. This is **blocked by payment/plan** until approved.
-3. **Standalone venture accounts:** authorize account creation and recovery ownership for C. This is the recommended transfer-grade path; it does not authorize asset migration.
+Paid parent environments and standalone venture-account migration are deferred options, not active work. Neither option authorizes asset movement or deletion.
 
-No purchase, upgrade, new account, product environment, or media migration was initiated in Pass 2 or this Pass 3 evidence refresh.
+No purchase, upgrade, new account, product environment, preset change, or media migration was initiated in Passes 2–4. Pass 4 changed folder structure only.
 
-## Safe controls while the decision is pending
+## Safe controls under the Free-plan decision
 
 1. Treat Explore&Earn as the only confirmed active consumer. Do not enable BidSpace, LogLoads, Sweepza, or another venture with shared write credentials merely because its folder exists.
 2. Clone rather than mutate the active presets. Require venture/environment-prefixed public IDs, bind both folder and asset folder, disable overwrite, set explicit filename uniqueness, and test only disposable fixtures before switching application configuration.
 3. Keep upload credentials server-only in that venture's Doppler config. Do not copy the combined Cloudinary URL or API secret to another venture.
-4. Classify the 31 sample/provider and 4 root source assets, then inventory resources, named transformations, presets, structured metadata, access modes, backups, and external delivery references before any change.
+4. Classify the 31 sample/provider and 4 root source assets plus the 55 former icon raws, then inventory resources, named transformations, presets, structured metadata, access modes, backups, and external delivery references before any change.
 5. Do not rename or move fixed-folder assets: that can change public IDs and break production URLs.
 
 ## Migration plan after approval

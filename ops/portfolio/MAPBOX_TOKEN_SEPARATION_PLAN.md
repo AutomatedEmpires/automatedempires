@@ -1,26 +1,28 @@
 # Mapbox Token Separation Plan
 
-**Prepared:** 2026-07-10  
-**Execution state:** Pass 3 completed a branch-qualified consumer and authenticated token-write analysis. The account has one unrestricted default public token and an available create-token form. No token was created, changed, installed, displayed, or revoked because explicit credential-action approval is pending.
+**Prepared:** 2026-07-10
+
+**Execution state:** Pass 3 completed the branch-qualified consumer/token-write analysis. Pass 4 approval is recorded, but the browser creation claim failed/reset at account-password confirmation. No active claim or token remains; nothing was created, changed, installed, displayed, or revoked.
 
 ## Approved target inventory
 
 | Token | Create when | Public scopes | Allowed URL(s) | Current gate |
 |---|---|---|---|---|
-| `explore-and-earn-dev-public` | Immediately after explicit credential-action approval | `styles:read`, `fonts:read` | `http://localhost:3000` | Founder approval for credential creation/direct transfer |
+| `explore-and-earn-dev-public` | After account-owner confirmation | `styles:read`, `fonts:read` | `http://localhost:3000` | **Blocked by MFA/account-owner confirmation** |
 | `explore-and-earn-stg-public` | After one canonical owned or provider staging hostname is selected | `styles:read`, `fonts:read` | Exact canonical HTTPS staging origin | **Intentionally deferred:** two conflicting Vercel aliases are recorded and wildcard restrictions are unsupported |
-| `explore-and-earn-prd-public` | After explicit credential-action approval; install first in a protected preview | `styles:read`, `fonts:read` | `https://exploreandearn.com` | Founder approval plus preview replacement-key gate |
-| `logloads-dev-public` | Immediately after explicit credential-action approval | `styles:read`, `fonts:read` | `http://localhost:3002` | Founder approval for credential creation/direct transfer |
+| `explore-and-earn-prd-public` | After owner confirmation; install first in protected Preview | `styles:read`, `fonts:read` | `https://exploreandearn.com` | Owner confirmation plus Preview replacement-key gate |
+| `logloads-dev-public` | After owner confirmation and source consumer recheck | `styles:read`, `fonts:read` | `http://localhost:3002` | Owner confirmation and clean-source gate |
 | `lake-and-pine-dev-public` | After the current candidate fixes are committed and clean CI passes | `styles:read`, `fonts:read` | Exact local origins | Clean source/CI gate |
 | `lake-and-pine-prd-public` | After exact-SHA preview acceptance | `styles:read`, `fonts:read` | `https://lakeandpinecleaning.com` | Clean deployment and DNS-cutover gate |
-| `logloads-prd-public` | Only if Mapbox remains selected after architecture/source convergence | `styles:read`, `fonts:read` | `https://logloads.com` | Founder architecture and clean production-candidate gate |
-| BidSpace public tokens | Only after the map UI and owned domain exist | Minimum scopes demonstrated by the implementation | Final owned development/production origins | Missing domain and implementation |
+| `logloads-prd-public` | Only if Mapbox remains selected after architecture/source convergence | `styles:read`, `fonts:read` | `https://logloads.com` | Accepted architecture and clean production-candidate gate |
+| `bidspace-dev-public` | After accepted map source is current and owner confirmation completes | `styles:read`, `fonts:read` | `http://localhost:3000` | Owner confirmation and reviewed-source gate; custom domain not required for dev |
+| BidSpace production token | Only after an owned domain exists | Minimum public scopes demonstrated by implementation | Final owned HTTPS production origin | Missing domain |
 
 No Explore&Earn server-token replacement is planned: the revoked server-shaped credential has no current source consumer. LogLoads' `MAPBOX_ACCESS_TOKEN` duplicates a public value and is not an independent privilege boundary. Sweepza, ORAN, and AutomatedEmpires do not need speculative Mapbox resources.
 
 ## Safe execution
 
-1. Use the already-authenticated account-owner dashboard only after explicit credential-action approval. Never put management authority in an application runtime.
+1. Founder credential-action approval is complete. Resume only after the provider's account-owner confirmation; never put management authority in an application runtime.
 2. Inventory token names, scopes, allowed URLs, default/non-default state, and provider usage without recording token material. The current default token cannot be restricted and stays active as rollback.
 3. Create the Explore&Earn development token first. Transfer it directly to Doppler `dev` without displaying it; verify the `/map` route, style/font requests, attribution, CSP, and rejection from an unrelated origin.
 4. Create the Explore&Earn production token with the HTTPS apex restriction. Because a domain-only restriction includes subdomains and paths, do not add wildcard syntax. Verify apex and `www`; do not authorize `vercel.app`.

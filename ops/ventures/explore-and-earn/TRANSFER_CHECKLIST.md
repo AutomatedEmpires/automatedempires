@@ -8,28 +8,28 @@ This checklist transfers control, not secret values. Use provider membership, RB
 
 - [ ] **Target state** — Record transferor, transferee, effective date, business owner, technical owner, billing owner, data owner, and emergency contact.
 - [ ] **Target state** — Confirm the transfer covers only Explore & Earn resources.
-- [ ] **Unknown / founder verification required** — Obtain founder approval for money-moving, database-ledger, DNS/domain, identity, deletion, or ownership-transfer actions.
+- [ ] **Authority boundary** — Obtain explicit approval for live irreversible money/customer actions, destructive database/deletion actions, domain/ownership transfer, and legal/tax/payout changes.
 
 ## Core access
 
 - [ ] **Observed in repository** — Confirm canonical GitHub repository `AutomatedEmpires/explore-and-earn`, protected branches, environments, Actions workflows, and current pull requests.
 - [ ] **Verified current** — Transfer least-privilege access to Doppler project `explore-and-earn` and configs `dev`, `stg`, `prd`.
 - [ ] **Verified current** — Transfer least-privilege access to Vercel project `explore-and-earn` and demonstrate Preview, Production, logs, and rollback.
-- [ ] **Verified current** — Transfer least-privilege access to Supabase project `mamosbzcbigcclafhmmr`; verify backups, migration controls, and emergency database owner.
+- [ ] **Verified current** — Transfer least-privilege access to Supabase fingerprint `…clafhmmr`; verify backups, migration controls, and emergency database owner.
 
 ## Open production gates
 
 - [ ] **Partially remediated** — Dark production Clerk DNS is Verified and SSL Issued; finish configuration, install Preview credentials, and prove custom-domain auth, OAuth, Supabase JWT, webhook, protected routes, admin access, and dev-user re-registration.
 - [ ] **Verified current** — Complete the founder-approved migration-ledger repair and produce a green migration workflow result.
 - [x] **Completed** — Resend DNS/provider-domain verification.
-- [ ] **Verified open** — Install a sending-only/domain-restricted replacement plus explicit sender and prove venture-domain delivery before retiring the broad key.
-- [ ] **Verified current** — Prove the production Stripe account and mode before provisioning the current catalog, portal, webhook, environment mapping, and billing flow.
+- [x] **Safely fixed configuration** — A sending-only/domain-restricted replacement and explicit sender/reply identity are installed across approved lanes; prove venture-domain delivery before retiring the broad key.
+- [ ] **Verified current** — Dedicated live/test accounts and the current catalog are prepared; prove the deployed production account/mode and correct live webhook before billing activation or customer-state work.
 
 ## Domain and provider ownership
 
 - [ ] **Observed in repository** — Confirm the intended domain is `exploreandearn.com`.
 - [x] **Completed** — Authenticated GoDaddy ownership, privacy, auto-renew, authoritative DNS, and full-zone inventory were verified; preserve recovery ownership.
-- [ ] **Unknown / founder verification required** — Reconcile Clerk, Stripe, Resend, PostHog, Cloudinary, Mapbox, Sentry, and AI resources with `PROVIDER_LINKS.md`.
+- [ ] **Provider verification required** — Reconcile the remaining Clerk/Stripe/Resend/PostHog/Cloudinary/Mapbox/Sentry/AI runtime gates with `PROVIDER_LINKS.md`; established resource identities must not be reclassified as unknown.
 - [ ] **Target state** — For every resource, record only provider, resource name, environment, owner roles, and verification date.
 
 ## Configuration integrity

@@ -6,9 +6,9 @@ This is a coordination runbook. The authoritative detailed activation procedure 
 
 ## Preconditions
 
-- **Verified current** — Vercel project `explore-and-earn`, Doppler project/configs `dev`/`stg`/`prd`, and Supabase project `mamosbzcbigcclafhmmr` exist.
-- **Verified current** — Clerk dark resource/DNS/SSL and Resend domain verification are complete; Clerk configuration/runtime, scoped mail credential/delivery, migration ledger, and Stripe separation remain open.
-- **Target state** — Founder approval is recorded before database-ledger mutation, money-moving configuration, domain/DNS changes, or production cutover.
+- **Verified current** — Vercel/Doppler projects and Supabase fingerprint `…lafhmmr` exist; current `main` `b616b9e10fa434422dd34442f6cb24194cf8d5ec` is deployed as public deployment `dpl_5HCPaCNCQuyip2iZTHpoMvSxjQFY` and `READY`; sensitive account/project identifiers remain abbreviated.
+- **Verified current** — Clerk dark resource/DNS/SSL; Resend domain/scoped credential/environment; and Stripe dedicated-account/catalog preparation are complete. Clerk runtime, mail delivery, migration ledger, and production Stripe binding/webhook remain open.
+- **Target state** — Record the exact plan and applicable destructive/money/legal/DNS authority before database-ledger mutation, money-moving configuration, domain changes, or production cutover.
 - **Target state** — Operators compare variable names and resource identity without printing values.
 
 ## Gate 1 — production Clerk
@@ -26,26 +26,26 @@ Configuration names referenced by the repository include `NEXT_PUBLIC_CLERK_PUBL
 
 1. **Verified current** — Treat the ledger repair as open even though an older runbook documents an earlier reconciliation.
 2. **Target state** — Capture a fresh read-only migration list and database backup/restore point before mutation.
-3. **Target state** — Have the founder approve the exact applied/reverted version plan in `docs/runbooks/production-activation-gates.md`.
+3. **Target state** — Approve the exact applied/reverted version plan in `docs/runbooks/production-activation-gates.md` with backup and rollback evidence.
 4. **Target state** — Execute the repair only against the verified Explore & Earn database endpoint using a secure local/provider session; never paste the database locator into documentation or chat.
 5. **Target state** — Re-run the migration list and the repository's production migration workflow. Definition of done is a matching local/remote ledger and a green no-op migration deployment.
 6. **Target state** — Stop and investigate if schema changes appear; the documented repair is intended to change bookkeeping, not application schema.
 
-## Gate 3 — Resend DNS
+## Gate 3 — Resend delivery
 
 1. **Completed** — Authenticated GoDaddy zone was inspected, the three provider-issued records were added without collision, all resolve publicly, and Resend reports `verified`.
-2. **Verified open** — The current key is broad/full-access, `RESEND_FROM_EMAIL` is absent, and no runtime synchronization or delivery smoke has occurred.
-3. **Target state** — Create a sending-only/domain-restricted replacement, store in approved Doppler lane, configure an explicit sender, and deploy Preview.
+2. **Safely fixed now** — A sending-only/domain-restricted key is installed as restricted/sensitive in all approved Doppler/Vercel lanes. From is `notifications@exploreandearn.com`; Reply-To is `support@exploreandearn.com`. Source commits `d1e43f5…`/`7893756…` are green.
+3. **Verified open** — Exact-source Preview `dpl_BgD…` passed the GitHub Vercel status and PR #243 merged green at `b616b9e…`, but real custom-domain delivery/reply is not authorized/proven. The broad key remains rollback.
 4. **Target state** — Prove delivery, SPF/DKIM/DMARC alignment, reply/bounce/complaint behavior, and truthful app logging. Record metadata only.
 5. **Target state** — Promote only after proof; retire the broad key after zero use. Never revoke before replacement verification.
 
 ## Gate 4 — Stripe identity and provisioning
 
-1. **Verified current** — Do not wire production billing until the account identity and mode are proven.
-2. **Target state** — Prove the account behind the production runtime using an authoritative Stripe account lookup or equivalent dashboard evidence. Record the business display name, non-secret resource ownership, mode, billing owner, and verification date; do not record account credentials.
-3. **Observed in repository** — The latest activation runbook calls for Explore & Earn-namespaced subscriptions at $199/$1,990, $399/$3,990, and $749/$7,490, plus a $149 one-time announcement product. This later catalog supersedes the older multi-duration announcement audit.
-4. **Target state** — Provision in test mode first, configure the billing portal and webhook at `/api/webhooks/stripe`, then map only the required price and webhook variable names into the matching Doppler and Vercel environments.
-5. **Target state** — Prove checkout, signed webhook processing, subscription state, entitlements, and billing UI in test mode; then run the founder-approved live proof.
+1. **Safely fixed now** — Dedicated live `acct_1RM…` and test `acct_1Tep…` accounts are verified. The live account was empty before its five-product/ten-price catalog was created; test was seeded and twelve expected variables verified in approved non-production lanes.
+2. **Verified open** — Prove the account behind the current production runtime using an authoritative lookup that returns only account ID; do not record credentials. Stop if it does not match the intended E&E account.
+3. **Verified open** — Create/verify the E&E live webhook at `/api/webhooks/stripe` and map only the required names through a rollback-safe Doppler/Vercel path.
+4. **Safety rule** — No customer, invoice, payment, subscription, payout, tax, or legal state changes are authorized by catalog preparation.
+5. **Target state** — Prove checkout, signed webhook processing, subscription state, entitlements, and billing UI in test mode; run live proof only under the approved non-destructive plan.
 6. **Target state** — Keep billing controls fail-closed until the complete environment is present.
 
 ## Release and smoke test
@@ -59,7 +59,7 @@ Configuration names referenced by the repository include `NEXT_PUBLIC_CLERK_PUBL
 - **Target state** — Roll back application code through Vercel or a reviewed revert; do not delete provider projects.
 - **Target state** — Restore the previous DNS record set if verification fails and the change is proven causal.
 - **Target state** — Disable checkout if Stripe identity, signature verification, catalog mapping, or entitlement sync is uncertain.
-- **Target state** — Stop database work on any unexpected schema delta, destructive statement, wrong project ref, or missing founder approval.
+- **Target state** — Stop database work on any unexpected schema delta, destructive statement, wrong project, missing backup, or missing authorized plan.
 
 ## Evidence notes
 

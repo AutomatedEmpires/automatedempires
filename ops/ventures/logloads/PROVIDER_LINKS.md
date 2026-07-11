@@ -4,18 +4,18 @@ Pass 2 provider refresh: 2026-07-10; sanitized status only.
 
 | Provider | Resource locator | Status | Link / evidence |
 |---|---|---|---|
-| GitHub | `AutomatedEmpires/logloads` | **Verified current** | https://github.com/AutomatedEmpires/logloads |
+| GitHub | `AutomatedEmpires/logloads`; PR #6 final source `f280ef4fef4b992f94457aad61cfe27e8ec91791`, merged as current `main` `9c9e107082942e5bce782eac2ce71aa63eb7d9c0` | **Merged; required checks green; no unresolved threads; protection/security fixed** | https://github.com/AutomatedEmpires/logloads/pull/6 |
 | Doppler | Project `logloads`; configs `dev`, `stg`, `prd` | **Verified current** | https://dashboard.doppler.com/ |
-| Vercel | Project `logloads` / `prj_PR8dD2yjARgzZE1AyfZzafl7qRW4`; preview `dpl_Ejx66Z9wZFJiPJ5341j61voT7cHF`; failed production `dpl_5LdZ4qWv7P1B68iYi3zZoJBM7wLN` | **Verified artifacts / production promotion prohibited pending architecture decision** | https://vercel.com/dashboard |
-| Supabase | Ref `fdzohbiiyzgvjzfsjyxo` | **Verified snapshot mirror; not yet canonical transactional state** | https://supabase.com/dashboard/project/fdzohbiiyzgvjzfsjyxo |
-| Current launch-host contract | One Node process with persistent `/data` volume; Fly.io/Railway/VM/Docker are documented candidates | **Dated decision; paid host not approved/provisioned** | Repository `docs/DECISIONS.md` and `docs/DEPLOYMENT.md` |
+| Vercel | Project `logloads` (`…l7qRW4`); final-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4`; current-main production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` | **Both `READY`; live data/provider cutover remains gated** | https://vercel.com/dashboard |
+| Supabase | Project fingerprint `…fsjyxo` | **Dedicated; live unchanged, published canonical migration green locally** | https://supabase.com/dashboard/projects |
+| Runtime contract | Canonical `135cff673255cfc1b99c66552479e32cba370940` work; Supabase atomic authority/retry/cold-start/concurrency verified | **Safely fixed, merged, and source-deployed; not migrated/activated live** | Repository evidence |
 | Domain | `logloads.com` | **Authenticated GoDaddy control / 12-record post-change zone** | https://dcc.godaddy.com/ |
-| Clerk | Dev `ins_3EhjpXH8SIg9bCKF9TYYv7RsHYW`; dark production | **DNS Verified/SSL Issued; runtime absent** | https://dashboard.clerk.com/ |
+| Clerk | Dev instance `ins_3Eh…RsHYW`; dark production | **DNS Verified/SSL Issued; runtime absent** | https://dashboard.clerk.com/ |
 | Stripe | Subscription-only account/products intended | **Observed in repository**; account ID **unknown** | https://dashboard.stripe.com/ |
 | Mapbox | Shared public token in feature candidate; MapLibre/Carto fallback | **Actual optional consumer; server-looking name duplicates public token** | https://account.mapbox.com/ |
 | Resend | Distinct broad key in E&E 1/1-domain team; contact-inquiry consumer; no LogLoads domain/from/contact identity | **Payment/account coupling; runtime activation deferred** | https://resend.com/domains |
-| Cloudinary | Free cloud `dwiwyt9vi`, empty LogLoads root folder | **Placeholder only; no assets and no LogLoads credential** | https://console.cloudinary.com/ |
+| Cloudinary | Free environment `dwi…t9vi`, empty `logloads/` namespace | **Taxonomy created; no assets/credential** | https://console.cloudinary.com/ |
 | PostHog | No LogLoads project in the live organization | **Verified absent** | https://app.posthog.com/ |
-| Sentry | Distinct LogLoads project/DSN | **Verified resource; no first event/environment/owner routing** | https://sentry.io/ |
+| Sentry | Distinct LogLoads project/DSN | **Ownership/one alert/scrubbers/IP scrubbing fixed; no first event/environment** | https://sentry.io/ |
 
-The repository's provider list is an architecture decision, not a dashboard inventory. Verify each resource before adding live configuration. A Vercel project association does not supersede the dated single-writer/persistent-volume launch contract.
+Final-source Preview and current-main production are provider proof for source/build only. Verify backup/live upgrade, environment provenance, distributed rate limiting, functional production rollback, and controlled telemetry before live data/provider activation.

@@ -8,27 +8,27 @@ Use this checklist when transferring operations to a new maintainer, business ow
 
 - [ ] **Target state** — Record transferor, transferee, effective date, business owner, technical owner, and emergency contact.
 - [ ] **Target state** — Confirm the transfer covers only the AutomatedEmpires portfolio site and not child-venture production resources.
-- [ ] **Unknown / founder verification required** — Obtain founder approval for domain, billing, account-owner, or destructive changes.
+- [ ] **Approval boundary** — Obtain the recorded owner's approval for domain/billing/account transfer and explicit approval for destructive changes.
 
 ## Source and deployment
 
 - [ ] **Observed in repository** — Confirm the canonical repository is `AutomatedEmpires/automatedempires` and review outstanding branches and pull requests.
-- [ ] **Unknown / founder verification required** — Verify GitHub admin access, branch protection, required review, and Vercel Git integration.
-- [ ] **Verified current** — Locate Vercel project `automatedempires`; verify the recipient can view deployments without changing configuration.
+- [x] **Verified current** — Strict `verify`/`design`, linear/squash history, conversation resolution, no force push/deletion, automation bypass, vulnerability alerts, Dependabot updates, and Vercel Git integration are configured; recipient access remains transfer-specific.
+- [ ] **Verified current** — Locate Vercel project `automatedempires`, current production `dpl_5scDXWyVV2wq1ypwhcjmiBkQLpzT` from `ed91ece423583318fd7481278a7478311d867add`, and its rollback candidate; verify the recipient can view deployments without changing configuration.
 - [ ] **Target state** — Run typecheck and build, deploy a non-production change, and demonstrate rollback to the recipient.
 
 ## Configuration and access
 
-- [ ] **Verified current** — Locate Doppler project `automatedempires` and configs `dev`, `stg`, `prd`; supplied inventory found metadata only.
+- [ ] **Verified current** — Locate Doppler project `automatedempires` and configs `dev`, `stg`, `prd`; each contains only the parent Sentry identity beyond metadata.
 - [ ] **Target state** — Transfer access through provider membership/RBAC. Never copy a value into transfer documentation.
-- [ ] **Unknown / founder verification required** — Reconcile Vercel variables and Doppler metadata by variable name and environment, without displaying values.
+- [ ] **Provider verification required** — Reconcile Vercel variables and Doppler names by environment without displaying values.
 - [ ] **Target state** — Remove old access only after the recipient proves independent access and rollback capability.
 
 ## Domain and optional providers
 
 - [ ] **Observed in repository** — Confirm the application expects `automatedempires.com`.
-- [ ] **Unknown / founder verification required** — Verify registrar, authoritative DNS, registrant contact, renewal billing, recovery access, Vercel attachment, and certificate health.
-- [ ] **Unknown / founder verification required** — Determine whether AutomatedEmpires-specific Resend, PostHog, Cloudinary, or Sentry resources exist; do not assume child-venture resources are shared.
+- [ ] **Partially verified** — Registrar/authoritative DNS/zone are verified; transfer recipient must verify registrant contact, renewal billing, recovery access, Vercel attachment, and certificate health.
+- [ ] **Verified current** — Separate Sentry project/governance/Doppler bindings exist; Vercel event proof remains. Resend/PostHog are absent and Cloudinary parent namespace is organizational only; do not assume child resources are shared.
 - [ ] **Verified current** — Record that no Supabase project is required for this runtime.
 
 ## Handoff proof

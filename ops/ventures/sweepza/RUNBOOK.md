@@ -1,6 +1,6 @@
 # Sweepza runbook
 
-Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / founder verification required**.
+Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / provider-owner verification required**.
 
 ## Safety rules
 
@@ -13,7 +13,7 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 
 1. Confirm Doppler project `sweepza` and the intended config.
 2. Link the checkout to Vercel and verify `.vercel/project.json` reports project name `sweepza` before running any sync. The inspection clone did not contain that local link file.
-3. Confirm Supabase ref `ojwhsntcpmoxnzisuomq` before migration or data operations.
+3. Confirm Supabase fingerprint `…nzisuomq` before migration or data operations.
 4. Run names-only checks for required configuration; never echo values.
 
 ## Local development
@@ -30,12 +30,12 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 2. Review the names to be synchronized against [ENVIRONMENT_MAP.md](ENVIRONMENT_MAP.md).
 3. Run the guarded sync from the Sweepza repository.
 4. Deploy Preview and test auth, public data, host billing disabled/enabled states, email, analytics, errors, and cron authentication.
-5. The custom domain is already live. Promote only after production Clerk and Stripe separation, missing telemetry decisions, and rollback checks are confirmed.
+5. The custom domain and current-main production are already live. Future promotion still requires production Clerk proof, residual Stripe endpoint/object review, telemetry decisions, and rollback checks appropriate to the change.
 
 ## Pass 3 identity and email gates
 
 1. Dark production Clerk DNS is Verified and SSL Issued. Configure domain/OAuth/webhook/admin recovery and install only in Preview. Do not overwrite live dev-backed `prd` before role/profile/webhook smoke passes.
-2. Review/push local commit `89bbe121…`; it is a safe correctness fix, not email activation. Re-run with repository-pinned Node 24.16.0 because local validation used Node 24.14 and emitted a version warning.
+2. **Safely fixed and deployed** — The truthful mail-skip correctness fix merged through #47 and is present in current-main production `dpl_9N57qj7PHDteARUpVFWCKAxYutts`; this is not email activation, so retain the runtime smoke gate.
 3. With no mail key, verified behavior is `skipped`, and `sent_at` must remain null. Production must not claim mail delivery.
 4. After founder approves an independent Resend team/domain, install scoped key/from values through `stg`, preserve Microsoft 365 root MX, prove delivery, then promote.
 
@@ -50,9 +50,9 @@ Register endpoints separately per environment and account. Do not copy another v
 
 The repository script defines the Sweepza Host Plan and Extra Active Listing recurring prices and can create/update the webhook without printing its signing value. Before running it:
 
-1. Treat live account `acct_1SpxXpDtcwz0cxzo` as contaminated: it contains Sweepza products plus Explore&Earn branding/webhook. Do not run live provisioning until a founder-approved account-separation decision exists.
-2. Start in test mode.
-3. Store only resulting product/price/endpoint IDs in the operations record; store the signing value only in Doppler.
+1. Treat dedicated live account `acct_1Sp…cxzo` as Sweepza-owned but retain its foreign Explore&Earn webhook until E&E's replacement is proven. Classify two customers/one $0 draft invoice without deletion or irreversible mutation.
+2. Keep test/sandbox proof first; the $19/$5 prices and lane bindings are already aligned.
+3. Record only abbreviated object fingerprints in public operations docs; store signing material only in Doppler.
 4. Complete an end-to-end checkout → webhook → entitlement test before live activation.
 
 ## Supabase and cron

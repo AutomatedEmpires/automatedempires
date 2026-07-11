@@ -1,6 +1,6 @@
 # Sweepza environment map
 
-Pass 3 refresh: authenticated GoDaddy/Clerk plus code-qualified email and live telemetry inventory; no credential material is recorded.
+Pass 4 refresh: dedicated Stripe account/price/lane verification plus repository convergence and no-upgrade telemetry/media facts; no credential material is recorded.
 
 ## Environment ownership
 
@@ -8,8 +8,8 @@ Pass 3 refresh: authenticated GoDaddy/Clerk plus code-qualified email and live t
 |---|---|---|---|---|
 | Local development | `sweepza` / `dev` (25 names) | Local Next.js | Dedicated Supabase; Clerk development instance with one user; Stripe sandbox | **Verified current** |
 | Personal development | `sweepza` / `dev_personal` | Local only | Must not be assumed safe for production | **Observed in repository** |
-| Staging / preview | `sweepza` / `stg` (22 names) | Vercel Preview | Same one-user Clerk development instance and same webhook signing configuration as dev/prd; Stripe sandbox; data isolation strategy not proven | **Cross-environment identity contamination** |
-| Production | `sweepza` / `prd` (26 names) | Vercel Production `READY` at `sweepza.com` | Live config uses dev Clerk and mixed Stripe. Dark production Clerk DNS Verified/SSL Issued; config/runtime keys pending. Resend names absent although code sends mail. | **Live web runtime; identity/payment/email separation blocked** |
+| Staging / preview | `sweepza` / `stg` (22 names) | Final #44 Preview `dpl_DyK72pRkkjYCjAzTd7RJNE9uV7iN` is `READY` | Same one-user Clerk development instance/signing configuration as dev/prd; dedicated Stripe sandbox `acct_1Teq…` and correct prices; data isolation unproven | **Source/Stripe lane aligned; identity contamination remains** |
+| Production | `sweepza` / `prd` (26 names) | Clean production `dpl_9N57qj7PHDteARUpVFWCKAxYutts` from current `main` `4c0aad183fe9442e4546985b373b26498e38e6e7` is `READY` at `sweepza.com` | Dev Clerk still active; dark production Clerk DNS/SSL verified but runtime pending. Dedicated Stripe live `acct_1Spx…` and correct prices aligned; foreign E&E webhook/unclassified objects remain. No Resend sender. | **Live runtime; source/payment boundary fixed, identity/email/residual cleanup open** |
 
 ## Current variable-name contract
 
@@ -32,9 +32,9 @@ Names were extracted from the committed example/schema and sync script; values w
 
 Authenticated health reports app URL, Supabase public/service, Clerk app, Stripe app/webhook, and GitHub worker present. The deployed health response reports Clerk webhook, PostHog, Sentry, and Notion absent. Pass 2 confirms that Doppler contains the same Clerk webhook signing configuration in all three lanes, so the health result indicates a deployment/sync or endpoint-readiness gap rather than three isolated webhook resources.
 
-That list is incomplete relative to the current runtime contract: price variables and `CRON_SECRET` still require verification. `RESEND_API_KEY` and `RESEND_FROM_EMAIL` are absent from all three lanes. Listing approval/hold and winner publication call the mail helper, so current calls no-op. Local commit `89bbe121…` makes helpers/logs report `skipped` and keeps `sent_at` null unless Resend returns 2xx; its 124 tests, lint, route type generation, typecheck, and build pass, but it is not pushed/deployed. No Mapbox or Cloudinary credential is configured.
+Pass 4 verifies the $19/$5 prices and aligns Vercel lanes. `CRON_SECRET` still needs verification. Resend names remain absent; mail must report `skipped`. #47/#48/#49 merged; #49 squash is `005af4fdd09ffab279ece37e8d0426847b02ff5b` and its historical accepted Preview `dpl_6WAE…` is `READY`. Rewritten #44 source `d0f5a3abef0dd6c268e57da4e2a91f3449661517` passed final Preview `dpl_DyK72pRkkjYCjAzTd7RJNE9uV7iN` and merged green as current `main` `4c0aad183fe9442e4546985b373b26498e38e6e7`; current production `dpl_9N57qj7PHDteARUpVFWCKAxYutts` is `READY` and is the rollback candidate. No Mapbox/Cloudinary credential; empty namespace only.
 
-PostHog host names exist but its key is empty; the live organization has only the Explore&Earn project. Sweepza has a distinct Sentry project/DSN but no first event, environment, owner routing, or metric alert.
+PostHog host names exist but its key is empty; the organization has only Explore&Earn and no cross-app reuse. New project creation is blocked by account-owner re-authentication/current-plan access. Sweepza's distinct Sentry project now has ownership routing, exactly one alert, scrubbers, and IP scrubbing; a first runtime event/environment remains open.
 
 ## Rules
 

@@ -4,6 +4,7 @@
 **Names-only snapshot:** 2026-07-10
 **Configs inspected:** `dev`, `stg`, `prd`
 **Pass 2 status:** Configured values were used only in transient, read-only provider calls; only sanitized status, equality, and resource metadata were retained.
+**Pass 4 delta:** Vercel lanes are verified against dedicated Sweepza sandbox/live accounts and the $19/$5 prices. This file does not claim that every missing Pass 2 Doppler staging name was added.
 
 Inventory used Doppler CLI names-only JSON mode with environment reads disabled. No secret value was requested, returned, or documented.
 
@@ -52,10 +53,10 @@ No variable is classified as `empty` because names-only inspection does not expo
 - `dev`, `stg`, and `prd` are confirmed to share one Clerk development instance and one webhook signing configuration. Production and staging must be separated before identity can be transfer-ready.
 - Clerk has no native staging instance. Use a documented separate application/domain for strict staging or deliberately constrain development identity to provider-hosted previews.
 - No `RESEND_API_KEY` or `RESEND_FROM_EMAIL` name is present in any lane even though the repository contains email code. Transactional email is inactive.
-- No Mapbox or Cloudinary credential name is present in any lane. The empty Sweepza Cloudinary folder is a placeholder, not an active media boundary.
+- No Mapbox or Cloudinary credential name is present in any lane. The required empty `sweepza/` namespace now exists, but it is not an access or media boundary.
 
 ## Follow-up
 
 - Replace `prd` with a Sweepza production Clerk instance and give `stg` an explicit strategy; keep `dev` unchanged until replacements pass auth and webhook smoke tests.
-- Resolve the missing staging Stripe price and webhook names only after the staging product/account strategy is confirmed.
+- Reconcile any missing Doppler staging Stripe price/webhook names against the already verified Vercel sandbox lane; never copy live values into staging.
 - Review GitHub and Notion token scopes; environment presence alone does not establish least privilege.

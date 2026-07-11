@@ -1,15 +1,16 @@
 # Clerk Production and Environment Separation Plan
 
-**Prepared:** 2026-07-10  
+**Prepared:** 2026-07-10
+
 **Execution state:** Provider identities, user counts, environment coupling, and cutover gates are verified. No production instance, domain, user, webhook, OAuth credential, key, or runtime configuration was changed.
 
 ## Current state and classification
 
 | Venture | Current identity | Users | Separation finding | Pass 2 classification |
 |---|---|---:|---|---|
-| Explore&Earn | Development instance `ins_3EbijmjwDxAGFSseSube1NHpMLk`; only Doppler `dev` has Clerk keys | 1 | `stg`/`prd` absent; no custom Clerk domain; production webhook signing config absent | Production blocked; safe dark-instance activation pending authenticated dashboard/DNS |
-| Sweepza | Development instance `ins_3EhjrYiNBzhqkZlG9kIc2Gh4dSy` | 1 | `dev`, `stg`, and live `prd` use the same development instance and same webhook signing configuration; no custom domain | Confirmed cross-environment contamination; production blocked |
-| LogLoads | Development instance `ins_3EhjpXH8SIg9bCKF9TYYv7RsHYW` | 0 | `dev`/`stg` coupled; `prd` absent; no custom Clerk domain | Lower-risk production activation, but production install blocked by runtime architecture/provenance |
+| Explore&Earn | Development instance `ins_3Eb…HpMLk`; only Doppler `dev` has Clerk keys | 1 | `stg`/`prd` absent; production webhook signing config absent | Production blocked; safe dark-instance activation pending |
+| Sweepza | Development instance `ins_3Eh…Gh4dSy` | 1 | `dev`, `stg`, and live `prd` use the same development instance/signing config | Confirmed cross-environment contamination; production blocked |
+| LogLoads | Development instance `ins_3Eh…RsHYW` | 0 | `dev`/`stg` coupled; `prd` absent | Lower-risk activation, blocked by source/provenance |
 
 All three instance IDs are different. No cross-venture Clerk instance reuse was found.
 
@@ -17,7 +18,7 @@ All three instance IDs are different. No cross-venture Clerk instance reuse was 
 
 - Clerk development instances are not production-safe, are capped at 100 users, and use a weaker development session architecture.
 - Users cannot be transferred from a Clerk development instance to its production instance. The one Explore&Earn user and one Sweepza user must be treated as test/dev identities or explicitly re-register in production; no automatic migration may be promised.
-- Production activation requires an owned domain, DNS writes, production OAuth credentials, production webhooks, and redeployed `pk_live_`/`sk_live_` configuration.
+- Production activation requires an owned domain, DNS writes, production OAuth credentials/webhooks, and redeployed production key configuration. Key prefixes and values are intentionally omitted.
 - Clerk does not offer a native staging instance. Strict long-lived staging needs a separate Clerk application and separate domain. Ephemeral provider previews may explicitly use development keys.
 - Production can remain on Hobby when only Hobby features are used; paid features can require Pro. Confirm the enabled feature set before accepting a charge.
 
@@ -68,7 +69,7 @@ All three instance IDs are different. No cross-venture Clerk instance reuse was 
 
 - Zero users means no current Clerk dev-user re-registration burden.
 - Create/configure the dark production identity only after confirming the app's final auth routes and webhook contract.
-- Do not install production keys into a Vercel production deployment while the persistent-volume versus stateless-runtime architecture decision is open.
+- Local canonical state/cold-start/concurrency checks pass. Do not install production keys until the branch is reviewed and exact-SHA Preview/live-upgrade/rollback gates pass.
 
 ## Preview and cutover gates
 
@@ -87,7 +88,7 @@ All three instance IDs are different. No cross-venture Clerk instance reuse was 
 
 ## Current blocker
 
-Authenticated dashboard work could not start because Chrome is not running and the ChatGPT Chrome Extension is not installed in the selected profile. The native host is healthy. Installing/enabling the extension and opening an authenticated Clerk/GoDaddy session is the next founder-attended action.
+Authenticated provider setup is complete through separate dark production instances plus DNS Verified/SSL Issued for Explore&Earn, Sweepza, and LogLoads. The remaining gate is runtime configuration and isolated Preview proof: OAuth/JWT/webhook/admin settings, venture-specific keys, end-to-end auth flows, staging strategy, and safe replacement of current development-backed production bindings. Paid Phone/SMS MFA cloning remains a payment/plan gate; browser authentication is not the current blocker.
 
 ## Provider references
 

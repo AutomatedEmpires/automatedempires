@@ -9,44 +9,44 @@ This pack records Explore & Earn as a standalone marketplace runtime. It is oper
 - **Verified current** — explicitly supplied or live-verified provider fact.
 - **Observed in repository** — supported by code or committed documentation, but not proof of live provider state.
 - **Target state** — the intended separated operating model.
-- **Unknown / founder verification required** — requires a provider dashboard, account owner, billing owner, or DNS owner to confirm.
+- **Unknown / provider-owner verification required** — requires an authenticated provider/account/billing/DNS owner to confirm.
 
 ## Identity snapshot
 
 | Area | Status | Current statement | Evidence |
 | --- | --- | --- | --- |
-| GitHub | **Observed in repository** | Canonical repository is `AutomatedEmpires/explore-and-earn`. | `EMPIRE_INFRA_ALIGNMENT_PLAN.md` §2 |
-| Secrets | **Verified current** | Doppler project `explore-and-earn` exists; `dev` is populated by name while `stg` and `prd` contain metadata only. | Authenticated Doppler names-only inventory |
-| Hosting | **Verified current** | Canonical Vercel project is connected to the repository, branch `main`, root `apps/web`, and serves a `READY` production deployment. | Authenticated Vercel inventory and HTTP checks |
-| Database | **Verified current** | Supabase project ref is `mamosbzcbigcclafhmmr`. | Provider fact supplied for this alignment pass |
-| Domain | **Verified current** | `exploreandearn.com` is registered at GoDaddy, routes apex/`www` to Vercel, and serves the application and health endpoint. | Public RDAP/DNS and HTTP checks |
+| GitHub | **Merged/protected** | Canonical repository `AutomatedEmpires/explore-and-earn`; #242/#243 merged, latest `b616b9e10fa434422dd34442f6cb24194cf8d5ec`; strict real-check protection/security configured. | Pass 4 GitHub evidence |
+| Secrets | **Verified current** | Doppler project exists; scoped Resend identity spans all lanes and Stripe test contract is verified in `dev`/`stg`; broader parity remains incomplete. | Authenticated names-only/write evidence |
+| Hosting | **Verified current** | Canonical project serves clean production `dpl_5HCPaCNCQuyip2iZTHpoMvSxjQFY` from current `main` `b616b9e10fa434422dd34442f6cb24194cf8d5ec`; it is `READY`, and exact-source Preview `dpl_BgD…` was green. | Authenticated Vercel/GitHub evidence |
+| Database | **Verified current** | Dedicated Supabase fingerprint `…clafhmmr`; ledger/isolation proof remains open. | Provider evidence |
+| Domain | **Verified current** | `exploreandearn.com` authenticated GoDaddy control; apex/`www` serve Vercel; Resend DNS is verified. | Authenticated registrar/provider evidence |
 | Runtime surface | **Observed in repository** | Next.js monorepo with Supabase, Clerk, Stripe, Resend, PostHog, Cloudinary, Mapbox, Sentry, and AI integration points. | Explore & Earn `package.json`, `apps/web/package.json`, application and runbook paths |
 
 ## Current activation gates
 
-These four blockers were supplied as current facts for this alignment pass.
+These remaining activation gates are current after Pass 4 remediation.
 
 | Gate | Status | Required outcome |
 | --- | --- | --- |
-| Production Clerk | **Verified current** | Provision and prove a production Clerk instance, custom-domain flow, OAuth configuration, Supabase JWT template, webhook, and admin access. |
-| Migration ledger | **Verified current** | Complete the founder-approved ledger repair and prove the database migration workflow is green. |
-| Resend DNS | **Verified current** | Add provider-issued DNS records, verify the sending domain, and prove delivery from the venture domain. |
-| Stripe identity and provisioning | **Verified current** | Identify the actual production account and mode, then provision the venture-specific catalog, webhook, environment mapping, and end-to-end billing proof. |
+| Production Clerk | **Provider identity fixed / runtime open** | Dark production instance DNS/SSL is verified; configure OAuth/JWT/webhook/admin, install only in dark Preview, and prove full auth before `prd`. |
+| Migration ledger | **Production-risk gate** | Back up/reconcile the ledger and prove a green no-op workflow under an approved plan. |
+| Resend delivery | **Credential/DNS/source fixed / delivery open** | Run a controlled custom-domain delivery/reply smoke, verify authentication/logs, then retire broad rollback only after zero use. |
+| Stripe activation | **Accounts/catalog/test fixed / production open** | Prove production account identity without displaying keys, create the correct live webhook, and pass Preview before promotion. |
 
 The strongest repository control surface is Explore & Earn `docs/runbooks/production-activation-gates.md` (prepared 2026-07-07). It should be read immediately before any production activation work.
 
 ## Older-document contradictions
 
-- **Observed in repository** — `docs/audit/STRIPE_PRODUCTION_VERIFICATION.md` (2026-06-15) says a particular CLI account was confirmed for Explore & Earn. The later activation-gates runbook says production uses a different, still-unidentified account. The older account conclusion is not current production proof and its account identifier must not be copied forward.
+- **Pass 4 correction** — Authenticated evidence proves dedicated E&E live/test accounts and the canonical catalog. The deployed production credential identity/live webhook remain unproven; never copy an older account conclusion forward.
 - **Observed in repository** — `docs/audit/WORLDCLASS_SITE_REDESIGN_PLAN.md` says Stripe is ownership-checked. The later activation-gates runbook explicitly requires account identification and provisioning. Use the later gate.
-- **Observed in repository** — `docs/runbooks/db-migrations-ci.md` documents an earlier reconciliation through migration 048 and characterizes legacy rows as harmless. The later activation-gates runbook identifies additional numbered migrations and legacy rows that still require ledger repair. Use the later gate and obtain founder approval.
-- **Observed in repository** — Older Stripe documentation describes nine price variables and multiple announcement durations. The later activation-gates runbook defines six subscription prices plus one announcement price for the current provisioning pass. Do not mix the catalogs.
+- **Observed in repository** — `docs/runbooks/db-migrations-ci.md` documents an earlier reconciliation through migration 048 and characterizes legacy rows as harmless. The later activation gate identifies additional rows requiring repair. Use an exact backup/reconciliation plan and authorized operator.
+- **Pass 4 correction** — The provider-verified five-product/ten-price catalog is current authority. Do not mix older documented price sets into runtime configuration.
 
 ## Separation rules
 
 - **Target state** — Explore & Earn owns its provider projects, users, data, webhook endpoints, billing catalog, sending domain, analytics, media, maps, and error-monitoring resources.
 - **Target state** — Production values are stored only in Explore & Earn's own secret/deployment environments and are never copied into the parent portfolio runtime.
 - **Target state** — Every webhook is registered against the Explore & Earn resource and domain, with a named owner and environment.
-- **Unknown / founder verification required** — Authenticated registrar authority, production Clerk, the actual production Stripe runtime identity, Resend DNS, and account billing/recovery owners remain to be reconciled.
+- **Mixed verified/open state** — Registrar and Resend DNS are authenticated; dark production Clerk exists; dedicated Stripe accounts/catalog exist. Clerk runtime, deployed Stripe identity/live webhook, real mail delivery, and billing/recovery ownership remain to be reconciled.
 
 No secret values, key material, account credentials, connection strings, or signing material belong in this pack.

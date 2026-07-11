@@ -1,31 +1,34 @@
 # LogLoads transfer checklist
 
-Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / founder verification required**.
+Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / provider-owner verification required**.
 
 ## Repository and governance
 
 - [ ] Recipient has the required role on `AutomatedEmpires/logloads`.
-- [ ] Branch protection, required CI, CODEOWNERS, emergency access, and open foundation work are reviewed.
+- [x] Strict `verify`/`migrations`/`dependency-review`, linear/squash history, conversation resolution, no force push/deletion, automation bypass, vulnerability alerts, and Dependabot updates are verified; CODEOWNERS/emergency access remain transfer-specific.
 - [ ] Recipient acknowledges the coordination-software boundary and subscription-only Stripe decision.
 
 ## Environments and deployment
 
 - [ ] Doppler project `logloads` and `dev`/`stg`/`prd` access are transferred independently.
 - [ ] Broad scaffold variables are classified as active, planned, or retired without revealing values.
-- [ ] Vercel project, canonical repo/main/root, healthy Preview, repaired Production, aliases, and rollback owners are verified.
+- [x] Canonical work is published at final PR #6 source `f280ef4fef4b992f94457aad61cfe27e8ec91791`; historical review threads are resolved, required checks are green, and final-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4` is `READY`.
+- [x] PR #6 merged as current `main` `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`; production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` is `READY`. Alias, live-data/provider, and functional rollback ownership remain open.
 
 ## Data and product providers
 
-- [ ] Supabase ref `fdzohbiiyzgvjzfsjyxo`, schema, migration ledger, backups, RLS, storage, and PostGIS state are reviewed.
+- [ ] Supabase fingerprint `…zfsjyxo`, schema, ledger, backups, RLS, storage, and PostGIS state are reviewed; local `135cff6…` upgrade is proven safely before live migration.
 - [ ] Dark production Clerk DNS is Verified and SSL Issued; finish the host decision, role claims, OAuth/callbacks/webhook, isolated Preview, and runtime installation. Resolve dev/stg reuse.
 - [ ] Decide whether Mapbox remains after source convergence; if so replace shared token with restricted public token. Otherwise record/test MapLibre fallback and remove misleading server name.
 - [ ] Stripe account/mode/products/webhooks are proved LogLoads-specific and limited to subscriptions.
-- [ ] LogLoads has a separate Resend account/domain/scoped key plus explicit sender/contact identity and delivery proof; record Cloudinary non-use/transfer decision, create PostHog only if required, and activate the distinct Sentry project/owner routing.
+- [ ] LogLoads has a separate Resend account/domain/scoped key plus explicit sender/contact identity and delivery proof; record Cloudinary non-use/transfer decision and create PostHog only if required. Distinct Sentry ownership/alert/privacy controls are complete; first event/release remains.
 - [ ] Agent hooks and provider-admin tokens are least-privilege, venture-specific, and removed from runtime where unnecessary.
 
 ## Domain and acceptance
 
 - [x] `logloads.com` authenticated ownership, privacy, auto-renew, full DNS zone, Website Builder route, and no-MX state are recorded; recovery/email/cutover transfer steps remain operationally open.
-- [ ] Preview smoke test covers the actually implemented slice and verifies safe missing-provider behavior.
+- [x] Local canonical E2E/smoke covers the implemented slice.
+- [x] Remote final-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4` is `READY`.
+- [ ] Provider-failure smoke and production rollback remain.
 - [ ] Production rollback and escalation owners are documented.
 - [ ] No credential value or cross-venture runtime dependency was transferred in this repository.

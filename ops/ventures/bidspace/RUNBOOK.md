@@ -1,6 +1,6 @@
 # BidSpace runbook
 
-Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / founder verification required**.
+Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / provider-owner verification required**.
 
 ## Safety rules
 
@@ -14,7 +14,7 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 1. Confirm the Git remote resolves to `AutomatedEmpires/bidspace`.
 2. Confirm Doppler project `bidspace` exposes configs `dev`, `stg`, and `prd`; inspect names and presence only.
 3. Confirm the linked Vercel project name is exactly `bidspace` before syncing environment variables or deploying.
-4. Confirm the intended Supabase project ref is `hnjjcgxflxlfsqslgxcv` before linking or generating types.
+4. Confirm the intended Supabase fingerprint ends `fsqslgxcv` before linking or generating types.
 5. Run repository validation using the pinned Node/pnpm versions and the repository's existing scripts.
 
 ## Local development
@@ -29,7 +29,7 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 
 - **Target state:** Doppler `stg` feeds Vercel Preview and Doppler `prd` feeds Vercel Production.
 - **Verified current:** the Vercel project exists.
-- **Unknown / founder verification required:** linked root directory, current aliases, deployment health, domain, and exact environment-variable synchronization.
+- **Mixed verified/open:** Git/root, accepted Preview `dpl_3vFJAPyiQqWr95woTY51mKBT1W1S`, current `main` `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8`, and clean production `dpl_GQ2yhiJjwchgt7rJDSbU8Y8JuVDp` are verified; custom domain is purchase-deferred and exact environment-variable synchronization remains to prove.
 
 Before production promotion, verify Clerk sign-in, Supabase reads/writes under RLS, a representative bid flow, and webhook rejection behavior without changing money-moving resources.
 

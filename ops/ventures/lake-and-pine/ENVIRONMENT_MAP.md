@@ -4,23 +4,23 @@
 
 | Environment | Doppler | Vercel | Supabase | Status |
 |---|---|---|---|---|
-| Development | `lake-and-pine` / `dev`, metadata only | Local branch `codex/pass3-production-foundation` at `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c`; base candidate `e1fe8f00…` | Separate local/data strategy not established | Development contract incomplete; local branch is six commits ahead of prototype `main` |
-| Staging | `lake-and-pine` / `stg`, nine names imported from verified runtime | Required clean exact-SHA Preview; none recorded yet | Dedicated staging database not discovered | Runtime names exist; data isolation and CI are unresolved |
-| Production | `lake-and-pine` / `prd`, nine names imported from verified runtime | Two `READY`, production-target artifacts came from dirty `122dd312`; latest `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt` | Ref `fftnqsvxxsxcsiwvtmwr`; 14 RLS/policy-covered tables and two remote migrations | Runtime responds, but exact source reproducibility and owned-domain cutover are blocked |
+| Development | `lake-and-pine` / `dev`; own Sentry DSN/org/project identifiers now included | Reviewed merged source lineage from PR #1 | Separate local/data strategy not established | Source/monitoring boundary exists; development data contract incomplete |
+| Staging | `lake-and-pine` / `stg`; verified runtime plus own Sentry identifiers | Exact-source Preview `dpl_BBy…` is `READY` | Dedicated staging database not discovered | CI/Preview fixed; data isolation and Vercel Sentry runtime smoke open |
+| Production | `lake-and-pine` / `prd`; verified runtime plus own Sentry identifiers | PR #1 merge/current `main` `1b6a877bc054a9239c2a430aaf668996de8a0302`; clean production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` `READY` | Dedicated Supabase fingerprint `…vtmwr`; 14 RLS/policy-covered tables and two remote migrations | Source/main provenance fixed; functional rollback/domain cutover open |
 
 ## Provenance and release gates
 
-- Intended production branch `main` is `0b7116f72878ba3f67e3ff9948a11da83cc5bab7` and currently has no application root `apps/web`; automatic main deployment is unsafe until source convergence.
-- Exact candidate `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` is five ahead of `main` and two commits newer than dirty deployment SHA `122dd312`; the provider artifacts are not exact builds of it.
-- Local clean commit `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` adds pinned CI and Windows `Toast.tsx`/`toast.ts` case repair. Frozen install/lint/typecheck/build/workflow/diff pass; no tests. Unpushed, no PR/Preview.
+- Source `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` adds pinned CI and the Windows `Toast.tsx`/`toast.ts` case repair. PR #1 passed CI/Vercel and squash-merged as `1b6a877bc054a9239c2a430aaf668996de8a0302`.
+- Preview `dpl_BBy…` and clean current-main production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` are `READY`; no latest merged-main deployment is dirty. Old dirty artifacts are historical evidence only.
+- GitHub `main` requires strict `validate`; linear/squash history, conversation resolution, no force push/deletion, automation bypass, vulnerability alerts, and Dependabot security updates are configured.
 - Authenticated GoDaddy control/full zone for `lakeandpinecleaning.com` is verified: dual Vercel apex A records, Vercel `www`, GoDaddy NS/domain-connect/SOA, quarantine DMARC, and no MX/SPF. DNS must not be attached/promoted before clean release/rollback.
-- Preview must use `stg` and must not mutate production data, send production email, or exercise live payments. Production must come from reviewed `main` with `prd` and pass on the provider hostname before any domain work.
+- Preview must use `stg` and must not mutate production data, send production email, or exercise live payments. Clean `main` production now exists, but functional provider-host/rollback smoke still precedes domain work.
 
 ## Variable-name contract
 
 The default-branch recovery snapshot has no application environment contract. Names safely imported from the verified Vercel runtime include the application URL/business contact contract and Supabase/database contract; see the venture Doppler map. Values are not documented.
 
-Do not populate guessed variables merely because other ventures use them. After architecture approval, document exact names for the implemented consumers. The likely provider categories—app URL, Supabase, Clerk, Stripe, Resend, PostHog, and Sentry—are **target-state categories**, not confirmation that corresponding live resources should be created now.
+Do not populate guessed variables merely because other ventures use them. The separate Sentry identity is the only newly established monitoring contract. App URL/Supabase are verified where listed; Clerk, Stripe, Resend, and PostHog remain target-state categories, not confirmation that live resources should be created now.
 
 ## Environment rules
 

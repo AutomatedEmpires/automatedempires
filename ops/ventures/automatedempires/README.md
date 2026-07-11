@@ -9,7 +9,7 @@ This pack describes the parent portfolio site's runtime boundary. AutomatedEmpir
 - **Verified current** — explicitly supplied or live-verified provider fact.
 - **Observed in repository** — supported by code or committed documentation, but not proof of live provider state.
 - **Target state** — the intended separated operating model.
-- **Unknown / founder verification required** — requires a provider dashboard, account owner, billing owner, or DNS owner to confirm.
+- **Unknown / provider-owner verification required** — requires an authenticated provider, account owner, billing owner, or DNS owner to confirm.
 
 ## Identity snapshot
 
@@ -17,8 +17,8 @@ This pack describes the parent portfolio site's runtime boundary. AutomatedEmpir
 | --- | --- | --- | --- |
 | Role | **Observed in repository** | Public Next.js studio and portfolio site; not a product application. | `AGENTS.md`, `README.md`, `lib/ventures.ts` |
 | GitHub | **Observed in repository** | Canonical repository is `AutomatedEmpires/automatedempires`. | `EMPIRE_INFRA_ALIGNMENT_PLAN.md` §2 |
-| Secrets inventory | **Verified current** | Doppler project `automatedempires` exists with `dev`, `stg`, and `prd` configs; the supplied inventory found Doppler metadata only. | Provider fact supplied for this alignment pass |
-| Hosting | **Verified current** | Vercel project is connected to the canonical repo/main/root. Pass 2 preview `dpl_7eWQBY2ULsfcPTnQ17aSmN3EAhm9` is `READY`; an earlier production-target artifact is `ERROR`, so no functional production or custom domain is attached. | Authenticated Vercel inventory/build |
+| Secrets inventory | **Verified current** | Doppler project `automatedempires` has `dev`/`stg`/`prd`; own Sentry DSN/org/project identifiers are installed write-only in every lane. | Pass 4 provider evidence |
+| Hosting | **Verified current** | Vercel is connected to canonical repo/main/root. Current `main` is `ed91ece423583318fd7481278a7478311d867add`; clean production `dpl_5scDXWyVV2wq1ypwhcjmiBkQLpzT` is `READY`; functional rollback/custom-domain cutover remain. | Pass 4 evidence |
 | Database | **Verified current** | No Supabase project is required for the current portfolio site. | Provider fact supplied for this alignment pass |
 | Domain | **Verified current** | `automatedempires.com` is registered at GoDaddy and currently serves GoDaddy Website Builder; Outlook MX and a possible duplicate-SPF condition are present. | Public RDAP/DNS and HTTP snapshot |
 | Optional integrations | **Observed in repository** | The repo contract names Resend, PostHog, Cloudinary, and Sentry as the provider family to use if features require them. | `AGENTS.md` §4 |
@@ -28,7 +28,7 @@ This pack describes the parent portfolio site's runtime boundary. AutomatedEmpir
 - **Target state** — AutomatedEmpires has its own GitHub, Doppler, Vercel, DNS, and any feature-specific provider resources.
 - **Target state** — Child-venture credentials, webhook signing material, customer data, and billing configuration never transit through this site's runtime.
 - **Target state** — Portfolio records may identify a child venture's resource by non-secret name, owner, and environment, but must not duplicate values.
-- **Unknown / founder verification required** — Confirm authenticated registrar control for `automatedempires.com`, then deploy and verify Vercel before any web-record cutover. Optional provider resources remain unnecessary until a feature uses them.
+- **Verified current / production-risk gate** — Authenticated registrar control and clean Vercel production are proven. Complete functional rollback/DNS smoke before any web-record cutover; optional providers remain unnecessary unless a feature uses them.
 
 ## Evidence hierarchy
 

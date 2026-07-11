@@ -20,9 +20,12 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 | `DOPPLER_CONFIG` | Identifies the active Doppler config | `dev`, `stg`, `prd` | `metadata` |
 | `DOPPLER_ENVIRONMENT` | Identifies the active Doppler environment | `dev`, `stg`, `prd` | `metadata` |
 | `DOPPLER_PROJECT` | Identifies the Doppler project | `dev`, `stg`, `prd` | `metadata` |
+| `SENTRY_DSN` | ORAN-specific Sentry event endpoint | `dev`, `stg`, `prd` | `configured` |
+| `SENTRY_ORG` | Sentry organization slug | `dev`, `stg`, `prd` | `configured` |
+| `SENTRY_PROJECT` | ORAN Sentry project slug | `dev`, `stg`, `prd` | `configured` |
 
-No application variables are present in any config. No variable is classified as `empty` because names-only inspection does not expose that state and no separate safe evidence established it.
+Pass 4 installed only the ORAN-specific Sentry identity beyond metadata, without displaying values. Traces remain `0`; no Vercel runtime event is claimed. No variable is classified as `empty` because names-only inspection does not expose that state and no separate safe evidence established it.
 
 ## Architecture constraint
 
-ORAN is in an unmerged Azure-to-Vercel transition. Populate this Doppler project only after the migration branch, Supabase schema/ledger, and retained Azure/Key Vault responsibilities are approved. Migrate only verified ORAN-owned values through a preview-first plan; do not copy generic Vercel, Supabase, Clerk, Stripe, or Mapbox values merely to match another venture.
+ORAN is in an unmerged Azure-to-Vercel transition. Keep the prepared Sentry identity scoped to ORAN and install it only in the safe Preview. Populate the rest only after the migration branch, Supabase schema/ledger, and retained Azure/Key Vault responsibilities are approved; never copy another venture's values.

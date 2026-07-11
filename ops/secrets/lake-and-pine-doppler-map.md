@@ -26,11 +26,15 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 | `NEXT_PUBLIC_BUSINESS_PHONE` | Browser-visible business contact phone | `stg`, `prd` | `configured` | Verified Vercel import |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser-visible Supabase anonymous key | `stg`, `prd` | `configured` | Verified Vercel import |
 | `NEXT_PUBLIC_SUPABASE_URL` | Browser-visible Supabase project URL | `stg`, `prd` | `configured` | Verified Vercel import |
+| `SENTRY_DSN` | Venture-specific Sentry event endpoint | `dev`, `stg`, `prd` | `configured` | Installed write-only in Pass 4 |
+| `SENTRY_ORG` | Sentry organization slug | `dev`, `stg`, `prd` | `configured` | Installed write-only in Pass 4 |
+| `SENTRY_PROJECT` | Lake & Pine Sentry project slug | `dev`, `stg`, `prd` | `configured` | Installed write-only in Pass 4 |
 
-The `dev` config currently contains Doppler metadata only. No variable is classified as `empty` because that state was not safely established.
+The `dev` config contains metadata plus the Lake & Pine-specific Sentry identity; its broader application/data contract remains absent. No variable is classified as `empty` because that state was not safely established.
 
 ## Follow-up
 
 - Confirm whether `stg` and `prd` intentionally share the same backing Vercel/Supabase resources; presence in both configs does not prove environment separation.
-- Populate `dev` only from a development-specific resource set.
+- Populate other `dev` values only from a development-specific resource set.
 - Verify the repository consumes these exact variable names before removing any Vercel-side copy.
+- Install the Sentry identity into Vercel without display and prove a controlled event/release before calling monitoring active.

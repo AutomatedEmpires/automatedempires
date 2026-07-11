@@ -1,27 +1,27 @@
 # Sweepza transfer checklist
 
-Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / founder verification required**.
+Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / provider-owner verification required**.
 
 ## Repository and environments
 
-- [ ] GitHub access to `AutomatedEmpires/sweepza`, branch protections, CI, and emergency owners are verified.
+- [x] Strict `verify`/`design`/`dependency-review`, linear/squash history, conversation resolution, no force push/deletion, automation bypass, vulnerability alerts, and Dependabot updates are verified; recipient/emergency access remains transfer-specific.
 - [ ] Doppler project `sweepza` and `dev`/`stg`/`prd` role boundaries are transferred.
 - [ ] `dev_personal` purpose, owner, and retention are documented or retired safely.
 - [ ] The recipient can perform a names-only configuration audit without revealing values.
 
 ## Deployment and data
 
-- [ ] Vercel project `sweepza`, team, Git link, root, aliases, Preview, Production, and rollback access are verified.
+- [ ] Vercel project `sweepza`, team, Git link, root, aliases, Preview, Production, and rollback access are verified; current release evidence is Preview `dpl_DyK72pRkkjYCjAzTd7RJNE9uV7iN` and `main` `4c0aad183fe9442e4546985b373b26498e38e6e7` / production `dpl_9N57qj7PHDteARUpVFWCKAxYutts`, both `READY`.
 - [ ] Current deployed alias and custom-domain cutover state are recorded.
-- [ ] Supabase ref `ojwhsntcpmoxnzisuomq`, ownership, migration ledger, backups, RLS, storage, and data-retention obligations are reviewed.
+- [ ] Supabase fingerprint `…nzisuomq`, ownership, migration ledger, backups, RLS, storage, and data-retention obligations are reviewed.
 - [ ] Cron path, schedule, authentication, last success, and alert owner are documented.
 
 ## Product providers
 
 - [ ] Dark production Clerk DNS is Verified and SSL Issued; finish OAuth, events/webhook, admin owners, Preview proof, `prd` replacement, and dev-user re-registration.
-- [ ] Shared live Stripe account `acct_1SpxXpDtcwz0cxzo` is separated through an approved migration; legal entity, mode, products/prices, endpoints, customers/subscriptions, payout/refund ownership, and rollback are reviewed.
-- [ ] Create/record a distinct PostHog project and prove ingestion; record the distinct Sentry project, first event, venture team/issue owner/alerts, retention and scrubbing policy.
-- [ ] Review/publish `89bbe121…`; until mail is funded/configured, verify sends report `skipped` and `sent_at` stays null.
+- [ ] Dedicated live `acct_1Sp…cxzo` and sandbox `acct_1Te…88pB` boundaries/prices are recorded; classify the foreign endpoint/two customers/$0 draft invoice without destructive mutation and review legal/payout/refund ownership.
+- [ ] Decide PostHog non-use/project after owner re-auth; Sentry project/ownership/one-alert/privacy controls are recorded, but first event/release/retention remain.
+- [x] Truthful mail-skip source merged through #47 and is present in current-main production; until mail is funded/configured, execution proof must show `skipped` and null `sent_at`.
 - [ ] Approve and verify an independent Resend team, sending identity/domain, scoped key, from-address ownership, delivery, and rollback.
 - [ ] GitHub/Notion worker tokens are least-privilege, venture-specific, and assigned to named owners.
 

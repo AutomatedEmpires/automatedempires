@@ -1,28 +1,34 @@
 # Sentry Project Matrix
 
-**Verified snapshot:** 2026-07-10
+**Verified snapshot:** 2026-07-10 (Pass 4 authenticated API remediation)
 
-A shared parent Sentry organization is acceptable only when each active venture has a separate project, ownership, alerts, retention policy, and data-scrubbing boundary. DSNs and auth tokens are intentionally excluded.
+The shared parent organization now contains seven distinct venture projects with distinct DSNs. Pass 4 created the previously missing AutomatedEmpires, Lake & Pine, and ORAN projects and preserved the existing Explore&Earn, BidSpace, Sweepza, and LogLoads projects. No DSN, auth token, full provider object ID, or credential fingerprint is recorded.
 
-Authenticated provider inspection confirmed organization `automated-empires` and four distinct venture projects: BidSpace, Explore&Earn, LogLoads, and Sweepza. Their DSNs are distinct across ventures. LogLoads reuses its own one DSN across `dev`, `stg`, and `prd`, which is an environment-labeling concern but not cross-venture reuse. No Sentry provider write was performed.
+## Venture boundaries
 
-| Venture | Current evidence | Separation state | Pass 3 classification | Safe next action |
+| Venture | Current project/runtime evidence | Doppler | Governance and privacy | Classification / remaining gate |
 |---|---|---|---|---|
-| AutomatedEmpires | The parent organization is authenticated; no AutomatedEmpires application project exists | Parent organization is the shared control plane; no parent DSN is in active use | **completed** for organization inventory; a parent app project **requires founder decision** only if monitoring is needed | Create a parent project only with the first monitored parent deployment and assign explicit owners/alerts at creation |
-| Explore&Earn | Project `explore-and-earn`, ID `4511510781624320`, is active in `production`, `vercel-production`, and `development`. In the last 14 days: production had 7 issues / 6,489 occurrences (5 high, 2 medium); `vercel-production` had 2 / 5 (both high); development had 5 / 1,024 (3 high, 2 medium). All are unassigned | Distinct venture project and DSN; environment labels exist, but alert ownership, routing, and retention are incomplete | Inventory is **completed**; credential replacement and production configuration are **blocked by production risk** until replacements are installed, deployed, and smoke-tested | Assign venture owners and routing, triage the high-volume issues, verify releases, and split the overprivileged credential into a parent read-only audit credential plus a narrow Explore&Earn build credential. Do not revoke the current credential until both replacements are verified. |
-| ORAN | No ORAN project exists; Azure telemetry is also referenced in repository docs | Not configured | **requires founder decision** | Decide Sentry versus Azure telemetry roles before creating a separate ORAN project; avoid duplicate sensitive payloads |
-| BidSpace | A distinct BidSpace project is verified. Its first production event was 2026-07-10, with 0 unresolved issues in the last 14 days | Distinct venture project and DSN; current ingestion is proven | **completed** for project identity and initial ingestion; routing ownership **requires founder decision** | Assign venture owners/alert routing and retain a controlled production smoke event as release evidence |
-| Lake & Pine | No Lake & Pine project exists | Not configured | **requires founder decision** | Defer until the clean production source/deployment exists, then create only if monitoring is part of the approved release contract |
-| Sweepza | A distinct Sweepza project exists, but it has no first event and no observed environments | Venture boundary exists; ingestion is inactive | **requires founder decision** on activation; rollout is **blocked by production risk** until a scoped preview smoke succeeds | Add only Sweepza-scoped configuration, emit a controlled preview event, verify environment/release/owner routing, then promote |
-| LogLoads | A distinct LogLoads project exists. The same LogLoads DSN is reused across `dev`, `stg`, and `prd`, but no first event or provider environments were observed | No cross-venture reuse; environment separation is ineffective until events carry verified environment/release labels | **requires founder decision** on activation; rollout is **blocked by production risk** until runtime architecture is chosen | After the runtime decision, emit controlled lane-specific events and verify environment/release labels, owner routing, and alert delivery before production |
+| AutomatedEmpires | Separate `automatedempires` project created; no runtime event claimed | Own DSN/org/project identifiers installed write-only in `dev`/`stg`/`prd` | Ownership rule, one alert, scrubbers, IP scrubbing | Project/config/governance **fixed and verified**; Vercel install/event open |
+| Explore&Earn | Existing active distinct project with historical production/provider-development ingestion | Existing venture configuration retained | Ownership rule, one alert, scrubbers, IP scrubbing; unresolved issues assigned to team | Governance **fixed and verified**; release proof and narrow-token replacement open |
+| ORAN | Separate `oran` project created; traces remain `0`; no Vercel deployment | Own DSN/org/project identifiers installed write-only in `dev`/`stg`/`prd` | Ownership rule, one alert, scrubbers, IP scrubbing | Project/config/governance **fixed and verified**; runtime event waits for safe Preview |
+| BidSpace | Existing distinct project; first production event verified; prior 14-day query had zero unresolved | Existing venture configuration retained | Ownership rule, one alert, scrubbers, IP scrubbing | **Fixed and verified**; retain controlled release smoke |
+| Lake & Pine | Separate `lake-and-pine` project created; no runtime event claimed | Own DSN/org/project identifiers installed write-only in `dev`/`stg`/`prd` | Ownership rule, one alert, scrubbers, IP scrubbing | Project/config/governance **fixed and verified**; Vercel install/event open |
+| Sweepza | Existing distinct project; no first event/environment observed | Existing venture configuration retained | Ownership rule, one alert, scrubbers, IP scrubbing | Governance **fixed and verified**; controlled runtime event open |
+| LogLoads | Existing distinct project; one own DSN spans lanes; no first event/environment observed | Existing venture configuration retained | Ownership rule, one alert, scrubbers, IP scrubbing | Governance **fixed and verified**; lane/release event waits for accepted runtime |
 
-## Cross-project controls
+No cross-venture Sentry project or DSN reuse exists.
 
-- All four projects share the parent team and the same default email alert. No alert-rule owner is assigned. Routing falls back to IssueOwners/ActiveMembers.
-- Ownership features are enabled with automatic assignment, fallthrough, and CODEOWNERS support, but zero ownership rules or targets are configured. All observed Explore&Earn issues are unassigned.
-- No metric alerts are configured on any of the four projects.
-- Data scrubbing is enabled on all four projects. IP-address scrubbing is disabled, and no custom safe-field or sensitive-field rules are configured.
+## Controls applied
+
+- Organization data scrubber, default scrubbers, and IP-address scrubbing are enabled.
+- All seven projects use `path:** #automated-empires` ownership with fallthrough, Issue Owner auto-assignment, and CODEOWNERS sync.
+- Every project has exactly one alert rule.
+- Fifteen previously unassigned unresolved issues were assigned to the AutomatedEmpires team.
+- Each new venture project received only its own DSN plus organization/project identifiers in Doppler `dev`/`stg`/`prd`, transferred without display.
+
+## Remaining gates
+
+- Vercel DSN installation/runtime smoke for the new and non-ingesting projects requires an authorized environment-write surface; it is not claimed.
+- ORAN traces remain disabled at `0` until its privacy/performance posture and safe Preview exist.
+- The existing owner-grade build token was not revoked. Replace it only through create → install → deploy → verify → revoke; never revoke working access first.
 - Retention was not exposed by the inspected provider surface and remains unverified.
-- An owner-grade organization token is stored in Explore&Earn development configuration and is overprivileged across the organization. Its value is intentionally excluded. Replacement must follow create → install → deploy → verify → revoke; current production access must not be revoked first.
-
-No cross-venture Sentry project or DSN sharing was found. Explore&Earn's incorrect development organization slug was corrected in Doppler and Vercel during Pass 2; Pass 3 added live project, ingestion, issue-volume, and control-plane evidence without changing provider state.

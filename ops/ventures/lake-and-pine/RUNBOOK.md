@@ -1,24 +1,24 @@
 # Lake & Pine runbook
 
-Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / founder verification required**.
+Status key: **Verified current** · **Observed in repository** · **Target state** · **Unknown / provider-owner verification required**.
 
 ## Current operating posture
 
-Lake & Pine has two healthy production-target artifacts from dirty SHA `122dd312`; latest is `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`. Exact candidate `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` is two commits newer and five ahead of prototype `main`, which lacks `apps/web`. Preserve artifacts as evidence while making release provenance reproducible.
+Lake & Pine now has reproducible reviewed-main authority: PR #1 source `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` merged as current `main` `1b6a877bc054a9239c2a430aaf668996de8a0302`; exact-source Preview `dpl_BBy…` and clean production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` are `READY`. Preserve old dirty artifacts only as historical evidence.
 
 ## Safety rules
 
 1. Use canonical slug `lake-and-pine` in portfolio operations; use `lakeandpine` only where an existing provider/repository requires it.
 2. Never deploy the recovered HTML prototype as if it were the approved production architecture.
-3. Do not apply database schema, create auth/payment resources, attach the owned domain, or copy another venture's settings without a dated decision and founder approval.
+3. Do not apply database schema, create auth/payment resources, attach the owned domain, or copy another venture's settings without a dated plan and the applicable production/legal/paid authority.
 4. Keep all secret values in Doppler; this pack records names and resource identities only.
 
 ## Verification sequence
 
-1. Confirm GitHub repository `AutomatedEmpires/lakeandpine`, `main` `0b7116f72878ba3f67e3ff9948a11da83cc5bab7`, and candidate `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` before review.
+1. Confirm GitHub repository `AutomatedEmpires/lakeandpine`, merge `1b6a877bc054a9239c2a430aaf668996de8a0302`, strict required `validate`, and clean branch status before release work.
 2. Confirm Doppler project `lake-and-pine`: dev is metadata-only; stg/prd contain the verified runtime contract imported without displaying values.
-3. Confirm Vercel project `lakeandpine`, root `apps/web`, intended production branch `main`, and deployment `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`; capture its source metadata, aliases, creation time, and rollback owner before replacement.
-4. Confirm Supabase ref `fftnqsvxxsxcsiwvtmwr`, 14 RLS/policy-covered tables, and two remote migrations before any database write.
+3. Confirm Vercel project `lakeandpine`, root `apps/web`, production branch `main`, clean production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk`, and exact-source Preview `dpl_BBy…`; capture aliases, creation time, and rollback owner before DNS.
+4. Confirm Supabase fingerprint `…siwvtmwr`, 14 RLS/policy-covered tables, and two remote migrations before any database write.
 5. Review `docs/product/recovered-product-truth.md` and the prototype as requirements evidence, not infrastructure truth.
 
 ## Architecture-to-runtime gate
@@ -32,29 +32,26 @@ Before production normalization, approve:
 - quoting, booking, scheduling, and payment boundaries;
 - email, analytics, error monitoring, and domain/DNS ownership.
 
-First review and push local commit `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c`, which already adds pinned CI on base candidate `e1fe8f00…`. Commit the environment contract and prove a clean exact-SHA preview. Only then replace the current production alias or attach the owned domain.
-
-Pass 3 local commit `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` pins Node `24.16.0`/pnpm `10.12.4` CI and renames the toast helper to avoid Windows/Linux filename collision. Checks pass; no tests. Worktree is clean, but commit is unpushed/no PR/Preview. Require remote review/run.
+Source `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` pins Node `24.16.0`/pnpm `10.12.4` CI and renames the toast helper to avoid the Windows/Linux filename collision. PR #1 passed remote CI/Vercel and merged. No application tests exist; this remains an explicit product-quality gap, not a provenance gap.
 
 ## Deployment
 
-- **Verified current:** canonical Git connection, root `apps/web`, project, ready deployment `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`, and Vercel/Supabase environment binding.
-- **Blocked:** the ready artifact came from dirty feature source; `main` lacks `apps/web`, no CI exists, and the live artifact is not proven equal to the clean candidate SHA.
-- **Target state:** reviewed candidate/fix → exact-SHA Preview with `stg` → reviewed `main` Production with `prd` → reversible cutover of owned `lakeandpinecleaning.com`.
+- **Verified current:** canonical Git/root, strict `validate`, clean Preview `dpl_BBy…`, clean current-main production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk`, and Vercel/Supabase/Doppler binding.
+- **Blocked:** functional provider-host/rollback smoke and owned-domain cutover only; product provider activation remains separately scoped.
+- **Target state:** accepted clean production/rollback → reversible cutover of owned `lakeandpinecleaning.com`.
 
 ## Acceptance gates
 
-1. Preserve the current deployment metadata and do not move its alias until the candidate passes.
-2. Review the five-commit application introduction and ensure prototype/recovery evidence remains intact.
-3. Require clean-checkout frozen install, lint, typecheck, and build; record the exact passing commit.
-4. Preview with staging-only resources and verify public pages, contact rendering, quote/booking boundaries, auth-disabled behavior, RLS, logs, and fail-closed missing-provider behavior without production writes.
-5. Deploy reviewed `main` to a provider hostname with `prd`; compare it to the accepted Preview before alias replacement. Domain work remains separately blocked.
+1. Preserve `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` metadata and name the rollback owner.
+2. Reconfirm `validate` on the exact release commit and record the explicit no-tests gap.
+3. Verify public pages, contact rendering, quote/booking boundaries, auth-disabled behavior, RLS, logs, Sentry-disabled behavior, and fail-closed missing-provider behavior without production writes.
+4. Compare clean production with accepted Preview, export DNS, and change only approved web records after rollback rehearsal.
 
 ## Rollback
 
-- Keep `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt` available until the clean main deployment is accepted. If the candidate fails, restore the alias to that recorded deployment.
+- Prefer restoring the alias to clean production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` or another recorded clean exact-SHA deployment. Do not promote the old dirty artifact as current authority.
 - Do not reset, reseed, or reverse the Supabase schema as a code rollback. Preserve data and use a reviewed forward fix if schema behavior is involved.
-- Because the existing deployment is dirty and unreproducible, replace it with a second verified deployment before treating rollback as transfer-ready.
+- Require at least one second recorded clean deployment/alias path before treating rollback as transfer-ready.
 
 ## Database
 

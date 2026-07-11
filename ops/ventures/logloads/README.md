@@ -7,7 +7,7 @@ This pack documents LogLoads as an independent logistics venture. Provider inten
 - **Verified current** — confirmed during the 2026-07-10 provider inventory or explicitly supplied to this alignment pass.
 - **Observed in repository** — present in committed code/docs, not live-provider proof.
 - **Target state** — intended after implementation and verification.
-- **Unknown / founder verification required** — cannot be established safely from current evidence.
+- **Unknown / provider-owner verification required** — cannot be established safely from current evidence.
 
 ## Identity summary
 
@@ -15,12 +15,12 @@ This pack documents LogLoads as an independent logistics venture. Provider inten
 |---|---|---|
 | Canonical slug | **Verified current** | `logloads` |
 | GitHub repository | **Verified current** | `AutomatedEmpires/logloads` |
-| Secrets boundary | **Verified current** | Doppler project `logloads`; names-only counts dev 18, stg 7, prd 14 |
-| Deployment boundary | **Verified current** | Vercel preview `dpl_Ejx66Z9wZFJiPJ5341j61voT7cHF` is `READY`; production `dpl_5LdZ4qWv7P1B68iYi3zZoJBM7wLN` is `ERROR` with `ENOENT`; both are dirty feature artifacts, not reproducible `main` releases |
-| Database boundary | **Verified current / interim architecture** | Supabase ref `fdzohbiiyzgvjzfsjyxo` is a durability mirror; process-local JSON remains the primary operating state |
+| Secrets boundary | **Verified current** | Doppler project `logloads`; pre-convergence names-only counts dev 22, stg 11, prd 18 |
+| Deployment boundary | **Source/merge/deployment fixed / live activation open** | PR #6 final source `f280ef4fef4b992f94457aad61cfe27e8ec91791` passed required checks and Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4`; it merged as current `main` `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`, whose production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` is `READY` |
+| Database boundary | **Safely fixed in code / live unchanged** | `135cff673255cfc1b99c66552479e32cba370940` makes Supabase canonical and passes fresh PostgreSQL 17/RLS/grant/E2E gates; final work is merged/deployed, but no live migration or data cutover occurred |
 | Domain | **Verified public** | `logloads.com` is registered at GoDaddy and serves Website Builder; no MX is present and it is not attached to Vercel |
-| Runtime architecture | **Dated decision / production gate** | Current engine is exactly one writer with a persistent volume. Vercel serverless is reserved until an asynchronous canonical database layer replaces process-local authority |
-| Product maturity | **Observed/verified** | Feature head `cce1c4494ae49d28aacc42724ab7245668474ab7` has 22 commits not in `main`; `main` `e78b48c292c57339a0610fcdbf2effa08827dc40` has 8 commits not in the feature, and the working tree has three uncommitted deployment files |
+| Runtime architecture | **Implementation/Preview complete / production-risk gate** | Supabase-canonical candidate passes atomic/retry/cold-start/concurrency tests; distributed rate limiting/live-upgrade/production rollback remain |
+| Product maturity | **Verified merged candidate** | Product/main automation converged through `5ada1dc…`, integrity fixed at `4cc386c…`, canonical work at `135cff6…`; final source `f280ef4…` explicitly initializes Supabase before E2E and merged as `9c9e107…` |
 
 ## Pack index
 
@@ -32,6 +32,6 @@ This pack documents LogLoads as an independent logistics venture. Provider inten
 
 Boundary rule: LogLoads is coordination software and marketplace visibility, not a freight broker or payment handler. Its decision log limits Stripe to subscriptions unless a new dated decision changes that scope.
 
-Deployment rule: correcting Vercel root/build output or `ENOENT` is secondary. Do not promote Vercel production until the founder approves and tests either the dated single-node persistent-volume runtime or a completed stateless/async-database Vercel architecture.
+Deployment rule: canonical checks, merge, final-source Preview, and current-main source deployment pass. Do not activate live data/providers or attach `logloads.com` until backup/live-shape upgrade, environment provenance, distributed rate limiting, and functional production rollback pass.
 
 Evidence baseline: parent `EMPIRE_INFRA_ALIGNMENT_PLAN.md`; LogLoads `README.md`, `docs/DECISIONS.md`, `LOGLOADS_NEXT_STEPS.md`, and committed `.env.example` names only.
