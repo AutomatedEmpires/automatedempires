@@ -29,4 +29,4 @@ pnpm build
 - `components/` — UI building blocks (Nav, Hero, VentureCard, Footer)
 - `lib/ventures.ts` — the single source of truth for the venture list
 
-> Note: run `pnpm install` once locally and commit the generated `pnpm-lock.yaml` before wiring frozen-install CI.
+The committed `pnpm-lock.yaml` is the reproducible dependency baseline. Use `pnpm install --frozen-lockfile` in CI.
