@@ -17,15 +17,15 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 ## Data and product providers
 
 - [ ] Supabase ref `fdzohbiiyzgvjzfsjyxo`, schema, migration ledger, backups, RLS, storage, and PostGIS state are reviewed.
-- [ ] Dev/stg Clerk reuse is resolved and a LogLoads production instance, role claims, OAuth settings, callbacks, and webhook are recorded.
-- [ ] Shared Mapbox token is replaced with LogLoads/environment-specific tokens and allowed origins are recorded.
+- [ ] Dark production Clerk DNS is Verified and SSL Issued; finish the host decision, role claims, OAuth/callbacks/webhook, isolated Preview, and runtime installation. Resolve dev/stg reuse.
+- [ ] Decide whether Mapbox remains after source convergence; if so replace shared token with restricted public token. Otherwise record/test MapLibre fallback and remove misleading server name.
 - [ ] Stripe account/mode/products/webhooks are proved LogLoads-specific and limited to subscriptions.
-- [ ] LogLoads has a separate Resend account/domain, a documented Cloudinary transfer boundary, and venture-specific PostHog/Sentry resources or explicit non-use decisions.
+- [ ] LogLoads has a separate Resend account/domain/scoped key plus explicit sender/contact identity and delivery proof; record Cloudinary non-use/transfer decision, create PostHog only if required, and activate the distinct Sentry project/owner routing.
 - [ ] Agent hooks and provider-admin tokens are least-privilege, venture-specific, and removed from runtime where unnecessary.
 
 ## Domain and acceptance
 
-- [ ] `logloads.com` public GoDaddy state is recorded and authenticated ownership, DNS, renewal, recovery, MX/email plan, and Vercel cutover are verified.
+- [x] `logloads.com` authenticated ownership, privacy, auto-renew, full DNS zone, Website Builder route, and no-MX state are recorded; recovery/email/cutover transfer steps remain operationally open.
 - [ ] Preview smoke test covers the actually implemented slice and verifies safe missing-provider behavior.
 - [ ] Production rollback and escalation owners are documented.
 - [ ] No credential value or cross-venture runtime dependency was transferred in this repository.

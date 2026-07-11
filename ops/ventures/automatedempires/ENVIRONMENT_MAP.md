@@ -20,7 +20,7 @@ This file maps environment ownership without recording values.
 | Database | **Verified current** | No Supabase project or database runtime is needed for the current site. |
 | Vercel environment bindings | **Verified current** | Canonical repo, root `.`, branch `main`, Next.js, and Node 24 are configured; no application environment is needed and the PR preview is `READY`. |
 | Doppler-to-Vercel flow | **Target state** | Each config maps only to its same-purpose environment; do not reuse another venture's service token or runtime identity. |
-| Domain and DNS | **Verified public / authenticated control pending** | GoDaddy registration/nameservers and Website Builder routing are public; export the authenticated zone and verify possible duplicate SPF before any Vercel attachment. |
+| Domain and DNS | **Authenticated control / full zone verified** | GoDaddy ownership/privacy/renewal and 23-record zone verified; Website Builder remains public. Review mail/SPF deliberately before Vercel attachment. |
 
 ## Promotion contract
 

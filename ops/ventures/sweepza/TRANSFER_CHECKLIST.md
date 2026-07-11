@@ -18,15 +18,16 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 
 ## Product providers
 
-- [ ] Clerk app ID/instance, domains, OAuth settings, subscribed events, webhook endpoint, and admin owners are recorded.
+- [ ] Dark production Clerk DNS is Verified and SSL Issued; finish OAuth, events/webhook, admin owners, Preview proof, `prd` replacement, and dev-user re-registration.
 - [ ] Shared live Stripe account `acct_1SpxXpDtcwz0cxzo` is separated through an approved migration; legal entity, mode, products/prices, endpoints, customers/subscriptions, payout/refund ownership, and rollback are reviewed.
-- [ ] PostHog project ID and Sentry org/project IDs, alert routes, and retention settings are recorded.
-- [ ] Resend sending identity/domain and from-address ownership are verified.
+- [ ] Create/record a distinct PostHog project and prove ingestion; record the distinct Sentry project, first event, venture team/issue owner/alerts, retention and scrubbing policy.
+- [ ] Review/publish `89bbe121…`; until mail is funded/configured, verify sends report `skipped` and `sent_at` stays null.
+- [ ] Approve and verify an independent Resend team, sending identity/domain, scoped key, from-address ownership, delivery, and rollback.
 - [ ] GitHub/Notion worker tokens are least-privilege, venture-specific, and assigned to named owners.
 
 ## Domain and acceptance
 
-- [ ] `sweepza.com` public Vercel attachment is recorded; authenticated GoDaddy ownership, renewal, recovery, Outlook MX, and DNS zone are proved.
+- [x] `sweepza.com` Vercel attachment plus authenticated GoDaddy ownership, privacy, auto-renew, Outlook MX, and full-zone evidence are recorded; recovery owner still transfers operationally.
 - [ ] Preview smoke tests cover Clerk sync, Supabase RLS, Stripe disabled/enabled states, email, analytics, Sentry, and cron.
 - [ ] A production rollback is rehearsed without exposing credentials.
 - [ ] Sender and recipient confirm no cross-venture credential or runtime resource remains.

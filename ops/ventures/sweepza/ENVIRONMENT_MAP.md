@@ -1,6 +1,6 @@
 # Sweepza environment map
 
-Pass 2 provider refresh: 2026-07-10; Clerk, Resend, Mapbox, and Cloudinary status was refreshed read-only without recording credential material.
+Pass 3 refresh: authenticated GoDaddy/Clerk plus code-qualified email and live telemetry inventory; no credential material is recorded.
 
 ## Environment ownership
 
@@ -9,7 +9,7 @@ Pass 2 provider refresh: 2026-07-10; Clerk, Resend, Mapbox, and Cloudinary statu
 | Local development | `sweepza` / `dev` (25 names) | Local Next.js | Dedicated Supabase; Clerk development instance with one user; Stripe sandbox | **Verified current** |
 | Personal development | `sweepza` / `dev_personal` | Local only | Must not be assumed safe for production | **Observed in repository** |
 | Staging / preview | `sweepza` / `stg` (22 names) | Vercel Preview | Same one-user Clerk development instance and same webhook signing configuration as dev/prd; Stripe sandbox; data isolation strategy not proven | **Cross-environment identity contamination** |
-| Production | `sweepza` / `prd` (26 names) | Vercel Production `READY` at `sweepza.com` | Ref `ojwhsntcpmoxnzisuomq`; same Clerk development instance/webhook config as dev/stg; Stripe live account is mixed with Explore&Earn; Resend is unconfigured | **Live web runtime; identity/payment/email separation blocked** |
+| Production | `sweepza` / `prd` (26 names) | Vercel Production `READY` at `sweepza.com` | Live config uses dev Clerk and mixed Stripe. Dark production Clerk DNS Verified/SSL Issued; config/runtime keys pending. Resend names absent although code sends mail. | **Live web runtime; identity/payment/email separation blocked** |
 
 ## Current variable-name contract
 
@@ -32,7 +32,9 @@ Names were extracted from the committed example/schema and sync script; values w
 
 Authenticated health reports app URL, Supabase public/service, Clerk app, Stripe app/webhook, and GitHub worker present. The deployed health response reports Clerk webhook, PostHog, Sentry, and Notion absent. Pass 2 confirms that Doppler contains the same Clerk webhook signing configuration in all three lanes, so the health result indicates a deployment/sync or endpoint-readiness gap rather than three isolated webhook resources.
 
-That list is incomplete relative to the current runtime contract: price variables and `CRON_SECRET` still require verification. `RESEND_API_KEY` and `RESEND_FROM_EMAIL` are absent from all three Doppler lanes, so email is currently inactive rather than merely unverified. No Mapbox or Cloudinary credential is configured; the empty Sweepza Cloudinary folder is a placeholder only.
+That list is incomplete relative to the current runtime contract: price variables and `CRON_SECRET` still require verification. `RESEND_API_KEY` and `RESEND_FROM_EMAIL` are absent from all three lanes. Listing approval/hold and winner publication call the mail helper, so current calls no-op. Local commit `89bbe121…` makes helpers/logs report `skipped` and keeps `sent_at` null unless Resend returns 2xx; its 124 tests, lint, route type generation, typecheck, and build pass, but it is not pushed/deployed. No Mapbox or Cloudinary credential is configured.
+
+PostHog host names exist but its key is empty; the live organization has only the Explore&Earn project. Sweepza has a distinct Sentry project/DSN but no first event, environment, owner routing, or metric alert.
 
 ## Rules
 

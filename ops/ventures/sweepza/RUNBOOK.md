@@ -32,6 +32,13 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 4. Deploy Preview and test auth, public data, host billing disabled/enabled states, email, analytics, errors, and cron authentication.
 5. The custom domain is already live. Promote only after production Clerk and Stripe separation, missing telemetry decisions, and rollback checks are confirmed.
 
+## Pass 3 identity and email gates
+
+1. Dark production Clerk DNS is Verified and SSL Issued. Configure domain/OAuth/webhook/admin recovery and install only in Preview. Do not overwrite live dev-backed `prd` before role/profile/webhook smoke passes.
+2. Review/push local commit `89bbe121…`; it is a safe correctness fix, not email activation. Re-run with repository-pinned Node 24.16.0 because local validation used Node 24.14 and emitted a version warning.
+3. With no mail key, verified behavior is `skipped`, and `sent_at` must remain null. Production must not claim mail delivery.
+4. After founder approves an independent Resend team/domain, install scoped key/from values through `stg`, preserve Microsoft 365 root MX, prove delivery, then promote.
+
 ## Webhooks
 
 - Clerk: `POST /api/webhooks/clerk`; subscribe to `user.created`, `user.updated`, `user.deleted`. The route returns 503 when its signing configuration is absent.

@@ -21,7 +21,7 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 - [ ] Production application architecture and runtime contract are approved.
 - [ ] Customer/staff auth model and data-retention obligations are approved.
 - [ ] Quote, booking, cancellation, scheduling, and payment policies are approved.
-- [ ] A final domain is purchased/owned; `lakepinecleaning.com` was unregistered at this snapshot.
+- [x] Authenticated ownership/privacy/renewal and full-zone inventory for `lakeandpinecleaning.com` are recorded; attachment remains gated by clean release/rollback.
 - [ ] Provider-specific projects are created only where the approved application consumes them.
 
 ## Acceptance
@@ -29,3 +29,4 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 - [ ] No secret value was placed in this repository or transfer notes.
 - [ ] Recipient can distinguish observed prototype behavior from implemented backend behavior.
 - [ ] A clean Preview uses staging-only resources and a main-based Production deployment has a documented rollback.
+- [ ] The prepared pinned CI/Windows case fix is reviewed, committed, run remotely, and recorded; absence of tests is an explicit accepted gap or corrected.

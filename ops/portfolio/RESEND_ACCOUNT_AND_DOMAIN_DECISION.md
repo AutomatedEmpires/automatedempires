@@ -1,72 +1,40 @@
 # Resend Account and Domain Decision
 
 **Prepared:** 2026-07-10  
-**Execution state:** Provider and DNS plan complete. No plan purchase, team creation, key creation/revocation, domain creation/deletion, DNS write, or production email was performed.
+**Pass 3 state:** Explore&Earn DNS and provider-domain verification are complete. No API key was created/revoked, no runtime value was synchronized, no message was sent, and no paid plan/team was created.
 
-## Current verified state
+## Authenticated state
 
-| Venture | Team / key boundary | Domain and sender state | Classification |
+The current team is at its one-domain limit (`1/1`). It contains only verified `exploreandearn.com` in `us-east-1`, with sending enabled and receiving disabled. Two existing API keys are distinct but both are broad/full-access: one is used by Explore&Earn `dev`; the other is reused by LogLoads `dev`/`prd`. This is account authority, reputation, quota, billing, and transfer coupling even though the key values differ.
+
+| Venture | Product/runtime evidence | Current boundary | Classification |
 |---|---|---|---|
-| Explore&Earn | Its key and LogLoads' key are distinct, but both have broad access to the same Resend team | Sole team domain `exploreandearn.com` is `failed`: one DKIM and two SPF-related records are failed; sending is enabled in metadata but the domain is not verified. `RESEND_FROM_EMAIL` is absent | DNS setup is safe after authenticated GoDaddy access; account co-tenancy remains a transfer blocker |
-| LogLoads | `dev` and `prd` reuse one broad key in the Explore&Earn team | No LogLoads domain; `LOGLOADS_EMAIL_FROM` is absent, so code falls back to Resend's testing sender | Blocked by team/domain quota and founder payment/ownership decision |
-| Sweepza | No Resend key in dev/stg/prd | No Resend domain or configured sender; root domain has Microsoft 365 mail | Requires founder decision; if email is required, provision a separate team and sending subdomain without changing Outlook MX |
-| ORAN | No Resend boundary is required by the current map | Existing Mailgun MX/SPF are live | Completed decision: preserve Mailgun during the ORAN migration unless a separate mail-provider project explicitly replaces it |
-| AutomatedEmpires | No defined transactional-mail consumer | Microsoft 365 receives root-domain mail | Completed decision: do not provision speculative Resend resources |
-| BidSpace | No owned final domain | Not applicable | Blocked by missing domain |
-| Lake & Pine | Candidate domain is unregistered | Not applicable | Blocked by missing domain and purchase |
+| Explore&Earn | Transactional mail package exists; explicit sender is absent | Domain DKIM/MX/SPF now resolve and Resend reports `verified`; existing key remains broad, runtime sync/smoke pending | DNS **completed**; scoped key and delivery **blocked by production risk** |
+| Sweepza | Approval/hold and winner publication paths call Resend | Key/from names are absent in every lane, so calls no-op; current code falsely logs these skips as `sent` | Email is a real product dependency. Local commit `89bbe121…` safely fixes result reporting, but is not pushed/deployed. Independent team/domain is **blocked by payment/plan** and **requires founder decision** |
+| LogLoads | Feature `cce1c449…` sends contact inquiries after saving an in-app notification | Broad key in `dev`/`prd`, absent `stg`; no LogLoads domain/from address; provider testing sender fallback | Activation intentionally deferred by runtime/source risk; independent boundary **blocked by payment/plan** |
+| ORAN | Existing DNS uses Mailgun | No Resend requirement | Preserve Mailgun unless a separately approved provider migration exists |
+| AutomatedEmpires | No transactional-mail consumer established | No resource | Do not provision speculatively |
+| BidSpace | No owned final domain | No resource | **Blocked by missing domain** |
+| Lake & Pine | `lakeandpinecleaning.com` is owned; clean deployment not established | No resource | Domain blocker resolved; mail decision intentionally deferred until clean deployment |
 
-The API does not expose the current billing plan. The observed one-domain quota is consistent with Resend Free, but must be described as a current plan/domain-quota blocker rather than a confirmed paid-plan limit.
+## Founder decision
 
-## Account decision
+Keep the current team for Explore&Earn. For each additional mail-sending venture, the recommended transfer-grade boundary is a separate team/account with its own billing, recovery admins, domain, usage, and keys. Upgrading one parent team may add domains but retains co-tenancy and is not the permanent target.
 
-Resend teams are the operative transfer boundary: each team has its own keys, billing, and usage. Separate keys inside one team do not separate ownership, domain quota, reputation, administrators, or billing.
+Founder approval is required for recurring cost and owner/recovery administrators for LogLoads and Sweepza. A no-purchase decision means those production mail features must remain disabled or explicitly report `skipped`; they must never reuse Explore&Earn's sending identity.
 
-| Option | Current public cost | Transfer quality | Decision |
-|---|---|---|---|
-| Upgrade the existing team to Pro and add every venture domain | Pro is currently $20/month for 50,000 emails and up to 10 domains | Poor: ventures remain co-tenants and cannot be transferred without separating the team later | Not recommended as the permanent portfolio structure |
-| Keep the existing team for Explore&Earn; create one independent team for each additional mail-sending venture | New teams require a paid plan; current Pro entry price is $20/month per paid team | Strong: separate keys, billing, usage, domains, administrators, and recovery | **Recommended.** Create LogLoads first; create Sweepza only when transactional email is confirmed as a production requirement |
-| Create no additional team | $0 incremental | LogLoads and Sweepza remain non-production for email | Accept only as an explicit defer decision; do not reuse Explore&Earn's sender/domain |
+## Execution order
 
-**Founder approval required:** authorize the recurring cost and owner/recovery administrators for each new team. This Pass 2 did not incur a charge.
-
-## Safe DNS sequence
-
-### Explore&Earn
-
-1. Keep the existing domain resource; do not delete/recreate it merely because verification failed.
-2. In the authenticated GoDaddy zone, export the current records and compare the three provider-issued records by exact host, type, value, priority, and TTL.
-3. Add or correct only the provider-issued DKIM TXT and `send` subdomain SPF/MX records. These records do not require changing root web A/CNAME records or adding a root mailbox MX.
-4. Restart provider verification and wait for all three records and the domain to become `verified`.
-5. Set an Explore&Earn-owned from address in Doppler `stg`, deploy preview, and send a controlled delivery to an approved test mailbox. Verify SPF, DKIM, DMARC alignment, reply behavior, bounce/complaint handling, and application logging.
-6. Promote the verified sender to `prd`; keep the current key until the complete sending path passes. Then replace the broad key with the least-privilege application key and revoke the old key only after a zero-use review.
-
-### LogLoads
-
-1. Create a separate LogLoads team after payment approval and record its billing/recovery administrators.
-2. Add a transactional subdomain such as `mail.logloads.com` unless the founder selects another explicit sending identity. The root domain remains on GoDaddy Website Builder during runtime remediation.
-3. Publish only provider-issued records. No root MX currently exists; adding the Resend return-path MX on its scoped subdomain is not an inbound-mailbox decision.
-4. Create a least-privilege LogLoads key, set a real LogLoads from address, install both in Doppler `stg`, and remove the testing-sender fallback as a production path.
-5. Verify delivery from the selected production runtime before promoting to `prd`. Do not revoke the current broad key until no LogLoads consumer uses it.
-
-### Sweepza
-
-1. Confirm transactional email is a launch requirement and approve an independent team.
-2. Use a scoped sending subdomain, for example `mail.sweepza.com`, to protect root-domain reputation and avoid colliding with Microsoft 365.
-3. Preserve the root Microsoft 365 MX, SPF, and mailbox behavior. Add only provider-issued records under the sending subdomain.
-4. Install a Sweepza-only key/from address through Doppler `stg`, verify delivery, then promote. Never copy the Explore&Earn or LogLoads key.
+1. Explore&Earn: create a sending-only, domain-restricted replacement key; store it in the approved Doppler lane; configure an explicit venture sender; deploy Preview; prove delivery, SPF/DKIM/DMARC alignment, reply/bounce/complaint behavior, and application logging. Revoke the broad key only after zero-use verification.
+2. Sweepza: review/push local commit `89bbe121…`, which returns `skipped` without a key, returns `sent` only after a 2xx response, and leaves `sent_at` null when skipped. Its 124 tests, lint, route type generation, typecheck, and production build pass locally; the remote/deployment gate remains open.
+3. After payment approval, create a separate Sweepza team and scoped sending subdomain while preserving Microsoft 365 root MX. Install key/from values first in `stg`, smoke delivery, then promote.
+4. After LogLoads hosting/source convergence and payment approval, create a separate LogLoads team/domain, remove the testing-sender fallback as a production path, install a scoped key/from/contact identity in `stg`, and smoke the selected runtime before `prd`.
+5. Never delete the existing team/domain or revoke either broad key until all dependent deployments are identified and replacement paths are verified.
 
 ## No-go conditions
 
-- Authenticated DNS zone has not been exported.
-- A provider-issued record conflicts with an existing mailbox, return-path, or DKIM selector and the owner is unknown.
-- Team billing/recovery ownership is not recorded.
-- The from address does not belong to the verified venture domain.
-- Verification is partial/failed or delivery authentication does not align.
-- The proposed fix reuses Explore&Earn's domain as the LogLoads or Sweepza production sender.
-
-## Provider references
-
-- [Resend teams are distinct by keys, billing, and usage](https://resend.com/docs/dashboard/settings/team)
-- [Resend domain verification and sending-subdomain guidance](https://resend.com/docs/dashboard/domains/introduction)
-- [Resend pricing and domain limits](https://resend.com/pricing)
-- [Resend DNS verification troubleshooting](https://resend.com/docs/knowledge-base/what-if-my-domain-is-not-verifying)
+- Do not add another venture to the Explore&Earn sending identity by default.
+- Do not claim a no-op email was sent.
+- Do not alter root Microsoft 365 or Mailgun MX during transactional-sending setup.
+- Do not activate LogLoads mail on an unreproducible or architecturally unsafe production artifact.
+- Do not record API/DKIM/SMTP values in Git, documentation, screenshots, or chat.

@@ -2,28 +2,30 @@
 
 **Prepared:** 2026-07-10  
 **Scope:** Lake & Pine, LogLoads, and ORAN  
-**Execution state:** Plans complete. No deployment, alias, domain, database, provider project, or feature branch was changed.
+**Pass 3 execution state:** Local, isolated remediation candidates were prepared and validated for Lake & Pine and ORAN. No provider deployment, alias, domain cutover, database mutation, or production resource was changed.
 
 ## Decision table
 
-| Venture | Current source truth | Current provider artifact | Pass 2 classification | Required decision |
+| Venture | Current source truth | Current provider artifact | Pass 3 classification | Required decision |
 |---|---|---|---|---|
-| Lake & Pine | `main` `0b7116f72878ba3f67e3ff9948a11da83cc5bab7`; candidate `feat/production-foundation` `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a`, five commits ahead and zero behind | READY production `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`, aliased to `lakeandpine.vercel.app`, created from a dirty CLI redeploy that cannot be tied to an exact committed SHA | Plan completed; cutover blocked by production risk; custom domain blocked by missing domain | Review and merge/reproduce the exact feature head before replacing the current recovery artifact |
+| Lake & Pine | Base `e1fe8f00…`, five ahead/zero behind `main`; local branch commit `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` adds pinned CI and Windows case repair, worktree clean | Two `READY` production-target deployments from dirty `122dd312`; latest `dpl_AaAE…`. Neither is an exact build of local commit | Local source fix **safely fixed now**; push/PR/Preview/merge/cutover **blocked by production risk** | Obtain approved GitHub auth, push PR, prove exact-SHA Preview, merge before replacing recovery artifact |
 | LogLoads | `main` `e78b48c292c57339a0610fcdbf2effa08827dc40`; feature `cce1c4494ae49d28aacc42724ab7245668474ab7`; 8 main-only and 22 feature-only commits after merge base `f096520d95f2e601799de718378f2319536c255c` | Dirty READY preview `dpl_Ejx66Z9wZFJiPJ5341j61voT7cHF`; dirty ERROR production `dpl_5LdZ4qWv7P1B68iYi3zZoJBM7wLN` | Plan completed; blocked by production risk; requires founder architecture decision | Choose persistent single-node hosting or re-architect for stateless/multi-instance Vercel before any production promotion |
-| ORAN | `main` `1dc1291d61cc9f27ee830f980e32eabd52248083`; migration candidate `feat/portfolio-convergence-azure-exit` `217cd962de1633321cae49327dbc089fc4ad7377`, nine commits ahead and zero behind | Empty canonical Vercel shell; no deployment or alias | Plan completed; cutover blocked by production risk | Approve the reviewed migration only after CI, env, database, preview, observability, and functional rollback gates are green |
+| ORAN | Base candidate `217cd962de1633321cae49327dbc089fc4ad7377`; isolated local remediation commit `5ec356195eb2bc13efc1e07c536a83a76bf036e7` on `codex/pass-3-vercel-preview-217cd962` | Vercel project `prj_pQlCLP4RXGr2eJTo7fzZyMPX9QLy` is Node 24, `live=false`, with no domains or deployments | Local CI/runtime remediation **safely fixed now**; preview/cutover **blocked by production risk** | Review/push the exact local commit, provide scoped Preview credentials/runtime vars, reconcile 53 repository migrations against one managed ledger entry, then prove Preview and rollback |
 
 ## Lake & Pine normalization
 
-The current alias is working, but it is not reproducible from `main`. The candidate branch adds 74 files and more than 11,000 lines, including the application tree that `main` currently lacks. Treat this as an application merge, not a small infrastructure patch.
+The provider artifact works, but it is not reproducible from `main`. Both production-target deployments came from dirty SHA `122dd312`; the exact candidate `e1fe8f00` is two commits newer and five commits ahead of prototype `main`. Treat source convergence as an application merge, not a small infrastructure patch.
+
+Pass 3 local commit `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` adds a pinned Node `24.16.0` / pnpm `10.12.4` workflow and moves `toast.ts` to `toast-events.ts` to remove the Windows/Linux collision with `Toast.tsx`. Frozen install, lint, typecheck, build, workflow parse, and diff checks pass; no tests exist. Commit is unpushed with no PR/Preview.
 
 ### Gates
 
 1. Preserve the current READY deployment, deployment ID, aliases, creation time, and rollback owner before any automatic deployment is enabled.
-2. Review exact candidate `e1fe8f0` through a PR or reproduce it on an approved branch. Confirm the resulting `main` includes `package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`, and `apps/web` before Vercel builds `main` at root `apps/web`.
-3. Add CI. Pin Node `24.16.0` and pnpm `10.12.4`; require frozen install, lint, typecheck, and production build.
+2. Review local commit `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` through a PR. Confirm resulting `main` includes workspace files and `apps/web` before Vercel builds root `apps/web`.
+3. Require the prepared pinned CI remotely; record explicitly that no tests currently exist.
 4. Deploy an exact-SHA preview against Doppler `stg`. Verify critical pages, business contact content, Supabase/RLS behavior, auth-disabled behavior, booking/quote routes, and safe provider-failure states. Do not modify remote schema while normalizing source provenance.
 5. Create a `main`/`prd` candidate on the provider hostname. Record its deployment ID and SHA, then compare it with the current alias before promotion.
-6. Keep domain work separate. `lakepinecleaning.com` is unregistered, so custom-domain setup remains a founder purchase decision even after source normalization.
+6. Keep domain work separate. Authenticated GoDaddy control of `lakeandpinecleaning.com` is confirmed, so no purchase is required; custom-domain configuration remains blocked until the clean release and rollback gates pass.
 
 ### Rollback
 
@@ -69,16 +71,23 @@ The public Azure IP currently returns a 404 and invalid TLS. Restoring that A re
 
 ### Repository and CI gates
 
-1. Review exact migration head `217cd962`; do not connect the Vercel project to stale `main` and let it auto-deploy.
-2. Commit the currently untracked Vercel workflow separately. Pin the Vercel CLI and add an exact-SHA preview/build/smoke path before any production job.
-3. Repair existing CI: align Node 20/24, remove the deleted `build:functions` contract, and replace Azure Maps variable checks with the migration branch's actual map/runtime contract.
-4. Remove or justify stale Application Insights/Azure CSP endpoints while preserving every endpoint still required during coexistence.
+1. Review base `217cd962` and local remediation commit `5ec356195eb2bc13efc1e07c536a83a76bf036e7`; do not connect the Vercel project to stale `main` or treat the unpushed local commit as release authority.
+2. The local commit pins Vercel CLI `55.0.0`, adds a workflow-dispatch exact-40-character-SHA Preview build/deploy, proves checkout identity, and records the immutable Preview URL. Push it only through review; keep production promotion out of this workflow.
+3. The local commit also aligns CI on Node 24, removes the deleted `build:functions` contract, and replaces stale Azure Maps/NextAuth runtime names with the migration branch's web contract.
+4. The local patch removes stale CSP configuration while retaining current runtime requirements. Re-review CSP in the actual Preview.
 5. Define ORAN-owned Doppler `stg` variables for canonical URL, database, Clerk, `CRON_SECRET`, `INTERNAL_API_KEY`, mail, logs, and monitoring. Current Doppler configs are metadata-only.
-6. Back up and reconcile the 97-table Supabase schema, one-row migration ledger, and RLS/policy intent before any data mutation.
+6. Back up and reconcile the 97-table Supabase schema and RLS/policy intent. The repository contains 53 migrations while the managed ledger exposes one entry; this mismatch blocks Preview writes and every production cutover.
+
+### Completed local verification
+
+- `npm ci`, lint, typecheck, runtime-contract validation, and workflow lint passed on commit `5ec3561`.
+- 3,753 tests passed; the production build generated 149 pages.
+- The production dependency audit reported zero vulnerabilities.
+- These are local source checks only. The branch is not pushed, the exact-SHA workflow has not run, and no Vercel Preview exists.
 
 ### Preview gates
 
-1. Produce a clean prebuilt preview from the reviewed SHA without attaching the custom domain.
+1. Push the reviewed remediation commit and provide narrowly scoped `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` through the approved GitHub environment. Populate ORAN-owned Preview runtime variables without exposing values, then produce a clean prebuilt Preview without attaching the domain.
 2. Verify public and authenticated pages, Clerk redirects, database isolation, OpenStreetMap/map behavior, CSP, mail, Sentry/logging, health, and error handling.
 3. Verify every cron route: unauthorized requests return `401`, missing internal configuration returns `503`, and an approved scheduled request completes exactly once.
 4. Record build command, install command, Node/package-manager versions, deployment ID, artifact SHA, environment source, and test evidence.

@@ -53,6 +53,8 @@ The verified project has 36 application tables with RLS, one zero-policy table (
 
 Resolve and test the production runtime first. If single-node, provision the approved persistent-volume host; if Vercel, complete the async canonical-data refactor before packaging work. Then: production Clerk → venture-specific Mapbox tokens → separate Resend account/domain → PostHog/Sentry → Cloudinary boundary → subscription-only Stripe. Do not treat shared Mapbox/Resend or folder-only media as transfer completion.
 
+Pass 3 staged production identity: Clerk DNS Verified/SSL Issued; runtime keys/config remain pending. Do not install until host/source candidate exists. Contact-inquiry email in `cce1c449…` remains inactive until independent team/domain and explicit sender/contact are approved/proven. Keep MapLibre/Carto fallback during convergence.
+
 ## Rollback
 
 - **Single-node path:** retain the previous image tag and volume snapshot; roll code back by redeploying the prior image or reviewed revert while preserving the volume. Correct schema with forward migrations rather than destructive down-migrations.

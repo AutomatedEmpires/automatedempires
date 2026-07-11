@@ -2,7 +2,7 @@
 
 ## Safety rules
 
-1. Preserve migration branch `feat/portfolio-convergence-azure-exit` at `217cd962de1633321cae49327dbc089fc4ad7377` and the untracked workflow; neither is production authority.
+1. Preserve base `217cd962…` and local remediation commit `5ec356195eb2bc13efc1e07c536a83a76bf036e7`; neither is production authority while unpushed/undeployed.
 2. Do not mutate the remote database, delete Azure resources, connect Vercel Git, deploy production, or change DNS until the stated gates pass.
 3. Treat openresourceaccessnetwork.com mail records independently from web cutover records.
 4. Never copy another venture's secrets into ORAN.
@@ -10,15 +10,15 @@
 ## Gate 1: reconcile the branch
 
 1. Review the nine commits from `main` `1dc1291d61cc9f27ee830f980e32eabd52248083` through candidate `217cd962de1633321cae49327dbc089fc4ad7377`; branch is zero commits behind at this snapshot.
-2. Repair CI before merge: align Node 24, remove the obsolete `build:functions` job and Azure Maps runtime warnings, and update the production variable-name contract.
-3. Replace the untracked production-only workflow with a reviewed, pinned-CLI exact-SHA Preview gate. Production promotion must require smoke evidence and a recorded rollback artifact.
+2. Review `5ec3561…`, which aligns Node 24, removes obsolete functions/Azure Maps/NextAuth contracts, updates runtime names, and pins exact-SHA Preview.
+3. Push through review; production promotion remains outside this workflow and requires smoke/rollback evidence.
 4. Add `CRON_SECRET`/`INTERNAL_API_KEY` ownership and canonical `NEXT_PUBLIC_SITE_URL`; remove stale Application Insights/Azure CSP assumptions and allow the approved Clerk/map/runtime hosts.
-5. Run install, lint, typecheck, tests, and production build in a clean checkout.
+5. Local install/lint/typecheck/runtime/workflow/3,753 tests/149-page build/audit pass. Re-run remotely on exact commit.
 
 ## Gate 2: reconcile data
 
 1. Capture a remote schema and backup/restore plan without exposing credentials.
-2. Compare committed migrations to all 97 public tables and the one-row remote ledger.
+2. Compare 53 committed migrations to 97 public tables and the one-entry managed ledger.
 3. Classify zero-policy tables as service-only or design reviewed policies.
 4. Decide whether Supabase branches/projects are required for staging and development.
 5. Stop before any migration-ledger repair or destructive SQL until founder approval.

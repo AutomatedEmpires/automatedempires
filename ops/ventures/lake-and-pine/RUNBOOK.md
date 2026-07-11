@@ -4,13 +4,13 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 
 ## Current operating posture
 
-Lake & Pine has a healthy Vercel application at deployment `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`, but it is a dirty redeploy from `feat/production-foundation`. Clean candidate `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` is five commits ahead of prototype-only `main` `0b7116f72878ba3f67e3ff9948a11da83cc5bab7`, which lacks configured root `apps/web`. Preserve the prototype and current deployment as evidence while making the release reproducible.
+Lake & Pine has two healthy production-target artifacts from dirty SHA `122dd312`; latest is `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`. Exact candidate `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` is two commits newer and five ahead of prototype `main`, which lacks `apps/web`. Preserve artifacts as evidence while making release provenance reproducible.
 
 ## Safety rules
 
 1. Use canonical slug `lake-and-pine` in portfolio operations; use `lakeandpine` only where an existing provider/repository requires it.
 2. Never deploy the recovered HTML prototype as if it were the approved production architecture.
-3. Do not apply database schema, create auth/payment resources, purchase/attach domains, or copy another venture's settings without a dated decision and founder approval.
+3. Do not apply database schema, create auth/payment resources, attach the owned domain, or copy another venture's settings without a dated decision and founder approval.
 4. Keep all secret values in Doppler; this pack records names and resource identities only.
 
 ## Verification sequence
@@ -32,13 +32,15 @@ Before production normalization, approve:
 - quoting, booking, scheduling, and payment boundaries;
 - email, analytics, error monitoring, and domain/DNS ownership.
 
-First review and merge or faithfully reproduce exact candidate `e1fe8f00f3e50ede86a2f6e3af75ea1e8cdded1a` on the intended branch. Add CI for frozen install, lint, typecheck, and build; commit the environment contract; and prove a clean exact-SHA preview. Only then replace the current production alias or attach an owned domain.
+First review and push local commit `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c`, which already adds pinned CI on base candidate `e1fe8f00…`. Commit the environment contract and prove a clean exact-SHA preview. Only then replace the current production alias or attach the owned domain.
+
+Pass 3 local commit `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` pins Node `24.16.0`/pnpm `10.12.4` CI and renames the toast helper to avoid Windows/Linux filename collision. Checks pass; no tests. Worktree is clean, but commit is unpushed/no PR/Preview. Require remote review/run.
 
 ## Deployment
 
 - **Verified current:** canonical Git connection, root `apps/web`, project, ready deployment `dpl_AaAEZZz9Ma442TDNygN6ypLsQCMt`, and Vercel/Supabase environment binding.
 - **Blocked:** the ready artifact came from dirty feature source; `main` lacks `apps/web`, no CI exists, and the live artifact is not proven equal to the clean candidate SHA.
-- **Target state:** reviewed candidate → exact-SHA Preview with `stg` → reviewed `main` Production with `prd` → owned domain after purchase.
+- **Target state:** reviewed candidate/fix → exact-SHA Preview with `stg` → reviewed `main` Production with `prd` → reversible cutover of owned `lakeandpinecleaning.com`.
 
 ## Acceptance gates
 

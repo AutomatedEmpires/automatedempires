@@ -22,7 +22,7 @@ Complete with two people where the provider supports role transfer. Record names
 - [ ] Supabase ref `hnjjcgxflxlfsqslgxcv`, database ownership, backups, migration ledger, storage, and RLS are reviewed.
 - [ ] Clerk application identity, domains, OAuth providers, webhook endpoint, and admin users are recorded.
 - [ ] Stripe Connect platform/account ownership, legal entity, payout settings, products, webhook endpoints, and restricted access are reviewed by the founder.
-- [ ] Mapbox, Cloudinary, PostHog, and Sentry resource identities and alert owners are recorded.
+- [ ] Record Sentry's distinct project/first event and assign owner/alerts; record explicit non-use for current Mapbox/Cloudinary/PostHog or create venture resources only when implemented.
 
 ## Domain and communications
 

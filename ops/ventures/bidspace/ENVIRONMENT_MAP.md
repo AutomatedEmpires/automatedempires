@@ -30,11 +30,13 @@ The following names were extracted from committed `.env.example` files; values w
 | OpenAI | `OPENAI_API_KEY` |
 | GitHub/Notion worker tools | `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_TOKEN`, `NOTION_API_TOKEN` |
 
-## Pass 2 provider findings
+## Pass 3 provider findings
 
 - Only `NEXT_PUBLIC_MAPBOX_TOKEN` is configured in Doppler. It is active and identical to the Explore&Earn and LogLoads public token; no separate `MAPBOX_ACCESS_TOKEN` is configured.
-- Current Mapbox authorization cannot list token metadata or create replacements. Management requires `tokens:read` and `tokens:write`; runtime tokens must not receive those scopes.
+- Branch-qualified scan of `main` `0b20189658f2…` found docs/config placeholders but no runtime Mapbox consumer. Accepted recovered feature `511b763…` does contain an active Mapbox GL `light-v11` consumer, so the shared value cannot be treated as globally unused. Do not provision production replacement until the reviewed source and domain are selected.
+- Authenticated Mapbox dashboard control can create tokens, but credential creation awaits explicit founder approval. Runtime tokens must receive only demonstrated public read scopes and exact-origin restrictions.
 - Cloudinary names exist in repository examples, but no BidSpace Cloudinary credential is present in Doppler. The `bidspace` root folder is empty and is not an active venture media boundary.
+- A distinct BidSpace Sentry project/DSN exists and recorded its first production event on 2026-07-10; it had zero unresolved issues in the 14-day query. Team/alert ownership remains shared/unassigned.
 
 ## Rules
 

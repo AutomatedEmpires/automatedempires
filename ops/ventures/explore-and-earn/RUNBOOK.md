@@ -7,18 +7,18 @@ This is a coordination runbook. The authoritative detailed activation procedure 
 ## Preconditions
 
 - **Verified current** — Vercel project `explore-and-earn`, Doppler project/configs `dev`/`stg`/`prd`, and Supabase project `mamosbzcbigcclafhmmr` exist.
-- **Verified current** — Production Clerk, migration-ledger repair, Resend DNS, and Stripe identity/provisioning are open blockers.
+- **Verified current** — Clerk dark resource/DNS/SSL and Resend domain verification are complete; Clerk configuration/runtime, scoped mail credential/delivery, migration ledger, and Stripe separation remain open.
 - **Target state** — Founder approval is recorded before database-ledger mutation, money-moving configuration, domain/DNS changes, or production cutover.
 - **Target state** — Operators compare variable names and resource identity without printing values.
 
 ## Gate 1 — production Clerk
 
-1. **Unknown / founder verification required** — Identify or create the venture's production Clerk application under the intended business owner and billing owner.
+1. **Safely fixed now** — A separate dark/default production Clerk instance exists and its five CNAMEs are provider-verified. It was not cloned because existing Phone/SMS MFA made cloning payment-gated.
 2. **Observed in repository** — The activation runbook expects Clerk-facing hosts under `exploreandearn.com`, a production OAuth setup, a JWT template named `supabase`, and a webhook at `/api/webhooks/clerk` for three user lifecycle events.
 3. **Target state** — Configure the Supabase JWT template against the verified Explore & Earn Supabase project without recording signing material in documentation.
 4. **Target state** — Register only the events consumed by the route, store the signing value in Explore & Earn's `prd` secret/deployment environments, and update the Clerk key names used by the app.
 5. **Target state** — Update the Content Security Policy for the production Clerk host through a reviewed code change.
-6. **Target state** — Prove sign-up, webhook delivery, profile creation, sign-in/out, protected seeker/host paths, authenticated Supabase access, and founder admin access.
+6. **Target state** — DNS is Verified and SSL Issued. Configure remaining settings, then prove sign-up, webhook/profile, sign-in/out, protected paths, Supabase, founder admin, and re-registration policy in dark Preview before `prd`.
 
 Configuration names referenced by the repository include `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, `CLERK_WEBHOOK_SECRET`, and `ADMIN_CLERK_USER_ID`. Names may be documented; values may not.
 
@@ -33,11 +33,11 @@ Configuration names referenced by the repository include `NEXT_PUBLIC_CLERK_PUBL
 
 ## Gate 3 — Resend DNS
 
-1. **Observed in repository** — `exploreandearn.com` is the intended sending domain and the activation runbook identifies required DKIM, SPF, and return-path/MX records.
-2. **Unknown / founder verification required** — Confirm domain ownership, authoritative DNS provider, Resend account, sending-domain record, and billing/recovery owners.
-3. **Target state** — Fetch record values directly from the Resend dashboard at execution time; do not copy DKIM material into this repository.
-4. **Target state** — Preserve the pre-change DNS set, add only provider-issued records, wait for propagation, and verify the domain in Resend.
-5. **Target state** — Send and receive a real transactional message from the venture domain and record only timestamp, result, and message purpose.
+1. **Completed** — Authenticated GoDaddy zone was inspected, the three provider-issued records were added without collision, all resolve publicly, and Resend reports `verified`.
+2. **Verified open** — The current key is broad/full-access, `RESEND_FROM_EMAIL` is absent, and no runtime synchronization or delivery smoke has occurred.
+3. **Target state** — Create a sending-only/domain-restricted replacement, store in approved Doppler lane, configure an explicit sender, and deploy Preview.
+4. **Target state** — Prove delivery, SPF/DKIM/DMARC alignment, reply/bounce/complaint behavior, and truthful app logging. Record metadata only.
+5. **Target state** — Promote only after proof; retire the broad key after zero use. Never revoke before replacement verification.
 
 ## Gate 4 — Stripe identity and provisioning
 

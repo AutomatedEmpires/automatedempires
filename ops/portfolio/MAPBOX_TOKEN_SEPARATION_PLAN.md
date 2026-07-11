@@ -1,60 +1,40 @@
 # Mapbox Token Separation Plan
 
 **Prepared:** 2026-07-10  
-**Execution state:** Consumer and permission analysis complete. No token was created, broadened, rotated, deleted, or installed.
+**Execution state:** Pass 3 completed a branch-qualified consumer and authenticated token-write analysis. The account has one unrestricted default public token and an available create-token form. No token was created, changed, installed, displayed, or revoked because explicit credential-action approval is pending.
 
-## Verified state
+## Approved target inventory
 
-- One public token is shared by Explore&Earn `dev`, BidSpace `dev`, and LogLoads `dev`/`prd`.
-- A live origin probe succeeded from an unrelated origin, consistent with no effective URL restriction.
-- LogLoads' `MAPBOX_ACCESS_TOKEN` is the same public token as `NEXT_PUBLIC_MAPBOX_TOKEN`; it is not a server secret and is mislabelled as a privilege boundary.
-- Explore&Earn's separate server token is revoked/invalid. No current Explore&Earn source consumer requires a secret Mapbox token; its active use is Mapbox GL JS through `NEXT_PUBLIC_MAPBOX_TOKEN`.
-- Current authorization cannot list token metadata or create/update/delete tokens; it lacks the necessary `tokens:read` and `tokens:write` authority. Authenticated account-owner dashboard access is required.
+| Token | Create when | Public scopes | Allowed URL(s) | Current gate |
+|---|---|---|---|---|
+| `explore-and-earn-dev-public` | Immediately after explicit credential-action approval | `styles:read`, `fonts:read` | `http://localhost:3000` | Founder approval for credential creation/direct transfer |
+| `explore-and-earn-stg-public` | After one canonical owned or provider staging hostname is selected | `styles:read`, `fonts:read` | Exact canonical HTTPS staging origin | **Intentionally deferred:** two conflicting Vercel aliases are recorded and wildcard restrictions are unsupported |
+| `explore-and-earn-prd-public` | After explicit credential-action approval; install first in a protected preview | `styles:read`, `fonts:read` | `https://exploreandearn.com` | Founder approval plus preview replacement-key gate |
+| `logloads-dev-public` | Immediately after explicit credential-action approval | `styles:read`, `fonts:read` | `http://localhost:3002` | Founder approval for credential creation/direct transfer |
+| `lake-and-pine-dev-public` | After the current candidate fixes are committed and clean CI passes | `styles:read`, `fonts:read` | Exact local origins | Clean source/CI gate |
+| `lake-and-pine-prd-public` | After exact-SHA preview acceptance | `styles:read`, `fonts:read` | `https://lakeandpinecleaning.com` | Clean deployment and DNS-cutover gate |
+| `logloads-prd-public` | Only if Mapbox remains selected after architecture/source convergence | `styles:read`, `fonts:read` | `https://logloads.com` | Founder architecture and clean production-candidate gate |
+| BidSpace public tokens | Only after the map UI and owned domain exist | Minimum scopes demonstrated by the implementation | Final owned development/production origins | Missing domain and implementation |
 
-## Target tokens
+No Explore&Earn server-token replacement is planned: the revoked server-shaped credential has no current source consumer. LogLoads' `MAPBOX_ACCESS_TOKEN` duplicates a public value and is not an independent privilege boundary. Sweepza, ORAN, and AutomatedEmpires do not need speculative Mapbox resources.
 
-| Venture / environment | Consumer | Target token | Scopes | URL restriction | Status |
-|---|---|---|---|---|---|
-| Explore&Earn production | Active Mapbox GL JS map | `explore-and-earn-prd-public` | `styles:read`, `fonts:read` | `https://exploreandearn.com` | Safely spec'd; creation blocked by account-owner token authority |
-| Explore&Earn development | Local Mapbox GL JS | `explore-and-earn-dev-public` | `styles:read`, `fonts:read` | `http://localhost:3000` and the explicitly used local origin(s) | Safely spec'd; creation blocked by account-owner token authority |
-| Explore&Earn server | No active consumer found | None | None | None | Completed decision: do not replace the revoked secret token until a reviewed server API use exists |
-| LogLoads production | No active map consumer in current clean source; runtime architecture unresolved | `logloads-prd-public` only after a verified map consumer and production candidate exist | Least public scopes required by the implementation | `https://logloads.com` | Blocked by production risk and token authority; remove the mislabelled server variable only after consumer verification |
-| LogLoads development | No active map consumer in current clean source | Create only with the implementing feature | Least public scopes | Explicit localhost origin(s) | Deferred safely; no reason to provision an unused token |
-| BidSpace | Configuration placeholders only; no final domain | Create after map implementation and final domain | Least public scopes | Final owned domain | Blocked by missing domain |
-| Other ventures | No verified Mapbox requirement | None | None | None | Completed decision: do not copy the portfolio token |
+## Safe execution
 
-Mapbox documents `styles:read` and `fonts:read` as the scopes needed to initialize and render a Mapbox GL JS map. Public tokens should not receive secret write/list/upload scopes.
+1. Use the already-authenticated account-owner dashboard only after explicit credential-action approval. Never put management authority in an application runtime.
+2. Inventory token names, scopes, allowed URLs, default/non-default state, and provider usage without recording token material. The current default token cannot be restricted and stays active as rollback.
+3. Create the Explore&Earn development token first. Transfer it directly to Doppler `dev` without displaying it; verify the `/map` route, style/font requests, attribution, CSP, and rejection from an unrelated origin.
+4. Create the Explore&Earn production token with the HTTPS apex restriction. Because a domain-only restriction includes subdomains and paths, do not add wildcard syntax. Verify apex and `www`; do not authorize `vercel.app`.
+5. Install the production value through the approved Doppler-to-preview path. Promote only after the map and non-map fallback/error behavior pass.
+6. Repeat per venture only when its source and domain gates are satisfied. Lake & Pine and LogLoads already have safe no-token fallbacks; retain them during remediation.
+7. Search source, Doppler names-only mappings, Vercel environment names, and deployment logs for remaining consumers. Observe provider usage through a quiet period.
+8. Remove the shared token from one verified consumer at a time. Revoke the shared token only after every consumer is replaced or deliberately deconfigured and usage is zero.
 
-## Safe rotation sequence
+## Rollback and no-go conditions
 
-1. An account owner creates the Explore&Earn development and production public tokens with the names, scopes, and restrictions above. Do not edit or delete the shared token yet.
-2. Store the new public values directly in the correct Doppler configs. Do not place token values in documentation, Git, screenshots, or chat.
-3. Sync development first and verify map style/font loading from the allowed local origin.
-4. Sync the production token to a protected preview that uses an allowed Explore&Earn origin, then verify map load, network errors, Mapbox usage attribution, and application CSP.
-5. Promote to production and verify apex/`www`. Prove that an unrelated origin receives `403` for billable services.
-6. Inventory any remaining traffic on the shared token. Replace only confirmed consumers; do not create speculative server tokens.
-7. Remove the shared token from a venture's Doppler config only after that venture passes. Delete the shared token only when provider statistics and all configuration searches show zero remaining consumers.
-8. Remove or rename LogLoads' `MAPBOX_ACCESS_TOKEN` only after code and job searches confirm it is unused; a public token stored under a server-shaped name must not be treated as privileged.
+- Restore the previous token reference only if it remains active and the rollback does not reintroduce another venture's production dependency; otherwise disable the map and use the tested fallback.
+- Never broaden a production token to `vercel.app`, add a wildcard, or remove the protocol merely to make arbitrary previews work.
+- Stop if the application sends `Referrer-Policy: noreferrer` or `same-origin`, because restricted Mapbox requests may fail.
+- Stop if a browser token request includes management, write, upload, dataset, or other scopes not demonstrated by the application.
+- Do not retire the shared token while BidSpace configuration, LogLoads feature deployments, or any unknown consumer still uses it.
 
-## Preview-domain constraint
-
-Mapbox does not support wildcard URL restrictions. Authorizing `vercel.app` would authorize unrelated Vercel subdomains and is not acceptable. For protected previews, use one of:
-
-1. a stable venture-owned preview origin explicitly added to a staging token;
-2. local development with the restricted dev token; or
-3. a temporary, deliberately broader token confined to non-production and retired after the test.
-
-Do not weaken the production token to make arbitrary preview URLs work.
-
-## No-go conditions
-
-- The operator cannot confirm the Mapbox account owner and token-write authority.
-- A requested token includes secret/write scopes for a browser consumer.
-- Production URL restrictions include another venture or a broad hosting-provider domain.
-- The shared token is removed before every consumer is deployed and provider traffic is quiet.
-- A secret token is created without a documented server-side API consumer and secure storage path.
-
-## Provider references
-
-- [Mapbox token management, scopes, rotation, and restrictions](https://docs.mapbox.com/accounts/guides/tokens/)
-- [Mapbox Tokens API permissions](https://docs.mapbox.com/api/accounts/tokens/)
+Provider references: [token management](https://docs.mapbox.com/accounts/guides/tokens/) and [Tokens API](https://docs.mapbox.com/api/accounts/tokens/).

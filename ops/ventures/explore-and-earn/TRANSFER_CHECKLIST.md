@@ -19,15 +19,16 @@ This checklist transfers control, not secret values. Use provider membership, RB
 
 ## Open production gates
 
-- [ ] **Verified current** — Resolve production Clerk and prove custom-domain auth, OAuth, Supabase JWT template, webhook lifecycle, protected routes, and admin access.
+- [ ] **Partially remediated** — Dark production Clerk DNS is Verified and SSL Issued; finish configuration, install Preview credentials, and prove custom-domain auth, OAuth, Supabase JWT, webhook, protected routes, admin access, and dev-user re-registration.
 - [ ] **Verified current** — Complete the founder-approved migration-ledger repair and produce a green migration workflow result.
-- [ ] **Verified current** — Verify Resend DNS and prove delivery from the venture domain.
+- [x] **Completed** — Resend DNS/provider-domain verification.
+- [ ] **Verified open** — Install a sending-only/domain-restricted replacement plus explicit sender and prove venture-domain delivery before retiring the broad key.
 - [ ] **Verified current** — Prove the production Stripe account and mode before provisioning the current catalog, portal, webhook, environment mapping, and billing flow.
 
 ## Domain and provider ownership
 
 - [ ] **Observed in repository** — Confirm the intended domain is `exploreandearn.com`.
-- [ ] **Unknown / founder verification required** — Verify registrar, authoritative DNS, registrant, renewal billing, recovery, and current record inventory.
+- [x] **Completed** — Authenticated GoDaddy ownership, privacy, auto-renew, authoritative DNS, and full-zone inventory were verified; preserve recovery ownership.
 - [ ] **Unknown / founder verification required** — Reconcile Clerk, Stripe, Resend, PostHog, Cloudinary, Mapbox, Sentry, and AI resources with `PROVIDER_LINKS.md`.
 - [ ] **Target state** — For every resource, record only provider, resource name, environment, owner roles, and verification date.
 

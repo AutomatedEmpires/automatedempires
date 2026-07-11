@@ -44,7 +44,7 @@ The supplied Supabase ref identifies the intended venture boundary. It does not 
 
 ## Provider activation order
 
-Database → Clerk → Stripe Connect → domain/DNS → PostHog/Sentry → Cloudinary/Mapbox → email. Create or connect only BidSpace-specific resources, then verify each end to end before retiring placeholders.
+Database → Clerk → domain/DNS → reviewed Stripe Connect plan → PostHog/Sentry → Cloudinary/Mapbox only for implemented consumers → email. Current `main` has no Mapbox runtime consumer, while accepted feature `511b763…` does; select reviewed source and the final domain before provisioning a production token.
 
 ## Incident response
 
