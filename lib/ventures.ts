@@ -103,7 +103,7 @@ export const ventures = [
     ],
     platformProfile: "AE Commercial Platform",
     repository: "https://github.com/AutomatedEmpires/explore-and-earn",
-    website: "https://explore-and-earn.vercel.app",
+    website: "https://exploreandearn.com",
     showcaseMode: "product",
     featured: true,
     palette: {
@@ -127,7 +127,7 @@ export const ventures = [
       {
         label: "Public deployment",
         detail: "GitHub metadata points to the Vercel deployment for the product.",
-        href: "https://explore-and-earn.vercel.app",
+        href: "https://exploreandearn.com",
       },
     ],
     milestones: [
@@ -334,7 +334,7 @@ export const ventures = [
     ],
     platformProfile: "AE Commercial Platform",
     repository: "https://github.com/AutomatedEmpires/sweepza",
-    website: "https://sweepza.vercel.app",
+    website: "https://sweepza.com",
     showcaseMode: "product",
     featured: true,
     palette: {
@@ -346,8 +346,8 @@ export const ventures = [
     proof: [
       {
         label: "Live alias",
-        detail: "The repo provider runbook lists the current production alias as sweepza.vercel.app.",
-        href: "https://sweepza.vercel.app",
+        detail: "The verified production deployment is served from the canonical Sweepza domain.",
+        href: "https://sweepza.com",
       },
       {
         label: "Consumer OS surfaces",

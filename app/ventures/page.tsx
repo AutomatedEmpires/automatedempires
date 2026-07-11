@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { VentureCard } from "@/components/VentureCard";
 import {
   activeCompanies,
@@ -83,7 +84,7 @@ function PortfolioGroup({
   eyebrow: string;
   id: string;
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <section className="section-block portfolio-group" aria-labelledby={id}>
