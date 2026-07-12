@@ -10,7 +10,7 @@ Use this runbook for the parent portfolio site only. Do not use it to operate a 
 | --- | --- | --- |
 | Vercel project `automatedempires` exists. | **Verified current** | Provider fact supplied for this alignment pass |
 | Doppler project `automatedempires` has `dev`, `stg`, and `prd`; own Sentry identifiers are installed write-only in all lanes. | **Verified current** | Pass 4 provider evidence |
-| Current `main` `ed91ece423583318fd7481278a7478311d867add` is deployed as `dpl_5scDXWyVV2wq1ypwhcjmiBkQLpzT` and is `READY`. | **Verified current** | Pass 4 GitHub/Vercel evidence |
+| Current `main` `664cda67bc7bc91e4f1577d76bbe7758290f3a2d` is deployed as `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` and is `READY`. | **Verified current** | Pass 5 GitHub/Vercel evidence |
 | The site uses Next.js and pins Node 24.16.0 and pnpm 10.12.4. | **Observed in repository** | `.nvmrc`, `package.json`, `AGENTS.md` |
 | The current application has no database requirement. | **Verified current** | Supplied parent-venture provider decision |
 
@@ -40,7 +40,7 @@ Use this runbook for the parent portfolio site only. Do not use it to operate a 
 ## Incident response
 
 1. **Target state** — Record the affected deployment, first observed time, user-visible symptom, and whether the issue is limited to content or affects all requests.
-2. **Verified current** — Current `main` `ed91ece423583318fd7481278a7478311d867add` is cleanly deployed as `dpl_5scDXWyVV2wq1ypwhcjmiBkQLpzT` and `READY`; verify functional provider-host smoke and rollback before any DNS change.
+2. **Verified current** — Current `main` `664cda67bc7bc91e4f1577d76bbe7758290f3a2d` is cleanly deployed as `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` and `READY`; verify functional provider-host smoke and rollback before any DNS change.
 3. **Target state** — If the regression is deployment-specific, restore the last known-good Vercel deployment without changing child-venture systems.
 4. **Target state** — If DNS is implicated, preserve current records before any edit and obtain owner approval.
 5. **Target state** — Re-run the smoke tests and document the restoration commit or deployment.

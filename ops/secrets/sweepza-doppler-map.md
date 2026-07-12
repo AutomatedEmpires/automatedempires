@@ -1,10 +1,11 @@
 # Sweepza Doppler Map
 
 **Doppler project:** `sweepza`
-**Names-only snapshot:** 2026-07-10
+**Names-only snapshot:** 2026-07-12
 **Configs inspected:** `dev`, `stg`, `prd`
 **Pass 2 status:** Configured values were used only in transient, read-only provider calls; only sanitized status, equality, and resource metadata were retained.
 **Pass 4 delta:** Vercel lanes are verified against dedicated Sweepza sandbox/live accounts and the $19/$5 prices. This file does not claim that every missing Pass 2 Doppler staging name was added.
+**Pass 5 delta:** PostHog project `509084` was created with autocapture, replay, and console capture disabled. Its own pair spans all Doppler lanes. Vercel now has exactly Development plus combined Preview+Production for both variables after the stale Production-only host duplicate was deleted by environment ID. No deploy/event smoke occurred.
 
 Inventory used Doppler CLI names-only JSON mode with environment reads disabled. No secret value was requested, returned, or documented.
 
@@ -30,8 +31,8 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 | `GITHUB_TOKEN` | GitHub API authentication for automation | `dev`, `stg`, `prd` | `unknown` | Verify minimum scopes per environment |
 | `NEXT_PUBLIC_APP_URL` | Browser-visible canonical application URL | `dev`, `stg`, `prd` | `unknown` | — |
 | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Browser-visible Clerk application identifier | `dev`, `stg`, `prd` | `configured` | All lanes identify the same development instance |
-| `NEXT_PUBLIC_POSTHOG_HOST` | Browser-visible PostHog ingestion host | `dev`, `stg`, `prd` | `unknown` | — |
-| `NEXT_PUBLIC_POSTHOG_KEY` | Browser-visible PostHog project key | `dev`, `stg`, `prd` | `unknown` | — |
+| `NEXT_PUBLIC_POSTHOG_HOST` | Browser-visible PostHog ingestion host | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed |
+| `NEXT_PUBLIC_POSTHOG_KEY` | Browser-visible Sweepza PostHog project key | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed; value excluded |
 | `NEXT_PUBLIC_SENTRY_DSN` | Browser-visible Sentry event endpoint | `dev`, `stg`, `prd` | `unknown` | — |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Browser-visible Stripe account identifier | `dev`, `stg`, `prd` | `unknown` | — |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser-visible Supabase anonymous key | `dev`, `stg`, `prd` | `unknown` | — |
@@ -60,3 +61,4 @@ No variable is classified as `empty` because names-only inspection does not expo
 - Replace `prd` with a Sweepza production Clerk instance and give `stg` an explicit strategy; keep `dev` unchanged until replacements pass auth and webhook smoke tests.
 - Reconcile any missing Doppler staging Stripe price/webhook names against the already verified Vercel sandbox lane; never copy live values into staging.
 - Review GitHub and Notion token scopes; environment presence alone does not establish least privilege.
+- Key/host placement is complete. Fresh-deploy a controlled Preview/Production build and verify a non-sensitive event reaches project `509084` before calling runtime activation complete.

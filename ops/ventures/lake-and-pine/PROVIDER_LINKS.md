@@ -11,7 +11,7 @@
 | Clerk | Customer/staff auth is a production requirement | **Target state**; no app ID verified | https://dashboard.clerk.com/ |
 | Stripe | Payment methods/invoices are a production requirement | **Target state**; no account ID verified | https://dashboard.stripe.com/ |
 | Resend | Transactional email is a production requirement | **Target state**; no domain/API resource verified | https://resend.com/domains |
-| PostHog | Product analytics | **Target state**; no project ID verified | https://app.posthog.com/ |
+| PostHog | Project `509088`; own key/host in Doppler/Vercel targets | **Provider/environment binding verified; runtime pending fresh deployment/event** | https://app.posthog.com/ |
 | Sentry | Separate `lake-and-pine` project; own identifiers in Doppler all lanes | **Project/governance fixed; Vercel install/runtime event open** | https://sentry.io/ |
 
 The owned domain is not release authority. GitHub/main/Vercel provenance is clean; functional provider-host smoke and rollback acceptance still precede domain work.

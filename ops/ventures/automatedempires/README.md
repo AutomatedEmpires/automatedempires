@@ -18,7 +18,7 @@ This pack describes the parent portfolio site's runtime boundary. AutomatedEmpir
 | Role | **Observed in repository** | Public Next.js studio and portfolio site; not a product application. | `AGENTS.md`, `README.md`, `lib/ventures.ts` |
 | GitHub | **Observed in repository** | Canonical repository is `AutomatedEmpires/automatedempires`. | `EMPIRE_INFRA_ALIGNMENT_PLAN.md` §2 |
 | Secrets inventory | **Verified current** | Doppler project `automatedempires` has `dev`/`stg`/`prd`; own Sentry DSN/org/project identifiers are installed write-only in every lane. | Pass 4 provider evidence |
-| Hosting | **Verified current** | Vercel is connected to canonical repo/main/root. Current `main` is `ed91ece423583318fd7481278a7478311d867add`; clean production `dpl_5scDXWyVV2wq1ypwhcjmiBkQLpzT` is `READY`; functional rollback/custom-domain cutover remain. | Pass 4 evidence |
+| Hosting | **Verified current** | Vercel is connected to canonical repo/main/root. Current `main` is `664cda67bc7bc91e4f1577d76bbe7758290f3a2d`; clean production `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` is `READY`; functional rollback/custom-domain cutover remain. | Pass 5 verification |
 | Database | **Verified current** | No Supabase project is required for the current portfolio site. | Provider fact supplied for this alignment pass |
 | Domain | **Verified current** | `automatedempires.com` is registered at GoDaddy and currently serves GoDaddy Website Builder; Outlook MX and a possible duplicate-SPF condition are present. | Public RDAP/DNS and HTTP snapshot |
 | Optional integrations | **Observed in repository** | The repo contract names Resend, PostHog, Cloudinary, and Sentry as the provider family to use if features require them. | `AGENTS.md` §4 |

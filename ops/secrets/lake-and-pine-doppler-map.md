@@ -1,7 +1,7 @@
 # Lake & Pine Doppler Map
 
 **Doppler project:** `lake-and-pine`
-**Names-only snapshot:** 2026-07-10
+**Names-only snapshot:** 2026-07-12
 **Configs inspected:** `dev`, `stg`, `prd`
 
 Inventory used Doppler CLI names-only JSON mode with environment reads disabled. No secret value was requested, returned, or documented. The `stg` and `prd` statuses below rely on a separate verified import from the Lake & Pine Vercel project; values were not displayed during this inventory.
@@ -24,6 +24,8 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 | `NEXT_PUBLIC_APP_URL` | Browser-visible canonical application URL | `stg`, `prd` | `configured` | Verified Vercel import |
 | `NEXT_PUBLIC_BUSINESS_EMAIL` | Browser-visible business contact email | `stg`, `prd` | `configured` | Verified Vercel import |
 | `NEXT_PUBLIC_BUSINESS_PHONE` | Browser-visible business contact phone | `stg`, `prd` | `configured` | Verified Vercel import |
+| `NEXT_PUBLIC_POSTHOG_HOST` | Browser-visible PostHog ingestion host | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed |
+| `NEXT_PUBLIC_POSTHOG_KEY` | Browser-visible Lake & Pine PostHog project key | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed; value excluded |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser-visible Supabase anonymous key | `stg`, `prd` | `configured` | Verified Vercel import |
 | `NEXT_PUBLIC_SUPABASE_URL` | Browser-visible Supabase project URL | `stg`, `prd` | `configured` | Verified Vercel import |
 | `SENTRY_DSN` | Venture-specific Sentry event endpoint | `dev`, `stg`, `prd` | `configured` | Installed write-only in Pass 4 |
@@ -32,9 +34,14 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 
 The `dev` config contains metadata plus the Lake & Pine-specific Sentry identity; its broader application/data contract remains absent. No variable is classified as `empty` because that state was not safely established.
 
+## Pass 5 provider delta
+
+PostHog project `509088` exists with autocapture, replay, and console capture disabled. Its own key/host pair is populated across all Doppler lanes and matching Vercel targets write-only; fresh deployment/event proof is pending. Source inspection also confirmed `apps/web/src/components/AreaMap.tsx` as an optional Mapbox consumer; no Mapbox name/value exists and the secret founder token was rejected.
+
 ## Follow-up
 
 - Confirm whether `stg` and `prd` intentionally share the same backing Vercel/Supabase resources; presence in both configs does not prove environment separation.
 - Populate other `dev` values only from a development-specific resource set.
 - Verify the repository consumes these exact variable names before removing any Vercel-side copy.
 - Install the Sentry identity into Vercel without display and prove a controlled event/release before calling monitoring active.
+- Fresh-deploy and event-check Lake & Pine before calling PostHog runtime-active. If Mapbox is activated, use one public `pk` Lake & Pine token across `dev`/`stg`/`prd`; never place a secret token in `NEXT_PUBLIC_MAPBOX_TOKEN`.

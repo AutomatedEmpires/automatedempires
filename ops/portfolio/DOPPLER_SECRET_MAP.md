@@ -1,19 +1,19 @@
 # Doppler Portfolio Secret Map
 
-**Verified snapshot:** 2026-07-10
-**Policy:** Doppler is the intended source of truth. Structure is complete. Pass 4 records a credential as installed only when direct names-only/provider evidence exists; installation is still not delivery or production activation.
+**Verified snapshot:** 2026-07-12
+**Policy:** Doppler is the intended source of truth. A credential is recorded as installed only when direct names-only/provider evidence exists; provider project/token creation is not installation, delivery, or production activation.
 
-Counts below are the Pass 3 names-only baseline and include Doppler metadata. Pass 4 added Explore&Earn Resend/Stripe names and AutomatedEmpires/Lake & Pine/ORAN Sentry DSN/org/project identifiers, so the old counts are retained only as history; rerun names-only counts before parity work. No values or fingerprints are stored here.
+Counts below are the Pass 3 names-only baseline and include Doppler metadata; they are retained only as history and are not recomputed totals. Pass 5 populated each active venture's own PostHog key/host in all lanes. AutomatedEmpires `dev` entries are restricted: CLI `null` is expected, while authenticated browser write-and-save confirms presence; they are not empty or independently readable. Other presence-only/non-empty checks passed. No Mapbox value changed. No values or fingerprints are stored here.
 
-| Venture | Doppler project | Pass 3 dev | Pass 3 stg | Pass 3 prd | Current Pass 4 state |
+| Venture | Doppler project | Pass 3 dev | Pass 3 stg | Pass 3 prd | Current state through Pass 5 |
 |---|---|---:|---:|---:|---|
-| AutomatedEmpires | automatedempires | 3 | 3 | 3 | Baseline superseded: separate Sentry DSN/org/project identifiers installed write-only in all lanes; broader runtime values absent |
-| Explore&Earn | explore-and-earn | 36 | 7 | 7 | Baseline counts superseded: scoped Resend key/From/Reply-To now span `dev`/`stg`/`prd`; twelve expected Stripe test names are verified in `dev`/`stg`. Clerk production remains absent; do not infer full lane parity |
-| ORAN | oran | 3 | 3 | 3 | Baseline superseded: ORAN-only Sentry identifiers installed in all lanes; draft #58 head `6d5caf2…` has required checks green but zero deployments and broader runtime config pending a safe migration Preview |
-| BidSpace | bidspace | 16 | 3 | 3 | Development populated; staging/production metadata only |
-| Lake & Pine | lake-and-pine | 3 | 9 | 9 | Baseline superseded: own Sentry identifiers added all lanes; Vercel/Supabase configuration remains in staging/production; no Mapbox token |
-| Sweepza | sweepza | 25 | 22 | 26 | Populated; all lanes still use dev Clerk. Resend absent/PostHog empty. Stripe lanes aligned; Sentry provider governance fixed, deployed health/event proof open |
-| LogLoads | logloads | 22 | 11 | 18 | Canonical PR #6 final source `f280ef4…` merged to default `9c9e107…`; clean production `dpl_Xxr…8dPtF` is `READY`, but live Supabase/data/provider configs remain unchanged. Production Clerk absent; legacy same-team Resend access has no LogLoads sending domain |
+| AutomatedEmpires | automatedempires | 3 | 3 | 3 | Sentry identifiers and own PostHog pair span all lanes. `dev` pair is restricted/browser write-confirmed and CLI-null by design; `stg`/`prd` presence verified. No Mapbox consumer; fresh deployment/event smoke pending |
+| Explore&Earn | explore-and-earn | 36 | 7 | 7 | Resend spans all lanes, Stripe test names span `dev`/`stg`, and preserved PostHog project `291166` key/host span all lanes. Shared public Mapbox remains rollback; no secret founder token was installed |
+| ORAN | oran | 3 | 3 | 3 | ORAN-only Sentry identifiers span all lanes. PostHog is intentionally deferred and no Mapbox consumer exists; no Pass 5 secret change |
+| BidSpace | bidspace | 16 | 3 | 3 | Own PostHog key/host now span all lanes; other staging/production application values remain sparse. Shared public Mapbox remains only in audited dev; secret replacement rejected. Fresh analytics deployment/event smoke pending |
+| Lake & Pine | lake-and-pine | 3 | 9 | 9 | Own Sentry and PostHog key/host span all lanes; Vercel/Supabase remain in staging/production. Mapbox consumer is proven, but no token name/value exists. Fresh analytics deployment/event smoke pending |
+| Sweepza | sweepza | 25 | 22 | 26 | All lanes still use dev Clerk. Own PostHog pair spans all lanes; Vercel duplicate production-only host record removed, leaving exact intended scopes. Resend absent; PostHog/Sentry event proof open |
+| LogLoads | logloads | 22 | 11 | 18 | Own PostHog key/host now span all lanes. Shared public Mapbox remains in audited `dev`/`prd`; no replacement installed. Fresh analytics deployment/event smoke and broader live-provider activation remain open |
 
 Every listed project has dev, stg, and prd configs. Personal development configs created by Doppler are not production environments.
 
@@ -27,6 +27,8 @@ Every listed project has dev, stg, and prd configs. Personal development configs
 - Confirmed that Pass 3-created Clerk resources and verified Resend DNS did not silently change Doppler. Provider existence is recorded separately from credential installation.
 - Pass 4 installed the scoped Explore&Earn Resend key and explicit From/Reply-To in all three configs without displaying values, and verified the twelve-name Stripe test contract in `dev`/`stg`.
 - Created separate Sentry projects for AutomatedEmpires, Lake & Pine, and ORAN and installed each venture's own DSN/org/project identifiers write-only into its `dev`/`stg`/`prd` configs. Vercel installation/runtime events are not claimed.
+- Pass 5 created/preserved six separate PostHog projects and populated each active venture's own key/host in all Doppler lanes. AutomatedEmpires `dev` is restricted/browser write-confirmed; other presence checks passed. No fresh deployment/event smoke is claimed.
+- Pass 5 rejected every available founder-created Mapbox token because each was a secret `sk` token. No browser-visible variable was changed; the old shared public token remains rollback where previously recorded.
 
 ## Known migration gaps
 
@@ -34,17 +36,17 @@ Every listed project has dev, stg, and prd configs. Personal development configs
 |---|---|---|
 | Explore&Earn lanes are only partially converged | Resend is now present in all lanes and Stripe test names in `dev`/`stg`, but Clerk/data/full runtime parity remains incomplete; GitHub/Vercel legacy values may be write-only | Replace each remaining consumer with an authoritative venture-owned value through exact-SHA Preview; never bulk-copy `dev` |
 | GitHub still holds five Explore&Earn repository secrets | Values cannot be read or compared, and deleting them could break workflows | Map each workflow consumer, replace it with a tested Doppler integration/token, then remove only confirmed-unused secrets |
-| Sweepza populated configs are not fully production-safe | All lanes still use Clerk development; PostHog is empty; Resend names absent. Dedicated Stripe accounts/prices are verified in Vercel, but residual objects/config and Doppler parity remain | Configure dark Clerk after Preview; keep mail truthfully disabled under the no-upgrade decision; finish telemetry and verify Doppler/Vercel Stripe name parity |
+| Sweepza populated configs are not fully production-safe | All lanes still use Clerk development; PostHog key/host are installed but not deployment/event verified; Resend names are absent. Dedicated Stripe accounts/prices are verified in Vercel, but residual objects/config and broader Doppler parity remain | Configure dark Clerk after Preview; keep mail truthfully disabled; fresh-deploy and event-check PostHog; verify Doppler/Vercel Stripe name parity |
 | LogLoads production activation is incomplete | Canonical source/checks are merged and clean main production exists, but live Supabase migration, environment provenance, distributed rate limiting, provider activation, and functional rollback remain; legacy Resend is coupled | Prove live-shape upgrade and production rollback before live migration or Clerk activation. Keep mail deferred until an independent paid domain/team |
 | Explore&Earn delivery and identity remain open | Scoped Resend is installed, but delivery/zero broad-key use is unproven; no production Clerk credentials are installed | Complete exact-SHA mail smoke, then revoke broad rollback only after zero use; configure Clerk through dark Preview |
-| Vercel values outside Lake & Pine were not re-imported | The API returns write-only values and no safe authoritative replacement was available | Treat Vercel as legacy storage until each value is replaced and verified through Doppler |
+| Other Vercel values outside the targeted PostHog writes were not re-imported | The API returns write-only values and no safe authoritative replacement was available | Treat other legacy Vercel values as unverified until each is replaced and tested through Doppler; PostHog presence is separately verified but awaits fresh deployment |
 | Doppler example-project is unexplained | It may be a template or dependency and contains sample-looking names | Confirm ownership and usage, then delete only with explicit approval |
 
 ## Hygiene rules
 
 1. Add or rotate a secret in Doppler first.
 2. Use a business-specific service token/integration for Vercel or CI; do not copy values across ventures.
-3. Keep development, staging, and production values distinct even when variable names match.
+3. Share one venture value across lanes only when the provider model and temporary policy explicitly require it, as with the current per-venture PostHog project. Otherwise keep development, staging, and production values distinct.
 4. Record names, purpose, owner, and rotation procedure only; never record values in Git or tickets.
 5. Rotate only after the replacement is deployed and its dependent flows pass.
 6. Review the venture-specific maps in ops/secrets before changing an environment.

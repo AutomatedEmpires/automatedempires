@@ -1,42 +1,59 @@
 # Mapbox Token Separation Plan
 
-**Prepared:** 2026-07-10
+**Prepared:** 2026-07-12
+**Policy correction:** Use one public token per application across `dev`, `stg`, and `prd` for now. Separate per-environment tokens are a later production-hardening rotation, not a Pass 5 requirement.
 
-**Execution state:** Pass 3 completed the branch-qualified consumer/token-write analysis. Pass 4 approval is recorded, but the browser creation claim failed/reset at account-password confirmation. No active claim or token remains; nothing was created, changed, installed, displayed, or revoked.
+## Execution state
 
-## Approved target inventory
+Source inspection confirms Mapbox browser consumers in Explore&Earn, LogLoads, BidSpace, and Lake & Pine. ORAN uses Leaflet/OpenStreetMap and has no Mapbox consumer. AutomatedEmpires and Sweepza also have no proven consumer.
 
-| Token | Create when | Public scopes | Allowed URL(s) | Current gate |
+Founder-created named tokens were inspected without displaying their values. Every available named token is a secret `sk` token, unrestricted, and at zero usage. A secret token cannot be placed in the browser-visible `NEXT_PUBLIC_MAPBOX_TOKEN` variable, so installation and Vercel synchronization were safely stopped. No token was changed, copied, printed, installed, or revoked.
+
+Authenticated cost evidence is green for creation: the account is pay-as-you-go, token creation has no base cost, the first 50,000 GL JS web loads/month are free, and the upcoming plus January–July 2026 invoices are `$0`. There is no monthly spending cap, so usage monitoring remains an activation control rather than a payment blocker.
+
+## Approved and conditional target inventory
+
+| Application | Required replacement | Doppler destination | Vercel destination | Current gate |
 |---|---|---|---|---|
-| `explore-and-earn-dev-public` | After account-owner confirmation | `styles:read`, `fonts:read` | `http://localhost:3000` | **Blocked by MFA/account-owner confirmation** |
-| `explore-and-earn-stg-public` | After one canonical owned or provider staging hostname is selected | `styles:read`, `fonts:read` | Exact canonical HTTPS staging origin | **Intentionally deferred:** two conflicting Vercel aliases are recorded and wildcard restrictions are unsupported |
-| `explore-and-earn-prd-public` | After owner confirmation; install first in protected Preview | `styles:read`, `fonts:read` | `https://exploreandearn.com` | Owner confirmation plus Preview replacement-key gate |
-| `logloads-dev-public` | After owner confirmation and source consumer recheck | `styles:read`, `fonts:read` | `http://localhost:3002` | Owner confirmation and clean-source gate |
-| `lake-and-pine-dev-public` | After the current candidate fixes are committed and clean CI passes | `styles:read`, `fonts:read` | Exact local origins | Clean source/CI gate |
-| `lake-and-pine-prd-public` | After exact-SHA preview acceptance | `styles:read`, `fonts:read` | `https://lakeandpinecleaning.com` | Clean deployment and DNS-cutover gate |
-| `logloads-prd-public` | Only if Mapbox remains selected after architecture/source convergence | `styles:read`, `fonts:read` | `https://logloads.com` | Accepted architecture and clean production-candidate gate |
-| `bidspace-dev-public` | After accepted map source is current and owner confirmation completes | `styles:read`, `fonts:read` | `http://localhost:3000` | Owner confirmation and reviewed-source gate; custom domain not required for dev |
-| BidSpace production token | Only after an owned domain exists | Minimum public scopes demonstrated by implementation | Final owned HTTPS production origin | Missing domain |
+| Explore&Earn | One venture-specific public `pk` token | `explore-and-earn` / `dev`, `stg`, `prd` as `NEXT_PUBLIC_MAPBOX_TOKEN` | `explore-and-earn` / Development, Preview, Production | **Blocked by secure public-token creation/handoff and Preview proof** |
+| LogLoads | One venture-specific public `pk` token | `logloads` / `dev`, `stg`, `prd` as `NEXT_PUBLIC_MAPBOX_TOKEN` | `logloads` / Development, Preview, Production | **Blocked by secure public-token creation/handoff and production-risk proof** |
+| BidSpace | One venture-specific public `pk` token | `bidspace` / `dev`, `stg`, `prd` as `NEXT_PUBLIC_MAPBOX_TOKEN` | `bidspace` / Development and Preview; Production custom-domain restriction deferred | **Blocked by secure public-token creation/handoff**; production custom-domain restriction **blocked by missing domain** |
+| Lake & Pine | One venture-specific public `pk` token only if the founder approves this unexpected consumer | `lake-and-pine` / `dev`, `stg`, `prd` as `NEXT_PUBLIC_MAPBOX_TOKEN` if approved | `lakeandpine` / Development, Preview, Production if approved | **Requires founder decision**, then secure public-token creation/handoff and Preview proof |
 
-No Explore&Earn server-token replacement is planned: the revoked server-shaped credential has no current source consumer. LogLoads' `MAPBOX_ACCESS_TOKEN` duplicates a public value and is not an independent privilege boundary. Sweepza, ORAN, and AutomatedEmpires do not need speculative Mapbox resources.
+Do not populate Explore&Earn or LogLoads `MAPBOX_ACCESS_TOKEN` with these public browser tokens. Current source establishes no required server-side Mapbox credential; LogLoads' legacy server-shaped value duplicates the shared public token.
+
+## Secure handoff
+
+Preferred method:
+
+1. The founder creates one minimum-scope public `pk` token for Explore&Earn, LogLoads, and BidSpace—and for Lake & Pine only if separately approved—then pastes each value directly into that application's Doppler `dev`, `stg`, and `prd` configs under `NEXT_PUBLIC_MAPBOX_TOKEN`.
+2. The operator verifies only name presence, configured/non-empty state, token class through a non-disclosing check, and venture/config coverage.
+3. Vercel receives the value through the approved Doppler synchronization path only after exact origins are confirmed.
+
+Fallback method:
+
+1. Use the approved temporary handoff file outside every repository.
+2. Read it once, write values without terminal echo, verify presence/class only, then securely remove the handoff file.
+3. Never record raw values or fingerprints in Git, chat, reports, screenshots, shell history, or deployment logs.
+
+No secure handoff occurred in this pass because the available values were the wrong token class.
 
 ## Safe execution
 
-1. Founder credential-action approval is complete. Resume only after the provider's account-owner confirmation; never put management authority in an application runtime.
-2. Inventory token names, scopes, allowed URLs, default/non-default state, and provider usage without recording token material. The current default token cannot be restricted and stays active as rollback.
-3. Create the Explore&Earn development token first. Transfer it directly to Doppler `dev` without displaying it; verify the `/map` route, style/font requests, attribution, CSP, and rejection from an unrelated origin.
-4. Create the Explore&Earn production token with the HTTPS apex restriction. Because a domain-only restriction includes subdomains and paths, do not add wildcard syntax. Verify apex and `www`; do not authorize `vercel.app`.
-5. Install the production value through the approved Doppler-to-preview path. Promote only after the map and non-map fallback/error behavior pass.
-6. Repeat per venture only when its source and domain gates are satisfied. Lake & Pine and LogLoads already have safe no-token fallbacks; retain them during remediation.
-7. Search source, Doppler names-only mappings, Vercel environment names, and deployment logs for remaining consumers. Observe provider usage through a quiet period.
-8. Remove the shared token from one verified consumer at a time. Revoke the shared token only after every consumer is replaced or deliberately deconfigured and usage is zero.
+1. Create public `pk` replacements with only scopes demonstrated by Mapbox GL browser use, such as style/font reads. Do not add management, upload, dataset, or write authority.
+2. Apply exact current origins for each application. BidSpace may use actual local and exact Vercel Preview/development origins; its custom-domain restriction remains deferred.
+3. Place the same application token into its Doppler `dev`, `stg`, and `prd` configs. Do not copy a token between ventures.
+4. Synchronize only the corresponding Vercel project/environments. Do not populate unused server-shaped variables.
+5. Deploy an exact-SHA Preview and smoke map rendering, style/font requests, attribution, CSP/referrer behavior, intended fallback, and rejection from an unrelated origin.
+6. Promote one consumer at a time. Observe provider usage and deployment health through a quiet period.
+7. Remove the old shared token from one verified consumer at a time. Revoke it only after configuration searches and provider usage establish zero remaining use.
+8. Track aggregate GL JS loads against the 50,000/month included allowance and review the upcoming invoice after each staged activation; no provider spending cap is available.
 
 ## Rollback and no-go conditions
 
-- Restore the previous token reference only if it remains active and the rollback does not reintroduce another venture's production dependency; otherwise disable the map and use the tested fallback.
-- Never broaden a production token to `vercel.app`, add a wildcard, or remove the protocol merely to make arbitrary previews work.
-- Stop if the application sends `Referrer-Policy: noreferrer` or `same-origin`, because restricted Mapbox requests may fail.
-- Stop if a browser token request includes management, write, upload, dataset, or other scopes not demonstrated by the application.
-- Do not retire the shared token while BidSpace configuration, LogLoads feature deployments, or any unknown consumer still uses it.
-
-Provider references: [token management](https://docs.mapbox.com/accounts/guides/tokens/) and [Tokens API](https://docs.mapbox.com/api/accounts/tokens/).
+- The existing shared public token remains rollback until all active consumers are verified. Do not revoke it during the blocked handoff state.
+- A secret `sk` token in any `NEXT_PUBLIC_` variable is an immediate stop condition.
+- Never broaden a production token to a hosting-provider parent domain or remove restrictions merely to make arbitrary previews work.
+- Stop if the application's referrer policy prevents restricted Mapbox requests; fix and re-verify the application rather than weakening the token blindly.
+- Lake & Pine and LogLoads retain tested no-token fallbacks; use them if a safe public replacement is unavailable.
+- Documentation and provider token creation alone are not remediation. Completion requires Doppler placement, Vercel synchronization where needed, and verified runtime behavior.

@@ -1,7 +1,7 @@
 # Explore & Earn environment map
 
-Last reviewed: 2026-07-10
-Pass 4 refresh: scoped Resend/Stripe test configuration, PostHog privacy defaults, and exact-SHA Preview evidence added; no credential material is recorded.
+Last reviewed: 2026-07-12
+Pass 5 refresh: existing PostHog project/cost boundary and Mapbox token-class gate added; no credential material is recorded.
 
 This map contains configuration names and resource identities only.
 
@@ -22,9 +22,9 @@ This map contains configuration names and resource identities only.
 | Supabase | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL` | **Verified current** — project exists; **production-risk verification required** — confirm exact lane roles and non-production isolation. |
 | Stripe | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, six subscription price names, and the announcement price names | Dedicated live/test accounts verified; canonical five-product/ten-price live catalog and seeded test contract exist. Production credential/account proof and correct webhook remain **blocked by production risk**. |
 | Resend | `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_REPLY_TO_EMAIL` | Domain verified; scoped domain-only key installed across Doppler/Vercel; From `notifications@…` and support Reply-To configured. Exact-source Preview passed; delivery smoke and broad-key retirement remain open. |
-| PostHog | `NEXT_PUBLIC_POSTHOG_KEY` and host/config names | Live project `exploreandearn` is the only project; numeric ID omitted; no reuse. `7893756…` disables replay/console capture. Policy awaits re-auth. |
+| PostHog | `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` | Existing project `291166` preserved unchanged. Own pair is presence-verified in Doppler all lanes and Vercel `explore-and-earn` Development plus combined Preview/Production; source `b616b9e…` consumes them. No fresh deployment/release event after the writes. `7893756…` disables replay/console capture. |
 | Cloudinary | Cloud name and server/client upload configuration names | Free single environment; nine top-level namespaces now exist without media moves. Only Explore&Earn has active assets/credentials. Signed presets remain folder-unbound/overwrite-enabled; 55 former icon raws need docs/manifest classification. |
-| Mapbox | Public token and server token names | `/map` is a real consumer. Replacement creation is approved but blocked by provider owner confirmation; shared default token stays rollback. No server consumer exists. |
+| Mapbox | Public token and server token names | `/map` uses `apps/web/components/map/MapView.tsx`. Every available founder-created replacement is a secret `sk` token and was rejected for browser use. One public `pk` token across `dev`/`stg`/`prd` plus secure handoff/Preview proof is required; shared default stays rollback. No server consumer exists. |
 | Sentry | DSN, organization, project, and source-map upload configuration names | Distinct active project. Ownership/one alert/scrubbers/IP scrubbing configured; 15 previously unassigned portfolio issues assigned to the AutomatedEmpires team. Owner-grade build token remains overprivileged pending safe replacement. |
 | Cron and AI | Cron authorization and OpenAI/AI Gateway configuration names | **Observed in repository** — integration points exist; live resource identity is unverified in this pass. |
 

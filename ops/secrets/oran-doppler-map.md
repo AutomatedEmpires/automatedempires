@@ -1,7 +1,7 @@
 # ORAN Doppler Map
 
 **Doppler project:** `oran`
-**Names-only snapshot:** 2026-07-10
+**Names-only snapshot:** 2026-07-12
 **Configs inspected:** `dev`, `stg`, `prd`
 
 Inventory used Doppler CLI names-only JSON mode with environment reads disabled. No secret value was requested, returned, or documented.
@@ -26,6 +26,10 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 
 Pass 4 installed only the ORAN-specific Sentry identity beyond metadata, without displaying values. Traces remain `0`; no Vercel runtime event is claimed. No variable is classified as `empty` because names-only inspection does not expose that state and no separate safe evidence established it.
 
+## Pass 5 provider delta
+
+ORAN has no Mapbox consumer; reviewed source uses Leaflet/OpenStreetMap. PostHog project creation is intentionally deferred because civic-product privacy and deployment posture are not ready. No Mapbox or PostHog name/value was added to any Doppler config.
+
 ## Architecture constraint
 
-ORAN is in an unmerged Azure-to-Vercel transition. Keep the prepared Sentry identity scoped to ORAN and install it only in the safe Preview. Populate the rest only after the migration branch, Supabase schema/ledger, and retained Azure/Key Vault responsibilities are approved; never copy another venture's values.
+ORAN is in an unmerged Azure-to-Vercel transition. Keep the prepared Sentry identity scoped to ORAN and install it only in the safe Preview. Prefer Sentry/logs and keep PostHog absent until a privacy-safe founder decision. Populate the rest only after the migration branch, Supabase schema/ledger, and retained Azure/Key Vault responsibilities are approved; never copy another venture's values.

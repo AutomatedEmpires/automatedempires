@@ -1,5 +1,7 @@
 # ORAN environment map
 
+Last reviewed: 2026-07-12
+
 ## Current and target lanes
 
 | Lane | Doppler | Runtime | Data | Status |
@@ -25,6 +27,10 @@ One database appears to serve the current ORAN data boundary. Separate dev/stg/p
 Pass 4 hardening lineage `d58ea0…` fail-closes the dangerous database-migration path, removes stale Azure assumptions, and keeps credentialed Preview deployment separate from validation. It is published in draft PR #58 at exact head `6d5caf226bb4940c6bc0f270f77c43e3cb30b1da`. Required Build, Lint, Test, Type Check, Security Audit, and Runtime Readiness are green; Codecov patch, Visual Regression, and runbook freshness are failing ancillary checks. Vercel still has zero deployments. No database write occurred.
 
 Pass 4 also created a separate ORAN Sentry project, enabled ownership/one alert/scrubbers/IP scrubbing, and installed ORAN-only DSN/org/project identifiers into Doppler `dev`/`stg`/`prd` without display. Traces remain `0`; Vercel installation and a controlled event wait for the safe Preview lane.
+
+## Pass 5 provider posture
+
+Reviewed source has no Mapbox consumer and uses Leaflet/OpenStreetMap, so no Mapbox token is provisioned. PostHog remains intentionally deferred: ORAN is civic infrastructure without a stable production deployment or approved minimal analytics/consent contract. Prefer Sentry/logs; no PostHog project/key or Mapbox name/value was added.
 
 ## Preview and rollback contract
 

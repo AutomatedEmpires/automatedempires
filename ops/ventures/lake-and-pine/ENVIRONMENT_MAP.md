@@ -1,5 +1,7 @@
 # Lake & Pine environment map
 
+Last reviewed: 2026-07-12
+
 ## Current map
 
 | Environment | Doppler | Vercel | Supabase | Status |
@@ -20,7 +22,13 @@
 
 The default-branch recovery snapshot has no application environment contract. Names safely imported from the verified Vercel runtime include the application URL/business contact contract and Supabase/database contract; see the venture Doppler map. Values are not documented.
 
-Do not populate guessed variables merely because other ventures use them. The separate Sentry identity is the only newly established monitoring contract. App URL/Supabase are verified where listed; Clerk, Stripe, Resend, and PostHog remain target-state categories, not confirmation that live resources should be created now.
+Do not populate guessed variables merely because other ventures use them. App URL/Supabase and the separate Sentry identity are verified where listed. PostHog project `509088` has autocapture/replay/console off; own key/host are presence-verified in Doppler all lanes and Vercel `lakeandpine` Development plus combined Preview/Production. Clerk, Stripe, and Resend remain target-state categories.
+
+## Pass 5 map and analytics delta
+
+- `apps/web/src/components/AreaMap.tsx` is a real optional Mapbox consumer; the branded SVG fallback remains current.
+- No Mapbox name/value is installed in Doppler. Every available founder-created named token was a secret `sk` token and was rejected for browser use. A future activation requires one Lake & Pine public `pk` token across `dev`/`stg`/`prd`, actual origins, and Preview proof.
+- PostHog provider/environment separation is safely fixed. Source `1b6a877…` consumes the pair, but no fresh deployment/event smoke occurred; runtime activation remains pending that proof.
 
 ## Environment rules
 

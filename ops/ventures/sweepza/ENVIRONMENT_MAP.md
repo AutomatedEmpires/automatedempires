@@ -1,6 +1,6 @@
 # Sweepza environment map
 
-Pass 4 refresh: dedicated Stripe account/price/lane verification plus repository convergence and no-upgrade telemetry/media facts; no credential material is recorded.
+Pass 5 refresh: separate PostHog project/cost/privacy state added; no credential material is recorded.
 
 ## Environment ownership
 
@@ -34,7 +34,7 @@ Authenticated health reports app URL, Supabase public/service, Clerk app, Stripe
 
 Pass 4 verifies the $19/$5 prices and aligns Vercel lanes. `CRON_SECRET` still needs verification. Resend names remain absent; mail must report `skipped`. #47/#48/#49 merged; #49 squash is `005af4fdd09ffab279ece37e8d0426847b02ff5b` and its historical accepted Preview `dpl_6WAE…` is `READY`. Rewritten #44 source `d0f5a3abef0dd6c268e57da4e2a91f3449661517` passed final Preview `dpl_DyK72pRkkjYCjAzTd7RJNE9uV7iN` and merged green as current `main` `4c0aad183fe9442e4546985b373b26498e38e6e7`; current production `dpl_9N57qj7PHDteARUpVFWCKAxYutts` is `READY` and is the rollback candidate. No Mapbox/Cloudinary credential; empty namespace only.
 
-PostHog host names exist but its key is empty; the organization has only Explore&Earn and no cross-app reuse. New project creation is blocked by account-owner re-authentication/current-plan access. Sweepza's distinct Sentry project now has ownership routing, exactly one alert, scrubbers, and IP scrubbing; a first runtime event/environment remains open.
+PostHog project `509084` has autocapture, replay, and console capture disabled. Own pair is presence-verified in all Doppler lanes. Vercel now has exactly Development plus combined Preview+Production after deleting the stale Production-only host duplicate by environment ID. Source `4c0aad1…` consumes the pair, but no deploy/event smoke occurred; historical health is not post-write proof.
 
 ## Rules
 
