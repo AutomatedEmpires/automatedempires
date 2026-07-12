@@ -27,7 +27,7 @@ Every listed project has dev, stg, and prd configs. Personal development configs
 - Confirmed that Pass 3-created Clerk resources and verified Resend DNS did not silently change Doppler. Provider existence is recorded separately from credential installation.
 - Pass 4 installed the scoped Explore&Earn Resend key and explicit From/Reply-To in all three configs without displaying values, and verified the twelve-name Stripe test contract in `dev`/`stg`.
 - Created separate Sentry projects for AutomatedEmpires, Lake & Pine, and ORAN and installed each venture's own DSN/org/project identifiers write-only into its `dev`/`stg`/`prd` configs. Vercel installation/runtime events are not claimed.
-- Pass 5 created/preserved six separate PostHog projects and populated each active venture's own key/host in all Doppler lanes. AutomatedEmpires `dev` is restricted/browser write-confirmed; other presence checks passed. No fresh deployment/event smoke is claimed.
+- Pass 5 created/preserved six separate PostHog projects and populated each active venture's own key/host in all Doppler lanes. AutomatedEmpires `dev` is restricted/browser write-confirmed; other presence checks passed. Publishing ops draft PR #8 auto-triggered an AutomatedEmpires Preview, but no production deployment or controlled event/ingestion smoke is claimed.
 - Pass 5 rejected every available founder-created Mapbox token because each was a secret `sk` token. No browser-visible variable was changed; the old shared public token remains rollback where previously recorded.
 
 ## Known migration gaps

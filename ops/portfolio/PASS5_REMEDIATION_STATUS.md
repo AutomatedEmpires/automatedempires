@@ -7,7 +7,7 @@ Pass 4 remains the accepted historical baseline. This document records only the 
 
 ## Executive result
 
-PostHog provider and environment separation were safely completed without a paid upgrade: the existing Explore&Earn project was preserved, five distinct projects were created, privacy-invasive defaults were disabled, twelve product caps were set to `$0`, and each active venture's own key/host pair was presence-verified in Doppler and Vercel. No fresh deployment or event smoke followed the environment writes, so runtime activation is not claimed.
+PostHog provider and environment separation were safely completed without a paid upgrade: the existing Explore&Earn project was preserved, five distinct projects were created, privacy-invasive defaults were disabled, twelve product caps were set to `$0`, and each active venture's own key/host pair was presence-verified in Doppler and Vercel. Publishing ops draft PR #8 auto-triggered an AutomatedEmpires Preview after the environment writes; it was not used for a controlled event/ingestion smoke, no production deployment occurred, and runtime activation is not claimed.
 
 Mapbox placement and source-consumer verification were completed, but installation was safely stopped. Every founder-created named token available during the pass is a secret `sk` token; putting it into `NEXT_PUBLIC_MAPBOX_TOKEN` would expose server authority to browsers. Public `pk` replacements and secure handoff remain required. The old shared public token remains rollback.
 
@@ -66,7 +66,7 @@ All six active ventures have their own PostHog pair in Doppler all lanes and mat
 
 The exact current production SHAs consume these names: AutomatedEmpires `664cda67bc7bc91e4f1577d76bbe7758290f3a2d`, Explore&Earn `b616b9e10fa434422dd34442f6cb24194cf8d5ec`, Sweepza `4c0aad183fe9442e4546985b373b26498e38e6e7`, LogLoads `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`, BidSpace `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8`, and Lake & Pine `1b6a877bc054a9239c2a430aaf668996de8a0302`.
 
-Configuration installation is **completed / safely fixed now**. Runtime activation remains **blocked by production risk** until a fresh deployment loads the writes and a controlled event/ingestion check passes. ORAN remains absent.
+Configuration installation is **completed / safely fixed now**. Runtime activation remains **blocked by production risk** until each venture has an appropriate post-write deployment and a controlled event/ingestion check. The AutomatedEmpires PR #8 Preview is build evidence only, not analytics proof. ORAN remains absent.
 
 ## 10. Privacy defaults
 
@@ -84,12 +84,12 @@ PostHog increased monthly base/current/projected spend by `$0`. Mapbox is PAYG w
 | Lake & Pine Mapbox adoption | **Requires founder decision** | Keep the SVG fallback unless the founder explicitly approves a fourth public token and its staged activation |
 | Mapbox Vercel sync and runtime proof | **Blocked by production risk** | Exact-SHA Preview, allowed/rejected-origin checks, fallback and rollback proof before Production |
 | BidSpace production restriction | **Blocked by missing domain** | Continue only on exact local/Vercel origins; defer custom-domain restriction |
-| PostHog runtime activation | **Blocked by fresh deployment / production risk** | Deploy each exact consuming SHA after the environment write; send a controlled non-sensitive event and verify the intended project/environment/health |
+| PostHog runtime activation | **Blocked by controlled deployment/event / production risk** | Use an appropriate post-write deployment per venture, send a controlled non-sensitive event, and verify the intended project/environment/health; do not count AutomatedEmpires PR #8's automatic Preview alone as activation proof |
 | ORAN PostHog | **Requires founder/privacy decision** | Keep deferred and prefer Sentry/logs until deployment and civic privacy posture are resolved |
 
 ## 13. Repository evidence
 
-Ops changes are maintained on branch `codex/pass5-mapbox-posthog` from remote `main` base `664cda67bc7bc91e4f1577d76bbe7758290f3a2d`. The exact commit and review URL are supplied in the execution handoff rather than embedded self-referentially in this commit. No application deployment or runtime event check is claimed.
+Ops changes are maintained on branch `codex/pass5-mapbox-posthog` from remote `main` base `664cda67bc7bc91e4f1577d76bbe7758290f3a2d` and reviewed in draft [PR #8](https://github.com/AutomatedEmpires/automatedempires/pull/8). Exact commit identifiers are supplied in the execution handoff rather than embedded self-referentially. The PR auto-triggered a docs-only AutomatedEmpires Preview; no production deployment or runtime event check is claimed.
 
 ## Classification summary
 

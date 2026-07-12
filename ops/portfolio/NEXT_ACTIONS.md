@@ -5,7 +5,7 @@
 ## Completed or safely fixed in Pass 5
 
 1. PostHog's existing PAYG plan was verified at `$0` base/current/projected cost with six projects allowed and no upgrade. Explore&Earn `291166` was preserved; separate AutomatedEmpires `509081`, Sweepza `509084`, LogLoads `509086`, BidSpace `509087`, and Lake & Pine `509088` projects were created.
-2. Autocapture, session replay, and console capture are disabled on all five new PostHog projects. Twelve product billing caps are `$0`; no paid add-on or plan upgrade was enabled. Each active venture's own key/host pair is presence-verified in Doppler `dev`/`stg`/`prd` and matching Vercel Development plus combined Preview/Production; no fresh deployment or event is claimed.
+2. Autocapture, session replay, and console capture are disabled on all five new PostHog projects. Twelve product billing caps are `$0`; no paid add-on or plan upgrade was enabled. Each active venture's own key/host pair is presence-verified in Doppler `dev`/`stg`/`prd` and matching Vercel Development plus combined Preview/Production. Ops draft PR #8 auto-triggered an AutomatedEmpires Preview; it is not a controlled analytics event/ingestion proof, and no production deployment is claimed.
 3. Mapbox source consumers and intended placements were established for Explore&Earn, LogLoads, BidSpace, and Lake & Pine. ORAN's Leaflet/OpenStreetMap no-resource decision is confirmed.
 4. Every founder-created named Mapbox token was identified as a secret `sk` token, unrestricted and at zero usage. Installation was safely stopped before any server-secret value could enter a `NEXT_PUBLIC_` variable. The shared public token remains rollback.
 
@@ -29,7 +29,7 @@
 
 1. Explore&Earn source/Preview checks are green. Obtain separate authorization for a controlled custom-domain mail smoke; verify reply routing and provider authentication/logging before broad-key retirement.
 2. Prove Explore&Earn's production Stripe account identity without displaying the key; create the correct live webhook and preview it dark. Keep Sweepza's foreign E&E endpoint until that replacement is verified. Classify—but do not delete—the two customers and $0 draft invoice.
-3. Complete GitHub CLI auth as operator tooling. Preserve the exact merged-main production evidence for Sweepza and LogLoads. Keep ORAN #58 draft until ancillary checks, its data lane, Preview, and rollback gates are green.
+3. GitHub CLI operator authentication is verified and was used to publish ops draft PR #8. Preserve the exact merged-main production evidence for Sweepza and LogLoads. Keep ORAN #58 draft until ancillary checks, its data lane, Preview, and rollback gates are green.
 4. Complete AutomatedEmpires and Lake & Pine functional production-host/rollback smoke before any DNS change. Establish ORAN's scoped Preview data/credential lane and reconcile schema authority before its first deployment.
 5. Configure each DNS/SSL-verified dark Clerk instance in isolated Preview and prove end-to-end auth before replacing any production binding.
 6. LogLoads source, required checks, merge, and clean main-production provenance are green. Next prove backup/live-shape upgrade, environment provenance, distributed rate limiting, production rollback, and live migration safety before activating live data/providers or changing DNS.

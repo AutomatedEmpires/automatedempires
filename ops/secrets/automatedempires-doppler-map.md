@@ -30,7 +30,7 @@ Pass 4 installed only the AutomatedEmpires-specific Sentry runtime identity beyo
 
 ## Pass 5 provider delta
 
-PostHog project `509081` exists with autocapture, replay, and console capture disabled. In Doppler `dev`, both PostHog entries have restricted visibility: CLI returns `null` by design, while authenticated browser write-and-save confirms presence. They are not empty or independently readable. `stg`/`prd` presence checks passed. Vercel Development was repaired directly in authenticated UI and both entries were reopened/exact-match verified without output; combined Preview/Production is present. No deploy/event smoke occurred.
+PostHog project `509081` exists with autocapture, replay, and console capture disabled. In Doppler `dev`, both PostHog entries have restricted visibility: CLI returns `null` by design, while authenticated browser write-and-save confirms presence. They are not empty or independently readable. `stg`/`prd` presence checks passed. Vercel Development was repaired directly in authenticated UI and both entries were reopened/exact-match verified without output; combined Preview/Production is present. Ops PR #8 auto-triggered a Preview, but no controlled event/ingestion smoke or production deployment occurred.
 
 ## Next action
 
