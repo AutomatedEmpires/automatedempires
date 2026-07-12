@@ -28,7 +28,7 @@ Pass 4 installed only the ORAN-specific Sentry identity beyond metadata, without
 
 ## Pass 5 provider delta
 
-ORAN has no Mapbox consumer; reviewed source uses Leaflet/OpenStreetMap. PostHog project creation is intentionally deferred because civic-product privacy and deployment posture are not ready. No Mapbox or PostHog name/value was added to any Doppler config.
+ORAN has no Mapbox consumer; reviewed source uses Leaflet/OpenStreetMap. Its labeled secret authorizer was validated but intentionally unused, no public token was minted, and no Mapbox name/value was added. PostHog remains intentionally deferred.
 
 ## Architecture constraint
 

@@ -12,7 +12,7 @@ Pass 2 provider refresh: 2026-07-10; sanitized status only.
 | Domain | `logloads.com` | **Authenticated GoDaddy control / 12-record post-change zone** | https://dcc.godaddy.com/ |
 | Clerk | Dev instance `ins_3Eh…RsHYW`; dark production | **DNS Verified/SSL Issued; runtime absent** | https://dashboard.clerk.com/ |
 | Stripe | Subscription-only account/products intended | **Observed in repository**; account ID **unknown** | https://dashboard.stripe.com/ |
-| Mapbox | Shared public token in feature candidate; MapLibre/Carto fallback | **Actual optional consumer; server-looking name duplicates public token** | https://account.mapbox.com/ |
+| Mapbox | Venture-specific public token plus MapLibre/Carto fallback | **Installed/origin/local verified; Preview app error path open; server-looking legacy name remains misleading** | https://account.mapbox.com/ |
 | Resend | Distinct broad key in E&E 1/1-domain team; contact-inquiry consumer; no LogLoads domain/from/contact identity | **Payment/account coupling; runtime activation deferred** | https://resend.com/domains |
 | Cloudinary | Free environment `dwi…t9vi`, empty `logloads/` namespace | **Taxonomy created; no assets/credential** | https://console.cloudinary.com/ |
 | PostHog | Project `509086`; own key/host in Doppler/Vercel targets | **Provider/environment binding verified; runtime pending fresh deployment/event** | https://app.posthog.com/ |

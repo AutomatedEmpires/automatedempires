@@ -6,8 +6,8 @@
 
 1. PostHog's existing PAYG plan was verified at `$0` base/current/projected cost with six projects allowed and no upgrade. Explore&Earn `291166` was preserved; separate AutomatedEmpires `509081`, Sweepza `509084`, LogLoads `509086`, BidSpace `509087`, and Lake & Pine `509088` projects were created.
 2. Autocapture, session replay, and console capture are disabled on all five new PostHog projects. Twelve product billing caps are `$0`; no paid add-on or plan upgrade was enabled. Each active venture's own key/host pair is presence-verified in Doppler `dev`/`stg`/`prd` and matching Vercel Development plus combined Preview/Production. Ops draft PR #8 auto-triggered an AutomatedEmpires Preview; it is not a controlled analytics event/ingestion proof, and no production deployment is claimed.
-3. Mapbox source consumers and intended placements were established for Explore&Earn, LogLoads, BidSpace, and Lake & Pine. ORAN's Leaflet/OpenStreetMap no-resource decision is confirmed.
-4. Every founder-created named Mapbox token was identified as a secret `sk` token, unrestricted and at zero usage. Installation was safely stopped before any server-secret value could enter a `NEXT_PUBLIC_` variable. The shared public token remains rollback.
+3. Separate least-scope public Mapbox tokens were minted server-side and installed across Doppler lanes for Explore&Earn, LogLoads, BidSpace, and Lake & Pine, with matching Vercel scopes. ORAN/Sweepza authorizers were intentionally unused.
+4. Exact origins, restriction counts, `200` allowed/`403` rejected enforcement, exact-main `READY` Previews, and real-Chrome local rendering were verified. Lake Preview passed; E&E/Log app error paths and Bid protected access remain. Shared provider token stays rollback.
 
 ## Completed or safely fixed in Pass 4
 
@@ -39,12 +39,12 @@
 1. No paid Resend upgrade: Sweepza and LogLoads transactional sending remain deferred, and neither may use Explore&Earn's sender identity.
 2. No Cloudinary upgrade: folder taxonomy is complete, but transfer-grade product-environment separation remains a paid blocker. Media deletion/move remains a distinct destructive/production-risk gate.
 3. Stripe account separation no longer needs an A/B/C retaining-account decision. Explicit approval is still required before deleting or irreversibly mutating the two Sweepza-account customers or $0 draft invoice, and legal/payout/tax state remains untouched.
-4. PostHog no-upgrade provisioning, environment writes, and `$0` caps are complete; fresh deployments/events remain. Mapbox still requires one public `pk` token per proven app plus secure founder-to-Doppler handoff. Authenticated Mapbox billing is PAYG with `$0` upcoming/January–July invoices, 50,000 free GL JS web loads/month, and no spending cap.
+4. PostHog provisioning/environment writes and `$0` caps are complete; fresh events remain. Mapbox handoff/install/non-production verification is complete at `$0` increased spend; PAYG includes 50,000 free GL JS loads/month and no spending cap.
 5. BidSpace custom-domain purchase remains deferred. Continue dev/Preview provider setup on controlled local/Vercel origins.
 
 ## Provider separation after the gates
 
-1. Mapbox: create one minimum-scope public `pk` token for Explore&Earn, LogLoads, and BidSpace; decide Lake & Pine separately because it was an unexpected consumer omitted from the founder's expected list. Use each approved app token across only its Doppler `dev`/`stg`/`prd` configs. The founder should place values directly in Doppler. Sync only matching Vercel environments, verify exact allowed/rejected origins and fallbacks in Preview, and keep the shared token until zero-use proof. BidSpace custom-domain restriction remains deferred.
+1. Mapbox: repair and re-smoke the E&E/Log fresh Preview application paths; obtain authorized BidSpace protected-Preview access; preserve Lake's green Preview. Production remains a separate approval, BidSpace domain work stays deferred, and the old/shared provider token remains rollback until all Production gates and zero-use evidence pass.
 2. PostHog: provider and environment separation are complete for six ventures. Fresh-deploy each exact consuming SHA, send a controlled non-sensitive event, and verify ingestion/environment health before calling runtime activation complete. Keep ORAN deferred and never reuse Explore&Earn's project/key.
 3. Sentry: retain seven distinct projects/DSNs and completed ownership/one-alert/scrubber/IP controls. Install new-project bindings into Vercel through an authorized write surface, prove controlled events/releases, then replace the owner-grade build token only after the narrow replacement is deployed and verified.
 4. Cloudinary: finish classifying non-E&E objects and the 55 former icon raws, clone environment-specific fixed-prefix presets with overwrite disabled, switch one disposable fixture in Preview, and retire old presets only after zero use. Do not move or delete media until separately approved and reversible.

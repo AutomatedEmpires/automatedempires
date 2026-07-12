@@ -30,7 +30,7 @@ Pass 4 also created a separate ORAN Sentry project, enabled ownership/one alert/
 
 ## Pass 5 provider posture
 
-Reviewed source has no Mapbox consumer and uses Leaflet/OpenStreetMap, so no Mapbox token is provisioned. PostHog remains intentionally deferred: ORAN is civic infrastructure without a stable production deployment or approved minimal analytics/consent contract. Prefer Sentry/logs; no PostHog project/key or Mapbox name/value was added.
+Reviewed source has no Mapbox consumer and uses Leaflet/OpenStreetMap. The labeled Mapbox secret authorizer was validated but intentionally unused; no public token or env was added. PostHog remains intentionally deferred for civic privacy/deployment posture.
 
 ## Preview and rollback contract
 

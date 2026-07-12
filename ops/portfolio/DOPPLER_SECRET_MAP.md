@@ -3,17 +3,17 @@
 **Verified snapshot:** 2026-07-12
 **Policy:** Doppler is the intended source of truth. A credential is recorded as installed only when direct names-only/provider evidence exists; provider project/token creation is not installation, delivery, or production activation.
 
-Counts below are the Pass 3 names-only baseline and include Doppler metadata; they are retained only as history and are not recomputed totals. Pass 5 populated each active venture's own PostHog key/host in all lanes. AutomatedEmpires `dev` entries are restricted: CLI `null` is expected, while authenticated browser write-and-save confirms presence; they are not empty or independently readable. Other presence-only/non-empty checks passed. No Mapbox value changed. No values or fingerprints are stored here.
+Counts below are the Pass 3 names-only baseline and include Doppler metadata; they are retained only as history and are not recomputed totals. Pass 5 populated each active venture's own PostHog pair as separately recorded. It also populated one venture-specific public Mapbox token as masked `NEXT_PUBLIC_MAPBOX_TOKEN` in `dev`, `stg`, and `prd` for Explore&Earn, LogLoads, BidSpace, and Lake & Pine. ORAN/Sweepza remain Mapbox-absent. No values or fingerprints are stored here.
 
 | Venture | Doppler project | Pass 3 dev | Pass 3 stg | Pass 3 prd | Current state through Pass 5 |
 |---|---|---:|---:|---:|---|
 | AutomatedEmpires | automatedempires | 3 | 3 | 3 | Sentry identifiers and own PostHog pair span all lanes. `dev` pair is restricted/browser write-confirmed and CLI-null by design; `stg`/`prd` presence verified. No Mapbox consumer; fresh deployment/event smoke pending |
-| Explore&Earn | explore-and-earn | 36 | 7 | 7 | Resend spans all lanes, Stripe test names span `dev`/`stg`, and preserved PostHog project `291166` key/host span all lanes. Shared public Mapbox remains rollback; no secret founder token was installed |
+| Explore&Earn | explore-and-earn | 36 | 7 | 7 | Resend/PostHog span all lanes; Stripe test names span `dev`/`stg`; venture-specific public Mapbox token now spans all lanes. E&E legacy duplicate was removed after exact replacement; provider old/shared token remains rollback |
 | ORAN | oran | 3 | 3 | 3 | ORAN-only Sentry identifiers span all lanes. PostHog is intentionally deferred and no Mapbox consumer exists; no Pass 5 secret change |
-| BidSpace | bidspace | 16 | 3 | 3 | Own PostHog key/host now span all lanes; other staging/production application values remain sparse. Shared public Mapbox remains only in audited dev; secret replacement rejected. Fresh analytics deployment/event smoke pending |
-| Lake & Pine | lake-and-pine | 3 | 9 | 9 | Own Sentry and PostHog key/host span all lanes; Vercel/Supabase remain in staging/production. Mapbox consumer is proven, but no token name/value exists. Fresh analytics deployment/event smoke pending |
+| BidSpace | bidspace | 16 | 3 | 3 | Own PostHog and venture-specific public Mapbox names span all lanes. Mapbox Vercel is intentionally Development/Preview only; no production/custom-domain origin or record |
+| Lake & Pine | lake-and-pine | 3 | 9 | 9 | Own Sentry/PostHog and venture-specific public Mapbox names span all lanes. Founder handoff resolved the prior Mapbox decision gate; fresh protected Preview/local runtime are green |
 | Sweepza | sweepza | 25 | 22 | 26 | All lanes still use dev Clerk. Own PostHog pair spans all lanes; Vercel duplicate production-only host record removed, leaving exact intended scopes. Resend absent; PostHog/Sentry event proof open |
-| LogLoads | logloads | 22 | 11 | 18 | Own PostHog key/host now span all lanes. Shared public Mapbox remains in audited `dev`/`prd`; no replacement installed. Fresh analytics deployment/event smoke and broader live-provider activation remain open |
+| LogLoads | logloads | 22 | 11 | 18 | Own PostHog and venture-specific public Mapbox names span all lanes. Fresh exact-main Preview is `READY`, but its pre-existing app error boundary remains a runtime gate; broader live-provider activation remains open |
 
 Every listed project has dev, stg, and prd configs. Personal development configs created by Doppler are not production environments.
 
@@ -28,7 +28,7 @@ Every listed project has dev, stg, and prd configs. Personal development configs
 - Pass 4 installed the scoped Explore&Earn Resend key and explicit From/Reply-To in all three configs without displaying values, and verified the twelve-name Stripe test contract in `dev`/`stg`.
 - Created separate Sentry projects for AutomatedEmpires, Lake & Pine, and ORAN and installed each venture's own DSN/org/project identifiers write-only into its `dev`/`stg`/`prd` configs. Vercel installation/runtime events are not claimed.
 - Pass 5 created/preserved six separate PostHog projects and populated each active venture's own key/host in all Doppler lanes. AutomatedEmpires `dev` is restricted/browser write-confirmed; other presence checks passed. Publishing ops draft PR #8 auto-triggered an AutomatedEmpires Preview, but no production deployment or controlled event/ingestion smoke is claimed.
-- Pass 5 rejected every available founder-created Mapbox token because each was a secret `sk` token. No browser-visible variable was changed; the old shared public token remains rollback where previously recorded.
+- Pass 5 used four labeled secret authorizers only server-side to mint public least-scope tokens, then installed one masked public token per app across Doppler lanes. ORAN/Sweepza authorizers were intentionally unused. The old/shared provider public token remains active rollback; no authorizer or replacement was revoked.
 
 ## Known migration gaps
 

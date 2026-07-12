@@ -1,33 +1,43 @@
 # Mapbox Token Matrix
 
-**Verified snapshot:** 2026-07-12 (Pass 5 provisioning safety gate)
-**Temporary operating model:** One public token per application, shared across Doppler `dev`, `stg`, and `prd`. Environment-specific rotation is deferred until each application is live and stable.
+**Verified snapshot:** 2026-07-12 (Pass 5 executed)
+**Operating model:** One venture-specific public token per application, shared across that application's `dev`, `stg`, and `prd` lanes for now. Environment-specific rotation remains a later production-hardening option.
 
-## Security result
+## Secure execution result
 
-Founder-created venture-named tokens exist, but authenticated provider inspection classifies every one as a secret `sk` token. They are unrestricted, report zero usage, and must never be placed in `NEXT_PUBLIC_MAPBOX_TOKEN`, Vercel browser runtime configuration, source, reports, screenshots, or chat. No raw value or fingerprint was read or recorded.
+The secure outside-repository handoff used `C:\Users\autom\.codex\mapbox keys.txt`. Placement scripts did not emit the secret handoff values. After verification, the 764-byte file was best-effort overwritten, truncated, and removed. No raw Mapbox credential is stored in source, Markdown, reports, env files, or committed artifacts. Public `pk` values are client-visible by design but intentionally omitted here.
 
-No Pass 5 Mapbox credential was installed or synchronized. The existing unrestricted shared public token remains active only as rollback in the previously audited lanes. Replacement requires a public `pk` token per proven application consumer, followed by secure founder-to-Doppler placement and deployment verification.
+Six labeled secret authorizers were validated. Explore&Earn, LogLoads, BidSpace, and Lake & Pine authorizers were used only server-side to mint separate public `pk` browser tokens. ORAN and Sweepza authorizers were intentionally unused, and no Mapbox environment variable was added for either venture. No authorizer was placed in application runtime.
 
-Authenticated billing is pay-as-you-go with `$0` upcoming and January–July 2026 invoices. Token creation has no base cost and the first 50,000 Mapbox GL JS web loads per month are free. No monthly spending cap is configured/available, so staged activation must include usage monitoring. Invoice numbers are intentionally excluded.
+The four public tokens have exactly `styles:read` and `fonts:read`. Their restriction counts are Explore&Earn 7, LogLoads 6, BidSpace 3, and Lake & Pine 7. Each allowlist includes `http://localhost:3000`, the venture's real owned/custom/project origins where applicable, and the exact fresh Preview origin. BidSpace intentionally has no production/custom-domain origin.
 
-## Placement table
+| Venture | Exact fresh Preview origin |
+|---|---|
+| Explore&Earn | `https://explore-and-earn-ofv76eqj6-jackson-coles-projects-dd76106c.vercel.app` |
+| LogLoads | `https://logloads-257awwwbb-jackson-coles-projects-dd76106c.vercel.app` |
+| BidSpace | `https://bidspace-9uk5bxzx5-jackson-coles-projects-dd76106c.vercel.app` |
+| Lake & Pine | `https://lakeandpine-ewzqk7zxj-jackson-coles-projects-dd76106c.vercel.app` |
 
-| Venture | Doppler project / configs | Required variable | Vercel project / environments | Exact source consumer | Current shared-token state | Pass 5 state | Verification before replacement |
-|---|---|---|---|---|---|---|---|
-| Explore&Earn | `explore-and-earn` / `dev`, `stg`, `prd` | `NEXT_PUBLIC_MAPBOX_TOKEN` | `explore-and-earn` / Development, Preview, Production | `apps/web/components/map/MapView.tsx` | Shared public token remains in audited Doppler `dev` and Vercel Development/Production and remains rollback | Public replacement **blocked**; founder-created token is secret and cannot enter a browser variable | Confirm public `pk` class and minimum read scopes; allow actual localhost, Preview, `exploreandearn.com`, and `www` origins only; deploy exact-SHA Preview; smoke `/map`, styles, fonts, attribution, CSP, and rejected origins before Production |
-| LogLoads | `logloads` / `dev`, `stg`, `prd` | `NEXT_PUBLIC_MAPBOX_TOKEN` | `logloads` / Development, Preview, Production | `apps/web/components/v3/RealMap.tsx` | Shared public token remains in audited `dev`/`prd`; keyless MapLibre/Carto fallback remains available | Public replacement **blocked**; no new value installed. `MAPBOX_ACCESS_TOKEN` is not a second boundary and must not receive the browser token | Confirm public token class, actual localhost/Preview/`logloads.com` origins, fallback, and provider selection; deploy Preview before any Production replacement |
-| BidSpace | `bidspace` / `dev`, `stg`, `prd` | `NEXT_PUBLIC_MAPBOX_TOKEN` | `bidspace` / Development and Preview now; Production custom-domain restriction deferred | `apps/web/components/explore-map.tsx` | Shared public token remains in audited `dev` as rollback | Public replacement **blocked**; no custom domain exists. Use only exact local and current Vercel Preview/development origins when a public token is created | Prove current source/Preview, public token class, allowed local/exact Preview origins, and rejection elsewhere. Do not invent or authorize a production custom domain |
-| Lake & Pine | `lake-and-pine` / `dev`, `stg`, `prd` if approved | `NEXT_PUBLIC_MAPBOX_TOKEN` | `lakeandpine` / Development, Preview, Production if approved | `apps/web/src/components/AreaMap.tsx` | No existing Mapbox value in Lake & Pine Doppler; branded SVG fallback remains current | Unexpected consumer newly confirmed; **requires founder decision** before a safe public replacement is created or installed. Available named token is secret and unusable | Preserve the fallback; if approved, confirm actual local, exact Preview, `lakeandpinecleaning.com`, and `www` origins before public-token placement; Preview-smoke before Production |
-| ORAN | `oran` | None | `oran` | No Mapbox consumer; migration candidate uses Leaflet/OpenStreetMap | None | **Completed no-resource decision**; do not provision or install Mapbox | Recheck only if reviewed source intentionally adopts Mapbox and the civic privacy posture permits it |
-| AutomatedEmpires / Sweepza | Their own projects | None | Their own projects | No Mapbox consumer verified | None | **Completed no-resource decision** | Do not provision speculative tokens |
+## Installation and verification matrix
 
-## Token and rollback rules
+| Venture | Source consumer | Public-token metadata | Doppler | Vercel | Fresh Preview at exact main SHA | Origin enforcement | Exact-source local Chrome | Remaining gate |
+|---|---|---|---|---|---|---|---|---|
+| Explore&Earn | `apps/web/components/map/MapView.tsx` | Public `pk`; 2 scopes; 7 restrictions | `NEXT_PUBLIC_MAPBOX_TOKEN` populated/masked in `dev`, `stg`, `prd`; one token across lanes | Encrypted Development, Preview, Production records. Legacy duplicate removed only after exact replacement | `READY` at `b616b9e10fa434422dd34442f6cb24194cf8d5ec`; route reaches a pre-existing app error boundary before map initialization | HTTP `Referer` probes: Preview/localhost `200`; unrelated `403` | Canvas `1`; fallback absent; 5 mapped items | Repair/verify the Preview application error path, then production-deploy only with a separate gate |
+| LogLoads | `apps/web/components/v3/RealMap.tsx` | Public `pk`; 2 scopes; 6 restrictions | Populated/masked in `dev`, `stg`, `prd`; one token across lanes | Encrypted Development, Preview, Production records | `READY` at `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`; route reaches a pre-existing app error boundary before map initialization | HTTP `Referer` probes: Preview/localhost `200`; unrelated `403` | Provider `mapbox`; canvas `1`; MapLibre `0` | Repair/verify the Preview application error path; retain fallback and production/data gates |
+| BidSpace | `apps/web/components/explore-map.tsx` | Public `pk`; 2 scopes; 3 restrictions; no production/custom-domain origin | Populated/masked in `dev`, `stg`, `prd`; one token across lanes | Encrypted Development and Preview only; no Production record | `READY` at `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8`; protected Preview was client-side blocked and no access bypass was created | HTTP `Referer` probes: Preview/localhost `200`; unrelated `403` | Canvas `1`; missing-token fallback absent | Obtain an authorized protected-Preview verification path; production remains deferred until an owned domain exists |
+| Lake & Pine | `apps/web/src/components/AreaMap.tsx` | Public `pk`; 2 scopes; 7 restrictions. Founder handoff explicitly directed placement, resolving the prior decision gate | Populated/masked in `dev`, `stg`, `prd`; one token across lanes | Encrypted Development, Preview, Production records | `READY` at `1b6a877bc054a9239c2a430aaf668996de8a0302`; fresh protected Preview passes directly | HTTP `Referer` probes: Preview/localhost `200`; unrelated `403` | Canvas `1`; SVG fallback `0` | Production remains unchanged; promote only through the normal production gate |
+| ORAN | No Mapbox consumer; Leaflet/OpenStreetMap | Secret authorizer validated but intentionally unused; no public token minted | Absent | Absent | Not applicable | Not applicable | Not applicable | **Completed no-resource decision**; preserve civic privacy posture |
+| Sweepza | No Mapbox consumer | Secret authorizer validated but intentionally unused; no public token minted | Absent | Absent | Not applicable | Not applicable | Not applicable | **Completed no-resource decision** |
+| AutomatedEmpires | No Mapbox consumer | No runtime resource required | Absent | Absent | Not applicable | Not applicable | Not applicable | **Completed no-resource decision** |
 
-- `NEXT_PUBLIC_MAPBOX_TOKEN` is intentionally browser-visible and therefore accepts only a public `pk` token with the minimum demonstrated read scopes. A secret `sk` token is a hard no-go.
-- One application token may cover that application's actual dev/stg/prd origins during this temporary phase; it must never be shared across applications.
-- Restrictions must enumerate actual origins. Do not authorize a broad hosting-provider domain, invent a domain, or use wildcard syntax unsupported by Mapbox.
-- Keep the old shared public token until every active consumer has a verified replacement or tested no-token fallback, exact-SHA Preview/Production checks pass, provider usage is quiet, and rollback is documented.
-- Creating a token, documenting a placement, or observing zero usage is not equivalent to installation or runtime verification.
+All fresh builds were Preview deployments. Latest Production deployment IDs, URLs, and SHAs remained unchanged; no Production deployment was triggered.
 
-See `MAPBOX_TOKEN_SEPARATION_PLAN.md` for the secure handoff and execution sequence.
+## Rollback and cost
+
+- The provider's old/shared public token remains active as rollback. No secret authorizer, new public replacement, or old/shared provider token was revoked.
+- The old shared value was replaced in the four intended application environments. E&E's overlapping legacy record was removed only after its exact replacement was verified.
+- Authenticated billing is pay-as-you-go. Token creation has no base cost, the first 50,000 Mapbox GL JS web loads/month are free, the upcoming and January–July 2026 invoices are `$0`, and no monthly spending cap exists. Pass 5 added `$0` recurring spend.
+- The E&E/LogLoads Preview failures are application error-boundary gates, not token failures: origin enforcement and isolated exact-source Chrome runtimes are green.
+- A `READY` build, environment presence, or local map render is not a Production deployment. Preserve the old/shared rollback until the remaining Preview gates and a separately approved Production rollout pass.
+
+See `MAPBOX_TOKEN_SEPARATION_PLAN.md` for the completed handoff and remaining promotion sequence.

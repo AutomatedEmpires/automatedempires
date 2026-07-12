@@ -1,7 +1,7 @@
 # Explore & Earn environment map
 
 Last reviewed: 2026-07-12
-Pass 5 refresh: existing PostHog project/cost boundary and Mapbox token-class gate added; no credential material is recorded.
+Pass 5 refresh: PostHog separation and venture-specific Mapbox installation/verification added; no credential material is recorded.
 
 This map contains configuration names and resource identities only.
 
@@ -9,7 +9,7 @@ This map contains configuration names and resource identities only.
 
 | Environment | Secrets/config | Deployment | Data and external services | Status |
 | --- | --- | --- | --- | --- |
-| Development | Doppler `explore-and-earn` / `dev` has application configuration by name. | Local monorepo plus reviewed Pass 4 source commits `d1e43f5…`/`7893756…`. | Clerk dev; scoped Resend; seeded dedicated Stripe test account; Cloudinary, PostHog, Sentry, and shared Mapbox public access. | **Verified non-production lane; map/Clerk/media governance still open** |
+| Development | Doppler `explore-and-earn` / `dev` has application configuration by name. | Local monorepo plus reviewed current source. | Clerk dev; scoped Resend; dedicated Stripe test; Cloudinary/PostHog/Sentry; venture-specific Mapbox public token | **Map local runtime/origin enforcement verified; Clerk/media gates open** |
 | Staging | Doppler `explore-and-earn` / `stg` includes scoped Resend and the verified twelve-variable Stripe test contract. | Exact-source Preview `dpl_BgD…` passed the GitHub Vercel status; PR #243 merged at `b616b9e…`. | Dedicated test account/config; real custom-domain delivery not authorized/proven. Clerk/data isolation incomplete. | **Source/Preview green; delivery/auth proof open** |
 | Production | Doppler/Vercel contain the scoped Resend identity; current Stripe production binding remains unactivated/unproven | Clean production `dpl_5HCPaCNCQuyip2iZTHpoMvSxjQFY` from current `main` `b616b9e10fa434422dd34442f6cb24194cf8d5ec` is `READY` | Dedicated Supabase. Dark Clerk DNS Verified/SSL Issued; runtime pending. Resend scoped key and explicit From/Reply-To installed, delivery pending. Dedicated Stripe live catalog exists, but credential/account ID and live webhook are not proven. | **Operational web runtime; auth/billing/mail delivery activation incomplete** |
 
@@ -24,7 +24,7 @@ This map contains configuration names and resource identities only.
 | Resend | `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_REPLY_TO_EMAIL` | Domain verified; scoped domain-only key installed across Doppler/Vercel; From `notifications@…` and support Reply-To configured. Exact-source Preview passed; delivery smoke and broad-key retirement remain open. |
 | PostHog | `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` | Existing project `291166` preserved unchanged. Own pair is presence-verified in Doppler all lanes and Vercel `explore-and-earn` Development plus combined Preview/Production; source `b616b9e…` consumes them. No fresh deployment/release event after the writes. `7893756…` disables replay/console capture. |
 | Cloudinary | Cloud name and server/client upload configuration names | Free single environment; nine top-level namespaces now exist without media moves. Only Explore&Earn has active assets/credentials. Signed presets remain folder-unbound/overwrite-enabled; 55 former icon raws need docs/manifest classification. |
-| Mapbox | Public token and server token names | `/map` uses `apps/web/components/map/MapView.tsx`. Every available founder-created replacement is a secret `sk` token and was rejected for browser use. One public `pk` token across `dev`/`stg`/`prd` plus secure handoff/Preview proof is required; shared default stays rollback. No server consumer exists. |
+| Mapbox | `NEXT_PUBLIC_MAPBOX_TOKEN`; unused server-shaped legacy name remains separate | Venture-specific public token spans Doppler/Vercel lanes with 7 restrictions and exact origin enforcement. Exact-source local Chrome is green; fresh `READY` Preview at `b616b9e…` hits a pre-existing app error boundary before map initialization. Shared provider token stays rollback. |
 | Sentry | DSN, organization, project, and source-map upload configuration names | Distinct active project. Ownership/one alert/scrubbers/IP scrubbing configured; 15 previously unassigned portfolio issues assigned to the AutomatedEmpires team. Owner-grade build token remains overprivileged pending safe replacement. |
 | Cron and AI | Cron authorization and OpenAI/AI Gateway configuration names | **Observed in repository** — integration points exist; live resource identity is unverified in this pass. |
 

@@ -6,7 +6,7 @@ Pass 5 provider refresh: 2026-07-12; Mapbox consumer/token class and PostHog pro
 
 | Logical environment | Secrets source | Deployment target | Database target | Status |
 |---|---|---|---|---|
-| Local development | Doppler `bidspace` / `dev` | Local Next.js workspace | Dedicated Supabase/Clerk dev; shared Mapbox rollback; PostHog project `509087` own key/host present across all lanes; empty Cloudinary namespace | **Provider/environment boundary fixed; map and post-write analytics runtime proof open** |
+| Local development | Doppler `bidspace` / `dev` | Local Next.js workspace | Dedicated Supabase/Clerk dev; venture-specific public Mapbox; PostHog project `509087`; empty Cloudinary namespace | **Map local runtime/origin enforcement verified; protected Preview access gate open** |
 | Staging / preview | Doppler `bidspace` / `stg` | Accepted Preview `dpl_3vFJAPyiQqWr95woTY51mKBT1W1S` is `READY` | BidSpace-only staging boundary remains to prove at runtime | **Source/build proven; product-provider lane incomplete** |
 | Production | Doppler `bidspace` / `prd`, metadata only | Clean production `dpl_GQ2yhiJjwchgt7rJDSbU8Y8JuVDp` from current `main` `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8` is `READY` | Supabase fingerprint `…fsqslgxcv`; no production Clerk/domain/Stripe | **Source/build live; product providers/custom domain incomplete** |
 
@@ -40,8 +40,8 @@ The following names were extracted from committed `.env.example` files; values w
 
 ## Pass 5 provider delta
 
-- Current source consumer is `apps/web/components/explore-map.tsx`. One BidSpace public `pk` token is intended across Doppler `dev`/`stg`/`prd`, but every available founder-created named token is a secret `sk` token and was rejected. No value was installed or synchronized.
-- Use exact local and current Vercel Preview/development origins only. Production custom-domain restriction remains deferred until an owned domain exists.
+- `apps/web/components/explore-map.tsx` consumes the BidSpace-specific public token across all Doppler lanes. Vercel has encrypted Development/Preview only; there is no Production record or production/custom-domain origin.
+- Three restrictions cover exact local/current project/fresh Preview origins. Exact Preview/localhost returned `200`, unrelated origin `403`; local Chrome rendered a canvas. Fresh Preview at `2fe90a3…` is `READY` but protected access was client-side blocked, and no bypass was created.
 - Separate PostHog project `509087` has autocapture, replay, and console capture disabled. Own key/host are presence-verified in Doppler all lanes and Vercel `bidspace` Development plus combined Preview/Production. Source `2fe90a3…` consumes them; no fresh deployment/event smoke occurred.
 
 ## Rules
@@ -50,4 +50,4 @@ The following names were extracted from committed `.env.example` files; values w
 - Server, database, webhook, CI, and provider-management variables must never be exposed to the client.
 - A variable name documents a potential consumer; it is not proof that the provider resource exists or is ready.
 - Keep CI/admin credentials out of Vercel runtime environments unless a deployed process demonstrably consumes them.
-- Mapbox public replacement and Preview proof remain blocked by secure handoff; production custom-domain restriction is separately blocked by the missing domain. Do not treat the shared public token as a server credential.
+- Mapbox installation/origin/local proof is complete. Protected Preview functional verification and the missing production domain remain; do not treat the secret authorizer as runtime configuration.

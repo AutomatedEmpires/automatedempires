@@ -9,40 +9,40 @@ Pass 4 remains the accepted historical baseline. This document records only the 
 
 PostHog provider and environment separation were safely completed without a paid upgrade: the existing Explore&Earn project was preserved, five distinct projects were created, privacy-invasive defaults were disabled, twelve product caps were set to `$0`, and each active venture's own key/host pair was presence-verified in Doppler and Vercel. Publishing ops draft PR #8 auto-triggered an AutomatedEmpires Preview after the environment writes; it was not used for a controlled event/ingestion smoke, no production deployment occurred, and runtime activation is not claimed.
 
-Mapbox placement and source-consumer verification were completed, but installation was safely stopped. Every founder-created named token available during the pass is a secret `sk` token; putting it into `NEXT_PUBLIC_MAPBOX_TOKEN` would expose server authority to browsers. Public `pk` replacements and secure handoff remain required. The old shared public token remains rollback.
+Mapbox separation was executed for Explore&Earn, LogLoads, BidSpace, and Lake & Pine through a secure outside-repository handoff. Secret authorizers stayed server-side; separate least-scope public tokens were installed across Doppler/Vercel scopes and verified by origin enforcement, fresh exact-main Previews, and real-Chrome local runtimes. No Production deployment occurred; remaining Preview app/access gates and old/shared rollback retirement are explicitly open.
 
 ## 1. Mapbox placement table
 
 Completed in `MAPBOX_TOKEN_MATRIX.md`. Proven browser consumers are:
 
-| Venture | Source consumer | Intended Doppler placement | Vercel placement | Result |
+| Venture | Source consumer | Doppler placement | Vercel placement | Result |
 |---|---|---|---|---|
-| Explore&Earn | `apps/web/components/map/MapView.tsx` | `explore-and-earn` `dev`/`stg`/`prd` → `NEXT_PUBLIC_MAPBOX_TOKEN` | `explore-and-earn` / Development, Preview, Production | **Blocked:** public replacement not available |
-| LogLoads | `apps/web/components/v3/RealMap.tsx` | `logloads` `dev`/`stg`/`prd` → `NEXT_PUBLIC_MAPBOX_TOKEN` | `logloads` / Development, Preview, Production | **Blocked:** public replacement not available |
-| BidSpace | `apps/web/components/explore-map.tsx` | `bidspace` `dev`/`stg`/`prd` → `NEXT_PUBLIC_MAPBOX_TOKEN` | `bidspace` / Development and Preview now; custom-domain Production deferred | **Blocked:** public replacement not available; production domain missing |
-| Lake & Pine | `apps/web/src/components/AreaMap.tsx` | `lake-and-pine` `dev`/`stg`/`prd` → `NEXT_PUBLIC_MAPBOX_TOKEN` if approved | `lakeandpine` / Development, Preview, Production if approved | **Requires founder decision:** unexpected consumer confirmed; available named token is secret and unusable |
+| Explore&Earn | `apps/web/components/map/MapView.tsx` | Populated/masked `dev`/`stg`/`prd` | Encrypted Development/Preview/Production | Installed; origin/local proof green; fresh Preview app error path open |
+| LogLoads | `apps/web/components/v3/RealMap.tsx` | Populated/masked `dev`/`stg`/`prd` | Encrypted Development/Preview/Production | Installed; origin/local proof green; fresh Preview app error path open |
+| BidSpace | `apps/web/components/explore-map.tsx` | Populated/masked `dev`/`stg`/`prd` | Encrypted Development/Preview only | Installed; origin/local proof green; protected Preview access and production domain open |
+| Lake & Pine | `apps/web/src/components/AreaMap.tsx` | Populated/masked `dev`/`stg`/`prd` | Encrypted Development/Preview/Production | Founder direction resolved decision gate; origin/local/fresh Preview green |
 
-ORAN uses Leaflet/OpenStreetMap and receives no Mapbox token. AutomatedEmpires and Sweepza also have no proven consumer.
+ORAN uses Leaflet/OpenStreetMap; its validated authorizer was intentionally unused. Sweepza's validated authorizer was also unused because there is no consumer. AutomatedEmpires has no Mapbox resource.
 
 ## 2. Secure handoff method
 
-No raw-token handoff occurred. Founder-created tokens were inspected only by provider metadata and were rejected because they are secret tokens. Preferred next handoff is founder-direct entry of one public `pk` token per application into the three matching Doppler configs. The temporary-file fallback remains available but was not used.
+The outside-repository handoff file was `C:\Users\autom\.codex\mapbox keys.txt`. Placement scripts did not emit its secret values. Four authorizers minted public tokens server-side; two were intentionally unused. After verification, the 764-byte file was best-effort overwritten, truncated, and removed. No raw Mapbox credential is stored in source, Markdown, reports, env files, or committed artifacts; public client-visible values are omitted from docs.
 
 ## 3. Mapbox tokens installed by venture/config
 
-None. This is **blocked by security and secure public-token handoff**, not completed. No secret token entered a browser-visible variable.
+Four public tokens were installed—one per application across its three Doppler lanes—with exactly `styles:read` and `fonts:read`. Restriction counts are E&E 7, LogLoads 6, BidSpace 3, Lake & Pine 7. No secret authorizer entered a browser-visible variable.
 
 ## 4. Vercel environment synchronization
 
-No Mapbox environment was synchronized. Synchronization remains after correct public-token placement and exact-origin review.
+E&E, LogLoads, and Lake & Pine have exact encrypted Development/Preview/Production records. BidSpace has Development/Preview only. ORAN/Sweepza are absent. E&E's duplicate was removed only after exact replacement. Latest Production deployments remained unchanged.
 
 ## 5. Map verification
 
-Source consumers were verified for four applications. Replacement-token Preview or Production map smoke was not possible because no safe public replacement was installed. Existing fallbacks and rollback configuration were not changed.
+All four tokens passed HTTP `Referer` probes: exact Preview and localhost returned billable-tileset metadata `200`, while an unrelated `Referer` returned `403`. Fresh exact-main Previews are `READY`. Real-Chrome local runtimes rendered maps for all four; Lake fresh protected Preview also passed. E&E/Log fresh Preview routes hit pre-existing app error boundaries before initialization; Bid protected Preview was client-side blocked without bypass. These are application/access gates, not token failures.
 
 ## 6. Old shared-token rollback
 
-The old shared public token remains active in the previously audited Explore&Earn, BidSpace, and LogLoads lanes. It must not be revoked until each active consumer has a verified venture-specific replacement or tested fallback, exact-SHA deployment checks pass, and provider/configuration evidence shows zero remaining use.
+The provider old/shared public token remains active rollback. No authorizer, replacement, or old/shared provider token was revoked. Retire only after remaining Preview paths, separately authorized Production rollouts, and zero-use evidence pass.
 
 ## 7. PostHog billing and plan
 
@@ -74,15 +74,15 @@ Autocapture, session replay, and console capture are disabled for all five new p
 
 ## 11. Monthly spend change
 
-PostHog increased monthly base/current/projected spend by `$0`. Mapbox is PAYG with no token base cost, a `$0` upcoming invoice, `$0` monthly invoices from January through July 2026, and 50,000 included GL JS web loads/month. No Mapbox public replacement was installed, so Pass 5 added `$0` recurring spend. No Mapbox spending cap exists; monitor usage. Invoice numbers are excluded. See `MONTHLY_SPEND_PROJECTION.md`.
+PostHog and Mapbox increased recurring spend by `$0`. Mapbox is PAYG with no token base cost, `$0` upcoming/January–July 2026 invoices, and 50,000 included GL JS web loads/month. Four bounded public replacements were installed and verified. No spending cap exists; monitor usage. Invoice numbers are excluded.
 
 ## 12. Remaining blockers
 
 | Item | Classification | Required next action |
 |---|---|---|
-| Mapbox public browser tokens | **Blocked by security / secure handoff** | Create one public `pk` token for Explore&Earn, LogLoads, and BidSpace with minimum scopes and actual origins; founder places each in matching Doppler configs |
-| Lake & Pine Mapbox adoption | **Requires founder decision** | Keep the SVG fallback unless the founder explicitly approves a fourth public token and its staged activation |
-| Mapbox Vercel sync and runtime proof | **Blocked by production risk** | Exact-SHA Preview, allowed/rejected-origin checks, fallback and rollback proof before Production |
+| E&E / LogLoads Mapbox Preview routes | **Blocked by pre-existing application error paths / production risk** | Repair and re-smoke the fresh exact-main Preview routes before Production |
+| BidSpace protected Preview | **Blocked by authorized access and missing production domain** | Verify through an approved access path; do not create a bypass or Production record/domain |
+| Mapbox Production rollout / old token retirement | **Blocked by production risk** | Promote separately after Preview gates; monitor usage and prove zero old/shared use before revocation |
 | BidSpace production restriction | **Blocked by missing domain** | Continue only on exact local/Vercel origins; defer custom-domain restriction |
 | PostHog runtime activation | **Blocked by controlled deployment/event / production risk** | Use an appropriate post-write deployment per venture, send a controlled non-sensitive event, and verify the intended project/environment/health; do not count AutomatedEmpires PR #8's automatic Preview alone as activation proof |
 | ORAN PostHog | **Requires founder/privacy decision** | Keep deferred and prefer Sentry/logs until deployment and civic privacy posture are resolved |
@@ -93,9 +93,8 @@ Ops changes are maintained on branch `codex/pass5-mapbox-posthog` from remote `m
 
 ## Classification summary
 
-- **Completed / safely fixed now:** PostHog cost gate, six-project separation, five new-project privacy defaults, venture-specific Doppler/Vercel key/host placement, Mapbox billing verification, and source/placement inventory.
-- **Blocked by security / secure handoff:** Mapbox public-token installation.
-- **Blocked by production risk:** Mapbox Vercel sync/map smoke/shared-token retirement and fresh PostHog deployment/event verification.
+- **Completed / safely fixed now:** PostHog boundaries; Mapbox secure handoff, four-token separation, Doppler/Vercel placement, least scopes/origin enforcement, local Chrome, fresh Preview builds, Lake Preview, and billing verification.
+- **Blocked by production risk/access:** E&E/Log Preview app paths, Bid protected Preview, Production rollout, shared-token retirement, and PostHog event verification.
 - **Blocked by missing domain:** BidSpace production-origin restriction.
-- **Requires founder/privacy decision:** Lake & Pine Mapbox adoption, ORAN PostHog, and any future analytics behavior beyond minimal approved events.
+- **Requires founder/privacy decision:** ORAN PostHog and future analytics beyond approved minimal events. Lake & Pine's Mapbox decision gate is resolved.
 - **Documentation only:** This report and matrix refresh. They do not convert blocked installation or runtime work into remediation.

@@ -5,7 +5,7 @@
 **Configs inspected:** `dev`, `stg`, `prd`
 **Pass 2 status:** Configured values were used only in transient, read-only provider calls; only sanitized status, equality, and resource metadata were retained.
 **Pass 4 delta:** `support@logloads.com` exists as a mailbox, but no LogLoads Resend sending domain exists. The legacy broad same-team key is not an acceptable production boundary. Supabase-canonical source convergence precedes runtime completion.
-**Pass 5 delta:** PostHog project `509086` exists with safe defaults and its own key/host pair spans all Doppler lanes and matching Vercel targets. All available founder-created Mapbox replacements were secret `sk` tokens and were rejected.
+**Pass 5 delta:** PostHog project `509086` exists as separately recorded. A venture-specific public Mapbox token now spans all Doppler lanes and matching Vercel targets; the secret authorizer remained server-side only.
 
 Inventory used Doppler CLI names-only JSON mode with environment reads disabled. No secret value was requested, returned, or documented.
 
@@ -30,7 +30,7 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 | `MAPBOX_ACCESS_TOKEN` | Mapbox access for server-side mapping/geocoding work | `dev`, `prd` | `configured` | Direct equality check confirms it is the same browser-visible public token, not a separate server credential |
 | `NEXT_PUBLIC_APP_URL` | Browser-visible canonical application URL | `dev` | `unknown` | Absent from `stg` and `prd` |
 | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Browser-visible Clerk application identifier | `dev`, `stg` | `configured` | Same development instance in both lanes; absent from `prd` |
-| `NEXT_PUBLIC_MAPBOX_TOKEN` | Browser-visible Mapbox token | `dev`, `prd` | `configured` | Active and shared with Explore&Earn and BidSpace; the current probe is consistent with no URL restriction |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Browser-visible LogLoads-specific Mapbox token | `dev`, `stg`, `prd` | `configured` | Masked; 6 allowed origins; exact Preview/localhost `200`, unrelated origin `403` |
 | `NEXT_PUBLIC_MAP_PROVIDER` | Browser-visible map-provider selector | `dev`, `prd` | `unknown` | — |
 | `NEXT_PUBLIC_POSTHOG_HOST` | Browser-visible PostHog ingestion host | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed |
 | `NEXT_PUBLIC_POSTHOG_KEY` | Browser-visible LogLoads PostHog project key | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed; value excluded |
@@ -45,7 +45,7 @@ No variable is classified as `empty` because names-only inspection does not expo
 
 ## Separation findings
 
-- The public Mapbox token remains shared with Explore&Earn and BidSpace in audited `dev`/`prd`. Create one LogLoads-specific public `pk` token across `dev`/`stg`/`prd`, apply actual origins, deploy/verify it, then retire the shared token only after zero-use proof.
+- The venture-specific public token spans all lanes and Vercel Development/Preview/Production. The old/shared provider token remains active rollback until the pre-existing Preview app error path and later Production gate pass.
 - `MAPBOX_ACCESS_TOKEN` is misleadingly named: it duplicates the public token and must not receive the replacement browser token. Remove/rename only through a verified deployment after source proves no server consumer.
 - The LogLoads and Explore&Earn Resend credentials are distinct by direct equality check but both have broad access to the same team. This account coupling prevents independent transfer; it is not credential reuse.
 - `LOGLOADS_EMAIL_FROM` is absent from the recorded configs. `support@logloads.com` is a reply/support mailbox, not a transactional sender resource. Do not use the provider testing sender as production.

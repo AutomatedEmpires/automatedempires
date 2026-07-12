@@ -27,7 +27,7 @@ Do not populate guessed variables merely because other ventures use them. App UR
 ## Pass 5 map and analytics delta
 
 - `apps/web/src/components/AreaMap.tsx` is a real optional Mapbox consumer; the branded SVG fallback remains current.
-- No Mapbox name/value is installed in Doppler. Every available founder-created named token was a secret `sk` token and was rejected for browser use. A future activation requires one Lake & Pine public `pk` token across `dev`/`stg`/`prd`, actual origins, and Preview proof.
+- The founder's labeled handoff/direction resolved the decision gate. A Lake & Pine-specific public token spans Doppler/Vercel lanes with 7 restrictions. Origin enforcement, exact-source local Chrome (canvas `1`, SVG fallback `0`), and fresh protected Preview at `1b6a877…` are green.
 - PostHog provider/environment separation is safely fixed. Source `1b6a877…` consumes the pair, but no fresh deployment/event smoke occurred; runtime activation remains pending that proof.
 
 ## Environment rules

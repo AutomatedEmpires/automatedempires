@@ -7,7 +7,7 @@
 | Vercel | Project `lakeandpine` (`…t3FePz`); Preview `dpl_BBy…` and clean current-main production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` are `READY` | **Source/main provenance fixed; functional rollback/domain smoke open** | https://vercel.com/dashboard |
 | Supabase | Project fingerprint `…vtmwr` | **Verified current; preserve during source normalization** | https://supabase.com/dashboard/projects |
 | Domain | `lakeandpinecleaning.com` | **Authenticated owned / full 8-record zone verified; no MX/SPF** | https://dcc.godaddy.com/ |
-| Mapbox | Optional `AreaMap.tsx` consumer with branded SVG fallback | **No active token; fallback retained; owner confirmation required before any scoped token** | https://account.mapbox.com/ |
+| Mapbox | Venture-specific public token for `AreaMap.tsx`; SVG fallback retained | **Installed across lanes; origin/local/fresh protected Preview verified; Production unchanged** | https://account.mapbox.com/ |
 | Clerk | Customer/staff auth is a production requirement | **Target state**; no app ID verified | https://dashboard.clerk.com/ |
 | Stripe | Payment methods/invoices are a production requirement | **Target state**; no account ID verified | https://dashboard.stripe.com/ |
 | Resend | Transactional email is a production requirement | **Target state**; no domain/API resource verified | https://resend.com/domains |

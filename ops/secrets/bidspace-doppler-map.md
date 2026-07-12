@@ -25,7 +25,7 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 | `DOPPLER_ENVIRONMENT` | Identifies the active Doppler environment | `dev`, `stg`, `prd` | `metadata` | — |
 | `DOPPLER_PROJECT` | Identifies the Doppler project | `dev`, `stg`, `prd` | `metadata` | — |
 | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Browser-visible Clerk application identifier | `dev` | `unknown` | — |
-| `NEXT_PUBLIC_MAPBOX_TOKEN` | Browser-visible Mapbox token | `dev` | `configured` | Active and identical to the Explore&Earn and LogLoads public token; current probe is consistent with no URL restriction |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Browser-visible BidSpace-specific Mapbox token | `dev`, `stg`, `prd` | `configured` | Masked; 3 allowed origins; no production/custom-domain origin |
 | `NEXT_PUBLIC_POSTHOG_HOST` | Browser-visible PostHog ingestion host | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed |
 | `NEXT_PUBLIC_POSTHOG_KEY` | Browser-visible BidSpace PostHog project key | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed; value excluded |
 | `NEXT_PUBLIC_SENTRY_DSN` | Browser-visible Sentry event endpoint | `dev` | `unknown` | — |
@@ -41,7 +41,7 @@ The `stg` and `prd` configs currently contain Doppler metadata only. No variable
 
 ## Separation finding
 
-The public Mapbox token remains shared with Explore&Earn and LogLoads in the audited `dev` lane. Pass 5 confirmed the current source consumer, but every available founder-created named replacement is a secret `sk` token and is forbidden in `NEXT_PUBLIC_MAPBOX_TOKEN`. No replacement was installed. Create one public `pk` BidSpace token for `dev`/`stg`/`prd`, restrict it to actual local and exact Vercel Preview/development origins for now, and deploy/verify it before retiring the shared token. Production custom-domain restriction remains deferred.
+The BidSpace-specific public token now spans all Doppler lanes. Vercel has encrypted Development/Preview records only; no Production record or production/custom-domain origin exists. Exact Preview/localhost metadata returned `200`, unrelated origin `403`, and exact-source local Chrome rendered a canvas. Protected Preview access remains the verification gate.
 
 No `MAPBOX_ACCESS_TOKEN` or Cloudinary credential name is present in BidSpace Doppler. The repository's server-token and Cloudinary names are scaffold intent only; the empty BidSpace Cloudinary folder is not an active media boundary.
 

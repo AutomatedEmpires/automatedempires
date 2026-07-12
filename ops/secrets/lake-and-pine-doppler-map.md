@@ -24,6 +24,7 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 | `NEXT_PUBLIC_APP_URL` | Browser-visible canonical application URL | `stg`, `prd` | `configured` | Verified Vercel import |
 | `NEXT_PUBLIC_BUSINESS_EMAIL` | Browser-visible business contact email | `stg`, `prd` | `configured` | Verified Vercel import |
 | `NEXT_PUBLIC_BUSINESS_PHONE` | Browser-visible business contact phone | `stg`, `prd` | `configured` | Verified Vercel import |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Browser-visible Lake & Pine-specific Mapbox token | `dev`, `stg`, `prd` | `configured` | Masked; 7 allowed origins; founder placement directive satisfied |
 | `NEXT_PUBLIC_POSTHOG_HOST` | Browser-visible PostHog ingestion host | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed |
 | `NEXT_PUBLIC_POSTHOG_KEY` | Browser-visible Lake & Pine PostHog project key | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed; value excluded |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser-visible Supabase anonymous key | `stg`, `prd` | `configured` | Verified Vercel import |
@@ -36,7 +37,7 @@ The `dev` config contains metadata plus the Lake & Pine-specific Sentry identity
 
 ## Pass 5 provider delta
 
-PostHog project `509088` exists with autocapture, replay, and console capture disabled. Its own key/host pair is populated across all Doppler lanes and matching Vercel targets write-only; fresh deployment/event proof is pending. Source inspection also confirmed `apps/web/src/components/AreaMap.tsx` as an optional Mapbox consumer; no Mapbox name/value exists and the secret founder token was rejected.
+PostHog project `509088` exists as separately recorded. The labeled founder handoff directed Mapbox placement and resolved the prior decision gate. A Lake & Pine-specific public token now spans all Doppler lanes and Vercel Development/Preview/Production; exact origin enforcement, local Chrome, and fresh protected Preview are green.
 
 ## Follow-up
 
@@ -44,4 +45,4 @@ PostHog project `509088` exists with autocapture, replay, and console capture di
 - Populate other `dev` values only from a development-specific resource set.
 - Verify the repository consumes these exact variable names before removing any Vercel-side copy.
 - Install the Sentry identity into Vercel without display and prove a controlled event/release before calling monitoring active.
-- Fresh-deploy and event-check Lake & Pine before calling PostHog runtime-active. If Mapbox is activated, use one public `pk` Lake & Pine token across `dev`/`stg`/`prd`; never place a secret token in `NEXT_PUBLIC_MAPBOX_TOKEN`.
+- Mapbox environment installation/Preview proof is complete; Production remains unchanged and requires the normal promotion gate. Never place the secret authorizer in `NEXT_PUBLIC_MAPBOX_TOKEN`.

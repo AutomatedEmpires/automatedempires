@@ -54,7 +54,7 @@ No variable is classified as `empty` because names-only inspection does not expo
 - `dev`, `stg`, and `prd` are confirmed to share one Clerk development instance and one webhook signing configuration. Production and staging must be separated before identity can be transfer-ready.
 - Clerk has no native staging instance. Use a documented separate application/domain for strict staging or deliberately constrain development identity to provider-hosted previews.
 - No `RESEND_API_KEY` or `RESEND_FROM_EMAIL` name is present in any lane even though the repository contains email code. Transactional email is inactive.
-- No Mapbox or Cloudinary credential name is present in any lane. The required empty `sweepza/` namespace now exists, but it is not an access or media boundary.
+- No Mapbox or Cloudinary credential name is present in any lane. Sweepza's labeled secret authorizer was validated but intentionally unused because there is no consumer. The empty `sweepza/` namespace is not an access/media boundary.
 
 ## Follow-up
 
