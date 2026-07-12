@@ -11,7 +11,7 @@ Date: 2026-07-12.
 - **Why safe:** no framework, provider, deployment, runtime API, or application code changed. PostCSS stays on major 8 and ESLint stays on major 9. The fix is isolated from draft PR #8's documentation files.
 - **Tests run:** `pnpm install --frozen-lockfile`; `pnpm audit --audit-level low`; `pnpm typecheck`; `pnpm lint`; `pnpm build`; `git diff --check`.
 - **Result:** all pass. Audit reports no known vulnerabilities; lint has zero warnings; Next production build succeeds and prerenders 18 routes.
-- **PR link:** Pending branch publication; this line will be updated after the draft PR is opened.
+- **PR link:** [AutomatedEmpires PR #9](https://github.com/AutomatedEmpires/automatedempires/pull/9) (draft; not merged).
 - **Rollback:** revert the dependency-fix commit, which removes the `pnpm.overrides.postcss` entry and restores ESLint `9.17.0` plus the prior lockfile.
 
 ## Venture repositories
