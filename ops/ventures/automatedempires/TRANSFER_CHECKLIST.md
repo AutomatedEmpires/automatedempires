@@ -14,7 +14,7 @@ Use this checklist when transferring operations to a new maintainer, business ow
 
 - [ ] **Observed in repository** — Confirm the canonical repository is `AutomatedEmpires/automatedempires` and review outstanding branches and pull requests.
 - [x] **Verified current** — Strict `verify`/`design`, linear/squash history, conversation resolution, no force push/deletion, automation bypass, vulnerability alerts, Dependabot updates, and Vercel Git integration are configured; recipient access remains transfer-specific.
-- [ ] **Verified current** — Locate Vercel project `automatedempires`, current production `dpl_5scDXWyVV2wq1ypwhcjmiBkQLpzT` from `ed91ece423583318fd7481278a7478311d867add`, and its rollback candidate; verify the recipient can view deployments without changing configuration.
+- [ ] **Verified current** — Locate Vercel project `automatedempires`, current production `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` from `664cda67bc7bc91e4f1577d76bbe7758290f3a2d`, and its rollback candidate; verify the recipient can view deployments without changing configuration.
 - [ ] **Target state** — Run typecheck and build, deploy a non-production change, and demonstrate rollback to the recipient.
 
 ## Configuration and access
@@ -28,7 +28,7 @@ Use this checklist when transferring operations to a new maintainer, business ow
 
 - [ ] **Observed in repository** — Confirm the application expects `automatedempires.com`.
 - [ ] **Partially verified** — Registrar/authoritative DNS/zone are verified; transfer recipient must verify registrant contact, renewal billing, recovery access, Vercel attachment, and certificate health.
-- [ ] **Verified current** — Separate Sentry project/governance/Doppler bindings exist; Vercel event proof remains. Resend/PostHog are absent and Cloudinary parent namespace is organizational only; do not assume child resources are shared.
+- [ ] **Verified current** — Separate Sentry and PostHog project/environment bindings exist; both still need fresh deployment/event proof. Resend is absent and Cloudinary parent namespace is organizational only; do not assume child resources are shared.
 - [ ] **Verified current** — Record that no Supabase project is required for this runtime.
 
 ## Handoff proof

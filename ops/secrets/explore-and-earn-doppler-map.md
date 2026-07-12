@@ -1,10 +1,11 @@
 # Explore&Earn Doppler Map
 
 **Doppler project:** `explore-and-earn`
-**Names-only snapshot:** 2026-07-10
+**Names-only snapshot:** 2026-07-12
 **Configs inspected:** `dev`, `stg`, `prd`
 **Pass 2 status:** Configured values were used only in transient, read-only provider calls; only sanitized status, equality, and resource metadata were retained.
 **Pass 4 delta:** Scoped Resend key/From/Reply-To are verified in `dev`/`stg`/`prd`; twelve expected Stripe test names are verified in `dev`/`stg`. The detailed Pass 2 inventory below is retained as the baseline where unchanged.
+**Pass 5 delta:** Existing PostHog project `291166` was preserved. A venture-specific public Mapbox token with only style/font read scopes now spans Doppler `dev`/`stg`/`prd`; no secret authorizer entered runtime.
 
 Inventory used Doppler CLI names-only JSON mode with environment reads disabled. No secret value was requested, returned, or documented.
 
@@ -33,9 +34,9 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 | `NEXT_PUBLIC_CLERK_SIGN_IN_URL` | Clerk sign-in route | `dev` | `unknown` | — |
 | `NEXT_PUBLIC_CLERK_SIGN_UP_URL` | Clerk sign-up route | `dev` | `unknown` | — |
 | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Browser-visible Cloudinary cloud identifier | `dev` | `configured` | Public delivery identity for the shared Free product environment |
-| `NEXT_PUBLIC_MAPBOX_TOKEN` | Browser-visible Mapbox token | `dev` | `configured` | Active and shared with BidSpace and LogLoads; an unrelated-Origin probe also succeeded, consistent with no URL restriction |
-| `NEXT_PUBLIC_POSTHOG_HOST` | Browser-visible PostHog ingestion host | `dev` | `unknown` | — |
-| `NEXT_PUBLIC_POSTHOG_KEY` | Browser-visible PostHog project key | `dev` | `unknown` | — |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Browser-visible venture-specific Mapbox token | `dev`, `stg`, `prd` | `configured` | Masked; 7 allowed origins; exact Preview/localhost `200`, unrelated origin `403` |
+| `NEXT_PUBLIC_POSTHOG_HOST` | Browser-visible PostHog ingestion host | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed |
+| `NEXT_PUBLIC_POSTHOG_KEY` | Browser-visible Explore&Earn PostHog project key | `dev`, `stg`, `prd` | `configured` | Existing project preserved; value excluded |
 | `NEXT_PUBLIC_SENTRY_DSN` | Browser-visible Sentry event endpoint | `dev` | `unknown` | — |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Browser-visible Stripe account identifier | `dev`, `stg` | `configured` | Dedicated test account; part of the twelve-name test contract |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Browser-visible Supabase anonymous key | `dev` | `unknown` | — |
@@ -58,10 +59,11 @@ The Pass 2 statement that `stg`/`prd` were metadata-only is superseded by the Pa
 
 ## Separation findings
 
-- The public Mapbox token is shared with BidSpace and LogLoads. Create venture/environment-specific Mapbox tokens with URL restrictions, deploy replacements, then retire the shared token.
-- Mapbox replacement is approved but blocked by account-owner confirmation. Management scopes never belong in application runtime.
+- The venture-specific public token is installed across all lanes and matching Vercel environments. E&E's legacy duplicate was removed only after exact replacement. The provider old/shared token remains active rollback pending the Preview application-path gate and later Production proof.
+- The secret authorizer remained server-side only. The unused/revoked server-shaped `MAPBOX_ACCESS_TOKEN` is not a destination for the public browser token.
 - Explore&Earn's runtime key is now scoped; the legacy LogLoads key still reaches the same team. This is account coupling, not shared key material.
 - `CLERK_WEBHOOK_SECRET` remains absent from the recorded lanes; production auth synchronization is unconfigured. Resend From/Reply-To are now explicit.
 - The Resend domain is verified. Exact-SHA delivery/reply smoke and broad-key retirement remain open.
 - Only Explore&Earn `dev` has Cloudinary credentials. Nine namespaces exist, but do not copy Admin authority to empty venture folders.
 - Do not populate `stg` or `prd` by copying all of `dev`; verify the correct provider resource for each variable first.
+- Explore&Earn's provider project was not recreated or reconfigured. Key/host presence is verified across all lanes and Vercel targets; a fresh deployment/release event is still required before claiming the post-write runtime state.

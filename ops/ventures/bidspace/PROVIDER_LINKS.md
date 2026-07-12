@@ -12,7 +12,7 @@ These are non-secret navigation aids. A dashboard link does not prove resource o
 | Supabase | Project fingerprint `…fsqslgxcv` | **Verified current** | https://supabase.com/dashboard/projects |
 | Clerk | Development instance `ins_3Eh…O6tsWB` | **Verified development**; production missing | https://dashboard.clerk.com/ |
 | Stripe | BidSpace-specific Connect platform/account | **Observed in repository**; account identity **unknown** | https://dashboard.stripe.com/ |
-| Mapbox | Shared default token configured in `dev`; no consumer on `main`, active consumer on accepted feature `511b763…` | **Branch-qualified coupling; replacement waits for reviewed source/domain** | https://account.mapbox.com/ |
+| Mapbox | Venture-specific public token; active `explore-map.tsx` consumer | **Doppler all lanes + Vercel Dev/Preview installed; origin/local proof green; protected Preview/domain gates open** | https://account.mapbox.com/ |
 | Cloudinary | Free environment `dwi…t9vi`, empty `bidspace/` namespace | **Taxonomy only; no assets/credential** | https://console.cloudinary.com/ |
 | PostHog | Product analytics project | **Observed in repository**; project identity **unknown** | https://app.posthog.com/ |
 | Sentry | Distinct BidSpace project/DSN in `automated-empires` | **First event plus ownership/one alert/scrubbers/IP scrubbing fixed** | https://sentry.io/ |

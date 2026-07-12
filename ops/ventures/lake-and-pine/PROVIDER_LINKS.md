@@ -7,11 +7,11 @@
 | Vercel | Project `lakeandpine` (`…t3FePz`); Preview `dpl_BBy…` and clean current-main production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` are `READY` | **Source/main provenance fixed; functional rollback/domain smoke open** | https://vercel.com/dashboard |
 | Supabase | Project fingerprint `…vtmwr` | **Verified current; preserve during source normalization** | https://supabase.com/dashboard/projects |
 | Domain | `lakeandpinecleaning.com` | **Authenticated owned / full 8-record zone verified; no MX/SPF** | https://dcc.godaddy.com/ |
-| Mapbox | Optional `AreaMap.tsx` consumer with branded SVG fallback | **No active token; fallback retained; owner confirmation required before any scoped token** | https://account.mapbox.com/ |
+| Mapbox | Venture-specific public token for `AreaMap.tsx`; SVG fallback retained | **Installed across lanes; origin/local/fresh protected Preview verified; Production unchanged** | https://account.mapbox.com/ |
 | Clerk | Customer/staff auth is a production requirement | **Target state**; no app ID verified | https://dashboard.clerk.com/ |
 | Stripe | Payment methods/invoices are a production requirement | **Target state**; no account ID verified | https://dashboard.stripe.com/ |
 | Resend | Transactional email is a production requirement | **Target state**; no domain/API resource verified | https://resend.com/domains |
-| PostHog | Product analytics | **Target state**; no project ID verified | https://app.posthog.com/ |
+| PostHog | Project `509088`; own key/host in Doppler/Vercel targets | **Provider/environment binding verified; runtime pending fresh deployment/event** | https://app.posthog.com/ |
 | Sentry | Separate `lake-and-pine` project; own identifiers in Doppler all lanes | **Project/governance fixed; Vercel install/runtime event open** | https://sentry.io/ |
 
 The owned domain is not release authority. GitHub/main/Vercel provenance is clean; functional provider-host smoke and rollback acceptance still precede domain work.

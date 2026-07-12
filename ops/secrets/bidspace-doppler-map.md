@@ -1,7 +1,7 @@
 # BidSpace Doppler Map
 
 **Doppler project:** `bidspace`
-**Names-only snapshot:** 2026-07-10
+**Names-only snapshot:** 2026-07-12
 **Configs inspected:** `dev`, `stg`, `prd`
 **Pass 2 status:** Configured values were used only in transient, read-only capability checks; only sanitized status and equality metadata were retained.
 
@@ -25,7 +25,9 @@ Inventory used Doppler CLI names-only JSON mode with environment reads disabled.
 | `DOPPLER_ENVIRONMENT` | Identifies the active Doppler environment | `dev`, `stg`, `prd` | `metadata` | — |
 | `DOPPLER_PROJECT` | Identifies the Doppler project | `dev`, `stg`, `prd` | `metadata` | — |
 | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Browser-visible Clerk application identifier | `dev` | `unknown` | — |
-| `NEXT_PUBLIC_MAPBOX_TOKEN` | Browser-visible Mapbox token | `dev` | `configured` | Active and identical to the Explore&Earn and LogLoads public token; current probe is consistent with no URL restriction |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Browser-visible BidSpace-specific Mapbox token | `dev`, `stg`, `prd` | `configured` | Masked; 3 allowed origins; no production/custom-domain origin |
+| `NEXT_PUBLIC_POSTHOG_HOST` | Browser-visible PostHog ingestion host | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed |
+| `NEXT_PUBLIC_POSTHOG_KEY` | Browser-visible BidSpace PostHog project key | `dev`, `stg`, `prd` | `configured` | Presence-only checks passed; value excluded |
 | `NEXT_PUBLIC_SENTRY_DSN` | Browser-visible Sentry event endpoint | `dev` | `unknown` | — |
 | `NEXT_PUBLIC_SITE_URL` | Canonical browser-visible application URL | `dev` | `unknown` | No production domain has been selected |
 | `SENTRY_DSN` | Server-side Sentry event endpoint | `dev` | `unknown` | — |
@@ -39,6 +41,8 @@ The `stg` and `prd` configs currently contain Doppler metadata only. No variable
 
 ## Separation finding
 
-The public Mapbox token is shared with Explore&Earn and LogLoads. Current authorization lacks `tokens:read` for metadata inventory and `tokens:write` for replacement. After the production domain is selected, have the account owner create a BidSpace-specific public token with only the required read scopes and environment-appropriate URL restrictions. Deploy the replacement before retiring the shared token.
+The BidSpace-specific public token now spans all Doppler lanes. Vercel has encrypted Development/Preview records only; no Production record or production/custom-domain origin exists. Exact Preview/localhost metadata returned `200`, unrelated origin `403`, and exact-source local Chrome rendered a canvas. Protected Preview access remains the verification gate.
 
 No `MAPBOX_ACCESS_TOKEN` or Cloudinary credential name is present in BidSpace Doppler. The repository's server-token and Cloudinary names are scaffold intent only; the empty BidSpace Cloudinary folder is not an active media boundary.
+
+PostHog project `509087` exists with autocapture, replay, and console capture disabled. Its own key/host pair is populated across all Doppler lanes and matching Vercel targets write-only. No fresh deployment/event smoke occurred, so runtime activation remains pending.

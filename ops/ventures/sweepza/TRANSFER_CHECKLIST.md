@@ -20,7 +20,7 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 
 - [ ] Dark production Clerk DNS is Verified and SSL Issued; finish OAuth, events/webhook, admin owners, Preview proof, `prd` replacement, and dev-user re-registration.
 - [ ] Dedicated live `acct_1Sp…cxzo` and sandbox `acct_1Te…88pB` boundaries/prices are recorded; classify the foreign endpoint/two customers/$0 draft invoice without destructive mutation and review legal/payout/refund ownership.
-- [ ] Decide PostHog non-use/project after owner re-auth; Sentry project/ownership/one-alert/privacy controls are recorded, but first event/release/retention remain.
+- [ ] PostHog project/key/host environment binding and Sentry governance are recorded; fresh-deploy and verify controlled events/releases/retention before transfer.
 - [x] Truthful mail-skip source merged through #47 and is present in current-main production; until mail is funded/configured, execution proof must show `skipped` and null `sent_at`.
 - [ ] Approve and verify an independent Resend team, sending identity/domain, scoped key, from-address ownership, delivery, and rollback.
 - [ ] GitHub/Notion worker tokens are least-privilege, venture-specific, and assigned to named owners.

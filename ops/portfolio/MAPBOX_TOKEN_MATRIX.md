@@ -1,27 +1,43 @@
 # Mapbox Token Matrix
 
-**Verified snapshot:** 2026-07-10 (Pass 4 owner-confirmation gate)
-**Execution state:** Founder approval is recorded. The browser creation claim failed/reset at account-password confirmation; no active claim or token remains. No token was created, changed, installed, printed, or revoked.
+**Verified snapshot:** 2026-07-12 (Pass 5 executed)
+**Operating model:** One venture-specific public token per application, shared across that application's `dev`, `stg`, and `prd` lanes for now. Environment-specific rotation remains a later production-hardening option.
 
-The authenticated account contains exactly one default public token. It is unrestricted, and Mapbox does not permit URL restrictions on the default token. Dashboard token-write control is available after owner confirmation. The current public value is shared by Explore&Earn, BidSpace, and LogLoads configuration and remains active as rollback.
+## Secure execution result
 
-| Venture / exact source | Runtime consumer | Current configuration | Separation state | Pass 4 classification | Safe next action |
-|---|---|---|---|---|---|
-| Explore&Earn `main` `528d28ccfb36…` | **Yes.** `apps/web/components/map/MapView.tsx` uses Mapbox GL JS with `NEXT_PUBLIC_MAPBOX_TOKEN` for `/map` | Shared public token in current configuration; separate server-shaped token is revoked/unused | Founder approved dev/prd replacements; staging still lacks one canonical hostname | Creation **blocked by MFA/account-owner confirmation**; installation/retirement **blocked by production risk**; staging **intentionally deferred** | After confirmation, create dev/prd non-default tokens with `styles:read`/`fonts:read`, restricted to `http://localhost:3000` and `https://exploreandearn.com`. Verify Preview and unrelated-origin rejection before replacement; do not create a server token. |
-| BidSpace `main` `0b20189658f2…` | **No consumer at that audited main.** Source contains planning/config placeholders | Shared public token appears in `dev`; final product domain is deferred | Unused shared configuration is not a production boundary | Dev cleanup **blocked by production risk**; production **blocked by missing domain** | Remove the unused value only after a clean build proves no hidden consumer; no production token until an owned domain exists. |
-| BidSpace accepted feature `511b763…` | **Yes.** The accepted recovered product branch uses Mapbox GL JS with the public token and `light-v11` | Feature source/environment exist; no owned production domain | A localhost dev token does not require the deferred domain; production does | Dev token creation **blocked by MFA/account-owner confirmation** and reviewed-source proof; production **blocked by missing domain** | After source acceptance and owner confirmation, create `bidspace-dev-public` for `http://localhost:3000`. Keep production deferred until an owned domain exists. |
-| LogLoads `main` `e78b48c…` | No map application on `main` | Shared public value is stored in both public and server-shaped names | Mislabelled public value; `main` is not the deployed feature candidate | **blocked by production risk** | Do not rotate from `main` evidence alone. Reconcile the feature branch and architecture first. |
-| LogLoads converged PR #6 | **Yes, optional.** `RealMap.tsx` uses Mapbox GL JS when a public token exists and otherwise uses the keyless MapLibre/Carto fallback | `dev`/`prd` carry the shared public value; the server-shaped name is unused/misleading | Source/Preview are converged; public-token coupling remains, with a safe no-token fallback | Dev token creation **blocked by MFA/account-owner confirmation**; production replacement **blocked by live-runtime risk** | After confirmation, create `logloads-dev-public` for `http://localhost:3002`. Keep fallback active. Create prd only after production/runtime proof; remove the misleading server-shaped name through a clean deploy. |
-| Lake & Pine merged main `1b6a877…` | **Yes, optional.** `AreaMap.tsx` uses Mapbox GL JS and falls back to a branded SVG when the public token is absent | No active token in Lake & Pine Doppler; clean main production runs with the fallback | No cross-venture credential reuse; no-token behavior is a valid current boundary | No token required now; any creation **blocked by MFA/account-owner confirmation** | Keep the branded fallback. If product acceptance requires Mapbox, create separate dev/prd public tokens with exact origins after owner confirmation; never borrow the portfolio token. |
-| Sweepza | No map consumer; product notes explicitly say none today | No active token verified | No contamination confirmed | **completed** no-resource decision | Do not provision a token unless a reviewed geospatial feature is implemented. |
-| AutomatedEmpires / ORAN | No Mapbox consumer verified; ORAN uses Leaflet/OpenStreetMap in the migration candidate | No active token verified | No contamination confirmed | **completed** no-resource decision | Do not copy the shared token. |
+The secure outside-repository handoff used `C:\Users\autom\.codex\mapbox keys.txt`. Placement scripts did not emit the secret handoff values. After verification, the 764-byte file was best-effort overwritten, truncated, and removed. No raw Mapbox credential is stored in source, Markdown, reports, env files, or committed artifacts. Public `pk` values are client-visible by design but intentionally omitted here.
 
-## Token rules
+Six labeled secret authorizers were validated. Explore&Earn, LogLoads, BidSpace, and Lake & Pine authorizers were used only server-side to mint separate public `pk` browser tokens. ORAN and Sweepza authorizers were intentionally unused, and no Mapbox environment variable was added for either venture. No authorizer was placed in application runtime.
 
-- Browser Mapbox GL JS consumers use non-default public tokens with `styles:read` and `fonts:read`. Do not grant management or write scopes.
-- Mapbox URL restrictions do **not** support wildcard characters or IP addresses. A restriction containing only the HTTPS apex domain also authorizes its subdomains and paths; specifying the protocol prevents HTTP use.
-- Restricted tokens require a referrer and may fail under `noreferrer`, `same-origin`, or privacy-blocking behavior. Verify the application's `Referrer-Policy` before production rollout.
-- A production token must never authorize the broad hosting-provider domain `vercel.app`, because a domain-only rule would authorize its subdomains. Use a stable venture-owned staging hostname, a separately restricted local token, or a deliberately temporary non-production token.
-- Keep the shared token until every proven consumer has a verified replacement or an intentionally tested fallback. Retire it only after configuration searches and provider usage show zero use.
+The four public tokens have exactly `styles:read` and `fonts:read`. Their restriction counts are Explore&Earn 7, LogLoads 6, BidSpace 3, and Lake & Pine 7. Each allowlist includes `http://localhost:3000`, the venture's real owned/custom/project origins where applicable, and the exact fresh Preview origin. BidSpace intentionally has no production/custom-domain origin.
 
-See `MAPBOX_TOKEN_SEPARATION_PLAN.md` for the execution and rollback sequence.
+| Venture | Exact fresh Preview origin |
+|---|---|
+| Explore&Earn | `https://explore-and-earn-ofv76eqj6-jackson-coles-projects-dd76106c.vercel.app` |
+| LogLoads | `https://logloads-257awwwbb-jackson-coles-projects-dd76106c.vercel.app` |
+| BidSpace | `https://bidspace-9uk5bxzx5-jackson-coles-projects-dd76106c.vercel.app` |
+| Lake & Pine | `https://lakeandpine-ewzqk7zxj-jackson-coles-projects-dd76106c.vercel.app` |
+
+## Installation and verification matrix
+
+| Venture | Source consumer | Public-token metadata | Doppler | Vercel | Fresh Preview at exact main SHA | Origin enforcement | Exact-source local Chrome | Remaining gate |
+|---|---|---|---|---|---|---|---|---|
+| Explore&Earn | `apps/web/components/map/MapView.tsx` | Public `pk`; 2 scopes; 7 restrictions | `NEXT_PUBLIC_MAPBOX_TOKEN` populated/masked in `dev`, `stg`, `prd`; one token across lanes | Encrypted Development, Preview, Production records. Legacy duplicate removed only after exact replacement | `READY` at `b616b9e10fa434422dd34442f6cb24194cf8d5ec`; route reaches a pre-existing app error boundary before map initialization | HTTP `Referer` probes: Preview/localhost `200`; unrelated `403` | Canvas `1`; fallback absent; 5 mapped items | Repair/verify the Preview application error path, then production-deploy only with a separate gate |
+| LogLoads | `apps/web/components/v3/RealMap.tsx` | Public `pk`; 2 scopes; 6 restrictions | Populated/masked in `dev`, `stg`, `prd`; one token across lanes | Encrypted Development, Preview, Production records | `READY` at `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`; route reaches a pre-existing app error boundary before map initialization | HTTP `Referer` probes: Preview/localhost `200`; unrelated `403` | Provider `mapbox`; canvas `1`; MapLibre `0` | Repair/verify the Preview application error path; retain fallback and production/data gates |
+| BidSpace | `apps/web/components/explore-map.tsx` | Public `pk`; 2 scopes; 3 restrictions; no production/custom-domain origin | Populated/masked in `dev`, `stg`, `prd`; one token across lanes | Encrypted Development and Preview only; no Production record | `READY` at `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8`; protected Preview was client-side blocked and no access bypass was created | HTTP `Referer` probes: Preview/localhost `200`; unrelated `403` | Canvas `1`; missing-token fallback absent | Obtain an authorized protected-Preview verification path; production remains deferred until an owned domain exists |
+| Lake & Pine | `apps/web/src/components/AreaMap.tsx` | Public `pk`; 2 scopes; 7 restrictions. Founder handoff explicitly directed placement, resolving the prior decision gate | Populated/masked in `dev`, `stg`, `prd`; one token across lanes | Encrypted Development, Preview, Production records | `READY` at `1b6a877bc054a9239c2a430aaf668996de8a0302`; fresh protected Preview passes directly | HTTP `Referer` probes: Preview/localhost `200`; unrelated `403` | Canvas `1`; SVG fallback `0` | Production remains unchanged; promote only through the normal production gate |
+| ORAN | No Mapbox consumer; Leaflet/OpenStreetMap | Secret authorizer validated but intentionally unused; no public token minted | Absent | Absent | Not applicable | Not applicable | Not applicable | **Completed no-resource decision**; preserve civic privacy posture |
+| Sweepza | No Mapbox consumer | Secret authorizer validated but intentionally unused; no public token minted | Absent | Absent | Not applicable | Not applicable | Not applicable | **Completed no-resource decision** |
+| AutomatedEmpires | No Mapbox consumer | No runtime resource required | Absent | Absent | Not applicable | Not applicable | Not applicable | **Completed no-resource decision** |
+
+All fresh builds were Preview deployments. Latest Production deployment IDs, URLs, and SHAs remained unchanged; no Production deployment was triggered.
+
+## Rollback and cost
+
+- The provider's old/shared public token remains active as rollback. No secret authorizer, new public replacement, or old/shared provider token was revoked.
+- The old shared value was replaced in the four intended application environments. E&E's overlapping legacy record was removed only after its exact replacement was verified.
+- Authenticated billing is pay-as-you-go. Token creation has no base cost, the first 50,000 Mapbox GL JS web loads/month are free, the upcoming and January–July 2026 invoices are `$0`, and no monthly spending cap exists. Pass 5 added `$0` recurring spend.
+- The E&E/LogLoads Preview failures are application error-boundary gates, not token failures: origin enforcement and isolated exact-source Chrome runtimes are green.
+- A `READY` build, environment presence, or local map render is not a Production deployment. Preserve the old/shared rollback until the remaining Preview gates and a separately approved Production rollout pass.
+
+See `MAPBOX_TOKEN_SEPARATION_PLAN.md` for the completed handoff and remaining promotion sequence.

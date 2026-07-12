@@ -12,7 +12,7 @@ Pass 2 provider refresh: 2026-07-10; sanitized status only.
 | Custom domain | `sweepza.com` | **Authenticated GoDaddy control; privacy/renewal/full zone verified** | https://dcc.godaddy.com/ |
 | Clerk | Dev `ins_3Eh…Gh4dSy`; dark production; route `/api/webhooks/clerk` | **Production DNS Verified/SSL Issued; dev/stg/prd reuse remains** | https://dashboard.clerk.com/ |
 | Stripe | Sandbox `acct_1Te…88pB`; live `acct_1Sp…cxzo` | **Dedicated accounts/prices/lanes verified; residual foreign endpoint/objects** | https://dashboard.stripe.com/ |
-| PostHog | No Sweepza project; key is empty | **Verified absent/non-reused; creation owner-reauth/current-plan blocked** | https://app.posthog.com/ |
+| PostHog | Project `509084`; own key/host in Doppler/Vercel targets | **Provider/environment binding verified; runtime pending fresh deployment/event** | https://app.posthog.com/ |
 | Sentry | Distinct Sweepza project/DSN in `automated-empires` | **Ownership/one alert/scrubbers/IP scrubbing fixed; no first event** | https://sentry.io/ |
 | Resend | Approval/hold and winner-notification consumers | **Required by code; no key/from/account/domain** | https://resend.com/domains |
 | Mapbox | No active Sweepza token configuration | **Not configured; do not inherit the shared portfolio token** | https://account.mapbox.com/ |

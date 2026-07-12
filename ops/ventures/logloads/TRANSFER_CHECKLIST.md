@@ -19,9 +19,9 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 
 - [ ] Supabase fingerprint `…zfsjyxo`, schema, ledger, backups, RLS, storage, and PostGIS state are reviewed; local `135cff6…` upgrade is proven safely before live migration.
 - [ ] Dark production Clerk DNS is Verified and SSL Issued; finish the host decision, role claims, OAuth/callbacks/webhook, isolated Preview, and runtime installation. Resolve dev/stg reuse.
-- [ ] Decide whether Mapbox remains after source convergence; if so replace shared token with restricted public token. Otherwise record/test MapLibre fallback and remove misleading server name.
+- [ ] Venture-specific Mapbox is installed and local/origin verified; repair/re-smoke the Preview app path, retain MapLibre/old-token rollback, then remove the misleading server name only after zero use.
 - [ ] Stripe account/mode/products/webhooks are proved LogLoads-specific and limited to subscriptions.
-- [ ] LogLoads has a separate Resend account/domain/scoped key plus explicit sender/contact identity and delivery proof; record Cloudinary non-use/transfer decision and create PostHog only if required. Distinct Sentry ownership/alert/privacy controls are complete; first event/release remains.
+- [ ] LogLoads still needs separate Resend/domain delivery proof and Cloudinary decision. PostHog project/environment binding and Sentry governance exist; fresh deployment and first events/releases remain.
 - [ ] Agent hooks and provider-admin tokens are least-privilege, venture-specific, and removed from runtime where unnecessary.
 
 ## Domain and acceptance
