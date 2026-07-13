@@ -1,15 +1,19 @@
-# AutomatedEmpires — Studio Site Agent Contract
+# AutomatedEmpires — Parent Operator Agent Contract
 
-> Binding for every agent (human or AI) touching this repo. This is the public-facing studio/portfolio site for the AutomatedEmpires venture system. Read it fully before doing anything.
+> Binding for every agent (human or AI) touching this repo. This repository contains the current public portfolio surface and the operating records for the AutomatedEmpires venture system. Read it fully before doing anything.
 
 ## 0 · Prime doctrine
-**Notion decides and builds. GitHub reviews and ships. Figma shows. Everything else runs.**
+**Founder product direction decides. GitHub records, reviews, and ships. Figma shows. Providers run approved capabilities.**
 
-- **Notion** = product & vision truth, and where the bulk of the build is authored before code moves. **This repo** = implementation truth for the marketing site only; GitHub validates, reviews, and ships it.
-- This repo is the org's public front door; it is NOT one of the product apps (Explore&Earn, BidSpace, Sweepza, LogLoads).
+- `docs/VENTURE_OPERATING_DEFINITIONS.md` records the dated founder product definitions that govern this repository. Notion or other planning systems must be reconciled to it when they conflict.
+- Code and provider state are implementation evidence, not permission to redefine a venture.
+- This repo is the org's current public front door and operating-command repository; it is not a child product app.
 
 ## 1 · What this is
-The AutomatedEmpires studio site: a Next.js (App Router) marketing/portfolio surface that presents the venture portfolio. `lib/ventures.ts` is the single source of truth for the venture list rendered by the site.
+
+AutomatedEmpires is the parent operator and command layer. Its direction is a portfolio status dashboard, provider map, rollout board, governance registry, cost/risk visibility, task orchestration, and venture transfer-readiness tracker—not a generic AI agency site.
+
+The checked-in Next.js application is the current public portfolio surface. `lib/ventures.ts` is the implementation source for the list and copy rendered by that surface; it is not the canonical product-definition source. When it conflicts with `docs/VENTURE_OPERATING_DEFINITIONS.md`, document the conflict and use a separately reviewed product-code change to reconcile it.
 
 ## 2 · The machine
 Built on ONE machine; assume exactly:
@@ -24,7 +28,8 @@ Built on ONE machine; assume exactly:
 - Any version change requires a dated decision.
 
 ## 4 · Integration spine (cross-app standard)
-This is a marketing-leaning site and does not need the full product spine, but when it does integrate it uses the locked family providers — Secrets = Doppler, Hosting = Vercel, Analytics = PostHog, Errors = Sentry, Media = Cloudinary, Email = Resend, Icons = Streamline. Do not introduce alternates without a dated decision.
+
+The current public surface does not need the full product spine. Command-layer features may add data or provider integrations only for a reviewed consumer, with access, privacy, cost, ownership, and removal plans. The current provider family is Secrets = Doppler, Hosting = Vercel, Analytics = PostHog, Errors = Sentry, Media = Cloudinary, Email = Resend, Icons = Streamline. This family is conditional on an approved consumer: a documented `no resource` or product-prohibited decision overrides stack symmetry. Never provision a provider merely to complete a matrix, and never introduce alternates or child-venture credentials without a dated decision.
 
 ## 5 · How we work
 - Work on lane/feature branches → small PRs → review → merge. **Never push straight to `main`.**
@@ -35,4 +40,6 @@ This is a marketing-leaning site and does not need the full product spine, but w
 ## 6 · Repo layout
 - `app/` — Next.js App Router routes
 - `components/` — Nav, Hero, VentureCard, Footer, and related UI
-- `lib/ventures.ts` — venture list single source of truth
+- `lib/ventures.ts` — implementation source for the venture list rendered by the public site
+- `docs/VENTURE_OPERATING_DEFINITIONS.md` — canonical portfolio product definitions
+- `ops/` — status, rollout, provider-governance, execution, and transfer-readiness evidence

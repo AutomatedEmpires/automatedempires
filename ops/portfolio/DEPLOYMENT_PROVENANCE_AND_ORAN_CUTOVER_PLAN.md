@@ -1,5 +1,9 @@
 # Deployment Provenance and ORAN Cutover Plan
 
+> Product/implementation correction (2026-07-12): ORAN is a protected, chat-first verified-provider navigation MVP, not a generic directory. Later execution merged PR #67 at `8da2101` and created protected noindex Preview `dpl_9QdKsovZZcASrdgCqENysSF9XSNd`; earlier PR #58/zero-deployment statements below remain historical evidence. The Preview does not authorize public access or DNS.
+
+> Later source supersession (2026-07-12): Lake & Pine PRs #2/#3 advanced current source to `e65b3b6` with DOM-XSS regression and disposable-PostgreSQL migration/RLS/booking/dashboard smoke. LogLoads PRs #21/#22 advanced current source to `6f7ebcd` with dependency/rate-limit hardening and a provider-neutral shared-limiter adapter. The Pass 4 #1/#6 deployments and “no tests”/source-authority statements below remain dated evidence for their exact SHAs, not current-main claims. Neither later source has a recorded Production promotion here.
+
 **Prepared:** 2026-07-10
 
 **Scope:** Lake & Pine, LogLoads, and ORAN
@@ -11,7 +15,7 @@
 | Venture | Current source truth | Current provider artifact | Pass 4 classification | Required decision |
 |---|---|---|---|---|
 | Lake & Pine | PR #1 source `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` merged as default `1b6a877bc054a9239c2a430aaf668996de8a0302` | Preview `dpl_BBy…` and clean merged-main production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` are `READY`; dirty artifact historical only | Source/CI/Preview/main production provenance **fixed and verified**; DNS cutover smoke **blocked by production risk** | Finish functional rollback/domain smoke before web-record change |
-| LogLoads | Supabase-canonical PR #6 final source `f280ef4fef4b992f94457aad61cfe27e8ec91791` passed required `verify`, `migrations`, and `dependency-review` checks and merged to default `9c9e107082942e5bce782eac2ce71aa63eb7d9c0` | Exact-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4` and merged-main production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` are `READY`; live Supabase/data/provider configuration is unchanged | Canonical source/checks/merge/main production provenance **fixed and verified**; live upgrade/provider/DNS cutover **blocked by production risk** | Prove backup/live-shape upgrade, environment provenance, distributed rate limiting, and rollback before live migration or provider activation |
+| LogLoads | Supabase-canonical PR #6 final source `f280ef4fef4b992f94457aad61cfe27e8ec91791` passed required `verify`, `migrations`, and `dependency-review` checks and merged to default `9c9e107082942e5bce782eac2ce71aa63eb7d9c0` | Exact-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4` and merged-main production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` are `READY`; live Supabase/data/provider configuration is unchanged | Canonical source/checks/merge/main production provenance **fixed and verified**; live upgrade/provider/DNS cutover **blocked by production risk** | Prove backup/live-shape upgrade, environment provenance, Supabase-first shared atomic rate limiting plus exact-SHA multi-instance/outage behavior, and rollback before live migration or provider activation |
 | ORAN | Green hardening remains draft PR #58 at exact head `6d5caf226bb4940c6bc0f270f77c43e3cb30b1da`; migration execution remains fail-closed and stale Azure assumptions are removed | Vercel project `oran` (`…X9QLy`) remains Node 24, `live=false`, with no domains/deployments | Required Build/Lint/Test/Type Check/Security Audit/Runtime Readiness checks are green; Codecov patch, Visual Regression, and runbook freshness are failing; Preview/cutover remains **blocked by production risk** | Keep the PR draft; create scoped Preview data/credential lane, reconcile schema authority without unsafe replay, repair ancillary gates, then prove Preview/rollback |
 
 ## Lake & Pine normalization
@@ -54,7 +58,7 @@ Current repository/provider evidence establishes that:
 
 1. Preserve the merged required-check evidence and default source `9c9e107…`; do not bypass strict protection for future changes.
 2. Preserve green evidence: lint/workflow, 9/9 typecheck, 101/101 unit, build, guardrails, PostgreSQL 17 reset, RLS/grants, 37 E2E with 5 intentional skips, wrapper smoke, `verify`, `migrations`, and `dependency-review`.
-3. Before live migration, back up and prove upgrade against the actual live schema/row; verify environment provenance and implement distributed rate limiting.
+3. Before live migration, back up and prove upgrade against the actual live schema/row; verify environment provenance and shared atomic rate limiting across serverless instances. Evaluate Supabase first; use Vercel KV/Upstash only if unsuitable; keep memory local/dev.
 4. Preserve clean final-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4`, merged-main production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF`, and their rollback provenance. Dirty artifacts remain diagnostic only.
 5. Keep `logloads.com` on Website Builder until live-data, provider, functional rollback, and DNS gates pass.
 
@@ -85,19 +89,22 @@ The public Azure IP currently returns a 404 and invalid TLS. Restoring that A re
 
 ### Preview gates
 
-1. Use the reviewed exact draft-PR head and provide narrowly scoped `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` through the approved GitHub environment. Populate ORAN-owned Preview runtime variables without exposing values, then produce a clean prebuilt Preview without attaching the domain.
-2. Verify public and authenticated pages, Clerk redirects, database isolation, OpenStreetMap/map behavior, CSP, mail, Sentry/logging, health, and error handling.
-3. Verify every cron route: unauthorized requests return `401`, missing internal configuration returns `503`, and an approved scheduled request completes exactly once.
-4. Record build command, install command, Node/package-manager versions, deployment ID, artifact SHA, environment source, and test evidence.
+1. Use the current reviewed exact candidate and approved scoped credentials to keep a protected/noindex Preview without attaching the public domain.
+2. Verify chat-first guided intake; need/location/age/urgency/eligibility/context/access/language inputs; actionable provider/service recommendations; source citations/provenance; stale states; issue reporting; agentic sourcing plus human verification; community volunteer/admin queue; and urgent/crisis escalation.
+3. Verify North Idaho/Eastern Washington scope and reject a generic resource-dump experience or broad irrelevant records.
+4. Verify no user or behavioral tracking and no pixels; privacy-scrubbed operational logs may support runtime safety only. Verify no medical/legal/political/emergency advice claims and no implied partnerships.
+5. Verify protected/authenticated access, Clerk redirects, database isolation, OpenStreetMap/map behavior, CSP, mail, Sentry/logging, health, error handling, and named support/correction/removal/escalation owners.
+6. Verify every cron route: unauthorized requests return `401`, missing internal configuration returns `503`, and an approved scheduled request completes exactly once.
+7. Record build command, install command, Node/package-manager versions, deployment ID, artifact SHA, environment source, and test evidence.
 
 ### Production-candidate gates
 
-1. Merge only after the preview and data-contract reviews pass.
+1. Consider a production-configured candidate only after the chat-first product, regional source/provenance/verification, data, runtime, support, privacy, and recovery reviews pass.
 2. Deploy to the Vercel provider hostname without attaching `openresourceaccessnetwork.com`.
 3. Establish observability baselines and a named rollback operator.
 4. Produce at least one known-good prior Vercel artifact or repair and verify Azure as a functional fallback. A broken Azure IP is not an acceptable rollback.
 5. Export the authenticated GoDaddy zone immediately before cutover. Change web records only; preserve Mailgun MX/SPF and DMARC.
-6. Verify apex, `www`, TLS, Clerk, database, mail, cron, logs, and rollback after propagation. Do not delete Azure, Key Vault, database, or mail resources during stabilization.
+6. Public access/DNS requires a separate founder decision after all product/data/runtime/support gates pass. Then verify apex, `www`, TLS, Clerk, database, mail, cron, logs, corrections/escalation, and rollback after propagation. Do not delete Azure, Key Vault, database, or mail resources during stabilization.
 
 ### Rollback
 

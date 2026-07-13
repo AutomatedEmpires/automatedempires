@@ -4,6 +4,8 @@
 
 **Scope:** Explore&Earn and Sweepza
 
+**Founder product correction (2026-07-12):** Sweepza is a discovery/listing platform, not the promotion operator by default. Existing Stripe accounts, prices, variables, and lane alignment are historical provider evidence; they do not authorize entry, prize, promotion, winner, or other operator money flows. Even host listing, placement, promotion, or subscription billing remains inactive until a separate legal/product approval defines the model. “Activation” in this plan applies to Explore&Earn only; Sweepza work is limited to non-destructive classification and preservation unless a later dated decision says otherwise.
+
 **Pass 4 correction:** Authenticated account-switcher/API evidence proves separate live and test/sandbox accounts. The Pass 2 A/B/C retaining-account decision is superseded; the remaining work is safe activation plus residual foreign-configuration/object classification.
 
 **Execution boundary:** Canonical catalog/test configuration and environment alignment were authorized and completed. No customer, invoice, payment, subscription, payout, tax, legal, or destructive live-state mutation occurred.
@@ -61,7 +63,7 @@ The two customers and $0 draft invoice still need non-sensitive attribution. No 
 | Account identity | Intended account ID returned without credential disclosure | Infrastructure |
 | Preview | Exact-SHA test-mode checkout, webhook, entitlement, portal, and failure-path evidence | Engineering |
 | Secrets | Doppler/Vercel names and account/mode mappings verified; old binding retained for rollback | Infrastructure |
-| Live activation | Explicit approval for any live transaction or customer/invoice-producing smoke | Founder + billing operator |
+| Live activation | Explore&Earn only: explicit approval for any live transaction or customer/invoice-producing smoke. Sweepza activation requires a separate approved host-monetization model and may not process promotion/operator money flows | Founder + billing operator |
 | Residual cleanup | Non-sensitive owner classification plus explicit approval for irreversible customer/invoice action | Founder + billing operator |
 | Endpoint retirement | Correct Explore&Earn replacement verified and zero unexplained traffic on the foreign endpoint | Billing operator |
 
@@ -70,6 +72,7 @@ The two customers and $0 draft invoice still need non-sensitive attribution. No 
 - Dedicated account choice: **Completed by authenticated provider evidence**
 - Explore&Earn catalog/test preparation: **Completed**
 - Sweepza lane/price alignment: **Completed**
+- Sweepza payment or billing activation: **Not authorized; provider evidence does not create product authority**
 - Explore&Earn production binding/webhook activation: **Not yet verified; production-risk gate**
 - Customer or invoice mutation: **Not authorized**
 - Live transaction smoke: **Not authorized**

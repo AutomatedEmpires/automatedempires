@@ -171,7 +171,7 @@ The chosen path is Supabase-canonical Vercel operation, not persistent local dis
 
 PR #6 final source head `f280ef4fef4b992f94457aad61cfe27e8ec91791` fixed the CI-discovered workflow coupling by explicitly initializing Supabase before E2E. Exact-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4` was `READY`; extended validation, verify, migrations, dependency review, and CodeQL passed; the PR merged as `9c9e107082942e5bce782eac2ce71aa63eb7d9c0` with zero unresolved threads. Clean main production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` is `READY`/rollback with no dirty metadata, and its exact deployment root returned HTTP 200. No live migration, provider-key activation, or DNS change occurred.
 
-Classification: architecture choice, bounded implementation, review/merge, and Preview are **fixed and verified / merged to main**. Backup/live-shape upgrade, environment provenance, distributed rate limiting, production rollback, Clerk/provider activation, and live migration remain **blocked by proven production risk**.
+Classification: the Supabase-canonical application-state choice, bounded implementation, review/merge, and Preview are **fixed and verified / merged to main**. The separate production rate limiter still needs Supabase-first shared atomic state and exact-SHA multi-instance/outage proof. Backup/live-shape upgrade, environment provenance, production rollback, provider activation, and live migration remain **blocked by proven production risk**.
 
 ## 15. ORAN preview and cutover status
 
@@ -224,5 +224,5 @@ The exact LogLoads production root returned HTTP 200. Exact AutomatedEmpires, Ex
 - Cloudinary advanced from inventory to a complete folder taxonomy; folders do not create transfer-grade access boundaries.
 - PostHog absence outside Explore&Earn is verified at provider and Doppler boundaries.
 - Lake & Pine, AutomatedEmpires, BidSpace, Explore&Earn, Sweepza, and LogLoads have clean `READY` current-main productions/rollback candidates with no dirty metadata. ORAN still has zero deployments.
-- LogLoads no longer requires an architecture choice: the Supabase-canonical path is merged to `main` and Preview-proven, while live migration/provider activation remain gated.
+- LogLoads' Supabase-canonical application-state choice is merged and Preview-proven. The separate shared atomic production limiter still requires a Supabase-first evaluation and exact-SHA multi-instance/outage proof; live migration/provider activation remain gated.
 - GitHub protections/security are configured across all seven repositories; fleet branch/local-clone cleanup remains separately evidenced and is not conflated with ruleset completion.

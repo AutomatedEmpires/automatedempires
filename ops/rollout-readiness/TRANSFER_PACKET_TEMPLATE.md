@@ -9,7 +9,7 @@
 - **Packet version:** `<version>`
 - **Transfer state:** `draft | rehearsal | accepted | post-transfer closeout`
 
-This packet is the minimum evidence required before Explore&Earn, Sweepza, LogLoads, Lake & Pine, BidSpace, ORAN, or AutomatedEmpires can be called sellable or transfer-ready. Delete no section. Mark an unused capability `not applicable` with an owner-approved rationale.
+This packet is the minimum evidence required before Explore&Earn, Sweepza, LogLoads, Lake & Pine, BidSpace, ORAN, or AutomatedEmpires can be called transfer-ready or, where relevant, sale-ready. Delete no section. Mark an unused or product-prohibited capability `not applicable` with an owner-approved rationale.
 
 Do not place passwords, API keys, signing secrets, recovery codes, private customer URLs, customer data, cookies, or raw database exports in this packet. Transfer secrets through the provider's supported invitation/rotation mechanism. Link only to appropriately access-controlled artifacts.
 
@@ -28,7 +28,10 @@ Do not place passwords, API keys, signing secrets, recovery codes, private custo
 
 ## 1. Venture overview
 
+- Canonical definition and dated authority: `<link to docs/VENTURE_OPERATING_DEFINITIONS.md plus any later approved decision>`
 - Product thesis and current customer promise: `<text>`
+- Explicit non-goals, prohibited capabilities, and phase boundaries: `<text>`
+- Known implementation/provider conflicts with the canonical definition and disposition: `<keep/repurpose/retire plan>`
 - Current lifecycle: `concept | demo | Preview | Production | paused | redevelopment`
 - Current public surfaces and applications: `<inventory>`
 - User types and operator roles: `<inventory>`
@@ -188,7 +191,7 @@ Do not place passwords, API keys, signing secrets, recovery codes, private custo
 
 ## 15. Meta and Instagram assets
 
-- Business portfolio, pages, Instagram accounts, domains, pixels/datasets, ad accounts, catalogs: `<IDs/inventory>`
+- Business portfolio, pages, Instagram accounts, domains, pixels/datasets, ad accounts, catalogs: `<IDs/inventory or product-prohibited/not applicable; ORAN MVP prohibits tracking/pixels>`
 - Ownership classification: `parent | venture | personal | duplicate | unknown`
 - Admins, partners, recovery, MFA, billing, spend, and policy restrictions: `<map>`
 - Content/creative rights and exports: `<evidence>`

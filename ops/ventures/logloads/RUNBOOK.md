@@ -10,11 +10,12 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 4. Require a reviewed rollback path for domain/DNS, database migration, live email, Stripe subscriptions, and secret rotation; require explicit approval only for the destructive/live-money/legal gates defined by Pass 4.
 5. Do not introduce Stripe Connect, freight payments, brokerage, or payout flows without a new dated product/legal decision.
 6. Do not promote Vercel until the selected Supabase-canonical runtime is implemented and tested; use persistent hosting only if a material-rewrite blocker is proven.
+7. Treat shared atomic production rate limiting as the requirement. Evaluate Supabase first, Vercel-integrated KV/Upstash second if needed, and instance-local memory only for local/dev.
 
 ## Verification sequence
 
 1. Confirm Doppler project `logloads` and config `dev`, `stg`, or `prd`.
-2. Confirm PR #6 final source `f280ef4fef4b992f94457aad61cfe27e8ec91791` contains canonical `135cff673255cfc1b99c66552479e32cba370940`, its predecessors, and the explicit Supabase-before-E2E workflow fix; it merged as current `main` `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`. Git/source authority is not live data/provider authority.
+2. Confirm PR #6 final source `f280ef4fef4b992f94457aad61cfe27e8ec91791` contains canonical `135cff673255cfc1b99c66552479e32cba370940`, its predecessors, and the explicit Supabase-before-E2E workflow fix; it merged as deployed baseline `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`. Current source includes #21/#22 through `6f7ebcd`. Git/source authority is not live data/provider authority.
 3. Confirm Supabase project fingerprint `…fsjyxo` in the authenticated dashboard before any database inspection/migration.
 4. Compare repository consumers with the variable-name inventory; populate only variables consumed by the current slice.
 5. Verify the Supabase-canonical runtime contract before using Vercel readiness as an acceptance signal.
@@ -32,11 +33,13 @@ Pass 4 local head `135cff6…` supersedes the dated local-authority model: Supab
 
 Current merged source and its recorded Vercel deployments are release provenance. Never reuse ignored `.vercel/output` or an old dirty artifact as release provenance.
 
+Later source introduced a provider-neutral Redis REST limiter adapter. Preserve it as an adapter candidate, but do not treat it as approval to provision Redis. Document why Supabase is or is not sufficient before selecting a second state provider; production must not use the in-memory fallback.
+
 ## Preview and production
 
-- **Verified current:** canonical repo/root connected; final-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4` and current-main production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` are `READY`; historical dirty artifacts are diagnostic.
+- **Verified boundary:** canonical repo/root and current source `6f7ebcd`; final-source Preview `dpl_8RY71TfokWZNaVZgbZgmDvMWyRf4` and production `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` from last deployed source `9c9e107…` are `READY`; historical dirty artifacts are diagnostic.
 - **Green:** canonical source/migration/full suite, required remote checks, merge, provider Preview, and source production deployment.
-- **Blocked:** backup/live upgrade, environment provenance, distributed rate limiting, live provider activation, and functional production rollback.
+- **Blocked:** backup/live upgrade, environment provenance, shared-limiter architecture decision and multi-instance/outage proof, live provider activation, and functional production rollback.
 
 Do not treat either `READY` deployment as permission for live data/provider cutover. They prove reproducible source/build, not live-shape upgrade, distributed coordination, or functional rollback.
 
@@ -46,7 +49,7 @@ The verified live project has 36 application tables with RLS, one zero-policy ta
 
 ## Provider activation order
 
-After the remaining live gates: production Clerk → venture Mapbox → separate Resend domain → PostHog/Sentry → Cloudinary boundary → subscription-only Stripe. Shared/folder-only resources are not transfer completion.
+After the remaining live gates: shared atomic limiter (Supabase first; KV/Upstash only if justified) → production Clerk → venture Mapbox → separate Resend domain → PostHog/Sentry → Cloudinary boundary → subscription-only Stripe. Shared/folder-only resources are not transfer completion.
 
 Pass 3 staged production identity: Clerk DNS Verified/SSL Issued; runtime keys/config remain pending. Do not install until host/source candidate exists. Contact-inquiry email in `cce1c449…` remains inactive until independent team/domain and explicit sender/contact are approved/proven. Keep MapLibre/Carto fallback during convergence.
 
@@ -54,7 +57,7 @@ Pass 3 staged production identity: Clerk DNS Verified/SSL Issued; runtime keys/c
 
 - **Current Vercel path:** retain `dpl_XxrZAJ1567EbtnkSg2XxWq88dPtF` and another recorded clean exact-SHA deployment as code rollback candidates; database changes must remain backward-compatible and separately recoverable.
 - **Data path:** capture backup/restore evidence before live migration and correct schema with forward migrations rather than destructive down-migrations.
-- Keep `logloads.com` on GoDaddy Website Builder until live-data/provider activation and functional rollback pass. Historical dirty artifacts remain diagnostic evidence only; use the recorded clean current-main production for code rollback.
+- Keep `logloads.com` on GoDaddy Website Builder until live-data/provider activation and functional rollback pass. Historical dirty artifacts remain diagnostic evidence only; use the recorded clean `9c9e107…` deployment for code rollback and separately revalidate current source `6f7ebcd`.
 
 ## Incident response
 

@@ -3,6 +3,7 @@
 - **Applies to:** AutomatedEmpires, Explore&Earn, Sweepza, LogLoads, Lake & Pine, BidSpace, ORAN, and future ventures
 - **Purpose:** Define operational independence, acceptable parent ownership, contamination, transfer evidence, and protected-change boundaries
 - **Evidence rule:** Record identifiers, names, owners, scopes, dates, tests, and controlled links—never secret values, recovery codes, cookies, signing material, private customer URLs, or customer data.
+- **Product authority:** `docs/VENTURE_OPERATING_DEFINITIONS.md`; this standard does not make a provider mandatory or override a product prohibition
 
 ## Governing definitions
 
@@ -12,7 +13,7 @@ A venture is **transfer-ready** only when a recipient can assume administrator, 
 
 Shared parent ownership may be an acceptable interim operating state. It is never automatic evidence of transfer readiness.
 
-A documented **no-resource decision** is acceptable when the product has no consumer. Do not create placeholder accounts or copied credentials merely to make provider rows look complete.
+A documented **no-resource decision** is acceptable when the product has no consumer or explicitly prohibits the capability. Do not create placeholder accounts or copied credentials merely to make provider rows look complete. For ORAN's MVP, user/behavioral analytics and tracking pixels are prohibited and therefore `no resource`, not an incomplete provider boundary.
 
 Use these provider-boundary classifications:
 
@@ -55,7 +56,7 @@ Current implication: seven canonical repositories and parent-organization owners
 - **Evidence of transfer readiness:** Recipient team/admin/billing accepted; project is transferred or recreated; Git/domains/bindings are installed from the venture's Doppler project; recipient passes exact-source Preview, Production smoke, and rollback.
 - **Do not change without approval:** Delete duplicate candidates; reconnect Git; change root/branch/build/runtime settings; promote/rollback Production; attach/move domains; change aliases/protection; replace environment records; delete deployments.
 
-Current implication: `explore-and-earn-vercel-fix` and `sweepza-canary` remain `delete-review`, not deletion-authorized. Six `READY` Productions are artifact evidence, not full runtime proof; ORAN has no deployment.
+Current implication: `explore-and-earn-vercel-fix` and `sweepza-canary` remain `delete-review`, not deletion-authorized. Six `READY` Productions are artifact evidence, not full runtime proof; ORAN has a protected noindex shell Preview at `8da2101`, with empty runtime providers and no public/product authority.
 
 ## Doppler
 
@@ -121,7 +122,7 @@ Current implication: LogLoads authority reaching the Explore&Earn team is unacce
 - **Evidence of transfer readiness:** Recipient ownership or verified export/recreation includes definitions, dashboards, integrations, access, retention, and billing; a new runtime key produces a controlled event.
 - **Do not change without approval:** Delete projects/data; enable replay/autocapture/console; change masking, retention, consent, region, caps, or add-ons; rotate keys before replacement proof.
 
-Current implication: six projects are separated and ORAN's absence is intentional. Controlled post-write ingestion remains required.
+Current implication: six projects are separated. ORAN's absence is an intentional, product-required `no resource` state for the MVP because user/behavioral tracking and pixels are prohibited. Controlled post-write ingestion remains required only for ventures whose approved product scope uses PostHog.
 
 ## Sentry
 
@@ -168,6 +169,8 @@ Current implication: four replacement public tokens are separated, but old share
 Current implication: BidSpace remains domain-deferred. ORAN renewal requires verification. Website Builder and Vercel cutovers must preserve all mail records.
 
 ## Meta Business Suite
+
+This section applies only when the approved venture scope uses Meta assets. ORAN's MVP prohibits user/behavioral tracking and pixels; do not create a pixel/dataset to satisfy this standard.
 
 - **Minimum acceptable separation:** Venture-specific Page, Instagram professional account, ad account, pixel/dataset, catalog, domain verification, billing profile, app/system-user permissions, consent map, and two recoverable admins with 2FA.
 - **Temporary acceptable shared parent ownership:** Assets may remain in the parent business portfolio with venture-scoped roles, distinct ad account/pixel/catalog, attributable spend, and documented transfer eligibility.

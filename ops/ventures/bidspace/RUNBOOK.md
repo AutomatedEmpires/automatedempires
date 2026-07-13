@@ -8,6 +8,7 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 2. Resolve secret values from Doppler at execution time; never paste them into this pack, tickets, terminal transcripts, or commits.
 3. Confirm the active Doppler project, Vercel project, and Supabase ref before every write.
 4. Treat database pushes, Stripe Connect changes, domain purchases, payouts, refunds, and production routing as founder-approved operations.
+5. Keep BidSpace non-live. Do not enable real bidding, booking, payments, or Stripe Connect before the legal entity, operating model, and payment model are approved.
 
 ## Normal verification sequence
 
@@ -29,9 +30,9 @@ Status key: **Verified current** · **Observed in repository** · **Target state
 
 - **Target state:** Doppler `stg` feeds Vercel Preview and Doppler `prd` feeds Vercel Production.
 - **Verified current:** the Vercel project exists.
-- **Mixed verified/open:** Git/root, accepted Preview `dpl_3vFJAPyiQqWr95woTY51mKBT1W1S`, current `main` `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8`, and clean production `dpl_GQ2yhiJjwchgt7rJDSbU8Y8JuVDp` are verified; custom domain is purchase-deferred and exact environment-variable synchronization remains to prove.
+- **Mixed verified/open:** Git/root and current source #64 at `69a53c4` are verified. Accepted Preview `dpl_3vFJAPyiQqWr95woTY51mKBT1W1S` and clean production `dpl_GQ2yhiJjwchgt7rJDSbU8Y8JuVDp` remain last-deployed evidence from `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8`; custom domain is purchase-deferred and exact environment-variable synchronization remains to prove.
 
-Before production promotion, verify Clerk sign-in, Supabase reads/writes under RLS, a representative bid flow, and webhook rejection behavior without changing money-moving resources.
+Before any controlled Preview acceptance, verify Clerk sign-in, Supabase reads/writes under RLS, a synthetic/demo-only bid flow, and webhook rejection behavior without accepting real bids, bookings, payments, or changing money-moving resources.
 
 ## Database changes
 
@@ -42,9 +43,9 @@ The supplied Supabase ref identifies the intended venture boundary. It does not 
 3. Obtain explicit approval before any remote migration, repair, reset, or destructive SQL.
 4. Never point BidSpace tooling at another venture's Supabase ref.
 
-## Provider activation order
+## Conditional provider activation order
 
-Database → Clerk → domain/DNS → reviewed Stripe Connect plan → PostHog/Sentry → Cloudinary/Mapbox only for implemented consumers → email. Current `main` has no Mapbox runtime consumer, while accepted feature `511b763…` does; select reviewed source and the final domain before provisioning a production token.
+Database → Clerk → domain/DNS → PostHog/Sentry → Cloudinary/Mapbox only for implemented consumers → email. Stripe/Connect is not part of the normal activation order: keep it sandbox/test-only and add it only after the legal entity, host-funded listing/placement/promotion/subscription model, marketplace responsibilities, and payment model receive dated approval. Current `main` has no Mapbox runtime consumer, while accepted feature `511b763…` does; select reviewed source and the final domain before provisioning a production token.
 
 ## Incident response
 

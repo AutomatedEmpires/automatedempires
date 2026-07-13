@@ -22,7 +22,7 @@ The current team is at its one-domain limit (`1/1`). It contains only verified `
 | Venture | Product/runtime evidence | Current boundary | Classification |
 |---|---|---|---|
 | Explore&Earn | Transactional mail package exists; From is `notifications@exploreandearn.com` and Reply-To is `support@exploreandearn.com` | Domain/key/lanes and merged source are green; exact-source Preview passed; real delivery is not authorized/proven; broad key retained | Credential/source/environment separation **safely fixed now**; delivery and broad-key retirement **blocked by production risk** |
-| Sweepza | Approval/hold and winner publication paths call Resend | Key/from absent in every lane; calls must no-op truthfully | Truthful skip handling from PR #47 is retained in current `main` `4c0aad183fe9442e4546985b373b26498e38e6e7`; production `dpl_9N57qj7PHDteARUpVFWCKAxYutts` is `READY`, while a controlled skipped-behavior runtime smoke remains open. Independent team/domain is **blocked by payment/plan** under the explicit no-upgrade decision |
+| Sweepza | Legacy approval/hold and winner-publication paths call Resend, but they conflict with the non-operator discovery definition | Key/from absent in every lane; paths remain inactive and calls must no-op truthfully | PR #47 skip handling is preserved. Do not fund or activate legacy mail. A later design may support official-source/host claim/listing-status notices that do not imply Sweepza selects winners; independent capacity then remains a separate paid gate |
 | LogLoads | `support@logloads.com` exists; feature source can send contact inquiries after saving an in-app notification | Supabase-canonical source is merged and production provenance is clean, but no LogLoads sending domain exists; the legacy broad same-team key is not an acceptable production boundary; mailbox existence does not provide transactional sending | Activation intentionally deferred; independent boundary **blocked by payment/plan** and delivery/rollback proof |
 | ORAN | Existing DNS uses Mailgun | No Resend requirement | Preserve Mailgun unless a separately approved provider migration exists |
 | AutomatedEmpires | No transactional-mail consumer established | No resource | Do not provision speculatively |
@@ -38,8 +38,8 @@ Explicit payment approval is required for recurring cost, with named owner/recov
 ## Execution order
 
 1. Explore&Earn: scoped key, lanes, identities, merged source, and exact-source Preview are complete. After separate authorization, prove delivery, SPF/DKIM/DMARC alignment, reply/bounce/complaint behavior, and application logging. Revoke broad key only after zero-use verification.
-2. Sweepza: truthful skip handling is merged and present in `main`/`READY` production. Verify a controlled no-key flow returns `skipped`, never reports `sent`, and leaves `sent_at` null before treating runtime behavior as complete.
-3. After payment approval, create a separate Sweepza team and scoped sending subdomain while preserving Microsoft 365 root MX. Install key/from values first in `stg`, smoke delivery, then promote.
+2. Sweepza: preserve truthful skip handling and verify legacy operator-style paths remain inactive, return `skipped`, never report `sent`, and leave `sent_at` null.
+3. Only after a non-operator source/claim/listing-status mail design and payment approval, create a separate Sweepza team and scoped sending subdomain while preserving Microsoft 365 root MX. Install first in `stg`, smoke delivery, then separately consider promotion.
 4. After payment approval, create a separate LogLoads team/domain, remove the testing-sender fallback as a production path, install a scoped key/from/contact identity in `stg`, and smoke delivery/rollback on the accepted Supabase-canonical runtime before `prd`.
 5. Never delete the existing team/domain or revoke either broad key until all dependent deployments are identified and replacement paths are verified.
 
