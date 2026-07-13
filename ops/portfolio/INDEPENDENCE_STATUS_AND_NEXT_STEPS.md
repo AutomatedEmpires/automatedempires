@@ -7,7 +7,7 @@
 
 Explore&Earn is the first venture in a controlled production-readiness pass. Its provider boundaries exist, but promotion remains gated on runtime/auth/payment/data/rollback evidence recorded in the venture repository at `ops/explore-and-earn/PRODUCTION_READINESS_PASS.md`.
 
-The current Explore&Earn UI and design system are not final. A later product-quality pass will address the planned discovery-card, navigation, and visual-system overhaul. That design work is not a prerequisite for infrastructure proof and was not performed here.
+The current Explore&Earn UI and design system are not final. A later repo-contextual, visionary product-quality pass must first inspect the real local/GitHub repo, routes, components, data, and states; preserve the Discovery Card, Seek/Swipe/Map/Profile, four categories, clarity/trust, and map/list/swipe mechanics; then overhaul the homepage, hierarchy, typography, color, spacing, layout, information placement, dashboard surfaces, responsive behavior, and product feel. It is not a detached redesign or a superficial polish pass, and was not performed here.
 
 ## Founder-owned support delta
 
@@ -21,5 +21,5 @@ Ownership of the mailbox reduces a future support-channel blocker, but it is not
 ## Next portfolio sequence
 
 1. Finish the Explore&Earn readiness blockers without promoting Production or retiring rollback credentials.
-2. Run a Sweepza-specific email/auth/runtime pass that starts from a fresh state freeze and uses the newly owned support address.
+2. Run a Sweepza discovery/source-verification preflight before email/auth/runtime activation. Establish official-source/host submissions, statuses, official link-outs, disclaimers/content rights, and legacy operator-flow disposition; keep entry/winner/payment behavior inactive.
 3. Continue venture-by-venture provider separation; do not reuse Explore&Earn proof as evidence for another venture.

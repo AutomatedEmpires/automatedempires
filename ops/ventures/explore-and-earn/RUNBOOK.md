@@ -6,7 +6,7 @@ This is a coordination runbook. The authoritative detailed activation procedure 
 
 ## Preconditions
 
-- **Verified current** — Vercel/Doppler projects and Supabase fingerprint `…lafhmmr` exist; current `main` `b616b9e10fa434422dd34442f6cb24194cf8d5ec` is deployed as public deployment `dpl_5HCPaCNCQuyip2iZTHpoMvSxjQFY` and `READY`; sensitive account/project identifiers remain abbreviated.
+- **Verified boundary** — Vercel/Doppler projects and Supabase fingerprint `…lafhmmr` exist; public deployment `dpl_5HCPaCNCQuyip2iZTHpoMvSxjQFY` from prior source `b616b9e10fa434422dd34442f6cb24194cf8d5ec` is `READY`. Current source includes #244/#245 through `5989853` and needs deployment revalidation; sensitive account/project identifiers remain abbreviated.
 - **Verified current** — Clerk dark resource/DNS/SSL; Resend domain/scoped credential/environment; and Stripe dedicated-account/catalog preparation are complete. Clerk runtime, mail delivery, migration ledger, and production Stripe binding/webhook remain open.
 - **Target state** — Record the exact plan and applicable destructive/money/legal/DNS authority before database-ledger mutation, money-moving configuration, domain changes, or production cutover.
 - **Target state** — Operators compare variable names and resource identity without printing values.

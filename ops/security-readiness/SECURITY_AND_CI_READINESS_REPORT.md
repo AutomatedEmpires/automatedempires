@@ -8,6 +8,8 @@ Scope: AutomatedEmpires, ORAN, BidSpace, Lake & Pine, Sweepza, and LogLoads. Exp
 
 This report combines exact GitHub `main` metadata, Actions logs, Dependabot/CodeQL/secret-scanning metadata, package-manager audits, lockfile inspection, and safe local checks. Remote exact-main CI is used where a full local rerun was not practical. A shared WSL dependency install exhausted the machine and reset the environment; that install is recorded as inconclusive, not as a repository failure.
 
+> Later execution supersession (2026-07-12): LogLoads PRs #21/#22 added dependency/rate-limit hardening, tests, forwarded-IP treatment, response semantics, and a provider-neutral Redis REST shared-limiter adapter. Shared production state is still unconfigured, and Redis is not the predetermined provider: evaluate Supabase first, KV/Upstash only if unsuitable, memory local/dev only. Lake & Pine PRs #2/#3 added DOM-XSS regression coverage and disposable-PostgreSQL migration/RLS/booking/dashboard smoke evidence. Rows below preserve the earlier exact-main audit snapshot.
+
 ## Portfolio summary
 
 | Venture | Current branch/SHA | CI status | Build | Typecheck | Lint | Tests | Security status | Dependency status | Rollout risk | Recommended action |

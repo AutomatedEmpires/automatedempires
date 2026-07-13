@@ -8,7 +8,7 @@ Pass 5 provider refresh: 2026-07-12; Mapbox consumer/token class and PostHog pro
 |---|---|---|---|---|
 | Local development | Doppler `bidspace` / `dev` | Local Next.js workspace | Dedicated Supabase/Clerk dev; venture-specific public Mapbox; PostHog project `509087`; empty Cloudinary namespace | **Map local runtime/origin enforcement verified; protected Preview access gate open** |
 | Staging / preview | Doppler `bidspace` / `stg` | Accepted Preview `dpl_3vFJAPyiQqWr95woTY51mKBT1W1S` is `READY` | BidSpace-only staging boundary remains to prove at runtime | **Source/build proven; product-provider lane incomplete** |
-| Production | Doppler `bidspace` / `prd`, metadata only | Clean production `dpl_GQ2yhiJjwchgt7rJDSbU8Y8JuVDp` from current `main` `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8` is `READY` | Supabase fingerprint `…fsqslgxcv`; no production Clerk/domain/Stripe | **Source/build live; product providers/custom domain incomplete** |
+| Production | Doppler `bidspace` / `prd`, metadata only | Last verified production-class artifact `dpl_GQ2yhiJjwchgt7rJDSbU8Y8JuVDp` from `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8` is `READY`; current source includes #64 at `69a53c4` without a recorded later deployment | Supabase fingerprint `…fsqslgxcv`; no production Clerk/domain/Stripe | **Deployment artifact READY; BidSpace remains non-live. No public bidding/booking, live payments, or Stripe Connect are authorized** |
 
 The Supabase project has 25 application tables with RLS enabled and no policies. This creates deny-all ordinary Data API behavior unless the application intentionally uses privileged server access; verify intent before deployment.
 
@@ -49,5 +49,6 @@ The following names were extracted from committed `.env.example` files; values w
 - Public-prefixed values may be browser-readable, but still belong to the BidSpace resource boundary.
 - Server, database, webhook, CI, and provider-management variables must never be exposed to the client.
 - A variable name documents a potential consumer; it is not proof that the provider resource exists or is ready.
+- Stripe/Connect names express conditional integration intent only. Keep all money work sandbox/test-only until the legal entity, host-fee model, operating responsibilities, and payment model are approved.
 - Keep CI/admin credentials out of Vercel runtime environments unless a deployed process demonstrably consumes them.
 - Mapbox installation/origin/local proof is complete. Protected Preview functional verification and the missing production domain remain; do not treat the secret authorizer as runtime configuration.

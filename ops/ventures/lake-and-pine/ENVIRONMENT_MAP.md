@@ -8,7 +8,7 @@ Last reviewed: 2026-07-12
 |---|---|---|---|---|
 | Development | `lake-and-pine` / `dev`; own Sentry DSN/org/project identifiers now included | Reviewed merged source lineage from PR #1 | Separate local/data strategy not established | Source/monitoring boundary exists; development data contract incomplete |
 | Staging | `lake-and-pine` / `stg`; verified runtime plus own Sentry identifiers | Exact-source Preview `dpl_BBy…` is `READY` | Dedicated staging database not discovered | CI/Preview fixed; data isolation and Vercel Sentry runtime smoke open |
-| Production | `lake-and-pine` / `prd`; verified runtime plus own Sentry identifiers | PR #1 merge/current `main` `1b6a877bc054a9239c2a430aaf668996de8a0302`; clean production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` `READY` | Dedicated Supabase fingerprint `…vtmwr`; 14 RLS/policy-covered tables and two remote migrations | Source/main provenance fixed; functional rollback/domain cutover open |
+| Production | `lake-and-pine` / `prd`; verified runtime plus own Sentry identifiers | Clean production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` from last deployed source `1b6a877bc054a9239c2a430aaf668996de8a0302` is `READY`; current source includes #2/#3 through `e65b3b6` without a recorded later deployment | Dedicated Supabase fingerprint `…vtmwr`; 14 RLS/policy-covered tables and two remote migrations | Current/deployed source boundary recorded; functional rollback/domain cutover open |
 
 ## Provenance and release gates
 

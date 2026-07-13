@@ -5,6 +5,8 @@
 
 Pass 4 remains the accepted historical baseline. This document records only the Pass 5 delta. It contains no raw credential value or fingerprint.
 
+> Founder product correction (2026-07-12): historical references to ORAN PostHog as “deferred” are superseded for forward planning. ORAN MVP user/behavioral analytics and pixels are product-prohibited and classified `no resource`. Privacy-scrubbed operational health logging is safety-only.
+
 ## Executive result
 
 PostHog provider and environment separation were safely completed without a paid upgrade: the existing Explore&Earn project was preserved, five distinct projects were created, privacy-invasive defaults were disabled, twelve product caps were set to `$0`, and each active venture's own key/host pair was presence-verified in Doppler and Vercel. Publishing ops draft PR #8 auto-triggered an AutomatedEmpires Preview after the environment writes; it was not used for a controlled event/ingestion smoke, no production deployment occurred, and runtime activation is not claimed.
@@ -58,7 +60,7 @@ The organization remains on existing PAYG at `$0` base/current/projected cost. S
 | LogLoads | `509086` | New separate project created |
 | BidSpace | `509087` | New separate project created |
 | Lake & Pine | `509088` | New separate project created |
-| ORAN | — | Deferred for privacy and deployment posture |
+| ORAN | — | Product-required `no resource` for MVP; no behavioral analytics or pixels |
 
 ## 9. PostHog keys installed by venture/config
 
@@ -66,11 +68,11 @@ All six active ventures have their own PostHog pair in Doppler all lanes and mat
 
 The exact current production SHAs consume these names: AutomatedEmpires `664cda67bc7bc91e4f1577d76bbe7758290f3a2d`, Explore&Earn `b616b9e10fa434422dd34442f6cb24194cf8d5ec`, Sweepza `4c0aad183fe9442e4546985b373b26498e38e6e7`, LogLoads `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`, BidSpace `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8`, and Lake & Pine `1b6a877bc054a9239c2a430aaf668996de8a0302`.
 
-Configuration installation is **completed / safely fixed now**. Runtime activation remains **blocked by production risk** until each venture has an appropriate post-write deployment and a controlled event/ingestion check. The AutomatedEmpires PR #8 Preview is build evidence only, not analytics proof. ORAN remains absent.
+Configuration installation is **completed / safely fixed now** for approved consumers. Runtime activation remains **blocked by production risk** until each applicable venture has an appropriate post-write deployment and a controlled event/ingestion check. The AutomatedEmpires PR #8 Preview is build evidence only, not analytics proof. ORAN remains absent by product requirement.
 
 ## 10. Privacy defaults
 
-Autocapture, session replay, and console capture are disabled for all five new projects. Explore&Earn source already disables replay and console capture. No sensitive civic/resource behavior was added, and ORAN remains deferred.
+Autocapture, session replay, and console capture are disabled for all five new projects. Explore&Earn source already disables replay and console capture. No sensitive civic/resource behavior was added; ORAN behavioral analytics/pixels remain prohibited.
 
 ## 11. Monthly spend change
 
@@ -85,7 +87,7 @@ PostHog and Mapbox increased recurring spend by `$0`. Mapbox is PAYG with no tok
 | Mapbox Production rollout / old token retirement | **Blocked by production risk** | Promote separately after Preview gates; monitor usage and prove zero old/shared use before revocation |
 | BidSpace production restriction | **Blocked by missing domain** | Continue only on exact local/Vercel origins; defer custom-domain restriction |
 | PostHog runtime activation | **Blocked by controlled deployment/event / production risk** | Use an appropriate post-write deployment per venture, send a controlled non-sensitive event, and verify the intended project/environment/health; do not count AutomatedEmpires PR #8's automatic Preview alone as activation proof |
-| ORAN PostHog | **Requires founder/privacy decision** | Keep deferred and prefer Sentry/logs until deployment and civic privacy posture are resolved |
+| ORAN PostHog | **Product-required `no resource` for MVP** | Keep absent; use only privacy-scrubbed runtime-safety logging. A later change requires a new dated founder product decision |
 
 ## 13. Repository evidence
 
@@ -96,5 +98,5 @@ Ops changes are maintained on branch `codex/pass5-mapbox-posthog` from remote `m
 - **Completed / safely fixed now:** PostHog boundaries; Mapbox secure handoff, four-token separation, Doppler/Vercel placement, least scopes/origin enforcement, local Chrome, fresh Preview builds, Lake Preview, and billing verification.
 - **Blocked by production risk/access:** E&E/Log Preview app paths, Bid protected Preview, Production rollout, shared-token retirement, and PostHog event verification.
 - **Blocked by missing domain:** BidSpace production-origin restriction.
-- **Requires founder/privacy decision:** ORAN PostHog and future analytics beyond approved minimal events. Lake & Pine's Mapbox decision gate is resolved.
+- **Product-prohibited/no resource:** ORAN behavioral analytics and pixels for the MVP. Lake & Pine's Mapbox decision gate is resolved.
 - **Documentation only:** This report and matrix refresh. They do not convert blocked installation or runtime work into remediation.

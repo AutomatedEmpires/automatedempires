@@ -16,6 +16,29 @@ Core public language:
 
 The next design pass should validate this language in context, establish a coherent discovery system, and leave room for product learning. A polished mockup is not approval to ship.
 
+## Founder-corrected design priority
+
+Treat the information architecture and mechanics below as a preservation contract, not a prompt for novelty. The next pass should primarily improve:
+
+- the homepage;
+- visual hierarchy;
+- typography and color;
+- spacing and layout composition;
+- where information lives;
+- premium marketplace feel;
+- dashboard surfaces; and
+- responsive polish.
+
+Do not redesign the Discovery Card, Seek/Swipe/Map/Profile navigation, four categories, or map/list/swipe discovery unless repository evidence identifies a concrete usability, accessibility, safety, or product failure. Record that evidence and obtain a dated decision before changing a core mechanic.
+
+### Required repo-context sequence
+
+1. Locate and verify the local checkout and canonical GitHub repository before design work.
+2. Inspect the actual routes, layouts, components, content/data models, responsive states, dashboards, and current evidence/screens—not only planning documents.
+3. Map what exists, what is working, what is inconsistent, and where information currently lives.
+4. Preserve correct mechanics and product primitives.
+5. Produce a visionary overhaul of the visual system and product feel grounded in that map. It must be more than surface polish, but it must not be a from-scratch concept detached from the implementation.
+
 ## Information architecture
 
 Use four categories only:
@@ -212,18 +235,22 @@ Premium here means disciplined hierarchy, photography, motion, typography, and d
 
 ## Design-pass deliverables
 
-1. Approved product hierarchy and state model for Seek, Swipe, Map, and Profile.
-2. Shared Discovery Card content schema and variant contract.
-3. Seeker-facing and mirrored host-facing card components.
-4. Map bottom-sheet and pin-popup specifications.
-5. Housing, meals, and pay evidence popup flows.
-6. Related-card family with reuse decisions.
-7. Mobile-first flows plus tablet/desktop adaptations.
-8. Accessibility, privacy, moderation, loading/error, and reduced-motion states.
-9. Prototype covering continuity across the three discovery modes.
-10. Content rules for category, pay/perk, match, verification, boost, and evidence.
-11. Design-token and component migration plan that avoids a risky all-at-once rewrite.
-12. Founder review record separating approved, revise, and exploratory decisions.
+1. Verified local/GitHub repository context and an existing-route/component/data inventory.
+2. Homepage composition and content hierarchy across mobile, tablet, and desktop.
+3. Visual system decisions for hierarchy, typography, color, spacing, layout, imagery, and responsive behavior.
+4. Information-placement map covering homepage, discovery, detail, profile, and dashboard surfaces.
+5. Premium marketplace direction and dashboard-surface specifications.
+6. Preservation validation for Seek, Swipe, Map, Profile, the four categories, and the shared Discovery Card; document evidence before proposing any mechanical change.
+7. Shared Discovery Card content schema and variant contract.
+8. Seeker-facing and mirrored host-facing card components.
+9. Map bottom-sheet and pin-popup specifications.
+10. Housing, meals, and pay evidence popup flows.
+11. Related-card family with reuse decisions.
+12. Accessibility, privacy, moderation, loading/error, and reduced-motion states.
+13. Prototype covering responsive homepage-to-discovery and dashboard continuity without changing core mechanics by default.
+14. Content rules for category, pay/perk, match, verification, boost, and evidence.
+15. Design-token and component migration plan that avoids a risky all-at-once rewrite.
+16. Founder review record separating approved, revise, and exploratory decisions.
 
 ## Questions the future pass must resolve
 

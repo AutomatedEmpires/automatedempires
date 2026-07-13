@@ -9,6 +9,8 @@
 
 This is the implementation baseline for provider governance, not a new audit and not a statement of rollout readiness. A project, repository, folder, application, token label, or account name is a useful operational boundary, but it is not venture ownership unless billing, privileged administration, recovery, and a provider-supported recipient acceptance path move with it.
 
+`docs/VENTURE_OPERATING_DEFINITIONS.md` separately governs product scope. Provider existence never creates a product requirement: in particular, Sweepza Stripe/entry/winner resources do not authorize promotion operation or payment flows, LogLoads does not require a standalone Redis provider merely because an adapter exists, and Lake & Pine's booking/planning Phase 1 must not be reduced to a marketing-only rollout.
+
 Every material change to a provider should update the affected row with a dated, non-secret evidence reference. Do not record secret values, private recovery destinations, personal contact details, payment details, private account identifiers, or customer identities here.
 
 Status vocabulary is deliberately limited to:

@@ -7,6 +7,8 @@
 **Pass 4 delta:** Vercel lanes are verified against dedicated Sweepza sandbox/live accounts and the $19/$5 prices. This file does not claim that every missing Pass 2 Doppler staging name was added.
 **Pass 5 delta:** PostHog project `509084` was created with autocapture, replay, and console capture disabled. Its own pair spans all Doppler lanes. Vercel now has exactly Development plus combined Preview+Production for both variables after the stale Production-only host duplicate was deleted by environment ID. No deploy/event smoke occurred.
 
+**Founder product correction (2026-07-12):** Stripe names and account/price mappings are provider-history evidence only. Sweepza does not process promotion entries, prizes, winner flows, or other operator payments by default. Host listing/placement/promotion/subscription billing also remains inactive until its legal and product model is separately approved; do not populate missing Stripe names merely for environment symmetry.
+
 Inventory used Doppler CLI names-only JSON mode with environment reads disabled. No secret value was requested, returned, or documented.
 
 ## Status legend
@@ -59,6 +61,6 @@ No variable is classified as `empty` because names-only inspection does not expo
 ## Follow-up
 
 - Replace `prd` with a Sweepza production Clerk instance and give `stg` an explicit strategy; keep `dev` unchanged until replacements pass auth and webhook smoke tests.
-- Reconcile any missing Doppler staging Stripe price/webhook names against the already verified Vercel sandbox lane; never copy live values into staging.
+- Leave missing Stripe names absent unless an approved host-monetization implementation consumes them. If that approval occurs, reconcile only against the verified sandbox lane and never copy live values into staging.
 - Review GitHub and Notion token scopes; environment presence alone does not establish least privilege.
 - Key/host placement is complete. Fresh-deploy a controlled Preview/Production build and verify a non-sensitive event reaches project `509084` before calling runtime activation complete.

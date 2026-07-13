@@ -54,3 +54,4 @@ No variable is classified as `empty` because names-only inspection does not expo
 - Clerk `dev` and `stg` share one zero-user development instance; `prd` is absent. Create explicit staging/production identity without copying development values.
 - `LOGLOADS_ENABLE_DEV_LOGIN` is present in `prd`. Verify that production behavior is disabled through a safe runtime/configuration check without documenting its value.
 - Key/host installation is complete. Fresh-deploy only through the accepted runtime gates, then verify a controlled event reaches project `509086` before calling analytics active.
+- Do not introduce Redis/KV-specific secret names merely because an adapter exists. Evaluate the existing Supabase boundary first and record why it is unsuitable before any Vercel KV/Upstash provisioning; instance-local memory remains local/dev only.

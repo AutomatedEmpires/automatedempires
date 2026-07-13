@@ -28,8 +28,8 @@ Pass 4 installed only the ORAN-specific Sentry identity beyond metadata, without
 
 ## Pass 5 provider delta
 
-ORAN has no Mapbox consumer; reviewed source uses Leaflet/OpenStreetMap. Its labeled secret authorizer was validated but intentionally unused, no public token was minted, and no Mapbox name/value was added. PostHog remains intentionally deferred.
+ORAN has no Mapbox consumer; reviewed source uses Leaflet/OpenStreetMap. Its labeled secret authorizer was validated but intentionally unused, no public token was minted, and no Mapbox name/value was added. PostHog behavioral analytics and pixels are product-prohibited for the MVP and classified `no resource`.
 
 ## Architecture constraint
 
-ORAN is in an unmerged Azure-to-Vercel transition. Keep the prepared Sentry identity scoped to ORAN and install it only in the safe Preview. Prefer Sentry/logs and keep PostHog absent until a privacy-safe founder decision. Populate the rest only after the migration branch, Supabase schema/ledger, and retained Azure/Key Vault responsibilities are approved; never copy another venture's values.
+The earlier snapshot recorded an unmerged Azure-to-Vercel transition; the later execution log records merged PR #67 and a protected noindex Preview with empty runtime provider variables. Keep the Sentry identity ORAN-scoped and privacy-scrubbed for runtime safety only. Keep PostHog absent; reopening behavioral analytics/pixels requires a new dated founder product decision. Populate other values only after chat-first/source/provenance/verification, schema/ledger, support, and retained Azure/Key Vault responsibilities are approved; never copy another venture's values.

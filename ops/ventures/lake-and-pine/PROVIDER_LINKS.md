@@ -2,14 +2,14 @@
 
 | Provider | Resource locator | Status | Link / evidence |
 |---|---|---|---|
-| GitHub | `AutomatedEmpires/lakeandpine`; [PR #1](https://github.com/AutomatedEmpires/lakeandpine/pull/1), source `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c`, merge `1b6a877bc054a9239c2a430aaf668996de8a0302` | **Merged; protection/security fixed** | https://github.com/AutomatedEmpires/lakeandpine |
+| GitHub | `AutomatedEmpires/lakeandpine`; PR #1 deployed baseline `1b6a877…`; PRs #2/#3 current source through `e65b3b6` | **Merged; protection/security fixed; later test/backend source present** | https://github.com/AutomatedEmpires/lakeandpine |
 | Doppler | Project `lake-and-pine`; dev metadata, stg/prd populated from verified runtime | **Verified current** | https://dashboard.doppler.com/ |
-| Vercel | Project `lakeandpine` (`…t3FePz`); Preview `dpl_BBy…` and clean current-main production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` are `READY` | **Source/main provenance fixed; functional rollback/domain smoke open** | https://vercel.com/dashboard |
+| Vercel | Project `lakeandpine` (`…t3FePz`); Preview `dpl_BBy…` and clean production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` from last deployed source `1b6a877…` are `READY` | **Current source `e65b3b6` is later; deployment revalidation and functional rollback/domain smoke open** | https://vercel.com/dashboard |
 | Supabase | Project fingerprint `…vtmwr` | **Verified current; preserve during source normalization** | https://supabase.com/dashboard/projects |
 | Domain | `lakeandpinecleaning.com` | **Authenticated owned / full 8-record zone verified; no MX/SPF** | https://dcc.godaddy.com/ |
 | Mapbox | Venture-specific public token for `AreaMap.tsx`; SVG fallback retained | **Installed across lanes; origin/local/fresh protected Preview verified; Production unchanged** | https://account.mapbox.com/ |
 | Clerk | Customer/staff auth is a production requirement | **Target state**; no app ID verified | https://dashboard.clerk.com/ |
-| Stripe | Payment methods/invoices are a production requirement | **Target state**; no account ID verified | https://dashboard.stripe.com/ |
+| Stripe | Phase 2 payment methods/invoices only | **Phase 2 target state**; no account ID verified and no Phase 1 requirement | https://dashboard.stripe.com/ |
 | Resend | Transactional email is a production requirement | **Target state**; no domain/API resource verified | https://resend.com/domains |
 | PostHog | Project `509088`; own key/host in Doppler/Vercel targets | **Provider/environment binding verified; runtime pending fresh deployment/event** | https://app.posthog.com/ |
 | Sentry | Separate `lake-and-pine` project; own identifiers in Doppler all lanes | **Project/governance fixed; Vercel install/runtime event open** | https://sentry.io/ |

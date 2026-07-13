@@ -3,6 +3,18 @@
 **Prepared:** 2026-07-12
 **Important:** Agents 6–8 appear to be already active. These prompts are handoff/acceptance contracts for the existing single writers, not instructions to spawn duplicate agents. Agent 5 did not start any of these tasks.
 
+## Binding product definitions for every prompt
+
+Before acting, read `docs/VENTURE_OPERATING_DEFINITIONS.md`. The founder correction supersedes conflicting routes, code copy, provider resources, historical plans, and earlier prompts.
+
+- Explore&Earn: preserve the Discovery Card, Seek/Swipe/Map/Profile, exactly Farm/Maritime/Remote/Seasonal, clarity/trust, and map/list/swipe discovery; prioritize homepage and visual/responsive polish over mechanics churn.
+- Sweepza: official-source discovery plus host/sponsor/partner submissions and official rules/entry link-outs; non-operator by default; no rules, eligibility, entry/payment processing, winner selection, legality/odds claims, fake partnerships, or live entry collection.
+- LogLoads: forestry/logistics coordination, not broker/carrier/payment/dispatch-for-hire; shared atomic limiter evaluation is Supabase first, Vercel KV/Upstash second only if needed, memory local/dev only.
+- Lake & Pine: cleaning/local-service operating system; booking/planning and the supporting operator/customer surfaces are Phase 1, payments Phase 2.
+- ORAN: chat-first guided intake and eligibility/location-aware routing to verified providers in a protected North Idaho/Eastern Washington MVP, with issue reporting, agentic sourcing plus human/volunteer/admin review, provenance/stale handling, urgent escalation, no resource dump, no tracking/pixels, no advice/partnership claims, and no public launch.
+- BidSpace: non-live host–vendor temporary-space marketplace for booths/stalls/food-truck pads/kiosks/pop-ups/event/table/sponsor/yard/farm/local-commercial placements; bidding/application allocates space. It is not a generic/physical-goods auction; real/public bidding or booking, live payments, and Stripe Connect remain disabled pending the applicable gates.
+- AutomatedEmpires: parent command layer for portfolio status, providers, rollout, governance, cost/risk, orchestration, and transfer readiness; not a generic AI agency site.
+
 ## Agent 6 — Explore&Earn Phase 2 NO-GO blocker closer
 
 ```text
@@ -57,16 +69,19 @@ Continue the five existing untracked `ops/sweepza/` documents. Do not launch ano
 
 Goal: finish an evidence-backed Sweepza NO-GO/GO gate without activating Production providers or touching live money/customer state.
 
+Canonical product contract: Sweepza is a third-party sweepstakes/giveaway discovery and host/partner listing platform, not the promotion operator by default. Listings require official sources, official rules/entry link-outs, disclaimers, and `sourced_unverified`, `source_verified`, `host_claimed`, `partner_verified`, `expired`, `removed`, or `disputed` status. Do not set rules, determine eligibility, process entries/payments, select winners, guarantee legality/odds, copy long source content without rights, imply partnerships, or collect live entries.
+
 Required work:
 1. Freeze exact `main`, current Production, domain, names-only environment contract, and rollback state.
-2. Produce an exact-current-main Preview and functional public/role smoke if it can be done without Production alias changes; record build versus runtime evidence separately.
-3. Inventory Supabase lanes, migration/ledger/RLS/storage/backup/restore/cron evidence read-only; propose disposable tests rather than touching live data.
-4. Finish the dark Production Clerk cutover plan, including origins, redirects, roles, webhooks, recovery, staging/dev-user strategy, and rollback. Do not install Production keys.
-5. Classify the foreign E&E webhook, two customer objects, and `$0` draft invoice using only approved non-sensitive evidence. Delete or mutate nothing.
-6. Record `support@sweepza.com` ownership and alias options, Resend capacity gap, support operators, and a later delivery/reply plan. Do not activate aliases or sending.
-7. Record Sentry/PostHog test requirements, privacy/retention, cost, incident, support, provider-escalation, and transfer-owner gaps.
+2. Inventory entry, winner, approval/hold, rules, eligibility, partnership, notification, and billing surfaces; produce a keep/repurpose/retire plan and keep operator-style behavior inactive.
+3. Define and test only the source/provenance/status/link-out/disclaimer/expiry/dispute model in an exact-current-main Preview if it can be done without Production alias changes; record build versus runtime evidence separately.
+4. Inventory Supabase lanes, migration/ledger/RLS/storage/backup/restore/cron evidence read-only; propose disposable tests rather than touching live data or collecting entries.
+5. Finish the dark Production Clerk plan only for approved source-claim/host/partner roles, including origins, redirects, least privilege, webhooks, recovery, staging/dev-user strategy, and rollback. Do not install Production keys.
+6. Classify the foreign E&E webhook, two customer objects, and `$0` draft invoice using only approved non-sensitive evidence. Delete or mutate nothing; do not test checkout without a later approved non-operator monetization model.
+7. Record `support@sweepza.com` ownership and alias options, Resend capacity gap, support operators, and a later source/claim/listing-status delivery/reply plan. Do not activate aliases or sending or imply Sweepza selects winners.
+8. Record Sentry/PostHog test requirements, privacy/retention, cost, incident, support, provider-escalation, and transfer-owner gaps.
 
-Hard stops: no live Stripe object mutation, foreign endpoint removal, Production Clerk cutover, email send/alias activation, Production promotion/DNS, live database changes, credential rotation, purchase, or plan upgrade. Wait for E&E replacement endpoint proof before recommending endpoint retirement.
+Hard stops: no sweepstakes operation, official-rule authorship, eligibility decision, entry collection/processing, winner selection, odds/legality guarantee, unverified partnership, copied source content, live Stripe object mutation, foreign endpoint removal, Production Clerk cutover, email send/alias activation, Production promotion/DNS, live database changes, credential rotation, purchase, or plan upgrade. Wait for E&E replacement endpoint proof before recommending endpoint retirement.
 
 Output: the five preflight documents, exact evidence inventory, founder decisions, dependency on E&E, safe execution sequence, rollback requirements, and explicit Production/money verdict.
 ```
@@ -76,9 +91,13 @@ Output: the five preflight documents, exact evidence inventory, founder decision
 ```text
 Run only after the founder accepts a stable Explore&Earn runtime/rollback baseline and explicitly approves the design brief.
 
-Goal: design—not ship—the seeker-first Explore&Earn discovery system around Seek, Swipe, Map, and Profile; one shared Discovery Card model with context variants; housing/meals/pay evidence popups; related card family; accessibility, privacy, moderation, loading/error, and reduced-motion states.
+Goal: design—not ship—a premium, seeker-first visual and responsive refinement centered on the homepage, visual hierarchy, typography, colors, spacing, layout composition, information placement, dashboard surfaces, and responsive polish. Preserve Seek, Swipe, Map, Profile, the shared Discovery Card, housing/meals/pay clarity, trust, and map/list/swipe discovery.
+
+Before designing, locate and verify the local checkout and canonical GitHub repository. Inspect the real routes, layouts, components, content/data models, current responsive states, dashboards, and screenshots. Produce an existing-system map, then make the overhaul visionary and implementation-aware: neither a repo-detached redesign from scratch nor a superficial polish pass.
 
 Use `ops/rollout-readiness/EXPLORE_AND_EARN_FUTURE_DESIGN_PASS_BRIEF.md` as directional input, not immutable truth. Keep exactly four categories (Farm, Maritime, Remote, Seasonal) and the four-item bottom navigation unless the founder changes them. Separate approved, revise, and exploratory decisions.
+
+Do not redesign a core mechanic unless repository evidence identifies a concrete usability, accessibility, safety, or product failure; record that evidence and obtain a dated decision first.
 
 Hard stops: no product-code edits, provider changes, deployment, data/schema changes, design lock-in, or production-readiness claims. Do not work in the founder's dirty product checkout.
 
