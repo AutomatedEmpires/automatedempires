@@ -33,52 +33,48 @@ const REQUIRED_ASSET_FIELDS = [
 ];
 
 const LEGAL_DISCLOSURE_PARTS = [
-  'P0 concept',
   'not trademark cleared',
   'not a final UI palette',
   'not legal/compliance approved',
+  'requires founder refinement before final adoption',
 ];
 
-const REQUIRED_ASSET_ROLES = [
-  'primary-logo',
-  'horizontal-logo',
-  'icon-mark',
-  'favicon',
-  'app-icon',
-  'social-profile',
-  'facebook-cover',
-  'open-graph',
-  'email-header',
-  'pitch-one-pager',
-  'brand-board',
-];
+const expectedAsset = (id, relativePath, format, width, height, alpha, role) => ({
+  id,
+  relativePath,
+  format,
+  width,
+  height,
+  alpha,
+  role,
+});
 
-const REQUIRED_ASSET_PATHS = [
-  'source/primary-logo.svg',
-  'exports/logo/primary-logo.png',
-  'source/horizontal-logo.svg',
-  'exports/logo/horizontal-logo.png',
-  'source/icon-mark.svg',
-  'exports/logo/icon-mark.png',
-  'exports/favicon/favicon.svg',
-  'exports/favicon/favicon-16.png',
-  'exports/favicon/favicon-32.png',
-  'exports/favicon/favicon-48.png',
-  'exports/favicon/apple-touch-icon.png',
-  'exports/favicon/icon-192.png',
-  'exports/favicon/icon-512.png',
-  'exports/favicon/favicon.ico',
-  'exports/app-icon/app-icon.png',
-  'exports/social-profile/social-profile.png',
-  'exports/facebook-cover/facebook-cover.png',
-  'exports/facebook-cover/facebook-cover.jpg',
-  'exports/open-graph/open-graph.png',
-  'exports/open-graph/open-graph.jpg',
-  'exports/email-header/email-header.png',
-  'exports/email-header/email-header.jpg',
-  'exports/pitch-one-pager/pitch-one-pager.png',
-  'exports/pitch-one-pager/pitch-one-pager.pdf',
-  'preview/brand-board.png',
+const REQUIRED_ASSET_MATRIX = [
+  expectedAsset('primary-logo-svg', 'source/primary-logo.svg', 'svg', 1600, 1600, true, 'primary-logo'),
+  expectedAsset('primary-logo-png', 'exports/logo/primary-logo.png', 'png', 1600, 1600, true, 'primary-logo'),
+  expectedAsset('horizontal-logo-svg', 'source/horizontal-logo.svg', 'svg', 2400, 720, true, 'horizontal-logo'),
+  expectedAsset('horizontal-logo-png', 'exports/logo/horizontal-logo.png', 'png', 2400, 720, true, 'horizontal-logo'),
+  expectedAsset('icon-mark-svg', 'source/icon-mark.svg', 'svg', 1024, 1024, true, 'icon-mark'),
+  expectedAsset('icon-mark-png', 'exports/logo/icon-mark.png', 'png', 1024, 1024, true, 'icon-mark'),
+  expectedAsset('favicon-svg', 'exports/favicon/favicon.svg', 'svg', 512, 512, true, 'favicon'),
+  expectedAsset('favicon-16-png', 'exports/favicon/favicon-16.png', 'png', 16, 16, true, 'favicon'),
+  expectedAsset('favicon-32-png', 'exports/favicon/favicon-32.png', 'png', 32, 32, true, 'favicon'),
+  expectedAsset('favicon-48-png', 'exports/favicon/favicon-48.png', 'png', 48, 48, true, 'favicon'),
+  expectedAsset('apple-touch-icon-png', 'exports/favicon/apple-touch-icon.png', 'png', 180, 180, false, 'favicon'),
+  expectedAsset('icon-192-png', 'exports/favicon/icon-192.png', 'png', 192, 192, false, 'favicon'),
+  expectedAsset('icon-512-png', 'exports/favicon/icon-512.png', 'png', 512, 512, false, 'favicon'),
+  expectedAsset('favicon-ico', 'exports/favicon/favicon.ico', 'ico', 48, 48, true, 'favicon'),
+  expectedAsset('app-icon-png', 'exports/app-icon/app-icon.png', 'png', 1024, 1024, false, 'app-icon'),
+  expectedAsset('social-profile-png', 'exports/social-profile/social-profile.png', 'png', 1080, 1080, false, 'social-profile'),
+  expectedAsset('facebook-cover-png', 'exports/facebook-cover/facebook-cover.png', 'png', 1640, 924, false, 'facebook-cover'),
+  expectedAsset('facebook-cover-jpg', 'exports/facebook-cover/facebook-cover.jpg', 'jpg', 851, 315, false, 'facebook-cover'),
+  expectedAsset('open-graph-png', 'exports/open-graph/open-graph.png', 'png', 1200, 630, false, 'open-graph'),
+  expectedAsset('open-graph-jpg', 'exports/open-graph/open-graph.jpg', 'jpg', 1200, 630, false, 'open-graph'),
+  expectedAsset('email-header-png', 'exports/email-header/email-header.png', 'png', 1200, 400, false, 'email-header'),
+  expectedAsset('email-header-jpg', 'exports/email-header/email-header.jpg', 'jpg', 1200, 400, false, 'email-header'),
+  expectedAsset('pitch-one-pager-png', 'exports/pitch-one-pager/pitch-one-pager.png', 'png', 1080, 1350, false, 'pitch-one-pager'),
+  expectedAsset('pitch-one-pager-pdf', 'exports/pitch-one-pager/pitch-one-pager.pdf', 'pdf', 612, 792, false, 'pitch-one-pager'),
+  expectedAsset('brand-board-png', 'preview/brand-board.png', 'png', 1920, 1080, false, 'brand-board'),
 ];
 
 describe('brand data contract', () => {
@@ -109,6 +105,7 @@ describe('brand data contract', () => {
   });
 
   it('includes the shared four-part legal disclosure on every brand', () => {
+    assert.match(LEGAL_DISCLOSURE, /P0 concept/i);
     for (const part of LEGAL_DISCLOSURE_PARTS) {
       assert.match(LEGAL_DISCLOSURE, new RegExp(part, 'i'));
     }
@@ -122,14 +119,7 @@ describe('brand data contract', () => {
   });
 
   it('defines complete, uniquely named, lowercase asset requirements', () => {
-    assert.deepEqual(
-      ASSET_REQUIREMENTS.map(({ relativePath }) => relativePath),
-      REQUIRED_ASSET_PATHS,
-    );
-    assert.deepEqual(
-      [...new Set(ASSET_REQUIREMENTS.map(({ role }) => role))],
-      REQUIRED_ASSET_ROLES,
-    );
+    assert.deepEqual(ASSET_REQUIREMENTS, REQUIRED_ASSET_MATRIX);
     assert.ok(Object.isFrozen(ASSET_REQUIREMENTS));
     assert.equal(
       new Set(ASSET_REQUIREMENTS.map(({ id }) => id)).size,
@@ -153,15 +143,27 @@ describe('brand data contract', () => {
     }
   });
 
-  it('keeps Sweepza public copy conservative and free of verified wording', () => {
+  it('keeps Sweepza direction conservative and free of assurance cues', () => {
     const sweepza = getBrand('sweepza');
     const processTeal = sweepza.palette.find(({ name }) => name === 'Process Teal');
+    const assuranceCue = /\b(?:verified|verification|badges?|seals?|certification)\b/i;
 
     assert.deepEqual(processTeal, { name: 'Process Teal', hex: '#2A8A7E' });
+    assert.equal(
+      sweepza.mark,
+      'Two nested sweep arcs resolving into one neutral process dot.',
+    );
     assert.equal(
       sweepza.copy.public,
       'Giveaway campaign tools for businesses. Compliance review and vendor onboarding in progress.',
     );
-    assert.doesNotMatch(sweepza.copy.public, /verified/i);
+
+    for (const [field, text] of [
+      ['mark', sweepza.mark],
+      ['copy', Object.values(sweepza.copy).join(' ')],
+      ["don'ts", sweepza.donts.join(' ')],
+    ]) {
+      assert.doesNotMatch(text, assuranceCue, `Sweepza ${field} contains an assurance cue`);
+    }
   });
 });

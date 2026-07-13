@@ -103,7 +103,7 @@ export const BRANDS = deepFreeze([
     slug: 'sweepza',
     name: 'Sweepza',
     fullName: 'Sweepza',
-    mark: 'Two nested sweep arcs resolving into one verification dot.',
+    mark: 'Two nested sweep arcs resolving into one neutral process dot.',
     palette: [
       { name: 'Clean Ink', hex: '#172126' },
       { name: 'Slate', hex: '#6B7880' },
@@ -126,7 +126,7 @@ export const BRANDS = deepFreeze([
       'Emphasize B2B campaign infrastructure, process clarity, and traceable steps.',
     ],
     donts: [
-      'Do not use visual badges, seals, certification marks, roulette, slots, jackpots, lottery motifs, cash rain, casino neon, or claims of legal approval, guaranteed legality, or fairness.',
+      'Do not use approval-style emblems, third-party assurance motifs, roulette, slots, jackpots, lottery motifs, cash rain, casino neon, or claims of legal approval, guaranteed legality, or fairness.',
     ],
     legalNotes: [
       'Requires trademark and promotion-law review; copy cannot promise legality, fairness, eligibility, or compliance.',
