@@ -47,7 +47,7 @@ Generated evidence timestamp: `2026-07-12T00:00:00.000Z`
 - **provenance: passed** — Every asset declares original image and font provenance.
 - **alt-text: passed** — Every asset record contains meaningful alt text.
 - **legal-status: passed** — Every brand and asset remains a P0 concept with explicit review boundaries.
-- **canva-status: passed** — Canva state uses the exact folder inventory and status-dependent ID semantics.
+- **canva-status: passed** — Canva state uses the exact folder inventory plus status-dependent and unique ID semantics.
 - **content-integrity: passed** — Every manifest SHA-256 matches the committed asset bytes.
 - **font-binary-absence: passed** — No font binaries are bundled in brand packs.
 - **repository-scope: passed** — Branch and working-tree changes do not touch application code or root runtime manifests.

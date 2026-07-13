@@ -393,12 +393,29 @@ const validateCanva = (manifest) => {
   const requireTimestamp = (label, value) => {
     if (!validTimestamp(value)) errors.push(`${label} must be an ISO timestamp`);
   };
+  const folderIdOwners = new Map();
+  const brandBoardIdOwners = new Map();
+  const requireUniqueId = (owners, value, owner, duplicateLabel) => {
+    if (typeof value !== 'string' || !value) return;
+    const existingOwner = owners.get(value);
+    if (existingOwner) {
+      errors.push(`${duplicateLabel} ${value}: ${existingOwner} and ${owner}`);
+    } else {
+      owners.set(value, owner);
+    }
+  };
 
   if (active) {
     if (canva.rootFolderStatus !== 'created') {
       errors.push('partial/created Canva root requires rootFolderStatus created');
     }
     requireId('rootFolderId', canva.rootFolderId, 'FA');
+    requireUniqueId(
+      folderIdOwners,
+      canva.rootFolderId,
+      'AutomatedEmpires Brand System root',
+      'duplicate Canva folder ID',
+    );
     requireUrl('rootFolderUrl', canva.rootFolderUrl, 'folder', canva.rootFolderId);
     requireTimestamp('Canva root createdAt', canva.createdAt);
     requireTimestamp('Canva root updatedAt', canva.updatedAt);
@@ -425,6 +442,12 @@ const validateCanva = (manifest) => {
     }
     if (active) {
       requireId(`${label} folderId`, folder.folderId, 'FA');
+      requireUniqueId(
+        folderIdOwners,
+        folder.folderId,
+        label,
+        'duplicate Canva folder ID',
+      );
       requireUrl(`${label} folderUrl`, folder.folderUrl, 'folder', folder.folderId);
       requireTimestamp(`${label} createdAt`, folder.createdAt);
       requireTimestamp(`${label} updatedAt`, folder.updatedAt);
@@ -471,6 +494,14 @@ const validateCanva = (manifest) => {
       errors.push(`${label} brandBoardStatus must be created`);
     }
     requireId(`${label} brandBoardDesignId`, folder.brandBoardDesignId, 'DA');
+    if (folder.brandBoardStatus === 'created') {
+      requireUniqueId(
+        brandBoardIdOwners,
+        folder.brandBoardDesignId,
+        `${label} brand board`,
+        'duplicate created brand-board design ID',
+      );
+    }
     requireUrl(`${label} brandBoardEditUrl`, folder.brandBoardEditUrl, 'd');
     requireUrl(`${label} brandBoardViewUrl`, folder.brandBoardViewUrl, 'd');
     if (folder.brandBoardSourcePath !== expectedBoardSource) {
@@ -919,10 +950,14 @@ export const validateAssetTree = async (root, options = {}) => {
     }),
   );
   checks.push(
-    check('canva-status', 'Canva state uses the exact folder inventory and status-dependent ID semantics.', canvaErrors, {
+    check('canva-status', 'Canva state uses the exact folder inventory plus status-dependent and unique ID semantics.', canvaErrors, {
       allowedStatuses: ['not-yet-created', 'partial', 'created'],
       expectedRootFolder: EXPECTED_CANVA_ROOT,
       expectedFolders: EXPECTED_CANVA_FOLDERS,
+      uniqueIdScopes: [
+        'root folder plus all 17 child folders',
+        'all nine created brand-board designs',
+      ],
     }),
   );
 

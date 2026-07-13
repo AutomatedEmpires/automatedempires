@@ -265,7 +265,7 @@
     },
     {
       "name": "canva-status",
-      "description": "Canva state uses the exact folder inventory and status-dependent ID semantics.",
+      "description": "Canva state uses the exact folder inventory plus status-dependent and unique ID semantics.",
       "status": "passed",
       "errors": [],
       "evidence": {
@@ -361,6 +361,10 @@
             "brand": null,
             "name": "97 Retired Assets"
           }
+        ],
+        "uniqueIdScopes": [
+          "root folder plus all 17 child folders",
+          "all nine created brand-board designs"
         ]
       }
     },

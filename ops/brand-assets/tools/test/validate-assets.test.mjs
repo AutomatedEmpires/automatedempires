@@ -488,6 +488,75 @@ describe('deterministic asset-tree validator', () => {
     }
   });
 
+  it('fails partial Canva state when two child folders reuse the same folder ID', async () => {
+    await mutateManifest((manifest) => {
+      applyPartialCanvaFixture(manifest);
+      const [first, second] = manifest.canva.folders;
+      second.folderId = first.folderId;
+      second.folderUrl = first.folderUrl;
+      const brandCanva = manifest.brands.find(({ slug }) => slug === second.brand).canva;
+      brandCanva.folderId = second.folderId;
+      brandCanva.folderUrl = second.folderUrl;
+    });
+    try {
+      const failure = failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status');
+      assert.ok(failure);
+      assert.ok(
+        failure.errors.some(
+          (error) => error.includes('duplicate Canva folder ID') && error.includes('FAfolder0'),
+        ),
+      );
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails partial Canva state when a child folder ID conflicts with the root folder ID', async () => {
+    await mutateManifest((manifest) => {
+      applyPartialCanvaFixture(manifest);
+      const folder = manifest.canva.folders[0];
+      folder.folderId = manifest.canva.rootFolderId;
+      folder.folderUrl = manifest.canva.rootFolderUrl;
+      const brandCanva = manifest.brands.find(({ slug }) => slug === folder.brand).canva;
+      brandCanva.folderId = folder.folderId;
+      brandCanva.folderUrl = folder.folderUrl;
+    });
+    try {
+      const failure = failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status');
+      assert.ok(failure);
+      assert.ok(
+        failure.errors.some(
+          (error) => error.includes('duplicate Canva folder ID') && error.includes('FAroot123'),
+        ),
+      );
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails partial Canva state when two created brand boards reuse the same design ID', async () => {
+    await mutateManifest((manifest) => {
+      applyPartialCanvaFixture(manifest);
+      const [first, second] = manifest.canva.folders;
+      second.brandBoardDesignId = first.brandBoardDesignId;
+      manifest.brands.find(({ slug }) => slug === second.brand).canva.brandBoardDesignId =
+        second.brandBoardDesignId;
+    });
+    try {
+      const failure = failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status');
+      assert.ok(failure);
+      assert.ok(
+        failure.errors.some(
+          (error) =>
+            error.includes('duplicate created brand-board design ID') &&
+            error.includes('DAdesign0'),
+        ),
+      );
+    } finally {
+      await restoreManifest();
+    }
+  });
+
   it('fails partial Canva state when a created brand board has an invalid ID or missing edit URL', async () => {
     await mutateManifest((manifest) => {
       applyPartialCanvaFixture(manifest);
