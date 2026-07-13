@@ -8,15 +8,15 @@ Generated evidence timestamp: `2026-07-12T00:00:00.000Z`
 
 | Brand | Slug | Tracked assets | Validation | Canva | Legal |
 | --- | --- | --- | --- | --- | --- |
-| AutomatedEmpires | `automatedempires` | 25 | passed | not-yet-created | P0 / review required |
-| Explore&Earn | `explore-and-earn` | 25 | passed | not-yet-created | P0 / review required |
-| Sweepza | `sweepza` | 25 | passed | not-yet-created | P0 / review required |
-| LogLoads | `logloads` | 25 | passed | not-yet-created | P0 / review required |
-| BidSpace | `bidspace` | 25 | passed | not-yet-created | P0 / review required |
-| Lake & Pine | `lake-and-pine` | 25 | passed | not-yet-created | P0 / review required |
-| ORAN | `oran` | 25 | passed | not-yet-created | P0 / review required |
-| Komfort Killz | `komfort-killz` | 25 | passed | not-yet-created | P0 / review required |
-| Just Jesus Bro | `just-jesus-bro` | 25 | passed | not-yet-created | P0 / review required |
+| AutomatedEmpires | `automatedempires` | 25 | passed | partial | P0 / review required |
+| Explore&Earn | `explore-and-earn` | 25 | passed | partial | P0 / review required |
+| Sweepza | `sweepza` | 25 | passed | partial | P0 / review required |
+| LogLoads | `logloads` | 25 | passed | partial | P0 / review required |
+| BidSpace | `bidspace` | 25 | passed | partial | P0 / review required |
+| Lake & Pine | `lake-and-pine` | 25 | passed | partial | P0 / review required |
+| ORAN | `oran` | 25 | passed | partial | P0 / review required |
+| Komfort Killz | `komfort-killz` | 25 | passed | partial | P0 / review required |
+| Just Jesus Bro | `just-jesus-bro` | 25 | passed | partial | P0 / review required |
 
 Local inventory: **9 brands, 225 tracked assets, 9 pack READMEs, 234 total generated pack files**.
 

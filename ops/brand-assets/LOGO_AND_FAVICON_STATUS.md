@@ -8,15 +8,15 @@ Generated evidence timestamp: `2026-07-12T00:00:00.000Z`
 
 | Brand | Logo/icon files | Local validation | Canva | Clearance |
 | --- | --- | --- | --- | --- |
-| AutomatedEmpires | 15 | passed | not-yet-created | P0 / not trademark cleared |
-| Explore&Earn | 15 | passed | not-yet-created | P0 / not trademark cleared |
-| Sweepza | 15 | passed | not-yet-created | P0 / not trademark cleared |
-| LogLoads | 15 | passed | not-yet-created | P0 / not trademark cleared |
-| BidSpace | 15 | passed | not-yet-created | P0 / not trademark cleared |
-| Lake & Pine | 15 | passed | not-yet-created | P0 / not trademark cleared |
-| ORAN | 15 | passed | not-yet-created | P0 / not trademark cleared |
-| Komfort Killz | 15 | passed | not-yet-created | P0 / not trademark cleared |
-| Just Jesus Bro | 15 | passed | not-yet-created | P0 / not trademark cleared |
+| AutomatedEmpires | 15 | passed | partial | P0 / not trademark cleared |
+| Explore&Earn | 15 | passed | partial | P0 / not trademark cleared |
+| Sweepza | 15 | passed | partial | P0 / not trademark cleared |
+| LogLoads | 15 | passed | partial | P0 / not trademark cleared |
+| BidSpace | 15 | passed | partial | P0 / not trademark cleared |
+| Lake & Pine | 15 | passed | partial | P0 / not trademark cleared |
+| ORAN | 15 | passed | partial | P0 / not trademark cleared |
+| Komfort Killz | 15 | passed | partial | P0 / not trademark cleared |
+| Just Jesus Bro | 15 | passed | partial | P0 / not trademark cleared |
 
 Each brand has primary, horizontal, and icon SVG masters; matching transparent PNG exports; SVG and 16/32/48/180/192/512 favicon variants; a PNG-compressed 16/32/48 multi-frame ICO; and an opaque 1024 px app icon.
 

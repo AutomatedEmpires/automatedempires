@@ -17,6 +17,8 @@ const FONT_BINARY = /\.(?:otf|ttf|ttc|woff2?|eot)$/i;
 const APPLICATION_PATH = /^(?:app|components|lib|public)\//;
 const ROOT_APPLICATION_FILE = /^(?:package\.json|pnpm-lock\.yaml|next\.config\.[^/]+|tailwind\.config\.[^/]+|tsconfig\.json)$/;
 const EXPECTED_CANVA_ROOT = 'AutomatedEmpires Brand System';
+export const CANVA_LOCAL_PDF_BLOCKER =
+  'Canva connector import-design-from-url accepts PDFs only from an already-public HTTPS URL; its direct local design_file path supports HTML/ZIP artifacts, not local PDFs. Security policy forbids publishing private local files solely for import.';
 const EXPECTED_CANVA_FOLDERS = Object.freeze([
   ['brand', 'automatedempires', '00 Parent — AutomatedEmpires'],
   ['brand', 'explore-and-earn', '01 Explore&Earn'],
@@ -343,8 +345,9 @@ const validateCanva = (manifest) => {
   const errors = [];
   const canva = manifest?.canva;
   if (!canva || typeof canva !== 'object') return ['manifest.canva must be an object'];
-  if (!['not-yet-created', 'created'].includes(canva.status)) {
-    errors.push('manifest.canva.status must be not-yet-created or created');
+  const allowedStatuses = ['not-yet-created', 'partial', 'created'];
+  if (!allowedStatuses.includes(canva.status)) {
+    errors.push(`manifest.canva.status must be one of ${allowedStatuses.join(', ')}`);
   }
   if (canva.rootFolderName !== EXPECTED_CANVA_ROOT) {
     errors.push(`Canva root folder must be named exactly ${EXPECTED_CANVA_ROOT}`);
@@ -364,36 +367,151 @@ const validateCanva = (manifest) => {
     errors.push('Canva folder inventory must match the exact 17 required folders in order');
   }
 
-  const created = canva.status === 'created';
-  if (created) {
-    if (typeof canva.rootFolderId !== 'string' || !canva.rootFolderId.trim()) {
-      errors.push('created Canva root requires a non-null rootFolderId');
+  const active = canva.status === 'partial' || canva.status === 'created';
+  const validId = (value, prefix) =>
+    typeof value === 'string' && new RegExp(`^${prefix}[A-Za-z0-9_-]+$`).test(value);
+  const validTimestamp = (value) =>
+    typeof value === 'string' && Number.isFinite(Date.parse(value));
+  const requireNull = (label, value) => {
+    if (value !== null && value !== undefined) errors.push(`${label} must be null`);
+  };
+  const requireId = (label, value, prefix) => {
+    if (!validId(value, prefix)) {
+      errors.push(`${label} must be a non-null Canva ${prefix} ID`);
     }
-  } else if (canva.rootFolderId !== null) {
-    errors.push('not-yet-created Canva root must have a null rootFolderId');
+  };
+  const requireUrl = (label, value, path, id) => {
+    const expected = id ? `https://www.canva.com/${path}/${id}` : null;
+    if (
+      typeof value !== 'string' ||
+      !value.startsWith(`https://www.canva.com/${path}/`) ||
+      (expected && value !== expected)
+    ) {
+      errors.push(`${label} must be a matching Canva https://www.canva.com/${path}/ URL`);
+    }
+  };
+  const requireTimestamp = (label, value) => {
+    if (!validTimestamp(value)) errors.push(`${label} must be an ISO timestamp`);
+  };
+
+  if (active) {
+    if (canva.rootFolderStatus !== 'created') {
+      errors.push('partial/created Canva root requires rootFolderStatus created');
+    }
+    requireId('rootFolderId', canva.rootFolderId, 'FA');
+    requireUrl('rootFolderUrl', canva.rootFolderUrl, 'folder', canva.rootFolderId);
+    requireTimestamp('Canva root createdAt', canva.createdAt);
+    requireTimestamp('Canva root updatedAt', canva.updatedAt);
+    requireTimestamp('Canva verifiedAt', canva.verifiedAt);
+  } else {
+    if (
+      canva.rootFolderStatus !== undefined &&
+      canva.rootFolderStatus !== 'not-yet-created'
+    ) {
+      errors.push('not-yet-created Canva root requires rootFolderStatus not-yet-created');
+    }
+    requireNull('not-yet-created Canva rootFolderId', canva.rootFolderId);
+    requireNull('not-yet-created Canva rootFolderUrl', canva.rootFolderUrl);
+    requireNull('not-yet-created Canva root createdAt', canva.createdAt);
+    requireNull('not-yet-created Canva root updatedAt', canva.updatedAt);
+    requireNull('not-yet-created Canva verifiedAt', canva.verifiedAt);
   }
 
   for (const folder of canva.folders) {
     const label = folder.name ?? '<unnamed-folder>';
-    if (folder.status !== canva.status) {
-      errors.push(`${label} status must match the Canva root status ${canva.status}`);
+    const expectedFolderStatus = active ? 'created' : 'not-yet-created';
+    if (folder.status !== expectedFolderStatus) {
+      errors.push(`${label} status must be ${expectedFolderStatus} when Canva is ${canva.status}`);
     }
-    if (created) {
-      if (typeof folder.folderId !== 'string' || !folder.folderId.trim()) {
-        errors.push(`${label} requires a non-null folderId when created`);
-      }
-      if (folder.kind === 'brand') {
-        for (const field of ['brandBoardDesignId', 'pitchOnePagerDesignId']) {
-          if (typeof folder[field] !== 'string' || !folder[field].trim()) {
-            errors.push(`${label} requires a non-null ${field} when created`);
-          }
-        }
-      }
+    if (active) {
+      requireId(`${label} folderId`, folder.folderId, 'FA');
+      requireUrl(`${label} folderUrl`, folder.folderUrl, 'folder', folder.folderId);
+      requireTimestamp(`${label} createdAt`, folder.createdAt);
+      requireTimestamp(`${label} updatedAt`, folder.updatedAt);
     } else {
       for (const field of ['folderId', 'brandBoardDesignId', 'pitchOnePagerDesignId']) {
-        if (folder[field] !== null) {
-          errors.push(`${label} ${field} must be null while not-yet-created`);
-        }
+        requireNull(`${label} ${field} while not-yet-created`, folder[field]);
+      }
+      for (const field of [
+        'folderUrl',
+        'createdAt',
+        'updatedAt',
+        'brandBoardEditUrl',
+        'brandBoardViewUrl',
+        'brandBoardCreatedAt',
+        'pitchOnePagerEditUrl',
+        'pitchOnePagerViewUrl',
+        'pitchOnePagerBlocker',
+      ]) requireNull(`${label} ${field} while not-yet-created`, folder[field]);
+      if (
+        folder.brandBoardStatus !== undefined &&
+        folder.brandBoardStatus !== 'not-yet-created'
+      ) {
+        errors.push(`${label} brandBoardStatus must be not-yet-created`);
+      }
+      if (
+        folder.pitchOnePagerStatus !== undefined &&
+        folder.pitchOnePagerStatus !== 'not-yet-created'
+      ) {
+        errors.push(`${label} pitchOnePagerStatus must be not-yet-created`);
+      }
+      continue;
+    }
+
+    if (folder.kind !== 'brand') {
+      requireNull(`${label} brandBoardDesignId`, folder.brandBoardDesignId);
+      requireNull(`${label} pitchOnePagerDesignId`, folder.pitchOnePagerDesignId);
+      continue;
+    }
+
+    const expectedBoardSource = `assets/${folder.brand}/preview/brand-board.png`;
+    const expectedPitchSource =
+      `assets/${folder.brand}/exports/pitch-one-pager/pitch-one-pager.pdf`;
+    if (folder.brandBoardStatus !== 'created') {
+      errors.push(`${label} brandBoardStatus must be created`);
+    }
+    requireId(`${label} brandBoardDesignId`, folder.brandBoardDesignId, 'DA');
+    requireUrl(`${label} brandBoardEditUrl`, folder.brandBoardEditUrl, 'd');
+    requireUrl(`${label} brandBoardViewUrl`, folder.brandBoardViewUrl, 'd');
+    if (folder.brandBoardSourcePath !== expectedBoardSource) {
+      errors.push(`${label} brandBoardSourcePath must equal ${expectedBoardSource}`);
+    }
+    requireTimestamp(`${label} brandBoardCreatedAt`, folder.brandBoardCreatedAt);
+
+    if (canva.status === 'partial') {
+      if (folder.pitchOnePagerStatus !== 'blocked') {
+        errors.push(`${label} pitchOnePagerStatus must be blocked while Canva is partial`);
+      }
+      requireNull(`${label} pitchOnePagerDesignId while blocked`, folder.pitchOnePagerDesignId);
+      requireNull(`${label} pitchOnePagerEditUrl while blocked`, folder.pitchOnePagerEditUrl);
+      requireNull(`${label} pitchOnePagerViewUrl while blocked`, folder.pitchOnePagerViewUrl);
+      if (folder.pitchOnePagerSourcePath !== expectedPitchSource) {
+        errors.push(`${label} pitchOnePagerSourcePath must equal ${expectedPitchSource}`);
+      }
+      if (folder.pitchOnePagerBlocker !== CANVA_LOCAL_PDF_BLOCKER) {
+        errors.push(`${label} pitchOnePagerBlocker must match the connector-contract blocker`);
+      }
+      const steps = folder.pitchOnePagerManualImportSteps;
+      if (
+        !Array.isArray(steps) ||
+        steps.length < 3 ||
+        !steps.some((step) => step.includes('Import file')) ||
+        !steps.some((step) => step.includes(expectedPitchSource)) ||
+        !steps.some((step) => step.includes(folder.name))
+      ) {
+        errors.push(
+          `${label} pitchOnePagerManualImportSteps must name the Canva import action, exact local PDF, and target folder`,
+        );
+      }
+    } else {
+      if (folder.pitchOnePagerStatus !== 'created') {
+        errors.push(`${label} pitchOnePagerStatus must be created when Canva is created`);
+      }
+      requireId(`${label} pitchOnePagerDesignId`, folder.pitchOnePagerDesignId, 'DA');
+      requireUrl(`${label} pitchOnePagerEditUrl`, folder.pitchOnePagerEditUrl, 'd');
+      requireUrl(`${label} pitchOnePagerViewUrl`, folder.pitchOnePagerViewUrl, 'd');
+      if (folder.pitchOnePagerSourcePath !== expectedPitchSource) {
+        errors.push(`${label} pitchOnePagerSourcePath must equal ${expectedPitchSource}`);
       }
     }
   }
@@ -409,8 +527,38 @@ const validateCanva = (manifest) => {
     if (brandCanva.folderName !== undefined && brandCanva.folderName !== folder.name) {
       errors.push(`${brand.slug} Canva folderName does not match the exact folder inventory`);
     }
-    for (const field of ['folderId', 'brandBoardDesignId', 'pitchOnePagerDesignId']) {
-      if (brandCanva[field] !== folder[field]) {
+    const mirroredFields = active
+      ? [
+          'folderStatus',
+          'folderId',
+          'folderUrl',
+          'folderCreatedAt',
+          'folderUpdatedAt',
+          'brandBoardStatus',
+          'brandBoardDesignId',
+          'brandBoardEditUrl',
+          'brandBoardViewUrl',
+          'brandBoardSourcePath',
+          'brandBoardCreatedAt',
+          'pitchOnePagerStatus',
+          'pitchOnePagerDesignId',
+          'pitchOnePagerEditUrl',
+          'pitchOnePagerViewUrl',
+          'pitchOnePagerSourcePath',
+          'pitchOnePagerBlocker',
+          'pitchOnePagerManualImportSteps',
+        ]
+      : ['folderId', 'brandBoardDesignId', 'pitchOnePagerDesignId'];
+    for (const field of mirroredFields) {
+      const folderField =
+        field === 'folderStatus'
+          ? folder.status
+          : field === 'folderCreatedAt'
+          ? folder.createdAt
+          : field === 'folderUpdatedAt'
+            ? folder.updatedAt
+            : folder[field];
+      if (JSON.stringify(brandCanva[field]) !== JSON.stringify(folderField)) {
         errors.push(`${brand.slug} Canva ${field} must match its folder record`);
       }
     }
@@ -772,7 +920,7 @@ export const validateAssetTree = async (root, options = {}) => {
   );
   checks.push(
     check('canva-status', 'Canva state uses the exact folder inventory and status-dependent ID semantics.', canvaErrors, {
-      allowedStatuses: ['not-yet-created', 'created'],
+      allowedStatuses: ['not-yet-created', 'partial', 'created'],
       expectedRootFolder: EXPECTED_CANVA_ROOT,
       expectedFolders: EXPECTED_CANVA_FOLDERS,
     }),

@@ -37,8 +37,13 @@ const SHARED_CANVA_FOLDERS = Object.freeze([
 
 export const DEFAULT_CANVA_STATE = Object.freeze({
   status: 'not-yet-created',
+  rootFolderStatus: 'not-yet-created',
   rootFolderName: 'AutomatedEmpires Brand System',
   rootFolderId: null,
+  rootFolderUrl: null,
+  createdAt: null,
+  updatedAt: null,
+  verifiedAt: null,
   folders: Object.freeze([
     ...Object.entries(BRAND_FOLDER_NAMES).map(([brand, name]) =>
       Object.freeze({
@@ -47,8 +52,23 @@ export const DEFAULT_CANVA_STATE = Object.freeze({
         name,
         status: 'not-yet-created',
         folderId: null,
+        folderUrl: null,
+        createdAt: null,
+        updatedAt: null,
+        brandBoardStatus: 'not-yet-created',
         brandBoardDesignId: null,
+        brandBoardEditUrl: null,
+        brandBoardViewUrl: null,
+        brandBoardSourcePath: `assets/${brand}/preview/brand-board.png`,
+        brandBoardCreatedAt: null,
+        pitchOnePagerStatus: 'not-yet-created',
         pitchOnePagerDesignId: null,
+        pitchOnePagerEditUrl: null,
+        pitchOnePagerViewUrl: null,
+        pitchOnePagerSourcePath:
+          `assets/${brand}/exports/pitch-one-pager/pitch-one-pager.pdf`,
+        pitchOnePagerBlocker: null,
+        pitchOnePagerManualImportSteps: [],
       }),
     ),
     ...SHARED_CANVA_FOLDERS.map((name) =>
@@ -58,6 +78,9 @@ export const DEFAULT_CANVA_STATE = Object.freeze({
         name,
         status: 'not-yet-created',
         folderId: null,
+        folderUrl: null,
+        createdAt: null,
+        updatedAt: null,
         brandBoardDesignId: null,
         pitchOnePagerDesignId: null,
       }),
@@ -124,11 +147,29 @@ export const collectAssetRecords = async (root, brands = BRANDS) => {
 const canvaForBrand = (canva, slug) => {
   const folder = canva.folders.find((entry) => entry.brand === slug);
   return {
-    status: folder?.status ?? 'not-yet-created',
+    status: canva.status,
     folderName: folder?.name ?? BRAND_FOLDER_NAMES[slug],
+    folderStatus: folder?.status ?? 'not-yet-created',
     folderId: folder?.folderId ?? null,
+    folderUrl: folder?.folderUrl ?? null,
+    folderCreatedAt: folder?.createdAt ?? null,
+    folderUpdatedAt: folder?.updatedAt ?? null,
+    brandBoardStatus: folder?.brandBoardStatus ?? 'not-yet-created',
     brandBoardDesignId: folder?.brandBoardDesignId ?? null,
+    brandBoardEditUrl: folder?.brandBoardEditUrl ?? null,
+    brandBoardViewUrl: folder?.brandBoardViewUrl ?? null,
+    brandBoardSourcePath:
+      folder?.brandBoardSourcePath ?? `assets/${slug}/preview/brand-board.png`,
+    brandBoardCreatedAt: folder?.brandBoardCreatedAt ?? null,
+    pitchOnePagerStatus: folder?.pitchOnePagerStatus ?? 'not-yet-created',
     pitchOnePagerDesignId: folder?.pitchOnePagerDesignId ?? null,
+    pitchOnePagerEditUrl: folder?.pitchOnePagerEditUrl ?? null,
+    pitchOnePagerViewUrl: folder?.pitchOnePagerViewUrl ?? null,
+    pitchOnePagerSourcePath:
+      folder?.pitchOnePagerSourcePath ??
+      `assets/${slug}/exports/pitch-one-pager/pitch-one-pager.pdf`,
+    pitchOnePagerBlocker: folder?.pitchOnePagerBlocker ?? null,
+    pitchOnePagerManualImportSteps: folder?.pitchOnePagerManualImportSteps ?? [],
   };
 };
 
@@ -139,8 +180,13 @@ const buildManifest = (brands, assets, canva) => ({
   legalDisclosure: LEGAL_DISCLOSURE,
   canva: {
     status: canva.status,
+    rootFolderStatus: canva.rootFolderStatus,
     rootFolderName: canva.rootFolderName,
     rootFolderId: canva.rootFolderId,
+    rootFolderUrl: canva.rootFolderUrl,
+    createdAt: canva.createdAt,
+    updatedAt: canva.updatedAt,
+    verifiedAt: canva.verifiedAt,
     folders: canva.folders,
   },
   brands: brands.map((brand) => ({
@@ -219,9 +265,33 @@ const canvaDocument = ({ brands, canva }) => {
     folder.brand ? `\`${folder.brand}\`` : '—',
     folder.status,
     folder.folderId ?? '—',
+    folder.folderUrl ? `[Open folder](${folder.folderUrl})` : '—',
+    folder.createdAt ? `\`${folder.createdAt}\`` : '—',
   ]);
   const importSections = brands.flatMap((brand) => {
     const folder = canvaForBrand(canva, brand.slug);
+    if (canva.status !== 'not-yet-created') {
+      return [
+        `### ${brand.name}`,
+        '',
+        `Target folder: \`${canva.rootFolderName}/${folder.folderName}\`${folder.folderUrl ? ` — [Open folder](${folder.folderUrl})` : ''}`,
+        '',
+        `- **Brand board:** \`${folder.brandBoardStatus}\`; source \`${folder.brandBoardSourcePath}\`; design ID ${folder.brandBoardDesignId ? `\`${folder.brandBoardDesignId}\`` : '—'}${folder.brandBoardEditUrl ? `; [edit in Canva](${folder.brandBoardEditUrl})` : ''}${folder.brandBoardCreatedAt ? `; created \`${folder.brandBoardCreatedAt}\`` : ''}.`,
+        `- **Pitch one-pager:** \`${folder.pitchOnePagerStatus}\`; source \`${folder.pitchOnePagerSourcePath}\`; design ID ${folder.pitchOnePagerDesignId ? `\`${folder.pitchOnePagerDesignId}\`` : '—'}${folder.pitchOnePagerEditUrl ? `; [edit in Canva](${folder.pitchOnePagerEditUrl})` : ''}.`,
+        ...(folder.pitchOnePagerBlocker
+          ? [`- **Connector blocker:** ${folder.pitchOnePagerBlocker}`]
+          : []),
+        ...(folder.pitchOnePagerManualImportSteps.length
+          ? [
+              '- **Secure manual import:**',
+              ...folder.pitchOnePagerManualImportSteps.map(
+                (step, index) => `  ${index + 1}. ${step}`,
+              ),
+            ]
+          : []),
+        '',
+      ];
+    }
     return [
       `### ${brand.name}`,
       '',
@@ -235,22 +305,53 @@ const canvaDocument = ({ brands, canva }) => {
       '',
     ];
   });
+  const createdBrandBoards = canva.folders.filter(
+    ({ kind, brandBoardStatus }) => kind === 'brand' && brandBoardStatus === 'created',
+  ).length;
+  const blockedPitchOnePagers = canva.folders.filter(
+    ({ kind, pitchOnePagerStatus }) => kind === 'brand' && pitchOnePagerStatus === 'blocked',
+  ).length;
+  const currentState =
+    canva.status === 'not-yet-created'
+      ? '**Canva creation is deferred to Task 4. Every Canva folder and design status is `not-yet-created`; every ID is null.**'
+      : `**Canva status is \`${canva.status}\`: root and ${canva.folders.filter(({ status }) => status === 'created').length}/${canva.folders.length} child folders are \`created\`; ${createdBrandBoards}/${brands.length} brand boards are \`created\`; ${blockedPitchOnePagers}/${brands.length} pitch one-pagers are \`blocked\`.**`;
+  const procedureHeading =
+    canva.status === 'not-yet-created'
+      ? '## Exact local import procedure'
+      : '## Per-brand Canva results and secure PDF completion steps';
   return [
     ...documentHeader('Canva folder map'),
     '## Current state',
     '',
-    '**Canva creation is deferred to Task 4. Every Canva folder and design status is `not-yet-created`; every ID is null.**',
+    currentState,
     '',
-    `Required root folder: \`${canva.rootFolderName}\``,
+    `Root folder: \`${canva.rootFolderName}\` — status \`${canva.rootFolderStatus ?? canva.status}\`; ID ${canva.rootFolderId ? `\`${canva.rootFolderId}\`` : '—'}${canva.rootFolderUrl ? `; [open in Canva](${canva.rootFolderUrl})` : ''}.`,
+    ...(canva.createdAt
+      ? [
+          '',
+          `Root created: \`${canva.createdAt}\`; updated: \`${canva.updatedAt}\`; verified: \`${canva.verifiedAt}\`.`,
+        ]
+      : []),
     '',
-    ...markdownTable(['Exact child folder', 'Kind', 'Brand', 'Status', 'Folder ID'], folderRows),
+    ...markdownTable(
+      ['Exact child folder', 'Kind', 'Brand', 'Status', 'Folder ID', 'Canva', 'Created'],
+      folderRows,
+    ),
     '',
-    '## Exact local import procedure',
+    procedureHeading,
     '',
-    `1. In Canva, open **Projects → Folders** and create or reuse one root folder named exactly \`${canva.rootFolderName}\`. Do not move or rename existing flat folders.`,
-    '2. Inside that root, create or reuse each child folder from the table exactly once, preserving numbering and punctuation.',
-    '3. Follow the per-brand steps below. Cross-brand masters belong only in `90 Shared Templates`; shared export copies may also go in the numbered libraries.',
-    '',
+    ...(canva.status === 'not-yet-created'
+      ? [
+          `1. In Canva, open **Projects → Folders** and create or reuse one root folder named exactly \`${canva.rootFolderName}\`. Do not move or rename existing flat folders.`,
+          '2. Inside that root, create or reuse each child folder from the table exactly once, preserving numbering and punctuation.',
+          '3. Follow the per-brand steps below. Cross-brand masters belong only in `90 Shared Templates`; shared export copies may also go in the numbered libraries.',
+          '',
+        ]
+      : [
+          'The existing flat venture folders are legacy content and were not renamed, moved, overwritten, or reused.',
+          'Local pitch PDFs remain private and canonical in this repository; they were not published to create connector-accessible URLs.',
+          '',
+        ]),
     ...importSections,
     '## Font substitution rule',
     '',
@@ -464,11 +565,20 @@ const pendingValidation = (brands, assets) => ({
 const run = async () => {
   const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
   const assets = await collectAssetRecords(root, BRANDS);
+  let canva = DEFAULT_CANVA_STATE;
+  try {
+    const currentManifest = JSON.parse(
+      await readFile(join(root, 'manifests', 'brand-assets.json'), 'utf8'),
+    );
+    if (currentManifest?.canva) canva = currentManifest.canva;
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
   await generateDocs({
     brands: BRANDS,
     assets,
     validation: pendingValidation(BRANDS, assets),
-    canva: DEFAULT_CANVA_STATE,
+    canva,
     root,
   });
   const validation = await validateAssetTree(root, { changeBase: TASK_3_CHANGE_BASE });
@@ -476,7 +586,7 @@ const run = async () => {
     brands: BRANDS,
     assets,
     validation,
-    canva: DEFAULT_CANVA_STATE,
+    canva,
     root,
   });
   process.stdout.write(

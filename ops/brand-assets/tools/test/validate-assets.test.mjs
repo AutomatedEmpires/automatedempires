@@ -55,6 +55,69 @@ const CANVA_FOLDERS = [
   pitchOnePagerDesignId: null,
 }));
 
+const PARTIAL_CANVA_BLOCKER =
+  'Canva connector import-design-from-url accepts PDFs only from an already-public HTTPS URL; its direct local design_file path supports HTML/ZIP artifacts, not local PDFs. Security policy forbids publishing private local files solely for import.';
+
+const applyPartialCanvaFixture = (manifest) => {
+  manifest.canva.status = 'partial';
+  manifest.canva.rootFolderStatus = 'created';
+  manifest.canva.rootFolderId = 'FAroot123';
+  manifest.canva.rootFolderUrl = 'https://www.canva.com/folder/FAroot123';
+  manifest.canva.createdAt = '2026-07-12T01:00:00.000Z';
+  manifest.canva.updatedAt = '2026-07-12T01:00:00.000Z';
+  manifest.canva.verifiedAt = '2026-07-12T01:30:00.000Z';
+
+  for (const [index, folder] of manifest.canva.folders.entries()) {
+    folder.status = 'created';
+    folder.folderId = `FAfolder${index}`;
+    folder.folderUrl = `https://www.canva.com/folder/FAfolder${index}`;
+    folder.createdAt = '2026-07-12T01:01:00.000Z';
+    folder.updatedAt = '2026-07-12T01:01:00.000Z';
+    if (folder.kind !== 'brand') continue;
+    const brand = manifest.brands.find(({ slug }) => slug === folder.brand);
+    folder.brandBoardStatus = 'created';
+    folder.brandBoardDesignId = `DAdesign${index}`;
+    folder.brandBoardEditUrl = `https://www.canva.com/d/edit${index}`;
+    folder.brandBoardViewUrl = `https://www.canva.com/d/view${index}`;
+    folder.brandBoardSourcePath = `assets/${folder.brand}/preview/brand-board.png`;
+    folder.brandBoardCreatedAt = '2026-07-12T01:02:00.000Z';
+    folder.pitchOnePagerStatus = 'blocked';
+    folder.pitchOnePagerDesignId = null;
+    folder.pitchOnePagerEditUrl = null;
+    folder.pitchOnePagerViewUrl = null;
+    folder.pitchOnePagerSourcePath =
+      `assets/${folder.brand}/exports/pitch-one-pager/pitch-one-pager.pdf`;
+    folder.pitchOnePagerBlocker = PARTIAL_CANVA_BLOCKER;
+    folder.pitchOnePagerManualImportSteps = [
+      'Open Canva Home → Create a design → Import file.',
+      `Choose assets/${folder.brand}/exports/pitch-one-pager/pitch-one-pager.pdf.`,
+      `Move the imported design to AutomatedEmpires Brand System/${folder.name}.`,
+    ];
+    brand.canva = {
+      status: 'partial',
+      folderName: folder.name,
+      folderStatus: folder.status,
+      folderId: folder.folderId,
+      folderUrl: folder.folderUrl,
+      folderCreatedAt: folder.createdAt,
+      folderUpdatedAt: folder.updatedAt,
+      brandBoardStatus: folder.brandBoardStatus,
+      brandBoardDesignId: folder.brandBoardDesignId,
+      brandBoardEditUrl: folder.brandBoardEditUrl,
+      brandBoardViewUrl: folder.brandBoardViewUrl,
+      brandBoardSourcePath: folder.brandBoardSourcePath,
+      brandBoardCreatedAt: folder.brandBoardCreatedAt,
+      pitchOnePagerStatus: folder.pitchOnePagerStatus,
+      pitchOnePagerDesignId: folder.pitchOnePagerDesignId,
+      pitchOnePagerEditUrl: folder.pitchOnePagerEditUrl,
+      pitchOnePagerViewUrl: folder.pitchOnePagerViewUrl,
+      pitchOnePagerSourcePath: folder.pitchOnePagerSourcePath,
+      pitchOnePagerBlocker: folder.pitchOnePagerBlocker,
+      pitchOnePagerManualImportSteps: folder.pitchOnePagerManualImportSteps,
+    };
+  }
+};
+
 const makeManifest = async (assetsRoot) => {
   const assets = [];
   for (const brand of BRANDS) {
@@ -405,6 +468,74 @@ describe('deterministic asset-tree validator', () => {
       assert.ok(failure.errors.some((error) => error.includes('folderId')));
       assert.ok(failure.errors.some((error) => error.includes('brandBoardDesignId')));
       assert.ok(failure.errors.some((error) => error.includes('pitchOnePagerDesignId')));
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('passes the precise partial Canva state for created folders and brand boards with blocked local PDFs', async () => {
+    await mutateManifest(applyPartialCanvaFixture);
+    try {
+      const report = await validateAssetTree(brandAssetsRoot);
+      assert.equal(
+        report.status,
+        'passed',
+        JSON.stringify(report.checks.filter(({ status }) => status === 'failed'), null, 2),
+      );
+      assert.equal(report.summary.failed, 0);
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails partial Canva state when a created brand board has an invalid ID or missing edit URL', async () => {
+    await mutateManifest((manifest) => {
+      applyPartialCanvaFixture(manifest);
+      manifest.canva.folders[0].brandBoardDesignId = 'fabricated-design-id';
+      manifest.canva.folders[0].brandBoardEditUrl = null;
+    });
+    try {
+      const failure = failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status');
+      assert.ok(failure);
+      assert.ok(failure.errors.some((error) => error.includes('brandBoardDesignId')));
+      assert.ok(failure.errors.some((error) => error.includes('brandBoardEditUrl')));
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails partial Canva state when a blocked pitch PDF has IDs or lacks blocker/manual guidance', async () => {
+    await mutateManifest((manifest) => {
+      applyPartialCanvaFixture(manifest);
+      const folder = manifest.canva.folders[0];
+      folder.pitchOnePagerDesignId = 'DAfabricated';
+      folder.pitchOnePagerEditUrl = 'https://www.canva.com/d/fabricated';
+      folder.pitchOnePagerBlocker = '';
+      folder.pitchOnePagerManualImportSteps = [];
+    });
+    try {
+      const failure = failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status');
+      assert.ok(failure);
+      assert.ok(failure.errors.some((error) => error.includes('pitchOnePagerDesignId')));
+      assert.ok(failure.errors.some((error) => error.includes('pitchOnePagerEditUrl')));
+      assert.ok(failure.errors.some((error) => error.includes('pitchOnePagerBlocker')));
+      assert.ok(
+        failure.errors.some((error) => error.includes('pitchOnePagerManualImportSteps')),
+      );
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails partial Canva state when the per-brand record diverges from its folder evidence', async () => {
+    await mutateManifest((manifest) => {
+      applyPartialCanvaFixture(manifest);
+      manifest.brands[0].canva.brandBoardDesignId = 'DAinconsistent';
+    });
+    try {
+      const failure = failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status');
+      assert.ok(failure);
+      assert.ok(failure.errors.some((error) => error.includes('must match its folder record')));
     } finally {
       await restoreManifest();
     }

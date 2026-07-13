@@ -8,15 +8,15 @@ Generated evidence timestamp: `2026-07-12T00:00:00.000Z`
 
 | Brand | Profile | Facebook | Open Graph | Email | Validation | Canva |
 | --- | --- | --- | --- | --- | --- | --- |
-| AutomatedEmpires | 1 | 2 | 2 | 2 | passed | not-yet-created |
-| Explore&Earn | 1 | 2 | 2 | 2 | passed | not-yet-created |
-| Sweepza | 1 | 2 | 2 | 2 | passed | not-yet-created |
-| LogLoads | 1 | 2 | 2 | 2 | passed | not-yet-created |
-| BidSpace | 1 | 2 | 2 | 2 | passed | not-yet-created |
-| Lake & Pine | 1 | 2 | 2 | 2 | passed | not-yet-created |
-| ORAN | 1 | 2 | 2 | 2 | passed | not-yet-created |
-| Komfort Killz | 1 | 2 | 2 | 2 | passed | not-yet-created |
-| Just Jesus Bro | 1 | 2 | 2 | 2 | passed | not-yet-created |
+| AutomatedEmpires | 1 | 2 | 2 | 2 | passed | partial |
+| Explore&Earn | 1 | 2 | 2 | 2 | passed | partial |
+| Sweepza | 1 | 2 | 2 | 2 | passed | partial |
+| LogLoads | 1 | 2 | 2 | 2 | passed | partial |
+| BidSpace | 1 | 2 | 2 | 2 | passed | partial |
+| Lake & Pine | 1 | 2 | 2 | 2 | passed | partial |
+| ORAN | 1 | 2 | 2 | 2 | passed | partial |
+| Komfort Killz | 1 | 2 | 2 | 2 | passed | partial |
+| Just Jesus Bro | 1 | 2 | 2 | 2 | passed | partial |
 
 ## Delivery notes
 
