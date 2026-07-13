@@ -12,7 +12,7 @@ The primary user and decision-maker is the founder/operator managing the portfol
 
 ## 3. Product destination
 
-The destination is a private operator command layer for portfolio governance, venture status, deployment awareness, provider and ownership maps, cost visibility, risk tracking, and task orchestration. Canonical operations documents are the current control plane. A private dashboard may progressively replace manual views only after its source data, freshness, ownership, and error states are trustworthy.
+The destination is a private operator command layer for portfolio governance, venture status, deployment awareness, provider and ownership maps, cost visibility, risk tracking, and task orchestration. Canonical operations documents are the current control plane. A private operator dashboard may progressively replace manual views only after its source data, freshness, ownership, and error states are trustworthy.
 
 The existing Next.js site remains an honest public portfolio front door. `lib/ventures.ts` is its rendered venture-list source of truth. Public-site work should clarify real portfolio activity, not turn AutomatedEmpires into a vague corporate site.
 
@@ -26,7 +26,7 @@ The current implementation is a Next.js App Router site using React and TypeScri
 
 ## 5. Operating doctrine
 
-Ship meaningful, tested improvements rather than producing another audit that restates known uncertainty. Each work cycle should close a decision, remove a blocker, improve a canonical source, or deliver a usable product slice. Use small branches, protected previews, test data, sandbox payments, internal-only email tests, and reversible dev/preview migrations aggressively when they shorten the path to evidence.
+Agents are expected to ship meaningful, tested improvements, not produce endless audits that restate known uncertainty. Each work cycle should close a decision, remove a blocker, improve a canonical source, or deliver a usable product slice. Use reversible branches, protected previews, test data, sandbox payments, internal-only email tests, and reversible dev/preview migrations aggressively when they shorten the path to evidence.
 
 An audit is useful only when it changes priority, names an owner, defines a safe next action, or supplies evidence needed to execute. When evidence is good enough, implement the next reversible step and record the result.
 

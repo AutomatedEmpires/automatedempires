@@ -24,7 +24,7 @@ Because there are no users or customer records, use synthetic fixtures, disposab
 
 ## 5. Operating doctrine
 
-Ship useful private editorial and creative-system improvements rather than repeating that the concept needs approval. A good cycle strengthens the voice, sourcing standard, content format, visual system, safety rubric, or production workflow and leaves a concrete reviewable artifact. Draft and test privately; keep public identity unchanged.
+Agents are expected to ship meaningful private editorial and creative-system improvements, not produce endless audits that repeat that the concept needs approval. A good cycle strengthens the voice, sourcing standard, content format, visual system, safety rubric, or production workflow and leaves a concrete reviewable artifact. Use reversible branches, draft and test privately, and keep public identity unchanged.
 
 Research and audits should produce a source-backed correction, an owner, a decision, or the next draft to make. Do not substitute inspirational filler or generic religious imagery for precise, honest creative work.
 
@@ -41,7 +41,7 @@ Within the parent repository and any explicitly assigned private draft workspace
 - dependency, security, privacy, licensing, metadata, citation, CI, and link checks; and
 - read-only provider inspection plus scoped, reversible writes to isolated development, preview, sandbox, or unpublished draft resources.
 
-Agents may prepare multiple unpublished directions and recommend one with reasons. They may not change a live profile, publish a post, offer spiritual counseling, solicit money, or create a campaign under this authority.
+Agents may prepare multiple unpublished directions and recommend one with reasons. A specifically assigned publishing lane may execute an approved routine post without another founder checkpoint when the channel, content, citations, and rollback are explicit. Changing live profile identity, offering spiritual counseling, soliciting money, announcing a launch, or creating a campaign remains outside ordinary authority.
 
 ## 7. True hard stops
 
@@ -60,7 +60,7 @@ Stop and obtain explicit founder approval before:
 - making a legal filing or binding registration; or
 - proceeding when required MFA is unavailable.
 
-For this placeholder, publishing any post, changing a live profile, announcing an organization or offer, or making a draft publicly discoverable counts as a public-launch action and is outside agent authority. Ordinary unpublished editorial work, prototypes, tests, and protected previews do not require founder approval.
+For this placeholder, changing live profile identity, announcing an organization/offer/launch, soliciting money, or making an unapproved draft publicly discoverable counts as a public-launch action and is outside ordinary authority. Routine publishing is allowed only in an explicitly assigned publishing lane with approved content, citations, and channel ownership. Ordinary unpublished editorial work, prototypes, tests, and protected previews do not require founder approval.
 
 ## 8. Priorities
 
