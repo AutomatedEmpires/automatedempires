@@ -6,12 +6,12 @@ The From and Reply-To values below are the only approved cross-system identities
 
 | Venture | Approved From | Approved Reply-To | Mailbox evidence | Runtime activation |
 |---|---|---|---|---|
-| AutomatedEmpires | `AutomatedEmpires <notifications@automatedempires.com>` | `jackson@automatedempires.com` | Admin/billing address is confirmed; apex hosted-mail MX is preserved | **Disabled:** no application notification surface; internal provider test blocked by inaccessible restricted key |
-| Explore&Earn | `Explore&Earn <notifications@exploreandearn.com>` | `support@exploreandearn.com` | Founder mailbox received the internal message; Reply-To header was correct. No apex receiving MX, so receipt/reply at the support address remains unproven | Founder-only test passed; customer/public sending remains disabled |
-| Sweepza | `Sweepza <notifications@sweepza.com>` | `support@sweepza.com` | Founder mailbox received the internal message; Reply-To header was correct. Microsoft 365 MX exists, but support mailbox receipt/delegation remains unproven | Founder-only test passed; public/campaign sending remains disabled |
-| LogLoads | `LogLoads <notifications@logloads.com>` | `support@logloads.com` | Founder mailbox received the internal message; Reply-To header was correct. Support inbox ownership and reply receipt remain unproven | Founder-only administrative test passed; broker/payment/public use remains disabled |
-| Lake & Pine | `Lake & Pine <hello@lakeandpinecleaning.com>` | `hello@lakeandpinecleaning.com` | Founder mailbox received the internal message; Reply-To header was correct. No apex MX, so receipt/reply at the business address remains unproven | Founder-only non-booking test passed; customer/booking sending remains disabled |
-| ORAN | `ORAN <updates@openresourceaccessnetwork.com>` | `support@openresourceaccessnetwork.com` | Existing Mailgun mail routing is preserved; target inbox confirmation is pending | Resend sending remains disabled; keep current Azure transport and click/open tracking disabled until migration approval |
+| AutomatedEmpires | `AutomatedEmpires <notifications@automatedempires.com>` | `jackson@automatedempires.com` | Founder-confirmed owned and accessible inbox; apex hosted-mail MX is preserved | **Disabled:** no application notification surface; internal provider test blocked by inaccessible restricted key |
+| Explore&Earn | `Explore&Earn <notifications@exploreandearn.com>` | `support@exploreandearn.com` | Founder-confirmed owned and accessible inbox. Founder recipient received the sender test and the Reply-To header was correct; an actual reply loop was not run | Founder-only sender test passed; customer/public sending remains disabled |
+| Sweepza | `Sweepza <notifications@sweepza.com>` | `support@sweepza.com` | Founder-confirmed owned and accessible inbox. Founder recipient received the sender test and the Reply-To header was correct; an actual reply loop was not run | Founder-only sender test passed; public/campaign sending remains disabled |
+| LogLoads | `LogLoads <notifications@logloads.com>` | `support@logloads.com` | Founder-confirmed owned and accessible inbox. Founder recipient received the sender test and the Reply-To header was correct; an actual reply loop was not run | Founder-only administrative sender test passed; broker/payment/public use remains disabled |
+| Lake & Pine | `Lake & Pine <hello@lakeandpinecleaning.com>` (outbound identity only) | **Missing / not approved** | No founder-confirmed accessible branded inbox. Receipt at `jackson@automatedempires.com` proves only the earlier outbound internal test; it does not prove `hello@lakeandpinecleaning.com` exists or receives replies | Sender/domain preparation only; customer/booking sending and branded reply routing remain disabled |
+| ORAN | `ORAN <updates@openresourceaccessnetwork.com>` (dormant outbound identity only) | **Missing / not approved** | No founder-confirmed accessible civic support inbox. Existing Mailgun records are preserved, but the application remains on Azure | Resend remains dormant; no migration or sending until a civic inbox is approved |
 
 The arrow-form contract consumed by application work is:
 
@@ -20,9 +20,20 @@ AutomatedEmpires <notifications@automatedempires.com> -> jackson@automatedempire
 Explore&Earn <notifications@exploreandearn.com> -> support@exploreandearn.com
 Sweepza <notifications@sweepza.com> -> support@sweepza.com
 LogLoads <notifications@logloads.com> -> support@logloads.com
-Lake & Pine <hello@lakeandpinecleaning.com> -> hello@lakeandpinecleaning.com
-ORAN <updates@openresourceaccessnetwork.com> -> support@openresourceaccessnetwork.com (pending inbox confirmation)
+Lake & Pine <hello@lakeandpinecleaning.com> -> [branded Reply-To missing; do not activate]
+ORAN <updates@openresourceaccessnetwork.com> -> [civic Reply-To missing; Resend dormant]
 ```
+
+## Founder-confirmed inbox inventory
+
+As of 2026-07-12, the only founder-confirmed owned and accessible inboxes are:
+
+- `support@logloads.com`
+- `support@sweepza.com`
+- `support@exploreandearn.com`
+- `jackson@automatedempires.com`
+
+Do not infer mailbox ownership or accessibility for any other address. GoDaddy redirected the read-only inventory attempt to sign-in, and the connected Microsoft delegated-mailbox surface did not recognize the three support addresses as delegated Microsoft users. Those provider limitations do not override the founder confirmation and do not prove the addresses are absent; they mean provider-side delegation and reply delivery were not independently verified in this session.
 
 ## Sweepza alias status
 
@@ -47,4 +58,4 @@ Do not create, name, or publish an optional alias by assumption.
 1. The authenticated key domain, From domain, Reply-To venture, Doppler project, Vercel project, and application repository must all refer to the same venture.
 2. Never use the Explore&Earn identity or Reply-To as a fallback for another venture.
 3. Canonical runtime variables are `RESEND_API_KEY`, `RESEND_FROM`, `RESEND_REPLY_TO`, and `SUPPORT_EMAIL`. Legacy names may be read-only fallbacks during migration, but they do not change this matrix.
-4. A mailbox marked pending or unproven cannot be described as delivery-ready until the internal test log records inbox receipt and a successful reply loop.
+4. Founder-confirmed ownership/access, Reply-To header correctness, and a successful reply loop are separate evidence fields. Do not claim reply delivery unless the reply destination actually receives a separately authorized test.
