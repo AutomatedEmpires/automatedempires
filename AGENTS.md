@@ -1,38 +1,78 @@
 # AutomatedEmpires — Studio Site Agent Contract
 
-> Binding for every agent (human or AI) touching this repo. This is the public-facing studio/portfolio site for the AutomatedEmpires venture system. Read it fully before doing anything.
+This contract is binding for every contributor and agent working in this repository. Snapshot facts are dated 2026-07-12; refresh PR and rollout status before acting.
 
-## 0 · Prime doctrine
-**Notion decides and builds. GitHub reviews and ships. Figma shows. Everything else runs.**
+## 1. App purpose
 
-- **Notion** = product & vision truth, and where the bulk of the build is authored before code moves. **This repo** = implementation truth for the marketing site only; GitHub validates, reviews, and ships it.
-- This repo is the org's public front door; it is NOT one of the product apps (Explore&Earn, BidSpace, Sweepza, LogLoads).
+AutomatedEmpires is the public venture-studio and portfolio site, not one of the portfolio's product applications. It is a Next.js App Router marketing surface, and `lib/ventures.ts` is the source of truth for the venture list rendered by the site. Preserve the existing Next.js runtime and source-of-truth doctrine: product and vision decisions belong in the durable product canon, while this repository is implementation truth for this site.
 
-## 1 · What this is
-The AutomatedEmpires studio site: a Next.js (App Router) marketing/portfolio surface that presents the venture portfolio. `lib/ventures.ts` is the single source of truth for the venture list rendered by the site.
+## 2. Business vision
 
-## 2 · The machine
-Built on ONE machine; assume exactly:
-- Windows 11 ARM64 (Snapdragon X Elite) → WSL2 Ubuntu 24.04 → VS Code
-- Working path: `/home/jackson/automatedempires/ventures/automatedempires`
-- 16 GB RAM. **One agent at a time** — no parallel heavy builds or long-running watchers.
+Provide a credible public front door for an independent venture portfolio. Copy and UI must describe the portfolio honestly without overstating rollout, partnerships, customers, legal status, ownership, traction, or production readiness.
 
-## 3 · Runtime (pinned — do not drift)
-- Node **24.16.0** (`.nvmrc`)
-- pnpm **10.12.4** (`packageManager` in `package.json`)
-- Next.js (App Router) · TypeScript end-to-end
-- Any version change requires a dated decision.
+## 3. Current rollout status
 
-## 4 · Integration spine (cross-app standard)
-This is a marketing-leaning site and does not need the full product spine, but when it does integrate it uses the locked family providers — Secrets = Doppler, Hosting = Vercel, Analytics = PostHog, Errors = Sentry, Media = Cloudinary, Email = Resend, Icons = Streamline. Do not introduce alternates without a dated decision.
+Status: `active · docs-only · security-risk`.
 
-## 5 · How we work
-- Work on lane/feature branches → small PRs → review → merge. **Never push straight to `main`.**
-- **Builder is never the approver.** Open a PR; do not merge your own work without review.
-- CI (`.github/workflows/ci.yml`) calls the org-shared reusable workflow and runs typecheck + lint + build on every PR; keep it green.
-- Respect founder gates for anything money-moving, legally binding, or destructive.
+This is a 2026-07-12 snapshot. No venture in the portfolio is money-ready or transfer-ready. Refresh current PRs, blockers, ownership, and rollout facts before beginning work or making public claims.
 
-## 6 · Repo layout
-- `app/` — Next.js App Router routes
-- `components/` — Nav, Hero, VentureCard, Footer, and related UI
-- `lib/ventures.ts` — venture list single source of truth
+## 4. Branch naming rules
+
+- Before work, run `git status -sb` and `git branch --show-current`, then inspect open PRs and owned artifacts.
+- Agent branches use `agent/<scope>-<short-description>`.
+- Normal work may use `feat/`, `fix/`, `docs/`, or `chore/` followed by a short kebab-case scope.
+- One agent owns one artifact and one branch at a time. Do not start from a branch containing unrelated changes or overwrite another agent's artifact.
+- Use branches and PRs for all work. Never push directly to `main`, merge a PR, or delete a branch.
+- Use durable issues, PRs, or repository documentation for handoff.
+
+## 5. Required checks before PR
+
+- When dependencies are needed, run `pnpm install --frozen-lockfile`.
+- Run `pnpm typecheck`.
+- Run `pnpm lint`.
+- Run `pnpm build`.
+- Run `git diff --check`.
+- This repository currently has no test script; do not claim that tests ran.
+- Review the resulting diff for scope, public-claim accuracy, and unintended changes to `lib/ventures.ts`.
+
+## 6. Forbidden actions
+
+- Do not push to `main`, merge PRs, delete branches, bypass independent review, overwrite another agent's artifact, or work from a branch with unrelated changes.
+- Do not deploy, promote, link projects, change environments, domains, or DNS, or perform destructive operations.
+- Do not invent venture, customer, partnership, legal, security, revenue, or readiness claims.
+- Do not introduce a replacement runtime, framework, provider, or source of truth without a dated approved decision.
+- Do not expose secrets, private customer or user data, cookies, tokens, sensitive provider IDs, or recovery material.
+
+## 7. Provider no-touch zones
+
+Provider no-touch means no dashboard, CLI, or API writes. Do not deploy, promote, link, or change environment variables, domains, or DNS; change Doppler secrets; run Supabase live migrations or SQL or alter auth/storage; change Clerk; create Stripe charges, products, prices, webhooks, refunds, or payouts; use Resend or send email; or change telemetry or media providers. This includes Vercel, Doppler, Supabase, Clerk, Stripe, Resend/DNS, PostHog, Sentry, and Cloudinary. Read-only provider inspection requires explicit scope.
+
+## 8. Data, money, email, and auth guardrails
+
+- Treat venture metadata and public copy as governed content. Keep `lib/ventures.ts` authoritative for the rendered venture list and avoid parallel sources.
+- No venture is approved for money movement. Do not activate billing, charges, refunds, payouts, purchases, subscriptions, or financial claims.
+- Do not send production email, activate domains, import recipients, or change templates or deliverability settings.
+- Do not activate or alter live authentication, authorization, user records, sessions, or recovery flows.
+- Never commit, log, paste, or expose secrets, private user or customer data, cookies, tokens, sensitive provider IDs, or recovery material.
+
+## 9. Design notes
+
+Preserve the existing public marketing and portfolio information architecture, established design tokens, and shared components. Make scoped changes rather than redesigning the site. Do not visually or verbally inflate any venture's status, maturity, availability, or endorsement.
+
+## 10. Current known PRs and blockers
+
+Snapshot date: 2026-07-12. Open draft PRs are #13, `docs: record portfolio execution commander pass`, and #14, `docs: add canonical operations documentation index`.
+
+Known blockers are concentrated provider and governance control, incomplete rollback and DNS smoke validation, the absence of an app test suite, and other documentation work in flight. Refresh these facts and check artifact ownership before acting.
+
+## 11. Output format for future agents
+
+Every PR or handoff must report:
+
+- Branch name and HEAD commit.
+- Files changed and exact scope.
+- Exact checks run and their results, including checks not run and why.
+- Provider or live-system actions; normally state `none` explicitly.
+- Risks and blockers.
+- PR URL.
+- For UI work, screenshots and accessibility notes.
