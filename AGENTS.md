@@ -4,7 +4,9 @@ This contract is binding for every contributor and agent working in this reposit
 
 ## 1. App purpose
 
-AutomatedEmpires is the public venture-studio and portfolio site, not one of the portfolio's product applications. It is a Next.js App Router marketing surface, and `lib/ventures.ts` is the source of truth for the venture list rendered by the site. Preserve the existing Next.js runtime and source-of-truth doctrine: product and vision decisions belong in the durable product canon, while this repository is implementation truth for this site.
+AutomatedEmpires is the public venture-studio and portfolio site, not one of the portfolio's product applications. It is a Next.js App Router marketing surface, and `lib/ventures.ts` is the source of truth for the venture list rendered by the site. Preserve the source-of-truth doctrine: product and vision decisions belong in the durable product canon, while this repository is implementation truth for this site.
+
+The pinned baseline is Node `24.16.0`, pnpm `10.12.4`, Next.js App Router, and TypeScript. Routes live in `app/`, shared visual building blocks in `components/`, and rendered venture data in `lib/ventures.ts`. A toolchain, framework, or ownership-boundary change requires a dated approved decision.
 
 ## 2. Business vision
 
@@ -22,7 +24,7 @@ This is a 2026-07-12 snapshot. No venture in the portfolio is money-ready or tra
 - Agent branches use `agent/<scope>-<short-description>`.
 - Normal work may use `feat/`, `fix/`, `docs/`, or `chore/` followed by a short kebab-case scope.
 - One agent owns one artifact and one branch at a time. Do not start from a branch containing unrelated changes or overwrite another agent's artifact.
-- Use branches and PRs for all work. Never push directly to `main`, merge a PR, or delete a branch.
+- Use branches and PRs for all work. Implementing agents/builders never push directly to `main`, merge their own PRs, or delete unmerged branches. A designated maintainer or approved automation may merge after independent review and green required checks, then delete the merged branch.
 - Use durable issues, PRs, or repository documentation for handoff.
 
 ## 5. Required checks before PR
@@ -37,7 +39,7 @@ This is a 2026-07-12 snapshot. No venture in the portfolio is money-ready or tra
 
 ## 6. Forbidden actions
 
-- Do not push to `main`, merge PRs, delete branches, bypass independent review, overwrite another agent's artifact, or work from a branch with unrelated changes.
+- Do not push to `main`, self-merge or bypass independent review, delete unmerged branches, overwrite another agent's artifact, or work from a branch with unrelated changes.
 - Do not deploy, promote, link projects, change environments, domains, or DNS, or perform destructive operations.
 - Do not invent venture, customer, partnership, legal, security, revenue, or readiness claims.
 - Do not introduce a replacement runtime, framework, provider, or source of truth without a dated approved decision.
