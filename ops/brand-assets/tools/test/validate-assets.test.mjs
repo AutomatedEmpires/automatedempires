@@ -27,6 +27,34 @@ const canonicalAssets = resolve(toolsRoot, '..', 'assets');
 
 const sha256 = (buffer) => createHash('sha256').update(buffer).digest('hex');
 
+const CANVA_FOLDERS = [
+  ['brand', 'automatedempires', '00 Parent — AutomatedEmpires'],
+  ['brand', 'explore-and-earn', '01 Explore&Earn'],
+  ['brand', 'oran', '02 ORAN'],
+  ['brand', 'bidspace', '03 BidSpace'],
+  ['brand', 'lake-and-pine', '04 Lake & Pine'],
+  ['brand', 'sweepza', '05 Sweepza'],
+  ['brand', 'logloads', '06 LogLoads'],
+  ['brand', 'komfort-killz', '07 Komfort Killz'],
+  ['brand', 'just-jesus-bro', '08 Just Jesus Bro'],
+  ['shared', null, '90 Shared Templates'],
+  ['shared', null, '91 Icons and Illustration Library'],
+  ['shared', null, '92 Photography Library'],
+  ['shared', null, '93 Favicons and App Icons'],
+  ['shared', null, '94 Social Covers and Profile Images'],
+  ['shared', null, '95 Open Graph and Website Images'],
+  ['shared', null, '96 Archived'],
+  ['shared', null, '97 Retired Assets'],
+].map(([kind, brand, name]) => ({
+  kind,
+  brand,
+  name,
+  status: 'not-yet-created',
+  folderId: null,
+  brandBoardDesignId: null,
+  pitchOnePagerDesignId: null,
+}));
+
 const makeManifest = async (assetsRoot) => {
   const assets = [];
   for (const brand of BRANDS) {
@@ -56,6 +84,12 @@ const makeManifest = async (assetsRoot) => {
     schemaVersion: 1,
     generatedAt: '2026-07-12T00:00:00.000Z',
     legalDisclosure: LEGAL_DISCLOSURE,
+    canva: {
+      status: 'not-yet-created',
+      rootFolderName: 'AutomatedEmpires Brand System',
+      rootFolderId: null,
+      folders: CANVA_FOLDERS,
+    },
     brands: BRANDS.map((brand) => ({
       ...brand,
       legalStatus: 'P0 concept; founder, similarity, trademark, and legal review required.',
@@ -78,6 +112,7 @@ describe('deterministic asset-tree validator', () => {
   let brandAssetsRoot;
   let manifestPath;
   let baselineManifest;
+  let baselineCommit;
 
   before(async () => {
     repositoryRoot = await mkdtemp(join(tmpdir(), 'brand-validator-'));
@@ -97,6 +132,7 @@ describe('deterministic asset-tree validator', () => {
     await exec('git', ['config', 'user.name', 'Asset Validator'], { cwd: repositoryRoot });
     await exec('git', ['add', '.'], { cwd: repositoryRoot });
     await exec('git', ['commit', '--quiet', '-m', 'fixture'], { cwd: repositoryRoot });
+    baselineCommit = (await exec('git', ['rev-parse', 'HEAD'], { cwd: repositoryRoot })).stdout.trim();
   });
 
   after(async () => {
@@ -232,6 +268,30 @@ describe('deterministic asset-tree validator', () => {
     }
   });
 
+  it('fails alpha-expectations for a fully opaque RGBA logo PNG', async () => {
+    const path = join(
+      brandAssetsRoot,
+      'assets',
+      'sweepza',
+      'exports',
+      'logo',
+      'primary-logo.png',
+    );
+    const original = await readFile(path);
+    const opaqueRgba = await sharp(original)
+      .flatten({ background: '#ffffff' })
+      .ensureAlpha()
+      .png()
+      .toBuffer();
+    assert.equal((await sharp(opaqueRgba).metadata()).hasAlpha, true);
+    await writeFile(path, opaqueRgba);
+    try {
+      assert.ok(failedCheck(await validateAssetTree(brandAssetsRoot), 'alpha-expectations'));
+    } finally {
+      await writeFile(path, original);
+    }
+  });
+
   it('fails pdf-pages for a two-page pitch PDF', async () => {
     const path = join(
       brandAssetsRoot,
@@ -297,6 +357,59 @@ describe('deterministic asset-tree validator', () => {
     }
   });
 
+  it('fails canva-status for a fabricated root folder ID before creation', async () => {
+    await mutateManifest((manifest) => {
+      manifest.canva.rootFolderId = 'fabricated-root-id';
+    });
+    try {
+      assert.ok(failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status'));
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails canva-status for a fabricated shared folder ID before creation', async () => {
+    await mutateManifest((manifest) => {
+      manifest.canva.folders.find(({ kind }) => kind === 'shared').folderId =
+        'fabricated-shared-folder-id';
+    });
+    try {
+      assert.ok(failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status'));
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails canva-status when the exact 17-folder inventory changes', async () => {
+    await mutateManifest((manifest) => {
+      manifest.canva.folders[0].name = '00 Parent Final';
+    });
+    try {
+      assert.ok(failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status'));
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails canva-status when created state has null root, folder, or design IDs', async () => {
+    await mutateManifest((manifest) => {
+      manifest.canva.status = 'created';
+      for (const folder of manifest.canva.folders) folder.status = 'created';
+      for (const brand of manifest.brands) brand.canva.status = 'created';
+    });
+    try {
+      const report = await validateAssetTree(brandAssetsRoot);
+      const failure = failedCheck(report, 'canva-status');
+      assert.ok(failure);
+      assert.ok(failure.errors.some((error) => error.includes('rootFolderId')));
+      assert.ok(failure.errors.some((error) => error.includes('folderId')));
+      assert.ok(failure.errors.some((error) => error.includes('brandBoardDesignId')));
+      assert.ok(failure.errors.some((error) => error.includes('pitchOnePagerDesignId')));
+    } finally {
+      await restoreManifest();
+    }
+  });
+
   it('fails font-binary-absence when a font binary is present', async () => {
     const path = join(brandAssetsRoot, 'assets', 'sweepza', 'source', 'brand-font.otf');
     await writeFile(path, 'font fixture');
@@ -313,6 +426,33 @@ describe('deterministic asset-tree validator', () => {
     await writeFile(path, 'export default () => "changed";\n');
     try {
       assert.ok(failedCheck(await validateAssetTree(brandAssetsRoot), 'repository-scope'));
+    } finally {
+      await writeFile(path, original);
+    }
+  });
+
+  it('fails canonical-asset-scope for an asset-byte diff from an explicit base', async () => {
+    const path = join(
+      brandAssetsRoot,
+      'assets',
+      'sweepza',
+      'exports',
+      'favicon',
+      'favicon-16.png',
+    );
+    const original = await readFile(path);
+    const changed = Buffer.from(original);
+    changed[changed.length - 1] ^= 1;
+    await writeFile(path, changed);
+    try {
+      const report = await validateAssetTree(brandAssetsRoot, {
+        changeBase: baselineCommit,
+      });
+      assert.ok(failedCheck(report, 'canonical-asset-scope'));
+      assert.equal(report.repositoryScope.changeBase, baselineCommit);
+      assert.deepEqual(report.repositoryScope.assetPackChanges, [
+        'ops/brand-assets/assets/sweepza/exports/favicon/favicon-16.png',
+      ]);
     } finally {
       await writeFile(path, original);
     }

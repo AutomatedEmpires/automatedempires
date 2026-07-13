@@ -16,6 +16,26 @@ const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0
 const FONT_BINARY = /\.(?:otf|ttf|ttc|woff2?|eot)$/i;
 const APPLICATION_PATH = /^(?:app|components|lib|public)\//;
 const ROOT_APPLICATION_FILE = /^(?:package\.json|pnpm-lock\.yaml|next\.config\.[^/]+|tailwind\.config\.[^/]+|tsconfig\.json)$/;
+const EXPECTED_CANVA_ROOT = 'AutomatedEmpires Brand System';
+const EXPECTED_CANVA_FOLDERS = Object.freeze([
+  ['brand', 'automatedempires', '00 Parent — AutomatedEmpires'],
+  ['brand', 'explore-and-earn', '01 Explore&Earn'],
+  ['brand', 'oran', '02 ORAN'],
+  ['brand', 'bidspace', '03 BidSpace'],
+  ['brand', 'lake-and-pine', '04 Lake & Pine'],
+  ['brand', 'sweepza', '05 Sweepza'],
+  ['brand', 'logloads', '06 LogLoads'],
+  ['brand', 'komfort-killz', '07 Komfort Killz'],
+  ['brand', 'just-jesus-bro', '08 Just Jesus Bro'],
+  ['shared', null, '90 Shared Templates'],
+  ['shared', null, '91 Icons and Illustration Library'],
+  ['shared', null, '92 Photography Library'],
+  ['shared', null, '93 Favicons and App Icons'],
+  ['shared', null, '94 Social Covers and Profile Images'],
+  ['shared', null, '95 Open Graph and Website Images'],
+  ['shared', null, '96 Archived'],
+  ['shared', null, '97 Retired Assets'],
+].map(([kind, brand, name]) => Object.freeze({ kind, brand, name })));
 const REQUIRED_BRAND_FIELDS = [
   'slug',
   'name',
@@ -162,9 +182,25 @@ const parseIco = (buffer) => {
 const alphaEvidence = async (path, shouldHaveAlpha) => {
   const metadata = await sharp(path).metadata();
   if (shouldHaveAlpha) {
+    if (metadata.hasAlpha !== true) {
+      return {
+        valid: false,
+        hasAlpha: false,
+        transparentPixels: 0,
+        detail: 'hasAlpha=false; transparentPixels=0',
+      };
+    }
+    const { data, info } = await sharp(path).raw().toBuffer({ resolveWithObject: true });
+    let transparentPixels = 0;
+    const alphaOffset = info.channels - 1;
+    for (let offset = alphaOffset; offset < data.length; offset += info.channels) {
+      if (data[offset] !== 255) transparentPixels += 1;
+    }
     return {
-      valid: metadata.hasAlpha === true,
-      detail: `hasAlpha=${Boolean(metadata.hasAlpha)}`,
+      valid: transparentPixels > 0,
+      hasAlpha: true,
+      transparentPixels,
+      detail: `hasAlpha=true; transparentPixels=${transparentPixels}`,
     };
   }
 
@@ -175,6 +211,8 @@ const alphaEvidence = async (path, shouldHaveAlpha) => {
   }
   return {
     valid: transparentPixels === 0,
+    hasAlpha: Boolean(metadata.hasAlpha),
+    transparentPixels,
     detail: `transparentPixels=${transparentPixels}`,
   };
 };
@@ -194,7 +232,7 @@ const gitLines = async (cwd, args) => {
   }
 };
 
-const repositoryEvidence = async (root) => {
+const repositoryEvidence = async (root, { changeBase, scopeBaseline } = {}) => {
   const repositoryRoots = await gitLines(root, ['rev-parse', '--show-toplevel']);
   if (repositoryRoots.length === 0) {
     return {
@@ -204,6 +242,12 @@ const repositoryEvidence = async (root) => {
       evaluatedFileCount: 0,
       changedFiles: [],
       disallowedFiles: ['<repository-not-found>'],
+      changeBase: changeBase ?? scopeBaseline ?? null,
+      resolvedChangeBase: null,
+      baselineComparison: null,
+      baselineChangedFiles: [],
+      assetPackChanges: [],
+      assetPackErrors: ['git repository discovery failed'],
     };
   }
 
@@ -235,14 +279,143 @@ const repositoryEvidence = async (root) => {
   const disallowedFiles = changedFiles.filter(
     (path) => APPLICATION_PATH.test(path) || ROOT_APPLICATION_FILE.test(path),
   );
+
+  const requestedBase = changeBase ?? scopeBaseline ?? null;
+  let resolvedChangeBase = null;
+  let baselineComparison = null;
+  let baselineChangedFiles = [];
+  let assetPackChanges = [];
+  const assetPackErrors = [];
+  if (requestedBase !== null) {
+    if (typeof requestedBase !== 'string' || requestedBase.trim() === '') {
+      assetPackErrors.push('change base must be a nonempty git ref');
+    } else {
+      const resolved = await gitLines(repositoryRoot, [
+        'rev-parse',
+        '--verify',
+        `${requestedBase}^{commit}`,
+      ]);
+      if (resolved.length === 0) {
+        assetPackErrors.push(`change base could not be resolved: ${requestedBase}`);
+      } else {
+        resolvedChangeBase = resolved[0];
+        baselineComparison = `${resolvedChangeBase}..WORKTREE`;
+        const fromBase = new Set(
+          await gitLines(repositoryRoot, ['diff', '--name-only', resolvedChangeBase]),
+        );
+        for (const path of await gitLines(repositoryRoot, [
+          'ls-files',
+          '--others',
+          '--exclude-standard',
+        ])) {
+          fromBase.add(path);
+        }
+        baselineChangedFiles = [...fromBase]
+          .map((path) => path.replaceAll('\\', '/'))
+          .sort();
+        assetPackChanges = baselineChangedFiles.filter((path) =>
+          path.startsWith('ops/brand-assets/assets/'),
+        );
+        assetPackErrors.push(...assetPackChanges);
+      }
+    }
+  }
   return {
-    status: disallowedFiles.length === 0 ? 'passed' : 'failed',
+    status:
+      disallowedFiles.length === 0 && assetPackErrors.length === 0 ? 'passed' : 'failed',
     repositoryRoot: posix(repositoryRoot),
     basis: [comparison ? `branch diff ${comparison}` : 'working tree status only', 'working tree status'],
     evaluatedFileCount: changedFiles.length,
     changedFiles,
     disallowedFiles,
+    changeBase: requestedBase,
+    scopeBaseline: scopeBaseline ?? null,
+    resolvedChangeBase,
+    baselineComparison,
+    baselineChangedFiles,
+    canonicalAssetScopeEnforced: requestedBase !== null,
+    assetPackChanges,
+    assetPackErrors,
   };
+};
+
+const validateCanva = (manifest) => {
+  const errors = [];
+  const canva = manifest?.canva;
+  if (!canva || typeof canva !== 'object') return ['manifest.canva must be an object'];
+  if (!['not-yet-created', 'created'].includes(canva.status)) {
+    errors.push('manifest.canva.status must be not-yet-created or created');
+  }
+  if (canva.rootFolderName !== EXPECTED_CANVA_ROOT) {
+    errors.push(`Canva root folder must be named exactly ${EXPECTED_CANVA_ROOT}`);
+  }
+  if (!Array.isArray(canva.folders)) {
+    errors.push('manifest.canva.folders must be an array');
+    return errors;
+  }
+
+  const expectedInventory = EXPECTED_CANVA_FOLDERS.map(
+    ({ kind, brand, name }) => `${kind}|${brand ?? ''}|${name}`,
+  );
+  const actualInventory = canva.folders.map(
+    ({ kind, brand, name }) => `${kind}|${brand ?? ''}|${name}`,
+  );
+  if (JSON.stringify(actualInventory) !== JSON.stringify(expectedInventory)) {
+    errors.push('Canva folder inventory must match the exact 17 required folders in order');
+  }
+
+  const created = canva.status === 'created';
+  if (created) {
+    if (typeof canva.rootFolderId !== 'string' || !canva.rootFolderId.trim()) {
+      errors.push('created Canva root requires a non-null rootFolderId');
+    }
+  } else if (canva.rootFolderId !== null) {
+    errors.push('not-yet-created Canva root must have a null rootFolderId');
+  }
+
+  for (const folder of canva.folders) {
+    const label = folder.name ?? '<unnamed-folder>';
+    if (folder.status !== canva.status) {
+      errors.push(`${label} status must match the Canva root status ${canva.status}`);
+    }
+    if (created) {
+      if (typeof folder.folderId !== 'string' || !folder.folderId.trim()) {
+        errors.push(`${label} requires a non-null folderId when created`);
+      }
+      if (folder.kind === 'brand') {
+        for (const field of ['brandBoardDesignId', 'pitchOnePagerDesignId']) {
+          if (typeof folder[field] !== 'string' || !folder[field].trim()) {
+            errors.push(`${label} requires a non-null ${field} when created`);
+          }
+        }
+      }
+    } else {
+      for (const field of ['folderId', 'brandBoardDesignId', 'pitchOnePagerDesignId']) {
+        if (folder[field] !== null) {
+          errors.push(`${label} ${field} must be null while not-yet-created`);
+        }
+      }
+    }
+  }
+
+  const folderByBrand = new Map(canva.folders.map((folder) => [folder.brand, folder]));
+  for (const brand of Array.isArray(manifest?.brands) ? manifest.brands : []) {
+    const folder = folderByBrand.get(brand.slug);
+    const brandCanva = brand.canva;
+    if (!folder || !brandCanva) continue;
+    if (brandCanva.status !== canva.status) {
+      errors.push(`${brand.slug} Canva status must match the root status ${canva.status}`);
+    }
+    if (brandCanva.folderName !== undefined && brandCanva.folderName !== folder.name) {
+      errors.push(`${brand.slug} Canva folderName does not match the exact folder inventory`);
+    }
+    for (const field of ['folderId', 'brandBoardDesignId', 'pitchOnePagerDesignId']) {
+      if (brandCanva[field] !== folder[field]) {
+        errors.push(`${brand.slug} Canva ${field} must match its folder record`);
+      }
+    }
+  }
+  return errors;
 };
 
 const validateManifest = (manifest) => {
@@ -306,9 +479,10 @@ const validateManifest = (manifest) => {
 /**
  * Validate a complete ops/brand-assets directory without mutating its generated assets.
  * @param {string} root
+ * @param {{changeBase?: string, scopeBaseline?: string}} [options]
  * @returns {Promise<object>}
  */
-export const validateAssetTree = async (root) => {
+export const validateAssetTree = async (root, options = {}) => {
   const brandAssetsRoot = resolve(root);
   const assetsRoot = join(brandAssetsRoot, 'assets');
   const manifestPath = join(brandAssetsRoot, 'manifests', 'brand-assets.json');
@@ -454,6 +628,10 @@ export const validateAssetTree = async (root) => {
 
   const alphaErrors = [];
   let alphaInspected = 0;
+  let transparentExpected = 0;
+  let transparentWithTransparentPixels = 0;
+  let opaqueExpected = 0;
+  let opaqueFullyOpaque = 0;
   for (const brand of BRANDS) {
     for (const requirement of ASSET_REQUIREMENTS.filter(({ format }) => format === 'png')) {
       const label = `${brand.slug}/${requirement.relativePath}`;
@@ -462,6 +640,15 @@ export const validateAssetTree = async (root) => {
           join(assetsRoot, ...label.split('/')),
           requirement.alpha,
         );
+        if (requirement.alpha) {
+          transparentExpected += 1;
+          if (result.hasAlpha && result.transparentPixels > 0) {
+            transparentWithTransparentPixels += 1;
+          }
+        } else {
+          opaqueExpected += 1;
+          if (result.transparentPixels === 0) opaqueFullyOpaque += 1;
+        }
         if (!result.valid) {
           throw new Error(
             requirement.alpha
@@ -479,6 +666,10 @@ export const validateAssetTree = async (root) => {
     check('alpha-expectations', 'Transparent logos retain alpha and opaque compositions contain no transparent pixels.', alphaErrors, {
       expected: BRANDS.length * ASSET_REQUIREMENTS.filter(({ format }) => format === 'png').length,
       inspected: alphaInspected,
+      transparentExpected,
+      transparentWithTransparentPixels,
+      opaqueExpected,
+      opaqueFullyOpaque,
     }),
   );
 
@@ -533,7 +724,7 @@ export const validateAssetTree = async (root) => {
   const provenanceErrors = [];
   const altErrors = [];
   const legalErrors = [];
-  const canvaErrors = [];
+  const canvaErrors = validateCanva(manifest);
   for (const asset of manifestAssets) {
     const key = `${asset.brand ?? '<unknown>'}:${asset.path ?? '<unknown>'}`;
     if (typeof asset.provenance !== 'string' || !asset.provenance.trim()) {
@@ -562,12 +753,6 @@ export const validateAssetTree = async (root) => {
     if (!Array.isArray(brand.legalNotes) || !brand.legalNotes.includes(LEGAL_DISCLOSURE)) {
       legalErrors.push(`${brand.slug ?? '<unknown>'} legalNotes omit the shared legal disclosure`);
     }
-    if (brand.canva?.status !== 'not-yet-created') {
-      canvaErrors.push(`${brand.slug ?? '<unknown>'} Canva status must remain not-yet-created`);
-    }
-    for (const field of ['folderId', 'brandBoardDesignId', 'pitchOnePagerDesignId']) {
-      if (brand.canva?.[field] !== null) canvaErrors.push(`${brand.slug ?? '<unknown>'} Canva ${field} must remain null`);
-    }
   }
   checks.push(
     check('provenance', 'Every asset declares original image and font provenance.', provenanceErrors, {
@@ -586,8 +771,10 @@ export const validateAssetTree = async (root) => {
     }),
   );
   checks.push(
-    check('canva-status', 'Canva fields remain not-yet-created with no fabricated IDs.', canvaErrors, {
-      expectedStatus: 'not-yet-created',
+    check('canva-status', 'Canva state uses the exact folder inventory and status-dependent ID semantics.', canvaErrors, {
+      allowedStatuses: ['not-yet-created', 'created'],
+      expectedRootFolder: EXPECTED_CANVA_ROOT,
+      expectedFolders: EXPECTED_CANVA_FOLDERS,
     }),
   );
 
@@ -617,13 +804,27 @@ export const validateAssetTree = async (root) => {
     }),
   );
 
-  const repositoryScope = await repositoryEvidence(brandAssetsRoot);
+  const repositoryScope = await repositoryEvidence(brandAssetsRoot, options);
   checks.push(
     check(
       'repository-scope',
       'Branch and working-tree changes do not touch application code or root runtime manifests.',
       repositoryScope.disallowedFiles,
       repositoryScope,
+    ),
+  );
+  checks.push(
+    check(
+      'canonical-asset-scope',
+      'When an explicit change base is supplied, no canonical generated asset-pack bytes may change.',
+      repositoryScope.assetPackErrors,
+      {
+        enforced: repositoryScope.canonicalAssetScopeEnforced,
+        changeBase: repositoryScope.changeBase,
+        resolvedChangeBase: repositoryScope.resolvedChangeBase,
+        comparison: repositoryScope.baselineComparison,
+        changedAssets: repositoryScope.assetPackChanges,
+      },
     ),
   );
 
@@ -672,7 +873,22 @@ export const validateAssetTree = async (root) => {
 const run = async () => {
   const toolsDirectory = dirname(fileURLToPath(import.meta.url));
   const root = resolve(toolsDirectory, '..');
-  const report = await validateAssetTree(root);
+  const args = process.argv.slice(2);
+  const options = {};
+  for (let index = 0; index < args.length; index += 1) {
+    const argument = args[index];
+    if (argument === '--change-base' || argument === '--scope-baseline') {
+      const value = args[index + 1];
+      if (!value || value.startsWith('--')) {
+        throw new Error(`${argument} requires a git ref`);
+      }
+      options[argument === '--change-base' ? 'changeBase' : 'scopeBaseline'] = value;
+      index += 1;
+    } else {
+      throw new Error(`Unknown validator argument: ${argument}`);
+    }
+  }
+  const report = await validateAssetTree(root, options);
   const destination = join(root, 'manifests', 'export-validation.json');
   await writeFile(destination, `${JSON.stringify(report, null, 2)}\n`);
   process.stdout.write(

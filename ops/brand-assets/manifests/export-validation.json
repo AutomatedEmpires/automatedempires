@@ -4,8 +4,8 @@
   "summary": {
     "brands": 9,
     "assets": 225,
-    "checks": 15,
-    "passed": 15,
+    "checks": 16,
+    "passed": 16,
     "failed": 0,
     "missingOrInvalidRequiredArtifacts": 0
   },
@@ -82,7 +82,11 @@
       "errors": [],
       "evidence": {
         "expected": 144,
-        "inspected": 144
+        "inspected": 144,
+        "transparentExpected": 54,
+        "transparentWithTransparentPixels": 54,
+        "opaqueExpected": 90,
+        "opaqueFullyOpaque": 90
       }
     },
     {
@@ -261,11 +265,102 @@
     },
     {
       "name": "canva-status",
-      "description": "Canva fields remain not-yet-created with no fabricated IDs.",
+      "description": "Canva state uses the exact folder inventory and status-dependent ID semantics.",
       "status": "passed",
       "errors": [],
       "evidence": {
-        "expectedStatus": "not-yet-created"
+        "allowedStatuses": [
+          "not-yet-created",
+          "created"
+        ],
+        "expectedRootFolder": "AutomatedEmpires Brand System",
+        "expectedFolders": [
+          {
+            "kind": "brand",
+            "brand": "automatedempires",
+            "name": "00 Parent — AutomatedEmpires"
+          },
+          {
+            "kind": "brand",
+            "brand": "explore-and-earn",
+            "name": "01 Explore&Earn"
+          },
+          {
+            "kind": "brand",
+            "brand": "oran",
+            "name": "02 ORAN"
+          },
+          {
+            "kind": "brand",
+            "brand": "bidspace",
+            "name": "03 BidSpace"
+          },
+          {
+            "kind": "brand",
+            "brand": "lake-and-pine",
+            "name": "04 Lake & Pine"
+          },
+          {
+            "kind": "brand",
+            "brand": "sweepza",
+            "name": "05 Sweepza"
+          },
+          {
+            "kind": "brand",
+            "brand": "logloads",
+            "name": "06 LogLoads"
+          },
+          {
+            "kind": "brand",
+            "brand": "komfort-killz",
+            "name": "07 Komfort Killz"
+          },
+          {
+            "kind": "brand",
+            "brand": "just-jesus-bro",
+            "name": "08 Just Jesus Bro"
+          },
+          {
+            "kind": "shared",
+            "brand": null,
+            "name": "90 Shared Templates"
+          },
+          {
+            "kind": "shared",
+            "brand": null,
+            "name": "91 Icons and Illustration Library"
+          },
+          {
+            "kind": "shared",
+            "brand": null,
+            "name": "92 Photography Library"
+          },
+          {
+            "kind": "shared",
+            "brand": null,
+            "name": "93 Favicons and App Icons"
+          },
+          {
+            "kind": "shared",
+            "brand": null,
+            "name": "94 Social Covers and Profile Images"
+          },
+          {
+            "kind": "shared",
+            "brand": null,
+            "name": "95 Open Graph and Website Images"
+          },
+          {
+            "kind": "shared",
+            "brand": null,
+            "name": "96 Archived"
+          },
+          {
+            "kind": "shared",
+            "brand": null,
+            "name": "97 Retired Assets"
+          }
+        ]
       }
     },
     {
@@ -564,7 +659,41 @@
           "ops/brand-assets/tools/test/validate-assets.test.mjs",
           "ops/brand-assets/tools/validate-assets.mjs"
         ],
-        "disallowedFiles": []
+        "disallowedFiles": [],
+        "changeBase": "e109623968213f70ec0371d2fd78102bd860e475",
+        "scopeBaseline": null,
+        "resolvedChangeBase": "e109623968213f70ec0371d2fd78102bd860e475",
+        "baselineComparison": "e109623968213f70ec0371d2fd78102bd860e475..WORKTREE",
+        "baselineChangedFiles": [
+          "ops/brand-assets/BRAND_ASSET_INVENTORY.md",
+          "ops/brand-assets/BRAND_DIRECTION_NOTES.md",
+          "ops/brand-assets/CANVA_FOLDER_MAP.md",
+          "ops/brand-assets/EXPORT_REQUIREMENTS.md",
+          "ops/brand-assets/LOGO_AND_FAVICON_STATUS.md",
+          "ops/brand-assets/OPEN_GRAPH_AND_SOCIAL_ASSET_STATUS.md",
+          "ops/brand-assets/manifests/brand-assets.json",
+          "ops/brand-assets/manifests/export-validation.json",
+          "ops/brand-assets/tools/generate-docs.mjs",
+          "ops/brand-assets/tools/package.json",
+          "ops/brand-assets/tools/test/validate-assets.test.mjs",
+          "ops/brand-assets/tools/validate-assets.mjs"
+        ],
+        "canonicalAssetScopeEnforced": true,
+        "assetPackChanges": [],
+        "assetPackErrors": []
+      }
+    },
+    {
+      "name": "canonical-asset-scope",
+      "description": "When an explicit change base is supplied, no canonical generated asset-pack bytes may change.",
+      "status": "passed",
+      "errors": [],
+      "evidence": {
+        "enforced": true,
+        "changeBase": "e109623968213f70ec0371d2fd78102bd860e475",
+        "resolvedChangeBase": "e109623968213f70ec0371d2fd78102bd860e475",
+        "comparison": "e109623968213f70ec0371d2fd78102bd860e475..WORKTREE",
+        "changedAssets": []
       }
     }
   ],
@@ -974,6 +1103,27 @@
       "ops/brand-assets/tools/test/validate-assets.test.mjs",
       "ops/brand-assets/tools/validate-assets.mjs"
     ],
-    "disallowedFiles": []
+    "disallowedFiles": [],
+    "changeBase": "e109623968213f70ec0371d2fd78102bd860e475",
+    "scopeBaseline": null,
+    "resolvedChangeBase": "e109623968213f70ec0371d2fd78102bd860e475",
+    "baselineComparison": "e109623968213f70ec0371d2fd78102bd860e475..WORKTREE",
+    "baselineChangedFiles": [
+      "ops/brand-assets/BRAND_ASSET_INVENTORY.md",
+      "ops/brand-assets/BRAND_DIRECTION_NOTES.md",
+      "ops/brand-assets/CANVA_FOLDER_MAP.md",
+      "ops/brand-assets/EXPORT_REQUIREMENTS.md",
+      "ops/brand-assets/LOGO_AND_FAVICON_STATUS.md",
+      "ops/brand-assets/OPEN_GRAPH_AND_SOCIAL_ASSET_STATUS.md",
+      "ops/brand-assets/manifests/brand-assets.json",
+      "ops/brand-assets/manifests/export-validation.json",
+      "ops/brand-assets/tools/generate-docs.mjs",
+      "ops/brand-assets/tools/package.json",
+      "ops/brand-assets/tools/test/validate-assets.test.mjs",
+      "ops/brand-assets/tools/validate-assets.mjs"
+    ],
+    "canonicalAssetScopeEnforced": true,
+    "assetPackChanges": [],
+    "assetPackErrors": []
   }
 }

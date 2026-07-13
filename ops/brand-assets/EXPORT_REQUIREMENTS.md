@@ -47,15 +47,17 @@ Generated evidence timestamp: `2026-07-12T00:00:00.000Z`
 - **provenance: passed** — Every asset declares original image and font provenance.
 - **alt-text: passed** — Every asset record contains meaningful alt text.
 - **legal-status: passed** — Every brand and asset remains a P0 concept with explicit review boundaries.
-- **canva-status: passed** — Canva fields remain not-yet-created with no fabricated IDs.
+- **canva-status: passed** — Canva state uses the exact folder inventory and status-dependent ID semantics.
 - **content-integrity: passed** — Every manifest SHA-256 matches the committed asset bytes.
 - **font-binary-absence: passed** — No font binaries are bundled in brand packs.
 - **repository-scope: passed** — Branch and working-tree changes do not touch application code or root runtime manifests.
+- **canonical-asset-scope: passed** — When an explicit change base is supplied, no canonical generated asset-pack bytes may change.
 
 ## Naming, provenance, and licensing
 
 - Use lowercase kebab-case paths; never append an ambiguous `final` token.
 - Preserve the recorded SHA-256 values as canonical-byte evidence.
+- Task 3 no-regeneration baseline: `e109623968213f70ec0371d2fd78102bd860e475`; validation requires zero changed files under `ops/brand-assets/assets/` relative to that base.
 - Every record needs brand-specific alt text, provenance, P0 status, and legal limitations.
 - Bundle no `.otf`, `.ttf`, `.ttc`, `.woff`, `.woff2`, or `.eot` font binaries.
 - Use original local geometry and text. Any future image or font addition requires a recorded source and license.
