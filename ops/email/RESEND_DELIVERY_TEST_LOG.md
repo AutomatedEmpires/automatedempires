@@ -2,7 +2,9 @@
 
 **Log opened:** 2026-07-12
 
-No email was sent during the provider-control-plane documentation task. The task added/verified domains and recorded state only; it did not place secrets, change application runtimes, or perform delivery tests.
+No email was sent during this Resend control-plane follow-on. Before the documentation commit, the root execution session added five Resend domains, used GoDaddy Domain Connect for their isolated sending records, and observed all six team domains verified. The documentation implementer only recorded that history and made no provider, DNS, browser, secret, application-runtime, or delivery mutation.
+
+The accepted AutomatedEmpires execution record merge `c537651` remains canonical; this follow-on does not reopen or duplicate that audit. DNS is now frozen, and launch, advertising, live-money activation, and key retirement remain prohibited.
 
 ## Current evidence
 

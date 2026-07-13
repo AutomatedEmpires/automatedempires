@@ -13,6 +13,14 @@ This directory is the operating source of truth for transactional email across t
 - BidSpace, Komfort Killz, and Just Jesus Bro remain email-disabled.
 - Domain verification is not delivery proof. Runtime credentials and internal-only delivery/reply tests remain separate gates.
 
+## Execution history and audit boundary
+
+The accepted AutomatedEmpires portfolio execution record merged at `c537651` is the canonical audit baseline. This scoped Resend follow-on does not reopen, duplicate, or replace that audit.
+
+Before commit `444467c`, the root execution session upgraded the existing team, added five Resend domains, submitted their isolated records with GoDaddy Domain Connect, and observed all six team domains verified. The documentation implementer then recorded that observed state and made no provider, DNS, browser, secret, or delivery mutation.
+
+`exploreandearn.com` and its Resend DNS records predated this follow-on. The five domains added in the root execution session were `automatedempires.com`, `sweepza.com`, `logloads.com`, `lakeandpinecleaning.com`, and `openresourceaccessnetwork.com`; their exact additions are inventoried in `RESEND_DOMAIN_VERIFICATION.md`.
+
 ## Document map
 
 | Document | Purpose |
@@ -33,7 +41,8 @@ This directory is the operating source of truth for transactional email across t
 4. Do not send customer, entrant, marketing, public-launch, or sweepstakes messages during infrastructure verification. Use one non-sensitive internal test only after the venture's runtime and domain gates are green.
 5. ORAN keeps click/open tracking disabled and stays on its current Azure transport until a separate migration decision is approved.
 6. Do not revoke an old key until every configured environment has demonstrated successful use of its replacement.
+7. DNS is now frozen. Do not make more DNS changes, launch or advertise a venture, enable live-money flows, or retire any key in this documentation lane.
 
 ## Evidence and change control
 
-The domain state in this directory combines the 2026-07-12 Resend dashboard observation with authoritative DNS evidence supplied during the execution pass. This documentation task did not perform provider, DNS, browser, secret, or delivery mutations. Re-check both authoritative DNS and the Resend dashboard immediately before any later activation, because propagation and provider state can change.
+The domain state in this directory combines the 2026-07-12 Resend dashboard observation with authoritative DNS evidence supplied during the root execution session. Any later activation requires a separately authorized re-check; it is not authorized by this documentation and must honor the DNS freeze and hard gates above.

@@ -6,6 +6,30 @@ The Resend Domains page reported six domains total, all **Verified** in `us-east
 
 This is a sending-authentication record. A Resend `Verified` state does not prove that a Reply-To mailbox exists, accepts mail, or is monitored.
 
+## Root-session DNS change inventory
+
+The root execution session added the following records before the documentation commit. The documentation implementer did not perform these mutations.
+
+| Domain added in this run | Type | Name | Target / value | Priority |
+|---|---|---|---|---:|
+| `automatedempires.com` | TXT | `resend._domainkey` | Provider-issued DKIM value (not reproduced) | — |
+| `automatedempires.com` | MX | `send` | `feedback-smtp.us-east-1.amazonses.com` | `10` |
+| `automatedempires.com` | TXT | `send` | `v=spf1 include:amazonses.com ~all` | — |
+| `sweepza.com` | TXT | `resend._domainkey` | Provider-issued DKIM value (not reproduced) | — |
+| `sweepza.com` | MX | `send` | `feedback-smtp.us-east-1.amazonses.com` | `10` |
+| `sweepza.com` | TXT | `send` | `v=spf1 include:amazonses.com ~all` | — |
+| `logloads.com` | TXT | `resend._domainkey` | Provider-issued DKIM value (not reproduced) | — |
+| `logloads.com` | MX | `send` | `feedback-smtp.us-east-1.amazonses.com` | `10` |
+| `logloads.com` | TXT | `send` | `v=spf1 include:amazonses.com ~all` | — |
+| `lakeandpinecleaning.com` | TXT | `resend._domainkey` | Provider-issued DKIM value (not reproduced) | — |
+| `lakeandpinecleaning.com` | MX | `send` | `feedback-smtp.us-east-1.amazonses.com` | `10` |
+| `lakeandpinecleaning.com` | TXT | `send` | `v=spf1 include:amazonses.com ~all` | — |
+| `openresourceaccessnetwork.com` | TXT | `resend._domainkey` | Provider-issued DKIM value (not reproduced) | — |
+| `openresourceaccessnetwork.com` | MX | `send` | `feedback-smtp.us-east-1.amazonses.com` | `10` |
+| `openresourceaccessnetwork.com` | TXT | `send` | `v=spf1 include:amazonses.com ~all` | — |
+
+The `exploreandearn.com` Resend DNS configuration predated this run and was retained. Across all five additions, no apex MX, existing apex SPF, mailbox-provider record, or mailbox routing was changed. DNS is now frozen; no additional record change is authorized by this document.
+
 ## Verification and mailbox-preservation matrix
 
 | Domain | Resend state / region | Existing apex mailbox and policy evidence | Preservation result |
@@ -24,6 +48,7 @@ This is a sending-authentication record. A Resend `Verified` state does not prov
 - Authoritative and authenticated-zone evidence for AutomatedEmpires confirms the three hosted-mail MX records and existing SPF includes.
 - Earlier repository snapshots that say a new Resend selector was not found predate this execution and are superseded for the six domains' current Resend state only. They remain historical evidence for the pre-change apex mailbox posture.
 - No provider-issued DKIM value is reproduced here.
+- The accepted AutomatedEmpires execution record merge `c537651` remains the canonical audit baseline. This scoped Resend follow-on does not reopen or duplicate that audit.
 
 ## Prohibited inference
 
