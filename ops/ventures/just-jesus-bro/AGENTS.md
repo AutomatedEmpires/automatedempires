@@ -1,6 +1,6 @@
 # Just Jesus Bro — Brand Placeholder Agent Contract
 
-This contract governs Just Jesus Bro work recorded in the AutomatedEmpires parent repository. It supplements the parent contract; this more specific contract controls brand scope. Snapshot facts are dated 2026-07-12 and must be refreshed before action.
+This contract governs Just Jesus Bro work recorded in the AutomatedEmpires parent repository. It supplements the parent contract; this more specific contract controls brand scope. Snapshot facts are dated 2026-07-12; refresh only the facts material to the assigned change rather than blocking private draft work on a portfolio-wide audit.
 
 ## 1. Venture thesis
 
@@ -89,7 +89,7 @@ Avoid:
 - Preserve originals and record source, license, consent, modification, and owner for creative assets. Check scripture translation attribution and usage terms before preparing public-ready excerpts.
 - Never commit or expose secrets, tokens, cookies, private provider URLs, recovery material, unpublished account identifiers, or private audience data.
 - Use synthetic audience data. Do not collect prayer requests, counseling details, health information, minors' data, donor data, contacts, or authentication records.
-- Test-mode payments and controlled internal email are allowed only as private technical tests within the narrow authority above. Live money, fundraising, donations, audience email, public posting, ads, and campaigns are not authorized.
+- Test-mode payments and controlled internal email are allowed only as private technical tests within the narrow authority above. Live money, fundraising, donations, audience email, ads, and campaigns are not authorized. Routine public posting is allowed only through the explicitly assigned publishing lane defined in Sections 6–7; it must not become a launch/offer, solicitation, counseling, or live-profile identity change.
 - Draft legal, policy, safeguarding, or editorial analysis if useful, but do not claim nonprofit/ministry status, affiliation, denominational authority, counseling competence, legal approval, or make a filing.
 - If future content encounters crisis, abuse, medical, legal, or mental-health needs, do not present the brand or an agent as a counselor or emergency service; route public-product decisions to qualified human review.
 
@@ -115,7 +115,7 @@ If a future canonical repository is assigned, use its actual scripts and contrac
 
 ## 13. Definition of done
 
-Work is done when it creates a coherent, reusable private editorial or creative-system outcome; is humble, direct, sourced, and free of false authority or manipulation; preserves public identity and source provenance; passes the applicable content, citation, visual, accessibility, link, security, licensing, and metadata checks; remains unpublished and reversible; contains no secrets or sensitive audience data; and has an independently reviewable PR or handoff with the next concrete step.
+Work is done when it creates a coherent, reusable editorial or creative-system outcome; is humble, direct, sourced, and free of false authority or manipulation; preserves public identity and source provenance; passes the applicable content, citation, visual, accessibility, link, security, licensing, and metadata checks; remains private unless an explicitly assigned routine-publishing lane executes the approved artifact; is reversible or has a correction plan; contains no secrets or sensitive audience data; and has an independently reviewable PR or handoff with the next concrete step.
 
 ## 14. Current PRs and blockers
 
@@ -139,4 +139,4 @@ Every PR or handoff must report:
 - public-posting state and provider, sensitive data, payment/donation, email, campaign, DNS, or other live-system actions; state `none` explicitly when none occurred;
 - identity, claims, citation, licensing, accessibility, and sensitive-metadata review;
 - risks, blockers, rollback, and any hard stop encountered; and
-- the next highest-value unpublished step.
+- the next highest-value private-draft or explicitly assigned routine-publishing step.

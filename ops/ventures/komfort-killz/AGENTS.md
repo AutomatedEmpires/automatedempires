@@ -1,6 +1,6 @@
 # Komfort Killz — Brand Placeholder Agent Contract
 
-This contract governs Komfort Killz work recorded in the AutomatedEmpires parent repository. It supplements the parent contract; this more specific contract controls brand scope. Snapshot facts are dated 2026-07-12 and must be refreshed before action.
+This contract governs Komfort Killz work recorded in the AutomatedEmpires parent repository. It supplements the parent contract; this more specific contract controls brand scope. Snapshot facts are dated 2026-07-12; refresh only the facts material to the assigned change rather than blocking private draft work on a portfolio-wide audit.
 
 ## 1. Venture thesis
 
@@ -88,7 +88,7 @@ Avoid:
 - Preserve originals and record source, license, consent, modification, and owner for creative assets. Do not use a person's likeness, copyrighted work, or trademark in a public-ready asset without a defensible right to do so.
 - Never commit or expose secrets, tokens, cookies, private provider URLs, recovery material, unpublished account identifiers, or private audience data.
 - Use synthetic audience and content data. Do not scrape followers, import contacts, collect leads, or create authentication records.
-- Test-mode payments and controlled internal email are allowed only as private technical tests. Live commerce, audience email, public posting, ads, and campaigns are not authorized.
+- Test-mode payments and controlled internal email are allowed only as private technical tests. Live commerce, audience email, ads, and campaigns are not authorized. Routine public posting is allowed only through the explicitly assigned publishing lane defined in Sections 6–7; it must not become a launch/drop/sale or change live profile identity.
 - Draft legal or policy notes if useful, but do not claim trademark ownership, make a filing, or present a legal conclusion as approved advice.
 
 ## 11. Branch and collaboration rules
@@ -113,7 +113,7 @@ If a future canonical repository is assigned, use its actual scripts and contrac
 
 ## 13. Definition of done
 
-Work is done when it creates a coherent, reusable private brand-system outcome; respects the edge-without-harm rubric; preserves public identity and source provenance; uses no fake product or traction claim; passes the applicable content, visual, accessibility, link, security, and metadata checks; remains unpublished and reversible; contains no secrets or unlicensed assets; and has an independently reviewable PR or handoff with the next concrete step.
+Work is done when it creates a coherent, reusable brand-system outcome; respects the edge-without-harm rubric; preserves public identity and source provenance; uses no fake product or traction claim; passes the applicable content, visual, accessibility, link, security, and metadata checks; remains private unless an explicitly assigned routine-publishing lane executes the approved artifact; is reversible or has a correction plan; contains no secrets or unlicensed assets; and has an independently reviewable PR or handoff with the next concrete step.
 
 ## 14. Current PRs and blockers
 
@@ -137,4 +137,4 @@ Every PR or handoff must report:
 - public-posting state and provider, data, payment, email, campaign, DNS, or other live-system actions; state `none` explicitly when none occurred;
 - identity, tone-safety, licensing, accessibility, and sensitive-metadata review;
 - risks, blockers, rollback, and any hard stop encountered; and
-- the next highest-value unpublished step.
+- the next highest-value private-draft or explicitly assigned routine-publishing step.
