@@ -94,6 +94,14 @@ SVG files are the editable local masters. PNG files are deterministic raster exp
 
 Meta currently recommends a 320 px square Page profile source and documents a 16:9 Page cover that may be cropped, resized, and partially obscured. The factory deliberately keeps a larger working master and exports the lightweight 851 × 315 variant Meta identifies for fast loading. Apple documents a 1024 × 1024 app-icon layout for iOS, iPadOS, and macOS. Web app icons include 192 and 512 px exports, with 1024 retained as the common master. Open Graph records width, height, MIME type, and alt text in the manifest.
 
+## Tooling data contract
+
+The isolated ESM package under `ops/brand-assets/tools/` is the single machine-readable source for approved brand directions and export requirements. It exports immutable `BRANDS` and `ASSET_REQUIREMENTS` collections, the shared `LEGAL_DISCLOSURE`, and a throwing `getBrand(slug)` lookup. Brand records include slug, display names, mark direction, four named palette colors, type stack, public and internal copy, imagery, do/don't guidance, and legal notes. Asset records include a stable ID, brand-relative path, format, dimensions, alpha expectation, and one of the eleven required asset roles.
+
+The shared disclosure is: “Every asset is a P0 concept: not trademark cleared, not a final UI palette, not legal/compliance approved, and requires founder refinement before final adoption.” Every brand record includes this disclosure in addition to any venture-specific review boundary.
+
+The asset contract covers SVG and PNG primary, horizontal, and icon marks; SVG, 16/32/48/180/192/512 px PNG, and multi-frame ICO favicon outputs; opaque 1024 px app icon and 1080 px social profile; 1640 × 924 PNG and 851 × 315 JPG Facebook covers; 1200 × 630 PNG/JPG Open Graph images; 1200 × 400 PNG/JPG email headers; 1080 × 1350 PNG and one-page US Letter PDF pitch sheets; and a 1920 × 1080 PNG brand board. Paths use lowercase kebab case and never use an ambiguous `final` suffix.
+
 ## Shared construction system
 
 ### Geometry

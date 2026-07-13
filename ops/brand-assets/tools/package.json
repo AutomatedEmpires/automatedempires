@@ -1,0 +1,16 @@
+{
+  "name": "@automatedempires/brand-assets-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "generate": "node generate-assets.mjs",
+    "validate": "node validate-assets.mjs",
+    "all": "pnpm test && pnpm generate && pnpm validate"
+  },
+  "dependencies": {
+    "pdf-lib": "1.17.1",
+    "sharp": "0.34.5"
+  }
+}
