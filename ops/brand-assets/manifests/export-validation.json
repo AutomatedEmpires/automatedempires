@@ -666,24 +666,19 @@
           "ops/brand-assets/tools/validate-assets.mjs"
         ],
         "disallowedFiles": [],
-        "changeBase": "e109623968213f70ec0371d2fd78102bd860e475",
+        "changeBase": "62c03b8875a361011478e8cf17ad1267782cf072",
         "scopeBaseline": null,
-        "resolvedChangeBase": "e109623968213f70ec0371d2fd78102bd860e475",
-        "baselineComparison": "e109623968213f70ec0371d2fd78102bd860e475..WORKTREE",
+        "resolvedChangeBase": "62c03b8875a361011478e8cf17ad1267782cf072",
+        "baselineComparison": "62c03b8875a361011478e8cf17ad1267782cf072..WORKTREE",
         "baselineChangedFiles": [
           "ops/brand-assets/BRAND_ASSET_INVENTORY.md",
-          "ops/brand-assets/BRAND_DIRECTION_NOTES.md",
-          "ops/brand-assets/CANVA_FOLDER_MAP.md",
           "ops/brand-assets/EXPORT_REQUIREMENTS.md",
           "ops/brand-assets/LOGO_AND_FAVICON_STATUS.md",
           "ops/brand-assets/OPEN_GRAPH_AND_SOCIAL_ASSET_STATUS.md",
-          "ops/brand-assets/manifests/brand-assets.json",
           "ops/brand-assets/manifests/export-validation.json",
           "ops/brand-assets/tools/generate-docs.mjs",
           "ops/brand-assets/tools/package.json",
-          "ops/brand-assets/tools/test/generate-docs.test.mjs",
-          "ops/brand-assets/tools/test/validate-assets.test.mjs",
-          "ops/brand-assets/tools/validate-assets.mjs"
+          "ops/brand-assets/tools/test/generate-docs.test.mjs"
         ],
         "canonicalAssetScopeEnforced": true,
         "assetPackChanges": [],
@@ -697,9 +692,9 @@
       "errors": [],
       "evidence": {
         "enforced": true,
-        "changeBase": "e109623968213f70ec0371d2fd78102bd860e475",
-        "resolvedChangeBase": "e109623968213f70ec0371d2fd78102bd860e475",
-        "comparison": "e109623968213f70ec0371d2fd78102bd860e475..WORKTREE",
+        "changeBase": "62c03b8875a361011478e8cf17ad1267782cf072",
+        "resolvedChangeBase": "62c03b8875a361011478e8cf17ad1267782cf072",
+        "comparison": "62c03b8875a361011478e8cf17ad1267782cf072..WORKTREE",
         "changedAssets": []
       }
     }
@@ -1112,24 +1107,19 @@
       "ops/brand-assets/tools/validate-assets.mjs"
     ],
     "disallowedFiles": [],
-    "changeBase": "e109623968213f70ec0371d2fd78102bd860e475",
+    "changeBase": "62c03b8875a361011478e8cf17ad1267782cf072",
     "scopeBaseline": null,
-    "resolvedChangeBase": "e109623968213f70ec0371d2fd78102bd860e475",
-    "baselineComparison": "e109623968213f70ec0371d2fd78102bd860e475..WORKTREE",
+    "resolvedChangeBase": "62c03b8875a361011478e8cf17ad1267782cf072",
+    "baselineComparison": "62c03b8875a361011478e8cf17ad1267782cf072..WORKTREE",
     "baselineChangedFiles": [
       "ops/brand-assets/BRAND_ASSET_INVENTORY.md",
-      "ops/brand-assets/BRAND_DIRECTION_NOTES.md",
-      "ops/brand-assets/CANVA_FOLDER_MAP.md",
       "ops/brand-assets/EXPORT_REQUIREMENTS.md",
       "ops/brand-assets/LOGO_AND_FAVICON_STATUS.md",
       "ops/brand-assets/OPEN_GRAPH_AND_SOCIAL_ASSET_STATUS.md",
-      "ops/brand-assets/manifests/brand-assets.json",
       "ops/brand-assets/manifests/export-validation.json",
       "ops/brand-assets/tools/generate-docs.mjs",
       "ops/brand-assets/tools/package.json",
-      "ops/brand-assets/tools/test/generate-docs.test.mjs",
-      "ops/brand-assets/tools/test/validate-assets.test.mjs",
-      "ops/brand-assets/tools/validate-assets.mjs"
+      "ops/brand-assets/tools/test/generate-docs.test.mjs"
     ],
     "canonicalAssetScopeEnforced": true,
     "assetPackChanges": [],

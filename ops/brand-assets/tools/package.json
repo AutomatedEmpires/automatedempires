@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node --test test/*.test.mjs",
     "generate": "node generate-assets.mjs",
-    "validate": "node validate-assets.mjs --change-base e109623968213f70ec0371d2fd78102bd860e475",
+    "validate": "node validate-assets.mjs --change-base 62c03b8875a361011478e8cf17ad1267782cf072",
     "all": "pnpm test && pnpm generate && pnpm validate"
   },
   "dependencies": {

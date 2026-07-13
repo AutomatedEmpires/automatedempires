@@ -57,7 +57,7 @@ Generated evidence timestamp: `2026-07-12T00:00:00.000Z`
 
 - Use lowercase kebab-case paths; never append an ambiguous `final` token.
 - Preserve the recorded SHA-256 values as canonical-byte evidence.
-- Task 3 no-regeneration baseline: `e109623968213f70ec0371d2fd78102bd860e475`; validation requires zero changed files under `ops/brand-assets/assets/` relative to that base.
+- Approved asset-change baseline: `62c03b8875a361011478e8cf17ad1267782cf072`. This baseline advanced from `e109623968213f70ec0371d2fd78102bd860e475` after the authorized deterministic communication-title crop repair; validation requires zero later changes under `ops/brand-assets/assets/` relative to the approved repair commit.
 - Every record needs brand-specific alt text, provenance, P0 status, and legal limitations.
 - Bundle no `.otf`, `.ttf`, `.ttc`, `.woff`, `.woff2`, or `.eot` font binaries.
 - Use original local geometry and text. Any future image or font addition requires a recorded source and license.

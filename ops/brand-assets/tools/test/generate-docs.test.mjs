@@ -86,5 +86,12 @@ describe('Canva documentation generation', () => {
     assert.equal(manifest.brands[0].canva.brandBoardDesignId, 'DAdesign123');
     assert.equal(manifest.brands[0].canva.pitchOnePagerStatus, 'blocked');
     assert.equal(manifest.brands[0].canva.pitchOnePagerDesignId, null);
+
+    const requirements = await readFile(join(root, 'EXPORT_REQUIREMENTS.md'), 'utf8');
+    assert.match(
+      requirements,
+      /Approved asset-change baseline: `62c03b8875a361011478e8cf17ad1267782cf072`/,
+    );
+    assert.match(requirements, /communication-title crop repair/);
   });
 });

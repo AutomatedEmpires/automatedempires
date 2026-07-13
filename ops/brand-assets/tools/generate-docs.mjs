@@ -8,7 +8,8 @@ import { RENDERER_METADATA } from './generate-assets.mjs';
 import { validateAssetTree } from './validate-assets.mjs';
 
 const GENERATED_AT = '2026-07-12T00:00:00.000Z';
-export const TASK_3_CHANGE_BASE = 'e109623968213f70ec0371d2fd78102bd860e475';
+export const APPROVED_ASSET_CHANGE_BASE = '62c03b8875a361011478e8cf17ad1267782cf072';
+const PRE_REPAIR_ASSET_BASE = 'e109623968213f70ec0371d2fd78102bd860e475';
 const LEGAL_STATUS =
   'P0 concept; founder refinement, similarity review, trademark clearance, and applicable legal/compliance review required before final adoption.';
 
@@ -482,7 +483,7 @@ const exportRequirementsDocument = ({ validation }) => {
     '',
     '- Use lowercase kebab-case paths; never append an ambiguous `final` token.',
     '- Preserve the recorded SHA-256 values as canonical-byte evidence.',
-    `- Task 3 no-regeneration baseline: \`${TASK_3_CHANGE_BASE}\`; validation requires zero changed files under \`ops/brand-assets/assets/\` relative to that base.`,
+    `- Approved asset-change baseline: \`${APPROVED_ASSET_CHANGE_BASE}\`. This baseline advanced from \`${PRE_REPAIR_ASSET_BASE}\` after the authorized deterministic communication-title crop repair; validation requires zero later changes under \`ops/brand-assets/assets/\` relative to the approved repair commit.`,
     '- Every record needs brand-specific alt text, provenance, P0 status, and legal limitations.',
     '- Bundle no `.otf`, `.ttf`, `.ttc`, `.woff`, `.woff2`, or `.eot` font binaries.',
     '- Use original local geometry and text. Any future image or font addition requires a recorded source and license.',
@@ -581,7 +582,9 @@ const run = async () => {
     canva,
     root,
   });
-  const validation = await validateAssetTree(root, { changeBase: TASK_3_CHANGE_BASE });
+  const validation = await validateAssetTree(root, {
+    changeBase: APPROVED_ASSET_CHANGE_BASE,
+  });
   await generateDocs({
     brands: BRANDS,
     assets,
