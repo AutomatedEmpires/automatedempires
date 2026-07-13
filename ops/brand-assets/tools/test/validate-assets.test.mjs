@@ -118,6 +118,28 @@ const applyPartialCanvaFixture = (manifest) => {
   }
 };
 
+const applyCreatedCanvaFixture = (manifest) => {
+  applyPartialCanvaFixture(manifest);
+  manifest.canva.status = 'created';
+  for (const [index, folder] of manifest.canva.folders.entries()) {
+    if (folder.kind !== 'brand') continue;
+    folder.pitchOnePagerStatus = 'created';
+    folder.pitchOnePagerDesignId = `DApitch${index}`;
+    folder.pitchOnePagerEditUrl = `https://www.canva.com/d/pitch-edit${index}`;
+    folder.pitchOnePagerViewUrl = `https://www.canva.com/d/pitch-view${index}`;
+    folder.pitchOnePagerBlocker = null;
+    folder.pitchOnePagerManualImportSteps = [];
+    const brandCanva = manifest.brands.find(({ slug }) => slug === folder.brand).canva;
+    brandCanva.status = 'created';
+    brandCanva.pitchOnePagerStatus = folder.pitchOnePagerStatus;
+    brandCanva.pitchOnePagerDesignId = folder.pitchOnePagerDesignId;
+    brandCanva.pitchOnePagerEditUrl = folder.pitchOnePagerEditUrl;
+    brandCanva.pitchOnePagerViewUrl = folder.pitchOnePagerViewUrl;
+    brandCanva.pitchOnePagerBlocker = folder.pitchOnePagerBlocker;
+    brandCanva.pitchOnePagerManualImportSteps = folder.pitchOnePagerManualImportSteps;
+  }
+};
+
 const makeManifest = async (assetsRoot) => {
   const assets = [];
   for (const brand of BRANDS) {
@@ -548,7 +570,67 @@ describe('deterministic asset-tree validator', () => {
       assert.ok(
         failure.errors.some(
           (error) =>
-            error.includes('duplicate created brand-board design ID') &&
+            error.includes('duplicate created Canva design ID') &&
+            error.includes('DAdesign0'),
+        ),
+      );
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('passes a complete created Canva state with unique board and pitch design IDs', async () => {
+    await mutateManifest(applyCreatedCanvaFixture);
+    try {
+      const report = await validateAssetTree(brandAssetsRoot);
+      assert.equal(
+        report.status,
+        'passed',
+        JSON.stringify(report.checks.filter(({ status }) => status === 'failed'), null, 2),
+      );
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails created Canva state when two pitch one-pagers reuse the same design ID', async () => {
+    await mutateManifest((manifest) => {
+      applyCreatedCanvaFixture(manifest);
+      const [first, second] = manifest.canva.folders;
+      second.pitchOnePagerDesignId = first.pitchOnePagerDesignId;
+      manifest.brands.find(({ slug }) => slug === second.brand).canva.pitchOnePagerDesignId =
+        second.pitchOnePagerDesignId;
+    });
+    try {
+      const failure = failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status');
+      assert.ok(failure);
+      assert.ok(
+        failure.errors.some(
+          (error) =>
+            error.includes('duplicate created Canva design ID') &&
+            error.includes('DApitch0'),
+        ),
+      );
+    } finally {
+      await restoreManifest();
+    }
+  });
+
+  it('fails created Canva state when a pitch one-pager reuses a brand-board design ID', async () => {
+    await mutateManifest((manifest) => {
+      applyCreatedCanvaFixture(manifest);
+      const folder = manifest.canva.folders[0];
+      folder.pitchOnePagerDesignId = folder.brandBoardDesignId;
+      manifest.brands.find(({ slug }) => slug === folder.brand).canva.pitchOnePagerDesignId =
+        folder.pitchOnePagerDesignId;
+    });
+    try {
+      const failure = failedCheck(await validateAssetTree(brandAssetsRoot), 'canva-status');
+      assert.ok(failure);
+      assert.ok(
+        failure.errors.some(
+          (error) =>
+            error.includes('duplicate created Canva design ID') &&
             error.includes('DAdesign0'),
         ),
       );

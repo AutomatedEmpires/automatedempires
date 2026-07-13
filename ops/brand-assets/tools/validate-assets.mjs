@@ -394,7 +394,7 @@ const validateCanva = (manifest) => {
     if (!validTimestamp(value)) errors.push(`${label} must be an ISO timestamp`);
   };
   const folderIdOwners = new Map();
-  const brandBoardIdOwners = new Map();
+  const createdDesignIdOwners = new Map();
   const requireUniqueId = (owners, value, owner, duplicateLabel) => {
     if (typeof value !== 'string' || !value) return;
     const existingOwner = owners.get(value);
@@ -496,10 +496,10 @@ const validateCanva = (manifest) => {
     requireId(`${label} brandBoardDesignId`, folder.brandBoardDesignId, 'DA');
     if (folder.brandBoardStatus === 'created') {
       requireUniqueId(
-        brandBoardIdOwners,
+        createdDesignIdOwners,
         folder.brandBoardDesignId,
         `${label} brand board`,
-        'duplicate created brand-board design ID',
+        'duplicate created Canva design ID',
       );
     }
     requireUrl(`${label} brandBoardEditUrl`, folder.brandBoardEditUrl, 'd');
@@ -539,6 +539,14 @@ const validateCanva = (manifest) => {
         errors.push(`${label} pitchOnePagerStatus must be created when Canva is created`);
       }
       requireId(`${label} pitchOnePagerDesignId`, folder.pitchOnePagerDesignId, 'DA');
+      if (folder.pitchOnePagerStatus === 'created') {
+        requireUniqueId(
+          createdDesignIdOwners,
+          folder.pitchOnePagerDesignId,
+          `${label} pitch one-pager`,
+          'duplicate created Canva design ID',
+        );
+      }
       requireUrl(`${label} pitchOnePagerEditUrl`, folder.pitchOnePagerEditUrl, 'd');
       requireUrl(`${label} pitchOnePagerViewUrl`, folder.pitchOnePagerViewUrl, 'd');
       if (folder.pitchOnePagerSourcePath !== expectedPitchSource) {
@@ -956,7 +964,7 @@ export const validateAssetTree = async (root, options = {}) => {
       expectedFolders: EXPECTED_CANVA_FOLDERS,
       uniqueIdScopes: [
         'root folder plus all 17 child folders',
-        'all nine created brand-board designs',
+        'all created brand-board and pitch one-pager designs',
       ],
     }),
   );
