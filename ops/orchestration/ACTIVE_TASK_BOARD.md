@@ -1,5 +1,7 @@
 # AutomatedEmpires Active Task Board
 
+> Execution update (2026-07-12): BidSpace #64, Lake & Pine #2, LogLoads #21, AutomatedEmpires #12, Sweepza #53, and Explore&Earn #244 are merged. ORAN #67 remains open solely because the required Visual Regression job has no committed Linux baselines (15 snapshots). See `ops/execution/PORTFOLIO_EXECUTION_COMMANDER_LOG.md` for current rollout state and founder-only gates.
+
 **Snapshot:** 2026-07-12 16:20 PDT
 **Owner:** Agent 5 — portfolio orchestration
 **Operating rule:** One writer per repository/provider lane. A green build, a `READY` deployment, or a completed document is not by itself Production, money, or transfer approval.
