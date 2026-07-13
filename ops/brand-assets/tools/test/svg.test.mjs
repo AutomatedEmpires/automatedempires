@@ -13,6 +13,41 @@ const EXTERNAL_RESOURCE =
 const escapeXml = (value) =>
   value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
+const normalizeText = (value) => value.replace(/\s+/g, ' ').trim();
+
+const decodeXml = (value) =>
+  value
+    .replaceAll('&amp;', '&')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&apos;', "'");
+
+const visibleText = (svg) =>
+  normalizeText(
+    [...svg.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/gi)]
+      .map(([, content]) => decodeXml(content.replace(/<[^>]+>/g, ' ')))
+      .join(' '),
+  );
+
+const geometryMarkup = (svg) => {
+  const withoutAccessibleMetadata = svg.replace(
+    /<(title|desc|metadata)\b[^>]*>[\s\S]*?<\/\1>/gi,
+    '',
+  );
+  const match = withoutAccessibleMetadata.match(
+    /<g\b[^>]*\baria-hidden="true"[^>]*>([\s\S]*?)<\/g>/i,
+  );
+  assert.ok(match, 'icon must expose a principal geometry group');
+  return normalizeText(match[1]);
+};
+
+const principalShapeCount = (svg) =>
+  [...geometryMarkup(svg).matchAll(/<(?:circle|ellipse|line|path|polygon|polyline|rect)\b/gi)]
+    .length;
+
+const sha = (value) => createHash('sha256').update(value).digest('hex');
+
 const assertNumericViewBox = (svg, label) => {
   const match = svg.match(/\bviewBox="([^"]+)"/);
   assert.ok(match, `${label} must have a viewBox`);
@@ -38,21 +73,47 @@ describe('SVG master rendering', () => {
       assert.match(svg, /\brole="img"/);
       assert.match(svg, /<title\b[^>]*>\S[\s\S]*<\/title>/);
       assert.match(svg, /\bdata-safe-zone="12\.5%"/);
-      const shapeCount = Number(svg.match(/\bdata-principal-shapes="(\d+)"/)?.[1]);
+      const shapeCount = principalShapeCount(svg);
       assert.ok(shapeCount >= 1 && shapeCount <= 4, `${brand.slug} must use at most four shapes`);
+      assert.equal(
+        Number(svg.match(/\bdata-principal-shapes="(\d+)"/)?.[1]),
+        shapeCount,
+        `${brand.slug} declared shape count must match its actual geometry`,
+      );
       assert.doesNotMatch(svg, EXTERNAL_RESOURCE, `${brand.slug} icon must be self-contained`);
     }
   });
 
   it('gives all nine brands distinct deterministic icon geometry', () => {
-    const firstPass = BRANDS.map((brand) => renderIconSvg(brand));
-    const secondPass = BRANDS.map((brand) => renderIconSvg(brand));
+    const firstPass = BRANDS.map((brand) =>
+      geometryMarkup(renderIconSvg(brand, { color: '#000000' })),
+    );
+    const secondPass = BRANDS.map((brand) =>
+      geometryMarkup(renderIconSvg(brand, { color: '#000000' })),
+    );
     assert.deepEqual(secondPass, firstPass);
 
-    const hashes = firstPass.map((svg) =>
-      createHash('sha256').update(svg).digest('hex'),
-    );
+    const hashes = firstPass.map(sha);
     assert.equal(new Set(hashes).size, BRANDS.length);
+  });
+
+  it('proves geometry hashes and shape counts cannot be satisfied by metadata mutations', () => {
+    const svg = renderIconSvg(BRANDS[0]);
+    const metadataMutation = svg
+      .replace(/<title\b[^>]*>[\s\S]*?<\/title>/, '<title>mutated title</title>')
+      .replace(/<desc\b[^>]*>[\s\S]*?<\/desc>/, '<desc>mutated description</desc>')
+      .replace(/<metadata>[\s\S]*?<\/metadata>/, '<metadata>mutated metadata</metadata>');
+    assert.notEqual(sha(metadataMutation), sha(svg));
+    assert.equal(sha(geometryMarkup(metadataMutation)), sha(geometryMarkup(svg)));
+
+    const dishonestShapeDeclaration = svg
+      .replace(/data-principal-shapes="\d+"/, 'data-principal-shapes="1"')
+      .replace('</g>', `${'<circle cx="500" cy="500" r="1"/>'.repeat(5)}</g>`);
+    assert.equal(
+      Number(dishonestShapeDeclaration.match(/data-principal-shapes="(\d+)"/)?.[1]),
+      1,
+    );
+    assert.ok(principalShapeCount(dishonestShapeDeclaration) > 4);
   });
 
   it('keeps rendered icon pixels inside the declared 12.5% safe zone', async () => {
@@ -95,7 +156,6 @@ describe('SVG master rendering', () => {
   });
 
   it('renders deterministic self-contained communication layouts with approved copy', () => {
-    const brand = BRANDS.find(({ slug }) => slug === 'sweepza');
     const layouts = [
       ['app-icon', 1024, 1024, false],
       ['social-profile', 1080, 1080, false],
@@ -107,21 +167,34 @@ describe('SVG master rendering', () => {
       ['brand-board', 1920, 1080, true],
     ];
 
-    for (const [layout, width, height, includesCopy] of layouts) {
-      const svg = renderLayoutSvg(brand, layout, width, height);
-      assert.match(svg, /^<svg\b/);
-      assert.match(svg, new RegExp(`viewBox="0 0 ${width} ${height}"`));
-      assert.ok(svg.includes(escapeXml(brand.name)));
-      if (includesCopy) {
-        assert.ok(svg.includes(escapeXml(brand.copy.public)));
+    for (const brand of BRANDS) {
+      for (const [layout, width, height, includesCopy] of layouts) {
+        const svg = renderLayoutSvg(brand, layout, width, height);
+        const renderedText = visibleText(svg);
+        assert.match(svg, /^<svg\b/);
+        assert.match(svg, new RegExp(`viewBox="0 0 ${width} ${height}"`));
+        if (layout !== 'app-icon') {
+          assert.ok(renderedText.includes(brand.name));
+        }
+        if (includesCopy) {
+          assert.ok(renderedText.includes(brand.copy.public));
+        }
+        assert.doesNotMatch(svg, EXTERNAL_RESOURCE);
+        assert.equal(renderLayoutSvg(brand, layout, width, height), svg);
       }
-      assert.doesNotMatch(svg, EXTERNAL_RESOURCE);
-      assert.equal(renderLayoutSvg(brand, layout, width, height), svg);
     }
 
+    const sweepza = BRANDS.find(({ slug }) => slug === 'sweepza');
     assert.throws(
-      () => renderLayoutSvg(brand, 'unsupported-layout', 100, 100),
+      () => renderLayoutSvg(sweepza, 'unsupported-layout', 100, 100),
       /Unsupported layout/,
     );
+  });
+
+  it('does not treat approved copy in descriptions as visible layout text', () => {
+    const brand = BRANDS.find(({ slug }) => slug === 'sweepza');
+    const metadataOnly = `<svg><desc>${escapeXml(brand.copy.public)}</desc><text>Other visible words</text></svg>`;
+    assert.equal(visibleText(metadataOnly), 'Other visible words');
+    assert.ok(!visibleText(metadataOnly).includes(brand.copy.public));
   });
 });
