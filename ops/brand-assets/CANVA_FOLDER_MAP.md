@@ -1,12 +1,14 @@
 # Canva folder map
 
+> **ARCHIVED — NOT BRAND TRUTH.** The founder rejected this Agent 17 output on 2026-07-13. All sixteen non-archive child folders were moved under Canva `96 Archived`; recorded brand-board designs are absent. See `ARCHIVAL_NOTICE.md`.
+
 > Generated from the committed brand data and asset manifest. Do not hand-edit generated status values.
 
 Generated evidence timestamp: `2026-07-12T00:00:00.000Z`
 
 ## Current state
 
-**Canva status is `partial`: root and 17/17 child folders are `created`; 9/9 brand boards are `created`; 9/9 pitch one-pagers are `blocked`.**
+**Canva status is `archived`: the root now contains only `96 Archived`; all sixteen other Agent 17 child folders were moved beneath it. The nine recorded brand-board design IDs are absent, and the nine pitch one-pagers were never imported.**
 
 Root folder: `AutomatedEmpires Brand System` — status `created`; ID `FAHPPeDF-v8`; [open in Canva](https://www.canva.com/folder/FAHPPeDF-v8).
 

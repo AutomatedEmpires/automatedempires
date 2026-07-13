@@ -1,5 +1,7 @@
 # Just Jesus Bro P0 brand asset pack
 
+> **ARCHIVED — REJECTED — NOT BRAND TRUTH.** See `../../ARCHIVAL_NOTICE.md`.
+
 ## Status
 
 P0 concept. Founder refinement, trademark review, and relevant legal/compliance review remain required before adoption.

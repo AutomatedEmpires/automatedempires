@@ -1,5 +1,7 @@
 # Brand asset inventory
 
+> **ARCHIVED — NOT BRAND TRUTH.** The founder rejected this Agent 17 output on 2026-07-13. See `ARCHIVAL_NOTICE.md` and use `references/founder-direction/` only as non-binding visual direction.
+
 > Generated from the committed brand data and asset manifest. Do not hand-edit generated status values.
 
 Generated evidence timestamp: `2026-07-12T00:00:00.000Z`

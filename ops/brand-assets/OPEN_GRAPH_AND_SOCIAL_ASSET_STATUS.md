@@ -1,5 +1,7 @@
 # Open Graph and social asset status
 
+> **ARCHIVED — NOT BRAND TRUTH.** The founder rejected these Agent 17 concepts on 2026-07-13. See `ARCHIVAL_NOTICE.md`.
+
 > Generated from the committed brand data and asset manifest. Do not hand-edit generated status values.
 
 Generated evidence timestamp: `2026-07-12T00:00:00.000Z`
