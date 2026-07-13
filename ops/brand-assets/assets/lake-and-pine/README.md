@@ -70,10 +70,10 @@ Original deterministic SVG geometry and live text rendered locally with Sharp an
 | `exports/favicon/favicon.ico` | favicon | ico | 48 × 48 | yes | `048d02d436a970189bf539509ce8f04ba9c61f10286a8558e0195980add0eedb` |
 | `exports/app-icon/app-icon.png` | app-icon | png | 1024 × 1024 | no | `a75ffbd1e67f0690329ff951c659db9949d739d1dbc85fb69adc644b6c98aaac` |
 | `exports/social-profile/social-profile.png` | social-profile | png | 1080 × 1080 | no | `d4fb185eae15f779dd2ed8e27d4a5583c127b10080e3ec3fd9cb7700317f6a04` |
-| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `28d14a95ab3b5d33d13aeb80a81347744b35dfed69a13c42c57740ccb4e00002` |
+| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `08d7bd40ebbfa96d8e58ea0434e984238194cbf5efce056952d1ff89aefc2731` |
 | `exports/facebook-cover/facebook-cover.jpg` | facebook-cover | jpg | 851 × 315 | no | `9276b0a2c1aa323daff5609615fddca851987f47ee378480617425acdd49bd6d` |
-| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `d0617f79a3d8ab50b751cf41650c1cabc14f85e385d202bf5ad6fe657540b09b` |
-| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `ddee8b01108189edfd34ccfd7f5b00b7b7bdb996565d1933269065c705704e6c` |
+| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `8e6211678a98ed259c73ab9f847ebefcbb06cb1bcd67d21b5c069c5d721c9d02` |
+| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `3a15b818b4916e9f8634cc28bf56ab6184967036531e09e7713072d3b60fcc61` |
 | `exports/email-header/email-header.png` | email-header | png | 1200 × 400 | no | `d9a2a1070cd8c5308bc804c02cdd7c0a3b058442c08d3083bd18cb83d1d5e618` |
 | `exports/email-header/email-header.jpg` | email-header | jpg | 1200 × 400 | no | `507c9ea5291372fdd3f93f33a8e8aa730a2ae24617f9dafe40730565c9a7f607` |
 | `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `a35b041eb2ef2a7b9c022f20b13416c464ac3826439359f8298b2de638f6fcd5` |

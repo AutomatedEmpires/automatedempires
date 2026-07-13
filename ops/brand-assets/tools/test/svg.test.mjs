@@ -58,6 +58,47 @@ const assertNumericViewBox = (svg, label) => {
   assert.ok(values[2] > 0 && values[3] > 0, `${label} viewBox must be nonempty`);
 };
 
+const brandNameNode = (svg, label) => {
+  const matches = [
+    ...svg.matchAll(/<text\b(?=[^>]*\bdata-role="brand-name")[^>]*>[\s\S]*?<\/text>/gi),
+  ];
+  assert.equal(matches.length, 1, `${label} must expose exactly one brand-name text node`);
+  return matches[0][0];
+};
+
+const changedPixelBounds = async (withText, withoutText, width, height) => {
+  const [{ data: foreground, info }, { data: background }] = await Promise.all([
+    sharp(Buffer.from(withText)).ensureAlpha().raw().toBuffer({ resolveWithObject: true }),
+    sharp(Buffer.from(withoutText)).ensureAlpha().raw().toBuffer({ resolveWithObject: true }),
+  ]);
+  assert.equal(info.width, width);
+  assert.equal(info.height, height);
+  let minX = width;
+  let minY = height;
+  let maxX = -1;
+  let maxY = -1;
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const offset = (y * width + x) * info.channels;
+      let changed = false;
+      for (let channel = 0; channel < info.channels; channel += 1) {
+        if (foreground[offset + channel] !== background[offset + channel]) {
+          changed = true;
+          break;
+        }
+      }
+      if (changed) {
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
+      }
+    }
+  }
+  assert.ok(maxX >= 0 && maxY >= 0, 'brand-name text must render visible pixels');
+  return { minX, minY, maxX, maxY };
+};
+
 describe('SVG master rendering', () => {
   it('renders an accessible, self-contained icon master for every brand', () => {
     for (const brand of BRANDS) {
@@ -189,6 +230,32 @@ describe('SVG master rendering', () => {
       () => renderLayoutSvg(sweepza, 'unsupported-layout', 100, 100),
       /Unsupported layout/,
     );
+  });
+
+  it('keeps communication titles inside their declared right safe margins', async () => {
+    const layouts = [
+      ['facebook-cover-master', 1640, 924],
+      ['facebook-cover-optimized', 851, 315],
+      ['open-graph', 1200, 630],
+      ['pitch-one-pager', 1080, 1350],
+    ];
+
+    for (const brand of BRANDS) {
+      for (const [layout, width, height] of layouts) {
+        const label = `${brand.slug}/${layout}`;
+        const svg = renderLayoutSvg(brand, layout, width, height);
+        const title = brandNameNode(svg, label);
+        const marginMatch = title.match(/\bdata-safe-right-margin="(\d+)"/);
+        assert.ok(marginMatch, `${label} must declare its right safe margin`);
+        const safeRightMargin = Number(marginMatch[1]);
+        const withoutTitle = svg.replace(title, title.replace(/>([\s\S]*)<\/text>$/, '></text>'));
+        const bounds = await changedPixelBounds(svg, withoutTitle, width, height);
+        assert.ok(
+          bounds.maxX < width - safeRightMargin,
+          `${label} title ends at x=${bounds.maxX}; safe edge is x=${width - safeRightMargin - 1}`,
+        );
+      }
+    }
   });
 
   it('does not treat approved copy in descriptions as visible layout text', () => {

@@ -11,7 +11,7 @@ import sharp from 'sharp';
 import { ASSET_REQUIREMENTS, getBrand } from '../brand-data.mjs';
 import * as generator from '../generate-assets.mjs';
 
-const { buildIco, renderBrand } = generator;
+const { buildIco, renderBrand, renderBrandAssets } = generator;
 
 const EXPECTED_RENDERER_METADATA = {
   id: 'automatedempires-brand-assets/v1',
@@ -188,6 +188,29 @@ describe('brand export renderer', () => {
       const buffer = await readFile(join(brandRoot, record.path));
       assert.equal(record.sha256, createHash('sha256').update(buffer).digest('hex'));
     }
+  });
+
+  it('regenerates only selected assets without deleting or rewriting unrelated pack bytes', async () => {
+    const brand = getBrand('sweepza');
+    const selectedPath = 'exports/facebook-cover/facebook-cover.png';
+    const unrelatedPath = 'exports/app-icon/app-icon.png';
+    const unrelatedBefore = await readFile(join(brandRoot, unrelatedPath));
+    await writeFile(join(brandRoot, selectedPath), 'replace only this asset');
+
+    const targetedRecords = await renderBrandAssets(brand, temporaryRoot, [
+      'facebook-cover-png',
+    ]);
+
+    assert.equal(targetedRecords.length, ASSET_REQUIREMENTS.length);
+    assert.deepEqual(await readFile(join(brandRoot, unrelatedPath)), unrelatedBefore);
+    assert.deepEqual(
+      pngDimensions(await readFile(join(brandRoot, selectedPath))),
+      { width: 1640, height: 924 },
+    );
+    assert.deepEqual(
+      await walkFiles(brandRoot),
+      [...ASSET_REQUIREMENTS.map(({ relativePath }) => relativePath), 'README.md'].sort(),
+    );
   });
 
   it('writes PNG IHDR and JPEG SOF dimensions exactly', async () => {

@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -296,6 +296,113 @@ const altFor = (brand, role) => {
   return descriptions[role] ?? `${brand.name} brand asset`;
 };
 
+const recordFor = (brand, requirement, buffer) => ({
+  brand: brand.slug,
+  role: requirement.role,
+  path: requirement.relativePath,
+  format: requirement.format,
+  width: requirement.width,
+  height: requirement.height,
+  alpha: requirement.alpha,
+  alt: altFor(brand, requirement.role),
+  provenance:
+    `Original deterministic SVG geometry and text rendered locally; no external imagery or font URLs. Renderer metadata: ${RENDERER_METADATA.id}.`,
+  status: 'P0 concept',
+  limitations: limitationsFor(brand),
+  sha256: sha256(buffer),
+});
+
+const renderRequirement = async (brand, requirement, brandRoot, generated) => {
+  const dependency = async (relativePath) =>
+    generated.get(relativePath) ??
+    readFile(join(brandRoot, ...relativePath.split('/')));
+  let buffer;
+  if (requirement.format === 'svg') {
+    buffer = Buffer.from(sourceSvg(brand, requirement.id));
+  } else if (requirement.format === 'png') {
+    const opaque = !requirement.alpha;
+    buffer = await renderPng(
+      pngSvg(brand, requirement.id),
+      requirement.width,
+      requirement.height,
+      opaque,
+      brand.palette[2].hex,
+    );
+  } else if (requirement.format === 'jpg') {
+    buffer = await renderJpeg(
+      jpegSvg(brand, requirement.id),
+      requirement.width,
+      requirement.height,
+      brand.palette[2].hex,
+    );
+  } else if (requirement.format === 'ico') {
+    const sizes = [16, 32, 48];
+    buffer = buildIco(
+      await Promise.all(
+        sizes.map(async (size) => ({
+          width: size,
+          height: size,
+          data: await dependency(`exports/favicon/favicon-${size}.png`),
+        })),
+      ),
+    );
+  } else if (requirement.format === 'pdf') {
+    buffer = await renderPdf(
+      await dependency('exports/pitch-one-pager/pitch-one-pager.png'),
+      brand,
+    );
+  } else {
+    throw new Error(`Unsupported asset format: ${requirement.format}`);
+  }
+
+  const destination = join(brandRoot, ...requirement.relativePath.split('/'));
+  await mkdir(dirname(destination), { recursive: true });
+  await writeFile(destination, buffer);
+  generated.set(requirement.relativePath, buffer);
+};
+
+const readBrandRecords = async (brand, brandRoot) =>
+  Promise.all(
+    ASSET_REQUIREMENTS.map(async (requirement) =>
+      recordFor(
+        brand,
+        requirement,
+        await readFile(join(brandRoot, ...requirement.relativePath.split('/'))),
+      ),
+    ),
+  );
+
+const writeBrandReadme = async (brand, brandRoot) => {
+  const records = await readBrandRecords(brand, brandRoot);
+  await writeFile(join(brandRoot, 'README.md'), buildReadme(brand, records));
+  return records;
+};
+
+/**
+ * Regenerate an explicit subset without removing or rewriting unrelated pack files.
+ * @param {import('./brand-data.mjs').Brand} brand
+ * @param {string} outputRoot
+ * @param {string[]} requirementIds
+ * @returns {Promise<object[]>}
+ */
+export const renderBrandAssets = async (brand, outputRoot, requirementIds) => {
+  const brandRoot = safeBrandRoot(brand, outputRoot);
+  const requested = new Set(requirementIds);
+  if (requested.size === 0) throw new Error('Targeted regeneration requires asset IDs');
+  const knownIds = new Set(ASSET_REQUIREMENTS.map(({ id }) => id));
+  for (const id of requested) {
+    if (!knownIds.has(id)) throw new Error(`Unknown asset requirement: ${id}`);
+  }
+  await mkdir(brandRoot, { recursive: true });
+  const generated = new Map();
+  for (const requirement of ASSET_REQUIREMENTS) {
+    if (requested.has(requirement.id)) {
+      await renderRequirement(brand, requirement, brandRoot, generated);
+    }
+  }
+  return writeBrandReadme(brand, brandRoot);
+};
+
 /**
  * Render all required files for one approved brand.
  * @param {import('./brand-data.mjs').Brand} brand
@@ -308,68 +415,10 @@ export const renderBrand = async (brand, outputRoot) => {
   await mkdir(brandRoot, { recursive: true });
 
   const generated = new Map();
-  const records = [];
   for (const requirement of ASSET_REQUIREMENTS) {
-    let buffer;
-    if (requirement.format === 'svg') {
-      buffer = Buffer.from(sourceSvg(brand, requirement.id));
-    } else if (requirement.format === 'png') {
-      const opaque = !requirement.alpha;
-      buffer = await renderPng(
-        pngSvg(brand, requirement.id),
-        requirement.width,
-        requirement.height,
-        opaque,
-        brand.palette[2].hex,
-      );
-    } else if (requirement.format === 'jpg') {
-      buffer = await renderJpeg(
-        jpegSvg(brand, requirement.id),
-        requirement.width,
-        requirement.height,
-        brand.palette[2].hex,
-      );
-    } else if (requirement.format === 'ico') {
-      const sizes = [16, 32, 48];
-      buffer = buildIco(
-        sizes.map((size) => ({
-          width: size,
-          height: size,
-          data: generated.get(`exports/favicon/favicon-${size}.png`),
-        })),
-      );
-    } else if (requirement.format === 'pdf') {
-      buffer = await renderPdf(
-        generated.get('exports/pitch-one-pager/pitch-one-pager.png'),
-        brand,
-      );
-    } else {
-      throw new Error(`Unsupported asset format: ${requirement.format}`);
-    }
-
-    const destination = join(brandRoot, ...requirement.relativePath.split('/'));
-    await mkdir(dirname(destination), { recursive: true });
-    await writeFile(destination, buffer);
-    generated.set(requirement.relativePath, buffer);
-    records.push({
-      brand: brand.slug,
-      role: requirement.role,
-      path: requirement.relativePath,
-      format: requirement.format,
-      width: requirement.width,
-      height: requirement.height,
-      alpha: requirement.alpha,
-      alt: altFor(brand, requirement.role),
-      provenance:
-        `Original deterministic SVG geometry and text rendered locally; no external imagery or font URLs. Renderer metadata: ${RENDERER_METADATA.id}.`,
-      status: 'P0 concept',
-      limitations: limitationsFor(brand),
-      sha256: sha256(buffer),
-    });
+    await renderRequirement(brand, requirement, brandRoot, generated);
   }
-
-  await writeFile(join(brandRoot, 'README.md'), buildReadme(brand, records));
-  return records;
+  return writeBrandReadme(brand, brandRoot);
 };
 
 const run = async () => {

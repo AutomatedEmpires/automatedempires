@@ -70,12 +70,12 @@ Original deterministic SVG geometry and live text rendered locally with Sharp an
 | `exports/favicon/favicon.ico` | favicon | ico | 48 × 48 | yes | `46d4290d33a2e3aed3d90e82e971fb8e5f5f350feb066ca66683327b839188c8` |
 | `exports/app-icon/app-icon.png` | app-icon | png | 1024 × 1024 | no | `44f1bd356d0afe0d52bb2c5a498360765f9955f18c885c82d33a8ff3598c2a14` |
 | `exports/social-profile/social-profile.png` | social-profile | png | 1080 × 1080 | no | `b86f110a071cf092310e9b89d6ab6070df3087008260e01f8ccff7c113a6377a` |
-| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `99b7eb54c45d993abc50f70dc49df85232891ed1510a5e2abfe6d7e06f2d01bd` |
+| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `a7e486c0dd679508b208899cc06326a6821605866ba05bbf025786c242c66dc8` |
 | `exports/facebook-cover/facebook-cover.jpg` | facebook-cover | jpg | 851 × 315 | no | `ece14ef40a1a8074a9a4e0a1a268a8881deefdb93633925b586c0a64308b5522` |
-| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `ea2c74159ac64a01763e01220e3998544a0ddc231fce904531201b70591831e0` |
-| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `20707e3cae1ee9dc90f836e87cfb7ad77b91d8083e78028ec99fcea15897cc95` |
+| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `abb7650d47c85e61f0fe4cd2018f30cc2c20533c78abdda3f83a36c2c49c8838` |
+| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `9894be1b257af891388420c527361ce0d2c2c6e34cca3e7bd1dd382b85f69659` |
 | `exports/email-header/email-header.png` | email-header | png | 1200 × 400 | no | `bacbddb07f426f84fcf3dfeca975a6a30bd7291ea9257cccd5f47b2671668147` |
 | `exports/email-header/email-header.jpg` | email-header | jpg | 1200 × 400 | no | `171723c340ca11cc59539b7d189c36099a7cd2c654dc54d41f0207c22c3ca0cc` |
-| `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `faa0a498ea44fa58b9228e185aed037b5d2b5e239f6de5ce407465cf7fb34f82` |
-| `exports/pitch-one-pager/pitch-one-pager.pdf` | pitch-one-pager | pdf | 612 × 792 | no | `44c88dd3fdf2c99cf9c0d7b144da51271d026bc8d755c99ed6a2f2c51c02d7ab` |
+| `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `fcb9e490e7eca1184b3dab1dd8b5cdac5d2148e1a783235f2cbba0bb9307ffc9` |
+| `exports/pitch-one-pager/pitch-one-pager.pdf` | pitch-one-pager | pdf | 612 × 792 | no | `72bcb6a642df03714199341b3eb0f897c97f5cd5915384e65745c44ad6bc5e65` |
 | `preview/brand-board.png` | brand-board | png | 1920 × 1080 | no | `77b87fd1f1adc6ddac1cf4733b654ec60930155a0a06138d3d9ca4c81f9a8e84` |

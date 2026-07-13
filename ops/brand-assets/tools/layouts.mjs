@@ -19,6 +19,16 @@ const assertDimension = (value, name) => {
   return number;
 };
 
+const titleFit = (text, preferredSize, availableWidth) => {
+  const characters = [...text].length;
+  const overflowEstimate = characters * preferredSize * 0.52;
+  if (overflowEstimate <= availableWidth) {
+    return { size: preferredSize, status: 'preferred' };
+  }
+  const size = Math.max(1, Math.floor(availableWidth / (characters * 0.6)));
+  return { size: Math.min(preferredSize, size), status: 'reduced' };
+};
+
 const wrapWords = (text, maxCharacters) => {
   const lines = [];
   let line = '';
@@ -85,17 +95,20 @@ const renderLandscape = (brand, width, height) => {
   const margin = Math.round(width * 0.07);
   const iconSize = Math.round(Math.min(height * 0.64, width * 0.29));
   const titleX = margin + iconSize + Math.round(width * 0.055);
-  const titleSize = Math.max(42, Math.min(Math.round(height * 0.19), Math.round(width / Math.max(9, brand.name.length * 0.82))));
+  const preferredTitleSize = Math.max(42, Math.min(Math.round(height * 0.19), Math.round(width / Math.max(9, brand.name.length * 0.82))));
+  const title = titleFit(brand.name, preferredTitleSize, width - titleX - margin);
   const copySize = Math.max(20, Math.round(height * 0.065));
   const copyWidth = Math.max(18, Math.round((width - titleX - margin) / (copySize * 0.58)));
-  return `<rect width="${width}" height="${height}" fill="${paper}"/>${pattern(width, height, slate)}<rect x="0" y="0" width="${Math.max(12, Math.round(width * 0.018))}" height="${height}" fill="${accent}"/>${iconAt(brand, margin, Math.round((height - iconSize) / 2), iconSize, ink)}<text x="${titleX}" y="${Math.round(height * 0.43)}" fill="${ink}" font-family="${escapeXml(brand.type.fallback)}" font-size="${titleSize}" font-weight="700">${escapeXml(brand.name)}</text>${textLines(brand.copy.public, titleX, Math.round(height * 0.58), Math.round(copySize * 1.28), copySize, ink, copyWidth, `font-family="${escapeXml(brand.type.fallback)}"`)}`;
+  return `<rect width="${width}" height="${height}" fill="${paper}"/>${pattern(width, height, slate)}<rect x="0" y="0" width="${Math.max(12, Math.round(width * 0.018))}" height="${height}" fill="${accent}"/>${iconAt(brand, margin, Math.round((height - iconSize) / 2), iconSize, ink)}<text data-role="brand-name" data-title-fit="${title.status}" data-safe-right-margin="${margin}" x="${titleX}" y="${Math.round(height * 0.43)}" fill="${ink}" font-family="${escapeXml(brand.type.fallback)}" font-size="${title.size}" font-weight="700">${escapeXml(brand.name)}</text>${textLines(brand.copy.public, titleX, Math.round(height * 0.58), Math.round(copySize * 1.28), copySize, ink, copyWidth, `font-family="${escapeXml(brand.type.fallback)}"`)}`;
 };
 
 const renderPitch = (brand, width, height) => {
   const [ink, slate, paper, accent] = brand.palette.map(({ hex }) => hex);
   const margin = Math.round(width * 0.085);
   const iconSize = Math.round(width * 0.25);
-  const titleSize = Math.max(58, Math.round(width / Math.max(11, brand.name.length * 0.9)));
+  const preferredTitleSize = Math.max(58, Math.round(width / Math.max(11, brand.name.length * 0.9)));
+  const titleX = margin + iconSize + Math.round(width * 0.055);
+  const title = titleFit(brand.name, preferredTitleSize, width - titleX - margin);
   const copySize = Math.round(width * 0.04);
   const copy = textLines(
     brand.copy.public,
@@ -117,7 +130,7 @@ const renderPitch = (brand, width, height) => {
     62,
     `font-family="${escapeXml(brand.type.fallback)}"`,
   );
-  return `<rect width="${width}" height="${height}" fill="${paper}"/>${pattern(width, height, slate)}<rect x="0" y="0" width="${width}" height="${Math.round(height * 0.035)}" fill="${accent}"/>${iconAt(brand, margin, Math.round(height * 0.08), iconSize, ink)}<text x="${margin + iconSize + Math.round(width * 0.055)}" y="${Math.round(height * 0.2)}" fill="${ink}" font-family="${escapeXml(brand.type.fallback)}" font-size="${titleSize}" font-weight="700">${escapeXml(brand.name)}</text>${copy}<line x1="${margin}" y1="${Math.round(height * 0.58)}" x2="${width - margin}" y2="${Math.round(height * 0.58)}" stroke="${accent}" stroke-width="5"/><text x="${margin}" y="${Math.round(height * 0.64)}" fill="${ink}" font-family="${escapeXml(brand.type.fallback)}" font-size="${Math.round(copySize * 0.62)}" font-weight="700" letter-spacing="2">IMAGERY DIRECTION</text>${notes}<text x="${margin}" y="${Math.round(height * 0.9)}" fill="${slate}" font-family="${escapeXml(brand.type.fallback)}" font-size="${Math.round(copySize * 0.5)}">P0 identity concept — founder refinement and clearance required.</text>`;
+  return `<rect width="${width}" height="${height}" fill="${paper}"/>${pattern(width, height, slate)}<rect x="0" y="0" width="${width}" height="${Math.round(height * 0.035)}" fill="${accent}"/>${iconAt(brand, margin, Math.round(height * 0.08), iconSize, ink)}<text data-role="brand-name" data-title-fit="${title.status}" data-safe-right-margin="${margin}" x="${titleX}" y="${Math.round(height * 0.2)}" fill="${ink}" font-family="${escapeXml(brand.type.fallback)}" font-size="${title.size}" font-weight="700">${escapeXml(brand.name)}</text>${copy}<line x1="${margin}" y1="${Math.round(height * 0.58)}" x2="${width - margin}" y2="${Math.round(height * 0.58)}" stroke="${accent}" stroke-width="5"/><text x="${margin}" y="${Math.round(height * 0.64)}" fill="${ink}" font-family="${escapeXml(brand.type.fallback)}" font-size="${Math.round(copySize * 0.62)}" font-weight="700" letter-spacing="2">IMAGERY DIRECTION</text>${notes}<text x="${margin}" y="${Math.round(height * 0.9)}" fill="${slate}" font-family="${escapeXml(brand.type.fallback)}" font-size="${Math.round(copySize * 0.5)}">P0 identity concept — founder refinement and clearance required.</text>`;
 };
 
 const renderBrandBoard = (brand, width, height) => {
