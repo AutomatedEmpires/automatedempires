@@ -120,7 +120,7 @@ Work is done when it creates a coherent, reusable private brand-system outcome; 
 Snapshot date: 2026-07-12.
 
 - Parent draft PR #15, `docs: add Meta and social setup system`, records the existing social identity and unpublished organic drafts. It is behind `main`; treat it as in-flight evidence, avoid file conflicts, and do not publish its material.
-- Parent draft PR #16, `docs: add agent operating standards`, owns this contract. It is behind `main`; keep its diff docs-only and limited to the three intended contracts, then revalidate after any update.
+- Parent draft PR #16, `docs: add agent operating standards`, owns this contract. The local branch was synchronized with `main` during this standards pass; keep its diff docs-only and limited to the three intended contracts, then refresh remote checks after every push.
 - Parent draft PR #14 adds canonical operations navigation and may determine the eventual filing location for brand records.
 
 Blockers are the absence of a canonical repository, a fully reconciled and accepted brand canon, verified asset licensing/provenance, a validated audience or offer, and an approved public publishing lane. These block public launch, not useful private creative-system work.

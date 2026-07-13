@@ -142,7 +142,7 @@ Snapshot date: 2026-07-12.
 
 - Draft PR #14, `docs: add canonical operations documentation index`, adds the navigation layer for operations truth. It is currently behind `main` and should be sequenced deliberately before building new canonical paths.
 - Draft PR #15, `docs: add Meta and social setup system`, records social identities, asset-group evidence, and unpublished content drafts. It is behind `main`; preserve its asset ownership and do not duplicate or publish its drafts.
-- Draft PR #16, `docs: add agent operating standards`, is this branch's docs-only contract PR. It is currently behind `main`; keep its diff limited to the three intended `AGENTS.md` files and revalidate after any update.
+- Draft PR #16, `docs: add agent operating standards`, is this branch's docs-only contract PR. The local branch was synchronized with `main` during this standards pass; keep its diff limited to the three intended `AGENTS.md` files and refresh remote checks after every push.
 
 Current blockers include fragmented-but-improving operations navigation, concentrated provider ownership and recovery, incomplete functional rollback and DNS smoke evidence, no application test suite, provider facts that must remain fresh, and zero validated users or customers. These blockers justify reliable sources and small execution loops; they do not justify a decorative dashboard or generic founder gating.
 
