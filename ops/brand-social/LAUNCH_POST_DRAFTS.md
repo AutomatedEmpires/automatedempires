@@ -8,6 +8,12 @@ These are first-five organic sequences, not paid campaigns. They contain no prom
 
 ## AutomatedEmpires
 
+**Safe pre-launch version:** AutomatedEmpires is building practical systems for industries and communities where important work is still fragmented. Follow for evidence-based build notes and venture updates.
+
+**Launch version:** Use only after the founder approves the portfolio for public presentation: “AutomatedEmpires builds focused ventures around real operational gaps—and shares the evidence behind each step.”
+
+**Founder/approval notes:** Founder approval is required before publication. Reconfirm the public status of every named venture on publication day; omit any venture that is not approved for public association. Organic posting only.
+
 ### Post 1 — Why we build
 
 The world is full of systems that almost work. AutomatedEmpires exists to find what is fragmented, understand who it fails, and build the system that should exist.
@@ -26,7 +32,7 @@ That is the operating thesis behind AutomatedEmpires.
 
 ### Post 3 — The portfolio
 
-Our current builds explore seasonal-work discovery, sweepstakes organization, timber-hauling coordination, temporary commercial space, local services, and civic resource infrastructure.
+Our current builds explore seasonal-work discovery, giveaway campaign infrastructure, timber-hauling coordination, temporary commercial space, local services, and civic resource infrastructure.
 
 They are different products for different people—not one template wearing different colors.
 
@@ -45,6 +51,12 @@ What process in your industry still depends too heavily on that kind of workarou
 ## Explore&Earn
 
 **Publish only as coming-soon/founding-host content until public availability is approved.**
+
+**Safe pre-launch version:** Explore&Earn is coming soon. We’re speaking with founding hosts while we build clearer seasonal and place-based opportunity listings.
+
+**Launch version:** Deferred. Replace “coming soon” only after the founder verifies that the public product, host workflow, website, and support route are live and approves a dated launch post.
+
+**Founder/approval notes:** Founder approval is required for every post and host call to action. Verify that messages are monitored and do not imply applicants can browse or apply until those functions are genuinely public. Organic posting only.
 
 ### Post 1 — Coming soon
 
@@ -78,41 +90,53 @@ We’re beginning founding-host conversations ahead of public availability.
 
 If you run seasonal or place-based work and want to help shape a clearer host experience, send us a message here.
 
-## Sweepza
+## Sweepza — pre-launch brand presence only
 
-**Do not publish as a live sweepstakes operation. This Page is not an entry channel, sponsor, administrator, or prize-fulfillment surface.**
+**Safe pre-launch version:** Sweepza is building tools for businesses to organize clearer, more trustworthy giveaway campaigns. Vendor onboarding and compliance review are in progress.
 
-### Post 1 — Still being built
+**Launch version:** Deferred. The default campaign status is `legal_review_required`. Public launch language may be drafted only after the specific campaign is recorded as `approved_for_public` and receives both founder and legal approval. Approval authorizes only the reviewed campaign copy; it is not a general compliance claim.
 
-Sweepza is still being built. The idea is simple: make public sweepstakes easier to discover and organize without turning the experience into another noisy list.
+**Founder/approval notes:** Founder and legal approval are required before any campaign-specific public post. Keep this profile business-facing and organic. Do not run ads, install pixels, accept payments or entries, collect entrant data, scrape or repost third-party campaigns, or present the profile as a campaign entry surface. Use clean blue, green, or neutral SaaS and checklist imagery; avoid cash-heavy, winner-celebration, or high-pressure promotional motifs. Stop if Meta applies a restricted classification or requests additional review.
 
-### Post 2 — A calmer routine
+### Post 1 — Campaign infrastructure for businesses
 
-Sweepstakes information is scattered across brand sites, newsletters, social posts, and daily-entry pages.
+Sweepza is building giveaway campaign infrastructure for businesses.
 
-We’re exploring a calmer routine: discover what interests you, save it, remember when it is available again, and keep your place.
+The goal is to help verified hosts organize the moving parts of a campaign more clearly—from sponsor details and official-rules workflow to eligibility tracking and winner-selection steps. Vendor onboarding and compliance review are still in progress.
 
-### Post 3 — Product concept
+### Post 2 — Organize the campaign before publishing
 
-The Sweepza concept has five simple states: discover, save, visit the sponsor’s entry page, revisit when relevant, and keep a personal record.
+A trustworthy giveaway starts with organized campaign information: sponsor identity, eligibility, geography, age requirements, entry methods, timing, prize terms, and winner details.
 
-We’re designing the routine before opening it to the public.
+Sweepza is designing a structured sponsor checklist and official-rules workflow to keep those decisions visible before public approval. The tools support review; they do not replace legal review.
 
-### Post 4 — The boundary
+### Post 3 — Support for a no-purchase entry path
 
-An important product boundary: Sweepza is intended to organize public information and direct people to sponsors’ own pages.
+A campaign team should be able to document its no-purchase entry path as carefully as every other entry method.
 
-This profile does not accept entries, select winners, or fulfill prizes.
+Sweepza is building workflow support for recording the free method of entry, how entry methods relate, and which disclosures still need review. No campaign is open through this profile.
 
-### Post 5 — What would help?
+### Post 4 — Eligibility and rules tracking
 
-What would make a sweepstakes organizer genuinely useful to you: better search, ending-soon reminders, repeat-entry tracking, category filters, or a simpler saved list?
+Rules can change while a campaign is being prepared. Sweepza is being designed to track eligibility decisions, rule versions, open questions, and approval status in one organized workflow.
 
-We’re listening while the product is still taking shape.
+The default status is `legal_review_required`. Nothing moves to public launch language until it is explicitly `approved_for_public` and approved by the founder and legal reviewer.
+
+### Post 5 — Winner-selection workflow and vendor onboarding
+
+Winner selection should follow a documented process—not an improvised handoff after a campaign closes.
+
+Sweepza is building a winner-selection workflow for businesses alongside vendor onboarding tools for prospective hosts. Businesses interested in helping shape the workflow may message this profile; this profile is not an entry channel.
 
 ## LogLoads
 
 **Keep positioning to software/coordination in development; do not imply freight-broker authority, carrier services, or managed payments.**
+
+**Safe pre-launch version:** LogLoads is building coordination software for timber-hauling teams. The product and operating model are still in development.
+
+**Launch version:** Deferred. Publish launch language only after the founder approves the entity and legal model, verifies the live product and support route, and confirms exactly which coordination functions are public.
+
+**Founder/approval notes:** Founder approval is required. Do not describe LogLoads as a broker, carrier, dispatcher-for-hire, payment provider, or guarantor. Keep calls to action to research conversations until a real onboarding path is approved. Organic posting only.
 
 ### Post 1 — Built for field reality
 
@@ -145,6 +169,12 @@ If you work around timber hauling, what creates the most preventable coordinatio
 ## BidSpace
 
 **Do not imply a live marketplace, bidding, booking, payments, Stripe Connect, or an approved public domain.**
+
+**Safe pre-launch version:** BidSpace is exploring clearer ways for businesses to discover and plan around temporary commercial space. The marketplace and transaction model are not live.
+
+**Launch version:** Deferred. Publish launch language only after the founder verifies the approved domain, live inventory, allocation model, legal terms, payment readiness, and support route.
+
+**Founder/approval notes:** Founder approval is required. Until every launch gate is verified, describe research and product development only; do not invite bids, bookings, listings, applications, or payments. Organic posting only.
 
 ### Post 1 — Invisible commercial space
 
@@ -180,6 +210,12 @@ What information is hardest to exchange when temporary space is being allocated?
 
 **Do not imply booking, service coverage, pricing, or availability is live.**
 
+**Safe pre-launch version:** Lake & Pine is shaping a calmer home-care experience. Service details, coverage, scheduling, and availability are still being prepared.
+
+**Launch version:** Deferred. Publish a service-launch version only after the founder verifies the operating area, service menu, pricing disclosures, booking path, availability, and monitored contact route.
+
+**Founder/approval notes:** Founder approval is required. Do not use booking or quote calls to action until the corresponding workflow is live, and do not imply background checks, insurance, guarantees, or service standards unless documented and approved. Organic posting only.
+
 ### Post 1 — A calmer approach
 
 Lake & Pine is building a calmer way to care for your home.
@@ -213,6 +249,12 @@ Lake & Pine is being built around that feeling: calm, order, and more time for w
 ## ORAN
 
 **Position only as civic resource infrastructure in development. Do not provide or imply political, medical, legal, eligibility, crisis, or emergency advice. Do not install tracking.**
+
+**Safe pre-launch version:** ORAN is civic resource infrastructure in development, focused on clearer source provenance, review workflows, and community-resource navigation. It is not yet a live public service.
+
+**Launch version:** Deferred. Publish public-availability language only after the founder approves the live resource scope, source-review process, stale-record handling, geographic coverage, support route, and safety disclaimers.
+
+**Founder/approval notes:** Founder approval is required. Every resource claim must be source-backed and current on publication day. Do not offer political, medical, legal, eligibility, crisis, or emergency guidance, and do not install tracking or pixels. Direct urgent needs to official services only when the destination has been independently verified. Organic posting only.
 
 ### Post 1 — Infrastructure in development
 
@@ -248,6 +290,12 @@ That work comes before public availability.
 
 **An existing public identity and prior content are present. These drafts introduce a next chapter without claiming a new product or sale is live.**
 
+**Safe pre-launch version:** Komfort Killz is refining its next chapter—voice, visual language, and point of view. No drop, release, or sale is being announced yet.
+
+**Launch version:** Deferred. Publish a product or collection launch only after the founder verifies the actual products, rights-cleared imagery, inventory, pricing, fulfillment terms, sale destination, and customer-support route.
+
+**Founder/approval notes:** Founder approval is required before posting to the existing Page or Instagram profile. Preserve prior content and established voice; do not manufacture scarcity, dates, inventory, collaborations, or availability. Organic posting only.
+
 ### Post 1 — The next chapter
 
 Komfort Killz is refining its next chapter: the voice, the visual language, and the point of view.
@@ -279,6 +327,12 @@ When you hear “Komfort Killz,” what comes to mind first: ease, confidence, r
 ## Just Jesus Bro
 
 **Preserve the existing Page and prior posts. These drafts build on the public “fashion with compassion” direction without announcing a new collection, program, or formal ministry.**
+
+**Safe pre-launch version:** Just Jesus Bro is shaping its next chapter around everyday faith, encouragement, compassion, and creative process. No collection, program, or formal ministry is being announced.
+
+**Launch version:** Deferred. Publish a collection, project, event, or program launch only after the founder verifies its exact scope, availability, fulfillment or participation route, rights-cleared imagery, and monitored contact path.
+
+**Founder/approval notes:** Founder approval is required before posting to the existing Page. Preserve prior posts and the public “fashion with compassion” direction. Avoid implying church affiliation, pastoral authority, charitable status, fundraising, formal counseling, or guaranteed outcomes unless separately documented and approved. Organic posting only.
 
 ### Post 1 — The center
 

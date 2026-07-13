@@ -67,31 +67,34 @@ Use drafts 1–5 in [Explore&Earn — first five organic posts](LAUNCH_POST_DRAF
 ## Sweepza
 
 **Short bio**
-Building a cleaner way to discover, save, and revisit public sweepstakes. Entries stay on sponsor pages.
+Giveaway campaign tools for businesses. Compliance review and vendor onboarding in progress.
 
 **Long bio**
-Sweepza is building a mobile-first tool for discovering and organizing public sweepstakes information. The intended experience helps people save what interests them, remember repeat-entry timing, and continue to each sponsor's own entry page. Sweepza's public product, host tools, and promotion operations are not launched.
+Sweepza is building giveaway campaign infrastructure for businesses, including campaign organization, official-rules workflows, sponsor checklists, no-purchase-entry support, eligibility and rules tracking, and winner-selection workflows. Vendor onboarding and compliance review are in progress. No public campaign may launch until legal and founder review changes its status from `legal_review_required` to `approved_for_public`.
 
 **One-line tagline**
-Sweepza remembers so you don't have to.
+Clearer giveaway campaigns for businesses.
 
 **“Not launched yet” safe bio variant**
-Coming soon: a cleaner way to discover, save, and revisit public sweepstakes. This profile is not an entry channel; entries stay with sponsors.
+Sweepza is building tools for businesses to organize clearer, more trustworthy giveaway campaigns. Vendor onboarding and compliance review are in progress.
 
 **Contact email**
 `support@sweepza.com` — recorded as founder-owned, but receiving, reply, retention, escalation, and recovery behavior remain unproven. Do not publish it as operational support until validated.
 
 **Website/domain**
-`https://sweepza.com` — canonical domain. A deployed domain does not authorize claims that a compliant sweepstakes operation, payment flow, email flow, or promotion is live.
+`https://sweepza.com` — canonical domain. Link it only when the destination truthfully presents business-facing pre-launch infrastructure. A deployed domain does not authorize public campaigns, payments, entrant-data collection, advertising, tracking, or a final compliance claim.
+
+**Meta category recommendation**
+Use a conservative business-facing category such as **Business service**, **Software**, **Marketing service**, or **Advertising/Marketing**. Do not classify Sweepza with gambling, casino, lottery, or betting categories or terminology.
 
 **Profile image recommendation**
-Create an original `S` formed from a card stack or reminder loop in plum, pink, and gold. Do not use sponsor logos, prize photography, or winner images.
+Create an original `S` or `S`-and-checkmark mark in a professional blue, green, or neutral SaaS palette. Do not use sponsor logos, prize or winner imagery, casino motifs, or copied campaign marks.
 
 **Cover image recommendation**
-Use an original editorial card-stack illustration showing discover, save, visit the sponsor page, and revisit. Avoid branded prizes and imagery that suggests Sweepza is currently running promotions.
+Use an original SaaS dashboard or checklist composition referencing official-rules workflow, sponsor review, eligibility tracking, and verified-host organization. Keep any gift or confetti motif sparse; avoid cash, winner, casino, jackpot, or explosive-prize imagery.
 
 **First five organic posts**
-Use drafts 1–5 in [Sweepza — first five organic posts](LAUNCH_POST_DRAFTS.md#sweepza).
+Use drafts 1–5 in [Sweepza — first five organic posts](LAUNCH_POST_DRAFTS.md#sweepza--pre-launch-brand-presence-only).
 
 ## LogLoads
 
@@ -276,6 +279,6 @@ Before pasting any copy into a live profile:
 3. Test the contact email from an external inbox and confirm monitored replies.
 4. Open the website in a signed-out browser and confirm the page accurately reflects the same launch state.
 5. Confirm the profile and cover assets are original, commissioned, generated with acceptable rights, or otherwise licensed for business use.
-6. For Sweepza, retain the sponsor-entry boundary and avoid any claim that Sweepza is operating a live promotion.
+6. For Sweepza, keep the profile business-facing, retain the `legal_review_required` default gate, and do not publish a campaign, accept payments or entrant data, scrape or repost giveaways, run ads or Pixels, or make a final compliance claim.
 7. For ORAN, retain the non-advice and in-development boundaries and do not add tracking.
 8. For LogLoads and BidSpace, retain the non-broker/non-payment and non-live-marketplace boundaries.
