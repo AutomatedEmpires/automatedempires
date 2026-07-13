@@ -1,0 +1,74 @@
+# Komfort Killz P0 brand asset pack
+
+## Status
+
+P0 concept. Founder refinement, trademark review, and relevant legal/compliance review remain required before adoption.
+
+## Provenance
+
+Original deterministic SVG geometry and live text rendered locally with Sharp and pdf-lib. No external imagery, remote font files, templates, stock assets, or third-party marks are embedded.
+
+## Limitations
+
+- Every asset is a P0 concept: not trademark cleared, not a final UI palette, not legal/compliance approved, and requires founder refinement before final adoption.
+- Requires platform-policy, advertising, merchandising, and reputational review because the violent reading remains possible.
+
+## Direction
+
+- Mark: A soft rounded K interrupted by one precise hard diagonal.
+- Approved public copy: Comfort is where the story starts.
+- Imagery: High-contrast editorial photography, domestic details, tactile materials, flash-lit objects, and composed visual tension.
+
+## Palette
+
+| Color | Hex |
+| --- | --- |
+| Near Black | `#181719` |
+| Smoke | `#757177` |
+| Bone | `#ECE7DF` |
+| Electric Plum | `#8B5B7C` |
+
+## Typography
+
+- Primary direction: Space Grotesk
+- Secondary direction: IBM Plex Mono
+- Local deterministic fallback: Arial, sans-serif
+- Recommended families are design direction only; this pack embeds no font files.
+
+## Do
+
+- Create edge through wit, contrast, and typography.
+
+## Don't
+
+- Do not use guns, blades, blood, skulls, targets, gore, hate, harassment, crime, or dangerous-behavior glorification.
+
+## Asset inventory
+
+| Path | Role | Format | Dimensions | Alpha | SHA-256 |
+| --- | --- | --- | --- | --- | --- |
+| `source/primary-logo.svg` | primary-logo | svg | 1600 × 1600 | yes | `362559e2d845ba26b721148547bd73318f2f358d5d5c5c7722118418cfd802ce` |
+| `exports/logo/primary-logo.png` | primary-logo | png | 1600 × 1600 | yes | `acc2e4535c491b07178790c010298c3869f1fd607182e172faaafa7328452315` |
+| `source/horizontal-logo.svg` | horizontal-logo | svg | 2400 × 720 | yes | `9ffaf9b8d8a6e0045cc06953a3157cd42d0dfff8a1548588b7ee2d1e55f290ee` |
+| `exports/logo/horizontal-logo.png` | horizontal-logo | png | 2400 × 720 | yes | `40f4cf48580665062fd0aad919bea2a033eec97560e6c93e05959773e3acdc38` |
+| `source/icon-mark.svg` | icon-mark | svg | 1024 × 1024 | yes | `aecb79308d24315068fb15e4f81bf9a1f6d2dac1473a12f691c713493f521bc0` |
+| `exports/logo/icon-mark.png` | icon-mark | png | 1024 × 1024 | yes | `9482c402aa367b75a9d8e1423dfcb2321885f3d312212c583fa95a6cb5e6f39c` |
+| `exports/favicon/favicon.svg` | favicon | svg | 512 × 512 | yes | `19d55c0fa22d6e2938cae19df0d6120515ac16e4f26157f224982c9d03b05311` |
+| `exports/favicon/favicon-16.png` | favicon | png | 16 × 16 | yes | `ce3c6dbbbc3cb1231a5e7e85e0ee08eed46dcb5e28d1fa05363fa784aa7f6ec8` |
+| `exports/favicon/favicon-32.png` | favicon | png | 32 × 32 | yes | `56be13143653a7c991d752403194668824478aa3dc45b01851a0a101f2d8942c` |
+| `exports/favicon/favicon-48.png` | favicon | png | 48 × 48 | yes | `4f6df227fdfb43f36d0ec5a524bde59b1ffdd1fd430c3d9657d80189e3bdafe3` |
+| `exports/favicon/apple-touch-icon.png` | favicon | png | 180 × 180 | no | `b4794b8fa77982c255da15606d33c8b6208f7e8af4f164a2da84eabd5c392d73` |
+| `exports/favicon/icon-192.png` | favicon | png | 192 × 192 | no | `d5655844813dd0923fe6fa98ab9991aad0bd7b454b70348dd40169c151baa9f0` |
+| `exports/favicon/icon-512.png` | favicon | png | 512 × 512 | no | `539c618f26b6994f20d16ee90dec759576285229b17d36e986819b00b698dcd2` |
+| `exports/favicon/favicon.ico` | favicon | ico | 48 × 48 | yes | `ee7e0d114d3d916d954c30b6c190cee1dc8b5e849c1b27c94fa2ffc2b9160c2a` |
+| `exports/app-icon/app-icon.png` | app-icon | png | 1024 × 1024 | no | `3963188a2a5c5b63024db5baf2988dc81bdf6f71b67e612d461fbd96e69f9619` |
+| `exports/social-profile/social-profile.png` | social-profile | png | 1080 × 1080 | no | `e9837ba40392ad4d16c4baa245569f62a09ef4148d9b037e9a075d87aa4c410a` |
+| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `dffbedb8a1feea16a24f67e390a9025a802f2443d2b999672dd92f49db471268` |
+| `exports/facebook-cover/facebook-cover.jpg` | facebook-cover | jpg | 851 × 315 | no | `39062453e3735caa8b88d23327e189cf7b0198e939c51b6013e8471328e3e960` |
+| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `eaa98d0a3c0799914a7a9f0dc7fca9287f76d0a4499726fe62dd537ac270bee4` |
+| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `1f0bae75e12f809bec59e8e910c6ada7291838e007d70cd5119beabff6934318` |
+| `exports/email-header/email-header.png` | email-header | png | 1200 × 400 | no | `5fed3ab681df4f31f20f57c3b70254e44ea529daf2f227e015d01b3ef0f2d9d8` |
+| `exports/email-header/email-header.jpg` | email-header | jpg | 1200 × 400 | no | `613bfb707ce19b44d4b54209d14abddeaebe038502c9d36dbbfdc9da7c496c07` |
+| `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `ef9e1f7e767db41cd99b5def507d964b24301f1525e7c1fa5f531312ab5aac1a` |
+| `exports/pitch-one-pager/pitch-one-pager.pdf` | pitch-one-pager | pdf | 612 × 792 | no | `de06710e1e76c9b2ac67432836d50608c731aadcc27e073bc51a8646dba63cc3` |
+| `preview/brand-board.png` | brand-board | png | 1920 × 1080 | no | `f6c83e0a1ab27dd9999d02f2ffd5b898f77f50abd0327339ddb5b7589545c5ab` |

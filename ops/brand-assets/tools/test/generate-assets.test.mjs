@@ -1,0 +1,199 @@
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, relative, sep } from 'node:path';
+import { after, before, describe, it } from 'node:test';
+
+import { PDFDocument } from 'pdf-lib';
+import sharp from 'sharp';
+
+import { ASSET_REQUIREMENTS, getBrand } from '../brand-data.mjs';
+import { renderBrand } from '../generate-assets.mjs';
+
+const walkFiles = async (directory) => {
+  const files = [];
+  const visit = async (current) => {
+    for (const entry of await readdir(current, { withFileTypes: true })) {
+      const path = join(current, entry.name);
+      if (entry.isDirectory()) await visit(path);
+      else files.push(relative(directory, path).split(sep).join('/'));
+    }
+  };
+  await visit(directory);
+  return files.sort();
+};
+
+const pngDimensions = (buffer) => {
+  assert.deepEqual(
+    buffer.subarray(0, 8),
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+  );
+  assert.equal(buffer.subarray(12, 16).toString('ascii'), 'IHDR');
+  return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+};
+
+const jpegDimensions = (buffer) => {
+  assert.equal(buffer.readUInt16BE(0), 0xffd8);
+  let offset = 2;
+  while (offset < buffer.length) {
+    while (buffer[offset] === 0xff) offset += 1;
+    const marker = buffer[offset];
+    offset += 1;
+    if (marker === 0xd8 || marker === 0xd9) continue;
+    const segmentLength = buffer.readUInt16BE(offset);
+    if ([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf].includes(marker)) {
+      return {
+        height: buffer.readUInt16BE(offset + 3),
+        width: buffer.readUInt16BE(offset + 5),
+      };
+    }
+    offset += segmentLength;
+  }
+  throw new Error('JPEG SOF marker not found');
+};
+
+const icoEntries = (buffer) => {
+  assert.equal(buffer.readUInt16LE(0), 0);
+  assert.equal(buffer.readUInt16LE(2), 1);
+  const count = buffer.readUInt16LE(4);
+  return Array.from({ length: count }, (_, index) => {
+    const offset = 6 + index * 16;
+    return {
+      width: buffer[offset] || 256,
+      height: buffer[offset + 1] || 256,
+      planes: buffer.readUInt16LE(offset + 4),
+      bitCount: buffer.readUInt16LE(offset + 6),
+      size: buffer.readUInt32LE(offset + 8),
+      imageOffset: buffer.readUInt32LE(offset + 12),
+    };
+  });
+};
+
+describe('brand export renderer', () => {
+  let temporaryRoot;
+  let brandRoot;
+  let records;
+
+  before(async () => {
+    temporaryRoot = await mkdtemp(join(tmpdir(), 'brand-assets-'));
+    const brand = getBrand('sweepza');
+    records = await renderBrand(brand, temporaryRoot);
+    brandRoot = join(temporaryRoot, brand.slug);
+  });
+
+  after(async () => {
+    if (temporaryRoot) await rm(temporaryRoot, { recursive: true, force: true });
+  });
+
+  it('writes exactly the required pack files and complete asset records', async () => {
+    const expectedFiles = [
+      ...ASSET_REQUIREMENTS.map(({ relativePath }) => relativePath),
+      'README.md',
+    ].sort();
+    assert.deepEqual(await walkFiles(brandRoot), expectedFiles);
+    assert.equal(records.length, ASSET_REQUIREMENTS.length);
+    const readme = await readFile(join(brandRoot, 'README.md'), 'utf8');
+    assert.doesNotMatch(readme, /\n\n$/, 'README must have exactly one trailing newline');
+
+    const requirementsByPath = new Map(
+      ASSET_REQUIREMENTS.map((requirement) => [requirement.relativePath, requirement]),
+    );
+    for (const record of records) {
+      const requirement = requirementsByPath.get(record.path);
+      assert.ok(requirement, `unexpected record ${record.path}`);
+      assert.deepEqual(
+        Object.keys(record).sort(),
+        [
+          'alpha',
+          'alt',
+          'brand',
+          'format',
+          'height',
+          'limitations',
+          'path',
+          'provenance',
+          'role',
+          'sha256',
+          'status',
+          'width',
+        ],
+      );
+      assert.equal(record.brand, 'sweepza');
+      assert.equal(record.role, requirement.role);
+      assert.equal(record.format, requirement.format);
+      assert.equal(record.width, requirement.width);
+      assert.equal(record.height, requirement.height);
+      assert.equal(record.alpha, requirement.alpha);
+      assert.match(record.alt, /Sweepza/);
+      assert.match(record.provenance, /deterministic/i);
+      assert.equal(record.status, 'P0 concept');
+      assert.match(record.limitations, /not trademark cleared/i);
+
+      const buffer = await readFile(join(brandRoot, record.path));
+      assert.equal(record.sha256, createHash('sha256').update(buffer).digest('hex'));
+    }
+  });
+
+  it('writes PNG IHDR and JPEG SOF dimensions exactly', async () => {
+    for (const requirement of ASSET_REQUIREMENTS) {
+      const file = await readFile(join(brandRoot, requirement.relativePath));
+      if (requirement.format === 'png') {
+        assert.deepEqual(pngDimensions(file), {
+          width: requirement.width,
+          height: requirement.height,
+        });
+      }
+      if (requirement.format === 'jpg') {
+        assert.deepEqual(jpegDimensions(file), {
+          width: requirement.width,
+          height: requirement.height,
+        });
+      }
+    }
+  });
+
+  it('builds a standards-compliant PNG-compressed 16/32/48 ICO', async () => {
+    const ico = await readFile(join(brandRoot, 'exports/favicon/favicon.ico'));
+    const entries = icoEntries(ico);
+    assert.deepEqual(entries.map(({ width }) => width), [16, 32, 48]);
+    assert.deepEqual(entries.map(({ height }) => height), [16, 32, 48]);
+    assert.ok(entries.every(({ planes }) => planes === 1));
+    assert.ok(entries.every(({ bitCount }) => bitCount === 32));
+    for (const entry of entries) {
+      const frame = ico.subarray(entry.imageOffset, entry.imageOffset + entry.size);
+      assert.deepEqual(
+        frame.subarray(0, 8),
+        Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+      );
+    }
+  });
+
+  it('keeps logo transparency and makes the app icon fully opaque', async () => {
+    for (const path of [
+      'exports/logo/primary-logo.png',
+      'exports/logo/horizontal-logo.png',
+      'exports/logo/icon-mark.png',
+    ]) {
+      const metadata = await sharp(join(brandRoot, path)).metadata();
+      assert.equal(metadata.hasAlpha, true, `${path} must contain alpha`);
+    }
+
+    const { data, info } = await sharp(join(brandRoot, 'exports/app-icon/app-icon.png'))
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    for (let offset = 3; offset < data.length; offset += info.channels) {
+      assert.equal(data[offset], 255, 'app icon must be fully opaque');
+    }
+  });
+
+  it('embeds the pitch image on exactly one US Letter PDF page', async () => {
+    const bytes = await readFile(
+      join(brandRoot, 'exports/pitch-one-pager/pitch-one-pager.pdf'),
+    );
+    const pdf = await PDFDocument.load(bytes);
+    assert.equal(pdf.getPageCount(), 1);
+    assert.deepEqual(pdf.getPage(0).getSize(), { width: 612, height: 792 });
+  });
+});

@@ -1,0 +1,73 @@
+# BidSpace P0 brand asset pack
+
+## Status
+
+P0 concept. Founder refinement, trademark review, and relevant legal/compliance review remain required before adoption.
+
+## Provenance
+
+Original deterministic SVG geometry and live text rendered locally with Sharp and pdf-lib. No external imagery, remote font files, templates, stock assets, or third-party marks are embedded.
+
+## Limitations
+
+- Every asset is a P0 concept: not trademark cleared, not a final UI palette, not legal/compliance approved, and requires founder refinement before final adoption.
+
+## Direction
+
+- Mark: Two opposing bracket planes creating an open transaction window and a negative-space B.
+- Approved public copy: A clearer place to bid and sell.
+- Imagery: Real goods and equipment, inspection details, orderly lots, and clean catalog framing.
+
+## Palette
+
+| Color | Hex |
+| --- | --- |
+| Market Ink | `#1E2428` |
+| Ledger Blue | `#596A75` |
+| Auction Ivory | `#F3F0E8` |
+| Copper | `#B56C45` |
+
+## Typography
+
+- Primary direction: IBM Plex Sans
+- Secondary direction: IBM Plex Mono
+- Local deterministic fallback: Arial, sans-serif
+- Recommended families are design direction only; this pack embeds no font files.
+
+## Do
+
+- Make hierarchy and transactional states obvious.
+
+## Don't
+
+- Do not use gavels, dollar signs, handshake clichés, shouting auctioneers, or dark luxury-fintech styling.
+
+## Asset inventory
+
+| Path | Role | Format | Dimensions | Alpha | SHA-256 |
+| --- | --- | --- | --- | --- | --- |
+| `source/primary-logo.svg` | primary-logo | svg | 1600 × 1600 | yes | `70cc5c7a547bee3df3709572344af97413246801c6fbc54c06d8a9dbbff5fc3a` |
+| `exports/logo/primary-logo.png` | primary-logo | png | 1600 × 1600 | yes | `d8ed9f517c493f1e0402c3a3019d1fb90f8733b20cbe3572422c71472d8223f4` |
+| `source/horizontal-logo.svg` | horizontal-logo | svg | 2400 × 720 | yes | `c3e8ed5eb0623d4f31782fba7148e83945f3810798b60a8b8538b630f56b0ae1` |
+| `exports/logo/horizontal-logo.png` | horizontal-logo | png | 2400 × 720 | yes | `903eb1c1368920f98e7112e0be64f1ad63f4b36009a6da57a66e1ecca594cdd7` |
+| `source/icon-mark.svg` | icon-mark | svg | 1024 × 1024 | yes | `d531eef09c0c621042a25fd283c0c2e763df24ab76b9e4b9265b88ba5994b116` |
+| `exports/logo/icon-mark.png` | icon-mark | png | 1024 × 1024 | yes | `9e51757c3daf7c7a0668311555673d8dac460170a88e5ebf0528d5265bfafde8` |
+| `exports/favicon/favicon.svg` | favicon | svg | 512 × 512 | yes | `c196d22e4329062c525131d5ac9268b4dd5db188b2738d0bdac27d236b91e981` |
+| `exports/favicon/favicon-16.png` | favicon | png | 16 × 16 | yes | `bde452c5e27fc643c1a759b0197d19bd91027287c7091425dea21927146c4453` |
+| `exports/favicon/favicon-32.png` | favicon | png | 32 × 32 | yes | `96ab10d23c7593f76c803fd2418b550277995b721cd56ab7ed31f9dd458f47c3` |
+| `exports/favicon/favicon-48.png` | favicon | png | 48 × 48 | yes | `6930a67bc1bbeb95be2b2be392d2b2f5572b04a28329851f76dca03d502c1b8a` |
+| `exports/favicon/apple-touch-icon.png` | favicon | png | 180 × 180 | no | `731b6a53a1d2807ac1d125da3198104f24f31b0765883e13b7d22aad38d3afe2` |
+| `exports/favicon/icon-192.png` | favicon | png | 192 × 192 | no | `39548856a4836db4b41526ca403e7b131b588d520ea538280862ffc3f056b751` |
+| `exports/favicon/icon-512.png` | favicon | png | 512 × 512 | no | `f7ddf792d9613b38686c0afcaad8aee2a685c775f8baa5553acb08e621ef259d` |
+| `exports/favicon/favicon.ico` | favicon | ico | 48 × 48 | yes | `718b6511fd5e1c366219b6ff3c684ce06783bfc5acc5fca7480b461170bf1444` |
+| `exports/app-icon/app-icon.png` | app-icon | png | 1024 × 1024 | no | `89f82c5dcc189a7234c93f74ff209d9aa13390394fc6d800e4b755ce617346bf` |
+| `exports/social-profile/social-profile.png` | social-profile | png | 1080 × 1080 | no | `9a1782edbeff41d129a65ed147bcebc43643ee36a4f8ac703d3fa85f37f579da` |
+| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `c9c2e8552d3a4fc20b014062a0bac2a543c5ace08e79810da534115d901c559c` |
+| `exports/facebook-cover/facebook-cover.jpg` | facebook-cover | jpg | 851 × 315 | no | `c137cd0211a9e5a6cdfc1603f54d636f150f15a122bcf8fc5006589c210bf2b3` |
+| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `faa4701c8db76d3162436ba8f661c199a20df7926182971ef19fe7b6b05869e3` |
+| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `b06159196d0eec23a1b885ece46f9af1adc0ec4f5871a44534f24584bb50be8b` |
+| `exports/email-header/email-header.png` | email-header | png | 1200 × 400 | no | `8b130323872cf6fb9806a6a12869c97bc08f80ed58435e2edd8051dfc4b15dfe` |
+| `exports/email-header/email-header.jpg` | email-header | jpg | 1200 × 400 | no | `27ff2f3d4bc00277fc66400b89e8b97a254b48bae41ec69e7cd2543b0cdb4c2c` |
+| `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `6bbc133efc6dedb6f607559f6cd421c9d94b50dd83526b099dfa0168e63a316b` |
+| `exports/pitch-one-pager/pitch-one-pager.pdf` | pitch-one-pager | pdf | 612 × 792 | no | `2183c0a9ab7112707b8fb620c41a403e7e7e37e56d1d9ff4db561f1b83e7c9c7` |
+| `preview/brand-board.png` | brand-board | png | 1920 × 1080 | no | `2c7a9286a55cdaa1875287df92ad0b33e02cf304c1096bc5eedb38bfcb56bdee` |

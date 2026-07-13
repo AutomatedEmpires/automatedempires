@@ -1,0 +1,73 @@
+# LogLoads P0 brand asset pack
+
+## Status
+
+P0 concept. Founder refinement, trademark review, and relevant legal/compliance review remain required before adoption.
+
+## Provenance
+
+Original deterministic SVG geometry and live text rendered locally with Sharp and pdf-lib. No external imagery, remote font files, templates, stock assets, or third-party marks are embedded.
+
+## Limitations
+
+- Every asset is a P0 concept: not trademark cleared, not a final UI palette, not legal/compliance approved, and requires founder refinement before final adoption.
+
+## Direction
+
+- Mark: Two abstract log-end circles secured by one horizontal route bar.
+- Approved public copy: Move timber with fewer loose ends.
+- Imagery: Documentary forestry operations, equipment in use, timber textures, route details, and real crews using safe practices.
+
+## Palette
+
+| Color | Hex |
+| --- | --- |
+| Bark | `#26231F` |
+| Iron | `#6F685D` |
+| Kraft | `#D8CCB8` |
+| Working Moss | `#64725A` |
+
+## Typography
+
+- Primary direction: Roboto Slab
+- Secondary direction: Source Sans 3
+- Local deterministic fallback: Arial, sans-serif
+- Recommended families are design direction only; this pack embeds no font files.
+
+## Do
+
+- Prioritize function and legibility.
+
+## Don't
+
+- Do not use cartoon trucks, lumberjack mascots, smiling logs, unsafe work, or excessive hazard striping.
+
+## Asset inventory
+
+| Path | Role | Format | Dimensions | Alpha | SHA-256 |
+| --- | --- | --- | --- | --- | --- |
+| `source/primary-logo.svg` | primary-logo | svg | 1600 × 1600 | yes | `de0371a81bcb7d5c59572b844a03d63ae71321e0b64932b6e899f8b2117faa8b` |
+| `exports/logo/primary-logo.png` | primary-logo | png | 1600 × 1600 | yes | `73885816e41e68601056c1cc6a8b33ebabbd5fd729e1cdb4ebe9cf56d860b054` |
+| `source/horizontal-logo.svg` | horizontal-logo | svg | 2400 × 720 | yes | `82280f5c3b018c1f95aa1352b3a5d18c01bc4d3724bb47543a00eaea0881254d` |
+| `exports/logo/horizontal-logo.png` | horizontal-logo | png | 2400 × 720 | yes | `6008ffa0acae962d6cbcc400405faf9584907748bc07059a7b8a2530f1b0b8c0` |
+| `source/icon-mark.svg` | icon-mark | svg | 1024 × 1024 | yes | `d531dbbc7f32d81d1a7ef4335d0c0e42d1765b09c80959d8140f0674b31fbfa2` |
+| `exports/logo/icon-mark.png` | icon-mark | png | 1024 × 1024 | yes | `c86aeab31cab4fe09bfdf29e2bcc4a6006b1a3bd53e97832d9236961e32cc00c` |
+| `exports/favicon/favicon.svg` | favicon | svg | 512 × 512 | yes | `db2c96db2cd2cfb314dd453fe4601af650c4ed0bb4712f4168a64370d1675326` |
+| `exports/favicon/favicon-16.png` | favicon | png | 16 × 16 | yes | `e48cfa772a4d9fda3bc6c314024815e14e9f50fd8892b938568370df61951d9f` |
+| `exports/favicon/favicon-32.png` | favicon | png | 32 × 32 | yes | `90613757accad362a485a02c93305c1b042d335197681d62398f762470566dbb` |
+| `exports/favicon/favicon-48.png` | favicon | png | 48 × 48 | yes | `89deab79255769c16bed4c440d1207cd0b8addd3bd79a6204b2d5b5ecc84f6f5` |
+| `exports/favicon/apple-touch-icon.png` | favicon | png | 180 × 180 | no | `ef30744764a480aa903ffcc47b84ed891b3cc2120c521b139539e754d8de60e9` |
+| `exports/favicon/icon-192.png` | favicon | png | 192 × 192 | no | `ccde73ef0b21505ae971df29a30e0d8d8acb2b1bd62f55ef63ece0407e080710` |
+| `exports/favicon/icon-512.png` | favicon | png | 512 × 512 | no | `c6af44a97c39d483a5ddb1b61a051cf2da0cba699d6301a9b098d8e9fcf6bc47` |
+| `exports/favicon/favicon.ico` | favicon | ico | 48 × 48 | yes | `31a49086693b96849f1c6b799bab069b79efe76892af1506ab4c4f51279920ef` |
+| `exports/app-icon/app-icon.png` | app-icon | png | 1024 × 1024 | no | `3ce099482f2a63b0425efb76c2a9f7c7e68726465b42a28eacd94e62fdaa76b8` |
+| `exports/social-profile/social-profile.png` | social-profile | png | 1080 × 1080 | no | `7285679acb21dc952ffb69b83b41b3a597cc26f726315e85fd486c8423c44db9` |
+| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `ffb18b196360b7e6dba2f776ba261b401811617b9e6192d422e360b12a37b7ab` |
+| `exports/facebook-cover/facebook-cover.jpg` | facebook-cover | jpg | 851 × 315 | no | `1c3180a9294eff22ef2ddfb5a3ffb30f9a6a71ebf5e3dbfd03a6d65eee497891` |
+| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `9e2bcc5958a22baa411daed9aafaf608984629a915ce37c9c46c4a36511b50d4` |
+| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `d4ba73fbb47ea74f87ab1edd3cf62a9e553831dca700e0d75551bbdd1af94c73` |
+| `exports/email-header/email-header.png` | email-header | png | 1200 × 400 | no | `ee00890adb49a2dea7325523c21adc1642da552fd6257859d06650d999b4bfd5` |
+| `exports/email-header/email-header.jpg` | email-header | jpg | 1200 × 400 | no | `8add51b3cda1497a292b75054e3e0264a4e3f001862de28ad303e51d8fa05948` |
+| `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `a5ab650bd534546efcfae00b78a4636c5fe635c1037a3657496eec41d4adbb5c` |
+| `exports/pitch-one-pager/pitch-one-pager.pdf` | pitch-one-pager | pdf | 612 × 792 | no | `687207ac1f4c9eed4c4f5708d252f3f05a170ed054232e9cadb2ff19238f4bb4` |
+| `preview/brand-board.png` | brand-board | png | 1920 × 1080 | no | `ebab024595d2f1a036599a0785c824b9375cae60c2cf2e18c2d45787c8117bba` |

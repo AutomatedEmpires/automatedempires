@@ -1,0 +1,74 @@
+# Just Jesus Bro P0 brand asset pack
+
+## Status
+
+P0 concept. Founder refinement, trademark review, and relevant legal/compliance review remain required before adoption.
+
+## Provenance
+
+Original deterministic SVG geometry and live text rendered locally with Sharp and pdf-lib. No external imagery, remote font files, templates, stock assets, or third-party marks are embedded.
+
+## Limitations
+
+- Every asset is a P0 concept: not trademark cleared, not a final UI palette, not legal/compliance approved, and requires founder refinement before final adoption.
+- Requires faith-media, ministry, podcast, and merchandise searches; scripture quotations require translation-specific permission review.
+
+## Direction
+
+- Mark: Two conversation brackets surrounding a short upright stroke, suggesting dialogue, presence, and an open doorway without a literal crucifix.
+- Approved public copy: Faith, in plain language.
+- Imagery: Quiet documentary community, honest portraits, shared tables, everyday service, books, notes, and natural light.
+
+## Palette
+
+| Color | Hex |
+| --- | --- |
+| Humble Ink | `#222422` |
+| Stone | `#77786F` |
+| Warm Paper | `#F3EFE6` |
+| Muted Clay | `#A9795A` |
+
+## Typography
+
+- Primary direction: Instrument Sans
+- Secondary direction: Source Serif 4
+- Local deterministic fallback: Arial, sans-serif
+- Recommended families are design direction only; this pack embeds no font files.
+
+## Do
+
+- Sound conversational and humble; use generous whitespace.
+
+## Don't
+
+- Do not use clip-art crosses, fish, crowns, doves, glowing clouds, faux-script church branding, prosperity cues, or denominational endorsements.
+
+## Asset inventory
+
+| Path | Role | Format | Dimensions | Alpha | SHA-256 |
+| --- | --- | --- | --- | --- | --- |
+| `source/primary-logo.svg` | primary-logo | svg | 1600 × 1600 | yes | `b011e931b4ae8479897e9409b1bc320ef65eacf555d9b4957e1b27fa7a017057` |
+| `exports/logo/primary-logo.png` | primary-logo | png | 1600 × 1600 | yes | `701a1f7278322be7cd90f48a903030e56c73f995d5e1dcfa32bf9840124a38df` |
+| `source/horizontal-logo.svg` | horizontal-logo | svg | 2400 × 720 | yes | `fb30739a18bb8ce8bb917be05d99e27d5a756db99e64b79705d42ec25ae0fa9f` |
+| `exports/logo/horizontal-logo.png` | horizontal-logo | png | 2400 × 720 | yes | `6be677d50356b00b4100801de398ca8574bfd389065d671d60ce44a07ad54568` |
+| `source/icon-mark.svg` | icon-mark | svg | 1024 × 1024 | yes | `e09b8691136f61484522a789d78098ac891b420c10636f153f0ca14993ba9e70` |
+| `exports/logo/icon-mark.png` | icon-mark | png | 1024 × 1024 | yes | `88a1a49a98f73da0c59580fc62212f0fb74a4f146a0a3c79e716fe200f5359d4` |
+| `exports/favicon/favicon.svg` | favicon | svg | 512 × 512 | yes | `62c33b0739039fc452052e85d6f8198447cfdff1f1e6582a269edc5600ed83a3` |
+| `exports/favicon/favicon-16.png` | favicon | png | 16 × 16 | yes | `d69332697b2058507d0440587bb95322888255454645b8eb33bded4e65d60af8` |
+| `exports/favicon/favicon-32.png` | favicon | png | 32 × 32 | yes | `28d450df08f5ff91ac3ef877b91ae59aa54300b9cb1a7db0f2a1301acb54f616` |
+| `exports/favicon/favicon-48.png` | favicon | png | 48 × 48 | yes | `9f60429ee54f6caebf8930265b5bcf48113e4cbea2ba6df9c4d92065799de924` |
+| `exports/favicon/apple-touch-icon.png` | favicon | png | 180 × 180 | no | `f6aaf5de3e83e5acbbbc2320c07745f787e46bfb15e34cbf50237e0832becb9c` |
+| `exports/favicon/icon-192.png` | favicon | png | 192 × 192 | no | `7ec8d20967224cdb38b9ddf1abaaf19b0982ceac3c4eb053f0c0dd5470a11f68` |
+| `exports/favicon/icon-512.png` | favicon | png | 512 × 512 | no | `d75006354146fe38250b60fc75c8c04690ac665fa2bf7f2fb060458f1c44c688` |
+| `exports/favicon/favicon.ico` | favicon | ico | 48 × 48 | yes | `8a9c745b060fd05c6abbd714c875705e0ece02f3aaf62fa76fa8b935c96a7e15` |
+| `exports/app-icon/app-icon.png` | app-icon | png | 1024 × 1024 | no | `bf401eaf23065a414fe86a54b3a3512d52cbc3b5af881fca502b5976062051a6` |
+| `exports/social-profile/social-profile.png` | social-profile | png | 1080 × 1080 | no | `c3652774b0aa4833cf702fbf640d698e64b7a674ac74e0882478b3e58401538c` |
+| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `fc167019cb3f3117558a8ebddf8a07a3668788c774ec7786c4df373c220d57f0` |
+| `exports/facebook-cover/facebook-cover.jpg` | facebook-cover | jpg | 851 × 315 | no | `2cf51b8b9c8f41b9234b1b5bd9eed721289f06c67fdf1dfa8744d49ce4a5c164` |
+| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `7331dc01eb6d6fc9e5a18cf5e48447af2496a0d0c1cfe8b5c5ec5ef88c361fe7` |
+| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `5f2ac169a2c9c2233f8f903989f1fca3a3e8f5393bfe895f440402fc3f0db8c3` |
+| `exports/email-header/email-header.png` | email-header | png | 1200 × 400 | no | `bb40864a17e64daa62734de78182f5936fac8393467193641939af91cae1a46f` |
+| `exports/email-header/email-header.jpg` | email-header | jpg | 1200 × 400 | no | `4261ef282fb11177e7020e716cf7fae1da948c2178199c96c89b6fa531bc07db` |
+| `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `df27efe23353b5e6926c48ff2d7df0cdb55798d78095efcf8dcaec143c92df91` |
+| `exports/pitch-one-pager/pitch-one-pager.pdf` | pitch-one-pager | pdf | 612 × 792 | no | `ba8777a6e93d937bbee15ac504f3ef1fd78d7e60be0247146ff4708b26fd43dc` |
+| `preview/brand-board.png` | brand-board | png | 1920 × 1080 | no | `196613e1e9fc55c2c656145c5c390a40ffb8ea3daa08c3904d9afb9492cf13c2` |

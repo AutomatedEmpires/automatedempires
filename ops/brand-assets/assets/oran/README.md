@@ -1,0 +1,74 @@
+# ORAN P0 brand asset pack
+
+## Status
+
+P0 concept. Founder refinement, trademark review, and relevant legal/compliance review remain required before adoption.
+
+## Provenance
+
+Original deterministic SVG geometry and live text rendered locally with Sharp and pdf-lib. No external imagery, remote font files, templates, stock assets, or third-party marks are embedded.
+
+## Limitations
+
+- Every asset is a P0 concept: not trademark cleared, not a final UI palette, not legal/compliance approved, and requires founder refinement before final adoption.
+- Requires the highest-priority naming review because the acronym is crowded, including established O-RAN telecom usage.
+
+## Direction
+
+- Mark: Four equal civic tiles arranged around an open public square.
+- Approved public copy: Public systems, made easier to understand.
+- Imagery: Libraries, transit nodes, sidewalks, public wayfinding, community spaces, and ordinary civic life.
+
+## Palette
+
+| Color | Hex |
+| --- | --- |
+| Civic Navy | `#20313A` |
+| Public Slate | `#6E7F86` |
+| Paper | `#F1F3F0` |
+| Wayfinding Amber | `#C78B3B` |
+
+## Typography
+
+- Primary direction: Public Sans
+- Secondary direction: Source Serif 4
+- Local deterministic fallback: Arial, sans-serif
+- Recommended families are design direction only; this pack embeds no font files.
+
+## Do
+
+- Use plain language, accessible hierarchy, and inclusive depictions.
+
+## Don't
+
+- Do not use flags, party colors, campaign imagery, podiums, seals, crests, or advice or affiliation implications.
+
+## Asset inventory
+
+| Path | Role | Format | Dimensions | Alpha | SHA-256 |
+| --- | --- | --- | --- | --- | --- |
+| `source/primary-logo.svg` | primary-logo | svg | 1600 × 1600 | yes | `ba0c47f00a6c535bff6983b8055ce73ce17261935a1f603375e2ecca63b92c9e` |
+| `exports/logo/primary-logo.png` | primary-logo | png | 1600 × 1600 | yes | `3646cfa217eb9efc96c7512760539a9c02d799a4c2942716ca1cb3bdebc8c370` |
+| `source/horizontal-logo.svg` | horizontal-logo | svg | 2400 × 720 | yes | `d98ad1b08a64087a86de562fb043f6676adb61245f4b3506121af78875bc52e1` |
+| `exports/logo/horizontal-logo.png` | horizontal-logo | png | 2400 × 720 | yes | `b0619cc54a953289dac4252cad1caf1cda346248ff7004161627e6ebda4d9182` |
+| `source/icon-mark.svg` | icon-mark | svg | 1024 × 1024 | yes | `a06cdfa5e82a0ac6492781d41c9288282e3a08a5e00afd1ad34fdaa5c61f2c16` |
+| `exports/logo/icon-mark.png` | icon-mark | png | 1024 × 1024 | yes | `3c63147facd59cb68ec8f834beeef15df5d27c8299f767ab439fe9e1993a2590` |
+| `exports/favicon/favicon.svg` | favicon | svg | 512 × 512 | yes | `3295f0f0f2449dc7d4bab3fcdde80ab7561c34e3cae6bbaa5ed0a121e42bfe9a` |
+| `exports/favicon/favicon-16.png` | favicon | png | 16 × 16 | yes | `0818cbd3910187ad4f273caf5762441155482619a14642333db7a07a20c09571` |
+| `exports/favicon/favicon-32.png` | favicon | png | 32 × 32 | yes | `7ace42d961f4d907b3fddfcf59a226cad63e43666f421f72051eda4780413d74` |
+| `exports/favicon/favicon-48.png` | favicon | png | 48 × 48 | yes | `739c727aba0acb92c207106cb65f6c8c68b41d4314b79bd6d48cb9ecbc1bc7a9` |
+| `exports/favicon/apple-touch-icon.png` | favicon | png | 180 × 180 | no | `8b810ef1d71f9c9d0f4b8c73199e8ed08208d8878e4d1806c22ae03087234893` |
+| `exports/favicon/icon-192.png` | favicon | png | 192 × 192 | no | `9e19a3dc824a462f608c3ad2246eebacf55b84289c11f7c1eeb9fee2ed1d57f1` |
+| `exports/favicon/icon-512.png` | favicon | png | 512 × 512 | no | `76ca36032a4c343ac1d1177102669444e427dd190a3d42a632d81d4d234ca8d8` |
+| `exports/favicon/favicon.ico` | favicon | ico | 48 × 48 | yes | `6dc3ed4a712a7ca57b3970c64c7f34ec5ec6b7e3e3c17be1f1d1b5c6fd17ff09` |
+| `exports/app-icon/app-icon.png` | app-icon | png | 1024 × 1024 | no | `902a05a926cd205d76aef93279bc4dc44b4983b34f97cd056391d0060a8f36d3` |
+| `exports/social-profile/social-profile.png` | social-profile | png | 1080 × 1080 | no | `d894da08e9f81f965c4ba131f6c6adce76adc9785378e2e6c60842cc51d70e00` |
+| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `b2483d17f9588ee2aa4084187e39efa0987a740a8491adc2be06913aebdc8d5d` |
+| `exports/facebook-cover/facebook-cover.jpg` | facebook-cover | jpg | 851 × 315 | no | `801ed49d22338c69ac8b0f9c46c3fde1152108b49cb8ef5e58345b58927b86b3` |
+| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `d0750227b49a0fcfd6baca315c2a8c4f0eff136bd43da55259a2a35e0d341817` |
+| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `0c70d9b62a618393d59c07712742655b37dc1b0e1334fc8a41c7990aecab96d2` |
+| `exports/email-header/email-header.png` | email-header | png | 1200 × 400 | no | `542833b34f317cbe23fc01c5b499c42d7e6f7eccecfc1eb459eef6f808ce99f2` |
+| `exports/email-header/email-header.jpg` | email-header | jpg | 1200 × 400 | no | `9e0565e9c75668707d34719de49bf43cbd677966f3ab901a227c198293565fb5` |
+| `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `565596a089b6763a381f4f0abcc9c12a1168eb098a53dc98132728429c6fb84a` |
+| `exports/pitch-one-pager/pitch-one-pager.pdf` | pitch-one-pager | pdf | 612 × 792 | no | `12dba685433119f37f41e190de6827c738e9eede543dc1054b60a0035cd20cc7` |
+| `preview/brand-board.png` | brand-board | png | 1920 × 1080 | no | `9360f8e0a8069bba6d40fa3f67efc0fd832630fca8639ae178b035435e9709d9` |

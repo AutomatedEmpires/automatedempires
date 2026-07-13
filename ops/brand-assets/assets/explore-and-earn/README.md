@@ -1,0 +1,73 @@
+# Explore&Earn P0 brand asset pack
+
+## Status
+
+P0 concept. Founder refinement, trademark review, and relevant legal/compliance review remain required before adoption.
+
+## Provenance
+
+Original deterministic SVG geometry and live text rendered locally with Sharp and pdf-lib. No external imagery, remote font files, templates, stock assets, or third-party marks are embedded.
+
+## Limitations
+
+- Every asset is a P0 concept: not trademark cleared, not a final UI palette, not legal/compliance approved, and requires founder refinement before final adoption.
+
+## Direction
+
+- Mark: Two offset contour lines forming an open trail and a subtle forward E.
+- Approved public copy: Go farther. Earn along the way.
+- Imagery: Documentary work-travel, human-scale landscapes, practical gear, and real destinations.
+
+## Palette
+
+| Color | Hex |
+| --- | --- |
+| Trail Pine | `#20362F` |
+| Alpine Gray | `#6F8176` |
+| Sand | `#E8E1D3` |
+| Camp Amber | `#C98245` |
+
+## Typography
+
+- Primary direction: Manrope
+- Secondary direction: Source Serif 4
+- Local deterministic fallback: Arial, sans-serif
+- Recommended families are design direction only; this pack embeds no font files.
+
+## Do
+
+- Balance aspiration with credible human activity.
+
+## Don't
+
+- Do not use cartoon badges, coins, money trails, influencer poses, or generic SaaS gradients.
+
+## Asset inventory
+
+| Path | Role | Format | Dimensions | Alpha | SHA-256 |
+| --- | --- | --- | --- | --- | --- |
+| `source/primary-logo.svg` | primary-logo | svg | 1600 × 1600 | yes | `f10d256e1f8768fc603d116cc806884ed435addc7186bb5b70c5f83f6739d44c` |
+| `exports/logo/primary-logo.png` | primary-logo | png | 1600 × 1600 | yes | `f0b40027129ea82e41216890feb5f2bd66423cd4dccecd5fabea6cf85f42c076` |
+| `source/horizontal-logo.svg` | horizontal-logo | svg | 2400 × 720 | yes | `10bc1a4b458b3fd2277114a34672d33f87ffd38b54c81cdac9aaff3f8520374c` |
+| `exports/logo/horizontal-logo.png` | horizontal-logo | png | 2400 × 720 | yes | `d07f11f6e5c0a6c9b979572bee40efdedceaef95a6eb48f009285fa4674131a8` |
+| `source/icon-mark.svg` | icon-mark | svg | 1024 × 1024 | yes | `c062a4093cb4d5a591096ef18d56be2caaed94ac9b517cdb225a37537a456902` |
+| `exports/logo/icon-mark.png` | icon-mark | png | 1024 × 1024 | yes | `90f189910f38aaedace89b7a7dd877f5a071e5269125a20f428e005188b40c2c` |
+| `exports/favicon/favicon.svg` | favicon | svg | 512 × 512 | yes | `acea899f2b62a18dac4e53fb943e739320c8f471ea16af19673ad2e7e4ac2163` |
+| `exports/favicon/favicon-16.png` | favicon | png | 16 × 16 | yes | `4e6230d135bc9fb3929d78bc9486ec256338f62dde8fef4ec2a2957bbf961c8e` |
+| `exports/favicon/favicon-32.png` | favicon | png | 32 × 32 | yes | `c8488238dac1149ba04accf771a67ea2b85e9582195af41b54e4f32fce6028d8` |
+| `exports/favicon/favicon-48.png` | favicon | png | 48 × 48 | yes | `2bdb1dd39550344fd712a21d7db4c74a268bfced14880bfc33e82310c919829b` |
+| `exports/favicon/apple-touch-icon.png` | favicon | png | 180 × 180 | no | `9b2d5e50f3d01526fb54a2dbac209689cf1056b18ae722df21975ac5c4158083` |
+| `exports/favicon/icon-192.png` | favicon | png | 192 × 192 | no | `35cba31013a449f10d92d35731124508267205c026fdc3513c9a27430870deef` |
+| `exports/favicon/icon-512.png` | favicon | png | 512 × 512 | no | `02d08878e1d32645625d985895bd9381e78eab029be584127f288b4e01eba59c` |
+| `exports/favicon/favicon.ico` | favicon | ico | 48 × 48 | yes | `46d4290d33a2e3aed3d90e82e971fb8e5f5f350feb066ca66683327b839188c8` |
+| `exports/app-icon/app-icon.png` | app-icon | png | 1024 × 1024 | no | `44f1bd356d0afe0d52bb2c5a498360765f9955f18c885c82d33a8ff3598c2a14` |
+| `exports/social-profile/social-profile.png` | social-profile | png | 1080 × 1080 | no | `b86f110a071cf092310e9b89d6ab6070df3087008260e01f8ccff7c113a6377a` |
+| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `99b7eb54c45d993abc50f70dc49df85232891ed1510a5e2abfe6d7e06f2d01bd` |
+| `exports/facebook-cover/facebook-cover.jpg` | facebook-cover | jpg | 851 × 315 | no | `ece14ef40a1a8074a9a4e0a1a268a8881deefdb93633925b586c0a64308b5522` |
+| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `ea2c74159ac64a01763e01220e3998544a0ddc231fce904531201b70591831e0` |
+| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `20707e3cae1ee9dc90f836e87cfb7ad77b91d8083e78028ec99fcea15897cc95` |
+| `exports/email-header/email-header.png` | email-header | png | 1200 × 400 | no | `bacbddb07f426f84fcf3dfeca975a6a30bd7291ea9257cccd5f47b2671668147` |
+| `exports/email-header/email-header.jpg` | email-header | jpg | 1200 × 400 | no | `171723c340ca11cc59539b7d189c36099a7cd2c654dc54d41f0207c22c3ca0cc` |
+| `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `faa0a498ea44fa58b9228e185aed037b5d2b5e239f6de5ce407465cf7fb34f82` |
+| `exports/pitch-one-pager/pitch-one-pager.pdf` | pitch-one-pager | pdf | 612 × 792 | no | `44c88dd3fdf2c99cf9c0d7b144da51271d026bc8d755c99ed6a2f2c51c02d7ab` |
+| `preview/brand-board.png` | brand-board | png | 1920 × 1080 | no | `77b87fd1f1adc6ddac1cf4733b654ec60930155a0a06138d3d9ca4c81f9a8e84` |

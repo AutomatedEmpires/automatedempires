@@ -1,0 +1,73 @@
+# AutomatedEmpires P0 brand asset pack
+
+## Status
+
+P0 concept. Founder refinement, trademark review, and relevant legal/compliance review remain required before adoption.
+
+## Provenance
+
+Original deterministic SVG geometry and live text rendered locally with Sharp and pdf-lib. No external imagery, remote font files, templates, stock assets, or third-party marks are embedded.
+
+## Limitations
+
+- Every asset is a P0 concept: not trademark cleared, not a final UI palette, not legal/compliance approved, and requires founder refinement before final adoption.
+
+## Direction
+
+- Mark: Three interlocking right-angle rails forming a central command path.
+- Approved public copy: We build systems that turn durable ideas into operating ventures.
+- Imagery: Architectural systems, engineered materials, restrained command-center views, and real operators.
+
+## Palette
+
+| Color | Hex |
+| --- | --- |
+| Command Ink | `#161A1D` |
+| Steel | `#5F6B73` |
+| Mist | `#E9ECEB` |
+| Signal Brass | `#B58A3A` |
+
+## Typography
+
+- Primary direction: Inter Tight
+- Secondary direction: IBM Plex Mono
+- Local deterministic fallback: Arial, sans-serif
+- Recommended families are design direction only; this pack embeds no font files.
+
+## Do
+
+- Use disciplined modular geometry and whitespace.
+
+## Don't
+
+- Do not use robots, circuit brains, crowns, eagles, conquest maps, or imperial symbolism.
+
+## Asset inventory
+
+| Path | Role | Format | Dimensions | Alpha | SHA-256 |
+| --- | --- | --- | --- | --- | --- |
+| `source/primary-logo.svg` | primary-logo | svg | 1600 × 1600 | yes | `9a201f8f4c7d80ced08f02a0c3821818e6cb3047b8499d1c5c9d10d2aebcaa98` |
+| `exports/logo/primary-logo.png` | primary-logo | png | 1600 × 1600 | yes | `acf180dae9c8001724043b54b03089f31cb2554e4652812475642880a6bf15e8` |
+| `source/horizontal-logo.svg` | horizontal-logo | svg | 2400 × 720 | yes | `b3c2abfe056e9dc65f6fc1202bf7dde372b100d01624665dfb5ec192cd75c485` |
+| `exports/logo/horizontal-logo.png` | horizontal-logo | png | 2400 × 720 | yes | `496dbfd973e2c5e300180965efb1aae9c47fbfc8c8f7f2e8865b34a49b0d3815` |
+| `source/icon-mark.svg` | icon-mark | svg | 1024 × 1024 | yes | `e04afe4dfa32db7358f97185d126a1aad2c31abb9aba015bbc857fac464c4e7f` |
+| `exports/logo/icon-mark.png` | icon-mark | png | 1024 × 1024 | yes | `b841197d3e1d05ab4714ef3e08055e5d550b9cfb9015e2845a269516adf45e41` |
+| `exports/favicon/favicon.svg` | favicon | svg | 512 × 512 | yes | `34924483577e104a7998765892368a39c939d27d637c92348164c236ac324302` |
+| `exports/favicon/favicon-16.png` | favicon | png | 16 × 16 | yes | `8ab1b833a7c48d5d428d4a70aa5b1570463a4ca0d83cafaca74a1f33de208149` |
+| `exports/favicon/favicon-32.png` | favicon | png | 32 × 32 | yes | `a1c15e9ac7fa45226c5c1feb547e3ac504f66469ba67761a66de660a942132a5` |
+| `exports/favicon/favicon-48.png` | favicon | png | 48 × 48 | yes | `0f454ca728822ad6d3dedb0971c158775beb3d158df4f8917033f2fd13302383` |
+| `exports/favicon/apple-touch-icon.png` | favicon | png | 180 × 180 | no | `0bde862716f5416d3698a41964e8066db475905f6eacf10328a5c4fc1e52f2a4` |
+| `exports/favicon/icon-192.png` | favicon | png | 192 × 192 | no | `cd49b3792a9cbdc752c51f750a07a37500114c85f59669a0926bb2de06d6aed4` |
+| `exports/favicon/icon-512.png` | favicon | png | 512 × 512 | no | `a1a97967a9cc68c72fc880ff03e6e854d90faa08062e39d5afece13bbbe314dd` |
+| `exports/favicon/favicon.ico` | favicon | ico | 48 × 48 | yes | `33bde194d25cb9eeb8ddbe15a95f26f4bb08472065ddbb64ecee0108dfe58ced` |
+| `exports/app-icon/app-icon.png` | app-icon | png | 1024 × 1024 | no | `8422afad561550f68adaf7a21a855541f21a4ccb1a7c6e14f196ac59cc279ecf` |
+| `exports/social-profile/social-profile.png` | social-profile | png | 1080 × 1080 | no | `4f21be07bcb07bbd28f94a3051af7bc625de0186bb4199946590fd30757083f5` |
+| `exports/facebook-cover/facebook-cover.png` | facebook-cover | png | 1640 × 924 | no | `b75f892091ecee03f634620baff74b2ebbb58a100e8099ef4bc60f683fd14257` |
+| `exports/facebook-cover/facebook-cover.jpg` | facebook-cover | jpg | 851 × 315 | no | `82c7fc59a2d94c1ec603b13cc778bd45d5054843c6c6e28f21c29d67a2ccce35` |
+| `exports/open-graph/open-graph.png` | open-graph | png | 1200 × 630 | no | `a10f918f2c0bf95b282fb1267abd52258d4288f6a559882cc64b5e4e4173a20f` |
+| `exports/open-graph/open-graph.jpg` | open-graph | jpg | 1200 × 630 | no | `2078ab2f3b49b42ec99b8a944ef902e0e9696612ffc92755808d0e3cf63a8718` |
+| `exports/email-header/email-header.png` | email-header | png | 1200 × 400 | no | `751f4ef3f81c1ca9aa68e00759475b7e6276063474eaa0897c1c6e2ffd2d820a` |
+| `exports/email-header/email-header.jpg` | email-header | jpg | 1200 × 400 | no | `3b1bb33aaf76b37d70f8a70d5a4145dd20b7162b936e2fe351281cf7ce6e5f4c` |
+| `exports/pitch-one-pager/pitch-one-pager.png` | pitch-one-pager | png | 1080 × 1350 | no | `2767bc543986d13673b9ad853f497185d048d827db87c3d01f1c7235a7588220` |
+| `exports/pitch-one-pager/pitch-one-pager.pdf` | pitch-one-pager | pdf | 612 × 792 | no | `b49621d3940615ac5def4b676b56092832f1ce6680b53059a0320f16b15ff86c` |
+| `preview/brand-board.png` | brand-board | png | 1920 × 1080 | no | `37e1baa4e3adde9f2adc6fca57a720dcae9fd939eb5fe76dfe77bb88ad8dd174` |
