@@ -6,6 +6,8 @@
 
 Contact and website fields include operational qualifiers. Do not remove those qualifiers in a live profile until the referenced mailbox, domain, and venture status have been verified.
 
+**Meta setup record:** LogLoads, Lake & Pine, and Open Resource Access Network Facebook Pages were created and assigned on 2026-07-12 using narrow in-development setup bios. That administrative setup did not authorize replacing those bios with the longer copy below, publishing a post, or claiming launch. Do not embed an Instagram or Threads username in public copy until founder control is proven or a collision-safe alternative has been approved, rechecked, and created with founder-approved recovery credentials. Keep ORAN's full name visible and keep it free of tracking, government-service, advice, and emergency implications.
+
 ## AutomatedEmpires
 
 **Short bio**
