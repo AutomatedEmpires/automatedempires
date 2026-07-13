@@ -151,12 +151,14 @@ Meta currently recommends a 320 px square Page profile source and documents a 16
 ### Sweepza
 
 - Mark: two nested sweep arcs resolving into one verification dot.
-- Palette: Clean Ink `#172126`, Slate `#6B7880`, Frost `#EEF4F3`, Verified Teal `#2A8A7E`.
+- Palette: Clean Ink `#172126`, Slate `#6B7880`, Frost `#EEF4F3`, Process Teal `#2A8A7E`.
 - Type: Plus Jakarta Sans; Inter for dense information.
 - Pitch: “Giveaways, run cleanly.”
 - Imagery: organized products, genuine recipients, crisp tabletop compositions, and restrained celebration.
-- Do: emphasize process clarity and traceable steps.
-- Don't: use roulette, slots, jackpots, cash rain, casino neon, or claims of guaranteed legality or fairness.
+- Do: emphasize B2B campaign infrastructure, process clarity, and traceable steps.
+- Don't: use visual badges, seals, certification marks, roulette, slots, jackpots, lottery motifs, cash rain, casino neon, or claims of legal approval, guaranteed legality, or fairness.
+- Public-safe copy: “Giveaway campaign tools for businesses. Compliance review and vendor onboarding in progress.”
+- Internal pitch only: “Giveaways, run cleanly.”
 
 ### LogLoads
 
