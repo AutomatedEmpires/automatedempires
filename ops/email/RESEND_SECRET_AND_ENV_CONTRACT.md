@@ -6,22 +6,22 @@ This contract separates venture sending authority even though all six domains sh
 
 ## Key scope
 
-When provisioned, each venture receives its own Resend key with:
+Each provisioned venture key has:
 
 - permission: `Sending access`;
 - domain restriction: exactly the venture's verified domain;
 - runtime placement: only the matching venture project;
 - no reuse by another venture, local script, shared fallback, or unrelated repository.
 
-Planned or confirmed key names are identifiers, not key values:
+Confirmed key names are identifiers, not key values:
 
 | Venture | Key name | Allowed domain | Application sending state |
 |---|---|---|---|
-| AutomatedEmpires | `automatedempires-sending-v1` | `automatedempires.com` | Key may be retained; app sending disabled until a notification surface is approved |
-| Explore&Earn | `explore-and-earn-sending-v3` | `exploreandearn.com` | Canonical runtime migration and delivery proof required |
-| Sweepza | `sweepza-sending-v1` | `sweepza.com` | Internal test only after application/env changes |
-| LogLoads | `logloads-sending-v1` | `logloads.com` | Internal test only after application/env changes |
-| Lake & Pine | `lake-and-pine-sending-v1` | `lakeandpinecleaning.com` | Internal test only after application/env changes |
+| AutomatedEmpires | `automatedempires-sending-v1` | `automatedempires.com` | Key retained in Doppler; no Vercel key or app sending surface; internal test blocked by restricted-value access |
+| Explore&Earn | `explore-and-earn-sending-v3` | `exploreandearn.com` | Founder-only acceptance, delivery, receipt, and Reply-To header verified |
+| Sweepza | `sweepza-sending-v1` | `sweepza.com` | Founder-only acceptance, delivery, receipt, and Reply-To header verified |
+| LogLoads | `logloads-sending-v1` | `logloads.com` | Founder-only administrative acceptance, delivery, receipt, and Reply-To header verified |
+| Lake & Pine | `lake-and-pine-sending-v1` | `lakeandpinecleaning.com` | Founder-only non-booking acceptance, delivery, receipt, and Reply-To header verified |
 | ORAN | `oran-sending-v1` | `openresourceaccessnetwork.com` | Key may be retained; Resend transport disabled pending provider-migration approval |
 
 Do not create or place keys for BidSpace, Komfort Killz, or Just Jesus Bro.
@@ -46,6 +46,17 @@ Legacy variable names remain read-only fallbacks during application migration. D
 | `prd` | `production` | Production runtime after the same identity/key passed lower lanes |
 
 For Explore&Earn, Sweepza, LogLoads, and Lake & Pine, all four canonical names must exist in all three matching lanes before activation. AutomatedEmpires and ORAN may retain configured scoped keys while their application sending stays disabled.
+
+## Reconciled placement snapshot
+
+Read-only name-level reconciliation on 2026-07-12 found:
+
+- Doppler `dev`, `stg`, and `prd`: `RESEND_API_KEY`, `RESEND_FROM`, `RESEND_REPLY_TO`, and `SUPPORT_EMAIL` exist for AutomatedEmpires, Explore&Earn, Sweepza, LogLoads, and Lake & Pine. Explore&Earn retains legacy identity names as migration fallbacks.
+- Doppler `oran`: `RESEND_API_KEY` and `RESEND_FROM` exist in all three configs; Reply-To/support remain intentionally absent.
+- Vercel: canonical identity names exist in Development, Preview, and Production for AutomatedEmpires, Explore&Earn, Sweepza, LogLoads, and Lake & Pine. ORAN has only `RESEND_FROM`.
+- Vercel `RESEND_API_KEY`: Explore&Earn has Development, Preview, and Production; Sweepza, LogLoads, and Lake & Pine have Development and Preview only; AutomatedEmpires and ORAN have none.
+
+No Production key was added or promoted during Task 6. The Sweepza, LogLoads, and Lake & Pine proof calls used their already-staged Development values through an in-memory read-only retrieval path. No value was printed or persisted.
 
 ## Safe secret handling
 

@@ -6,11 +6,11 @@ The From and Reply-To values below are the only approved cross-system identities
 
 | Venture | Approved From | Approved Reply-To | Mailbox evidence | Runtime activation |
 |---|---|---|---|---|
-| AutomatedEmpires | `AutomatedEmpires <notifications@automatedempires.com>` | `jackson@automatedempires.com` | Admin/billing address is confirmed; apex hosted-mail MX is preserved | **Disabled for delivery testing:** no notification surface is approved yet |
-| Explore&Earn | `Explore&Earn <notifications@exploreandearn.com>` | `support@exploreandearn.com` | No apex receiving MX; inbox/reply route remains unproven | Domain verified; customer/public sending disabled pending runtime and delivery proof |
-| Sweepza | `Sweepza <notifications@sweepza.com>` | `support@sweepza.com` | `support@sweepza.com` is the only founder-confirmed Sweepza address; Microsoft 365 MX exists, but receipt/delegation still needs proof | Domain verified; internal test only after scoped runtime wiring |
-| LogLoads | `LogLoads <notifications@logloads.com>` | `support@logloads.com` | Microsoft 365 MX exists; inbox ownership, monitoring, and reply behavior remain to be confirmed | Domain verified; internal test only after scoped runtime wiring |
-| Lake & Pine | `Lake & Pine <hello@lakeandpinecleaning.com>` | `hello@lakeandpinecleaning.com` | No apex MX; inbox receipt/reply remains unproven | Domain verified; internal test only after scoped runtime wiring |
+| AutomatedEmpires | `AutomatedEmpires <notifications@automatedempires.com>` | `jackson@automatedempires.com` | Admin/billing address is confirmed; apex hosted-mail MX is preserved | **Disabled:** no application notification surface; internal provider test blocked by inaccessible restricted key |
+| Explore&Earn | `Explore&Earn <notifications@exploreandearn.com>` | `support@exploreandearn.com` | Founder mailbox received the internal message; Reply-To header was correct. No apex receiving MX, so receipt/reply at the support address remains unproven | Founder-only test passed; customer/public sending remains disabled |
+| Sweepza | `Sweepza <notifications@sweepza.com>` | `support@sweepza.com` | Founder mailbox received the internal message; Reply-To header was correct. Microsoft 365 MX exists, but support mailbox receipt/delegation remains unproven | Founder-only test passed; public/campaign sending remains disabled |
+| LogLoads | `LogLoads <notifications@logloads.com>` | `support@logloads.com` | Founder mailbox received the internal message; Reply-To header was correct. Support inbox ownership and reply receipt remain unproven | Founder-only administrative test passed; broker/payment/public use remains disabled |
+| Lake & Pine | `Lake & Pine <hello@lakeandpinecleaning.com>` | `hello@lakeandpinecleaning.com` | Founder mailbox received the internal message; Reply-To header was correct. No apex MX, so receipt/reply at the business address remains unproven | Founder-only non-booking test passed; customer/booking sending remains disabled |
 | ORAN | `ORAN <updates@openresourceaccessnetwork.com>` | `support@openresourceaccessnetwork.com` | Existing Mailgun mail routing is preserved; target inbox confirmation is pending | Resend sending remains disabled; keep current Azure transport and click/open tracking disabled until migration approval |
 
 The arrow-form contract consumed by application work is:

@@ -40,9 +40,13 @@ One venture must never receive another venture's key. The key name, permitted do
 |---|---|---|
 | Reuse the `exploreandearn` paid team | Approved/current | Shared Transactional Pro capacity is sufficient for the six confirmed domains |
 | Authenticate each confirmed venture domain | Complete | Six domains are verified in `us-east-1` |
-| Scope each application key to one domain | Required; runtime wiring is a later task | Limits sending authority even though billing/reputation remain shared |
+| Scope each application key to one domain | Complete for six keys | Limits sending authority even though billing/reputation remain shared |
 | Add a BidSpace domain | Disabled | No production domain is confirmed; do not invent or purchase one |
 | Enable Komfort Killz or Just Jesus Bro | Disabled | Venture instructions prohibit provider writes |
 | Send public/customer email | Disabled | Only controlled internal tests may be used after the application and environment gates pass |
 
-No credential value belongs in this file. Key creation, runtime wiring, and delivery results must be recorded by name/state only in the companion operating documents.
+No credential value belongs in this file. Key creation, runtime wiring, and delivery results are recorded by name/state only in the companion operating documents.
+
+## Task 6 reconciliation
+
+Read-only reconciliation on 2026-07-12 confirmed all six domains still **Verified**, all six replacement keys still `Sending access`, and the expected Doppler/Vercel variable names still present. Four scoped keys completed founder-only delivery proof. AutomatedEmpires could not be exercised because its restricted Doppler value is not downloadable by the current CLI identity and no Vercel API key exists. No secret visibility, provider subscription, key, domain, DNS, or production setting was changed during reconciliation.

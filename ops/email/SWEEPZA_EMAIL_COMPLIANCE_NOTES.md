@@ -43,3 +43,7 @@ Before the internal test:
 - the test can be logged without exposing secrets or sensitive content.
 
 Before any public or customer email, a separate owner-approved compliance review must define message classification, consent, required disclosures, suppression/unsubscribe behavior where applicable, privacy/retention, complaints, bounce handling, promotion rules, vendor status, and operational ownership. This infrastructure task does not satisfy that review.
+
+## Completed internal proof
+
+On 2026-07-12, the single authorized founder-only message used the exact approved copy above. Resend accepted it, the dashboard reported `delivered`, the founder Outlook mailbox received it, and the dashboard showed `support@sweepza.com` as Reply-To. No reply was sent to the support address, so support-mailbox receipt/delegation remains unproven. A separate negative test used the same Sweepza Development key with an Explore&Earn From address; Resend rejected it with HTTP `403`, and no email was created.
