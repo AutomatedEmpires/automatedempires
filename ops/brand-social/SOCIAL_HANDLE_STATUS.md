@@ -3,7 +3,7 @@
 **Verified snapshot:** 2026-07-12
 **Scope:** authenticated Meta inventory, exact-name Facebook Page search, direct Instagram-handle checks, repository evidence, and proposed naming
 **Rule:** search results and apparent availability are not ownership; no handle was claimed, renamed, or reserved in this pass
-**Meta execution state:** all 10 required business asset groups were created. Only the verified Komfort Killz Facebook and Instagram assets are assigned. Explore&Earn stopped at a fresh founder identity prompt; the Just Jesus Bro connection has not started.
+**Meta execution state:** all 10 required business asset groups were created. Explore&Earn Facebook Page `1027674570438216` and Just Jesus Bro Facebook Page `330382103492515` are now owned by `AutomatedEmpires`, with Jackson Cole retaining full access, and are assigned to their matching groups. The verified Komfort Killz Facebook and Instagram assets remain assigned. The founder completed the identity prompt encountered for Explore&Earn; Just Jesus Bro required no additional identity prompt.
 
 ## Status definitions
 
@@ -19,14 +19,14 @@
 | Brand | Facebook | Instagram | Other observed/candidate handles | Preferred normalized handle | Status and action |
 |---|---|---|---|---|---|
 | AutomatedEmpires | No exact Page result in the signed-in Facebook Page search | Public `@automatedempires` profile resolves with 0 followers/0 following; not connected to the portfolio and ownership is unverified | GitHub organization/user naming exists | `@automatedempires` only if founder control is proven | **Public observed; ownership unknown.** Do not create a duplicate or treat the empty public profile as controlled. |
-| Explore&Earn | Page exists: [public profile `61588924325326`](https://www.facebook.com/profile.php?id=61588924325326); internal Meta asset `1027674570438216`; no custom username observed | No connected profile visible | Source metadata proposes `@exploreandearn` on Facebook, Instagram, Threads, and X, but this is not provider ownership proof | `@exploreandearn` | **Facebook authenticated-switcher observed; other platforms code-only candidates.** Complete Meta's fresh founder passkey, confirm owned/shared status and group-assignment authority, then verify whether the candidate usernames are controlled before connecting Instagram. |
+| Explore&Earn | Page exists: [public profile `61588924325326`](https://www.facebook.com/profile.php?id=61588924325326); internal Meta asset `1027674570438216`; no custom username observed | No connected profile visible | Source metadata proposes `@exploreandearn` on Facebook, Instagram, Threads, and X, but this is not provider ownership proof | `@exploreandearn` | **Facebook portfolio connected.** Page is owned by `AutomatedEmpires`, Jackson Cole has full access, and assignment to `AE | Explore&Earn` (`1128100470395624`) is verified. Other platforms remain code-only candidates; verify control before connecting Instagram. |
 | Sweepza | An unrelated exact-name Page exists: `Sweepza` (`61573371874703`), a home-improvement/robot-cleaning business | Direct `@sweepza` check returned **Profile isn't available**; no portfolio account connected | None verified | `@sweepza` remains a candidate only; recheck at creation time | **Public collision on Facebook; Instagram not reserved.** Brand preparation only. Position as giveaway campaign infrastructure for businesses, with vendor onboarding and compliance review in progress. |
 | LogLoads | Signed-in exact Page search returned no results | Public `@logloads` exists as **LoGlo** with 2 followers; not connected and not treated as owned | Unverified alternatives: `@logloadsapp`, `@getlogloads`, `@logloadsco` | Founder must choose and recheck a normalized handle; none is reserved | **Instagram collision.** Position as coordination software in development; do not imply freight brokerage, carrier authority, or payment services. |
 | BidSpace | Multiple third-party exact-name Pages exist, including `facebook.com/bidspace` | Public private `@bidspace` profile exists; not connected and not treated as owned | Unverified alternatives: `@bidspaceapp`, `@getbidspace`, `@bidspacehq` | Founder naming decision required; every alternative must be rechecked after domain/model approval | **Facebook and Instagram collisions.** Do not publish a website field or live-marketplace claim until a domain and operating model are approved. |
 | Lake & Pine | Similar third-party Pages exist, including **Lake & Pine Creative** and **Lake + Pine**; no owned match was verified | Direct `@lakeandpinecleaning` check returned **Profile isn't available**; no portfolio account connected | None verified | `@lakeandpinecleaning` remains a candidate only; recheck at creation time | **Name-collision review required.** Verify business-name use and current service availability before creating or publishing. |
 | ORAN | Broad exact-name search returned unrelated Orange/ORAN results; no owned match was verified | Direct `@openresourceaccessnetwork` check returned **Profile isn't available**; `@oranetwork` exists as unrelated **ORA Network e.V.** | Example placeholder links exist in venture source and are not accounts | Prefer `@openresourceaccessnetwork` only after recheck; reject occupied fallback `@oranetwork` | **Fallback collision.** Keep naming nonpartisan; do not imply medical, legal, political, or emergency-advice authority. |
 | Komfort Killz | Page exists: [public profile `61559844830194`](https://www.facebook.com/profile.php?id=61559844830194); internal Page `329566720232752`; no custom Facebook username observed | [`@komfort.killz`](https://www.instagram.com/komfort.killz) | Public Page links TikTok `@komfort.killz`, X `@komfort_killz`, and `komfortkillz@gmail.com` | Keep `@komfort.killz` where supported; `@komfort_killz` fallback | **Facebook/Instagram portfolio connected and public observed.** Preserve existing usernames unless founder approves a rename; verify ownership of TikTok/X separately. |
-| Just Jesus Bro | Page exists: [public profile `61560404762891`](https://www.facebook.com/profile.php?id=61560404762891); internal Page `330382103492515`; no custom username observed | No connected profile visible | Public Page links `justjesusbro.com`; candidate `@justjesusbro` is not verified | `@justjesusbro` | **Facebook authenticated-switcher observed; Instagram proposed.** Preserve existing Page content and identity. The Page connection has not started; run provider access review after Explore&Earn clears, then complete fresh founder identity only if Meta asks. |
+| Just Jesus Bro | Page exists: [public profile `61560404762891`](https://www.facebook.com/profile.php?id=61560404762891); internal Page `330382103492515`; no custom username observed | No connected profile visible | Public Page links `justjesusbro.com`; candidate `@justjesusbro` is not verified | `@justjesusbro` | **Facebook portfolio connected; Instagram proposed.** Page is owned by `AutomatedEmpires`, Jackson Cole has full access, and assignment to `AE | Just Jesus Bro` (`1276673322186756`) is verified. Preserve existing Page content and identity; verify the proposed Instagram handle before any creation. |
 
 ## Observed profile-state notes
 
@@ -45,7 +45,8 @@ Signed-in Facebook Page searches and direct public Instagram checks were perform
 
 ### Explore&Earn
 
-- The Page is visible in Meta Business Suite but listed under **Other assets**, not the `AutomatedEmpires` business portfolio.
+- The Page is owned by the `AutomatedEmpires` business portfolio, Jackson Cole has full access, and the Page is assigned and verified in `AE | Explore&Earn` (`1128100470395624`).
+- The founder completed the Meta identity prompt encountered during connection.
 - The public profile resolves through a numeric URL rather than a verified custom username.
 - `exploreandearn.com` is linked on the Page.
 - No connected Instagram account was visible in Meta Business Suite.
@@ -65,7 +66,8 @@ Signed-in Facebook Page searches and direct public Instagram checks were perform
 
 ### Just Jesus Bro
 
-- The Facebook Page is visible under **Other assets** and is not currently grouped inside the business portfolio.
+- The Facebook Page is owned by the `AutomatedEmpires` business portfolio, Jackson Cole has full access, and the Page is assigned and verified in `AE | Just Jesus Bro` (`1276673322186756`).
+- Meta did not issue an additional identity prompt during the Just Jesus Bro connection.
 - The public Page links `justjesusbro.com`, contains the phrase “fashion with compassion,” and has prior public posts.
 - No connected Instagram account was visible in Meta Business Suite.
 
@@ -93,7 +95,7 @@ For each **Proposed** or **Code-only candidate** handle:
 
 ## Remaining unknowns
 
-- Business Settings ownership versus shared-access state for Explore&Earn remains unresolved at the fresh identity prompt. The Just Jesus Bro connection review has not started. Komfort Killz assignment and Jackson Cole's full portfolio access were verified.
+- Explore&Earn and Just Jesus Bro Page ownership, Jackson Cole's full access, and matching group assignments were verified. Komfort Killz Facebook/Instagram assignment remains verified.
 - Current people, partners, backup admins, recovery methods, and transfer rights.
 - Custom Facebook usernames for the observed numeric-profile Pages.
 - Ownership of the Explore&Earn code-level candidates outside Facebook.

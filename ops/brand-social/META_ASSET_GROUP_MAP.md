@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-07-12
 **Target portfolio:** `AutomatedEmpires` (`810019010639432`)
-**Current execution state:** all 10 required business asset groups created. Only the verified Komfort Killz Facebook and Instagram assets are assigned. Explore&Earn stopped at a fresh founder identity prompt; the Just Jesus Bro connection has not started and is expected to follow the same identity-gated workflow.
+**Current execution state:** all 10 required business asset groups created. Explore&Earn Facebook Page `1027674570438216`, Just Jesus Bro Facebook Page `330382103492515`, and the verified Komfort Killz Facebook and Instagram assets are assigned to their matching groups. Jackson Cole retains full access to both newly connected Pages. The founder completed the identity prompt encountered while adding Explore&Earn; Just Jesus Bro required no additional identity prompt.
 
 ## Group map
 
@@ -11,14 +11,14 @@ An asset group is an organizational container inside the existing Meta business 
 | Exact group name | Current assets | Missing assets / future membership | Owner/admin status | Blocker or next gate |
 |---|---|---|---|---|
 | `AE | Parent` | None; group created empty | Approved AutomatedEmpires Facebook Page and matching Instagram profile | Jackson Cole has full portfolio access; no parent social asset is connected | Founder must prove control of public `@automatedempires` or approve a non-conflicting identity before Page/profile creation |
-| `AE | Explore&Earn` | None in group; Page `1027674570438216` observed outside portfolio | Existing Facebook Page connection; matching Instagram only after handle and ownership review | Meta review listed Jackson Cole (You) with Page access; owned-versus-shared portfolio status is not yet finalized | Final **Add Page** action is stopped at a fresh passkey/email/text identity prompt |
+| `AE | Explore&Earn` | Facebook Page `1027674570438216` assigned and verified; group ID `1128100470395624` | Matching Instagram only after handle and ownership review | Page is owned by `AutomatedEmpires`; Jackson Cole has full access | Core Facebook connection complete; any Instagram, profile-copy, or publishing action still needs founder approval |
 | `AE | Sweepza` | None; group created empty | Founder-approved Page/profile in a conservative business/software/marketing category | No authenticated Sweepza owner or admin verified; unrelated Facebook exact-name Page found | Founder Page/handle approval and collision review; campaign status remains `legal_review_required`; never add ads, Pixel, data, payments, or live campaign assets |
 | `AE | LogLoads` | None; group created empty | Approved Page/profile after legal/entity positioning | No authenticated LogLoads owner or admin verified; public `@logloads` is unrelated **LoGlo** | Founder naming decision plus entity/legal-model approval; do not imply brokerage, carrier, or payments |
 | `AE | BidSpace` | None; group created empty | Approved Page/profile after domain and marketplace-model decisions | No authenticated BidSpace owner or admin verified; Facebook and Instagram exact-name collisions found | Founder naming, domain, Connect/payment, and legal-model decisions; do not imply a live marketplace |
 | `AE | Lake & Pine` | None; group created empty | Approved Page/profile after service and contact-routing decisions | No authenticated Lake & Pine owner or admin verified; similar public names found | Name-conflict review plus service-area, availability, and routing approval |
 | `AE | ORAN` | None; group created empty | Approved ORAN Page/profile; never add a Pixel or tracking dataset | No authenticated ORAN owner or admin verified; fallback `@oranetwork` is unrelated | Founder naming and civic-resource scope approval; full-name candidate must be rechecked; tracking remains prohibited |
 | `AE | Komfort Killz` | Facebook Page `329566720232752`; Instagram `@komfort.killz` (`340229282497545`) assigned and verified | Other verified brand-owned assets only after ownership review | Jackson Cole has full portfolio/Page access; IG Jay C has partial Page access; no roles changed | No core-asset blocker; any profile copy/post/role change still needs founder approval |
-| `AE | Just Jesus Bro` | None in group; Page `330382103492515` observed outside portfolio | Existing Facebook Page connection; matching Instagram after handle and brand review | Founder states Jackson Cole controls the Page; provider connection review has not started | Complete Explore&Earn identity gate, then run the JJB add/review flow; a fresh identity prompt may recur |
+| `AE | Just Jesus Bro` | Facebook Page `330382103492515` assigned and verified; group ID `1276673322186756` | Matching Instagram after handle and brand review | Page is owned by `AutomatedEmpires`; Jackson Cole has full access | Core Facebook connection complete; no additional identity prompt occurred; any Instagram, profile-copy, or publishing action still needs founder approval |
 | `AE | Archive / Legacy` | None; group created empty | Founder-approved legacy assets only; preserve IDs and ownership evidence | Jackson Cole has full portfolio access; no asset classified as legacy | Explicit founder approval and recorded reason required before any move; never delete as cleanup |
 
 ## Current topology
@@ -27,7 +27,8 @@ An asset group is an organizational container inside the existing Meta business 
 AutomatedEmpires business portfolio (810019010639432)
 ├── 10 business asset groups created
 │   ├── AE | Parent (empty)
-│   ├── AE | Explore&Earn (empty; Page connection pending fresh passkey)
+│   ├── AE | Explore&Earn (group 1128100470395624)
+│   │   └── Facebook Page 1027674570438216
 │   ├── AE | Sweepza (empty)
 │   ├── AE | LogLoads (empty)
 │   ├── AE | BidSpace (empty)
@@ -36,21 +37,19 @@ AutomatedEmpires business portfolio (810019010639432)
 │   ├── AE | Komfort Killz
 │   │   ├── Facebook Page 329566720232752
 │   │   └── Instagram @komfort.killz
-│   ├── AE | Just Jesus Bro (empty; Page connection not started)
+│   ├── AE | Just Jesus Bro (group 1276673322186756)
+│   │   └── Facebook Page 330382103492515
 │   └── AE | Archive / Legacy (empty)
-└── Authenticated-switcher assets not yet connected to the portfolio groups
-    ├── Explore&Earn Facebook Page 1027674570438216
-    └── Just Jesus Bro Facebook Page 330382103492515
 ```
 
-This topology records the completed group creation and verified Komfort Killz assignment. Jackson Cole retained full portfolio access; no people or partners were assigned through group creation. Explore&Earn stopped at a fresh founder identity prompt. Just Jesus Bro has not entered the connection wizard and will be attempted only after Explore&Earn clears. The authenticated switcher alone does not determine legal ownership, transferability, billing responsibility, or whether an asset is owned versus shared.
+This topology records the completed group creation and verified Explore&Earn, Komfort Killz, and Just Jesus Bro assignments. Explore&Earn and Just Jesus Bro are now owned by the `AutomatedEmpires` portfolio, and Jackson Cole retained full access to both Pages. The founder completed the identity prompt required during Explore&Earn connection; Meta did not issue a new identity prompt for Just Jesus Bro. No people, partners, billing assets, advertising assets, tracking assets, or public content were added or changed.
 
-## Founder verification and asset-assignment sequence
+## Completed connection verification and future asset-assignment sequence
 
-1. Open [Meta Business Settings](https://business.facebook.com/settings/?business_id=810019010639432) and select **AutomatedEmpires**.
-2. Complete the fresh founder identity prompt requested by Meta for Explore&Earn. After Explore&Earn is verified and assigned, begin the same add/review flow for Just Jesus Bro and complete another identity prompt if Meta requires it.
-3. Under **Accounts → Pages**, add the existing Page only after Meta confirms Jackson Cole's access and shows **Will be controlled by: AutomatedEmpires**. Connecting the founder-controlled Page to the founder-controlled portfolio is the intended action. Stop if the destination differs, control would move away from `AutomatedEmpires`, or the flow proposes an admin removal or access reduction.
-4. Open **Business asset groups**, select the matching group, choose **Assign assets**, and select only the verified Page ID listed in the table.
+1. In [Meta Business Settings](https://business.facebook.com/settings/?business_id=810019010639432), Explore&Earn Page `1027674570438216` and Just Jesus Bro Page `330382103492515` were each verified as owned by **AutomatedEmpires**, with Jackson Cole retaining full access.
+2. Each Page was reopened under its matching business asset group and verified by exact Page ID: Explore&Earn in group `1128100470395624`, and Just Jesus Bro in group `1276673322186756`.
+3. For any future existing-Page connection, add the Page only after Meta confirms Jackson Cole's access and shows **Will be controlled by: AutomatedEmpires**. Stop if the destination differs, control would move away from `AutomatedEmpires`, or the flow proposes an admin removal or access reduction.
+4. For any future assignment, open **Business asset groups**, select the matching group, choose **Assign assets**, and select only the verified brand-owned asset.
 5. Skip ad accounts, Pixels, datasets, conversions, catalogs, domains, apps, WhatsApp accounts, payment assets, and all advertising options.
 6. If Meta requires a person selection, permission assignment, invitation, partner addition, or role change, stop for explicit founder approval.
 7. Save, reopen the group, and verify the exact Page ID. Do not create a replacement Page merely to bypass a passkey or ownership check.
@@ -60,15 +59,29 @@ This topology records the completed group creation and verified Komfort Killz as
 | Group | Created | Verified member assets | Ownership/shared status checked | Notes |
 |---|---|---|---|---|
 | `AE | Parent` | ✅ | None | N/A | Created empty |
-| `AE | Explore&Earn` | ✅ | None yet | Pending | Existing Page connection stopped at fresh passkey prompt |
+| `AE | Explore&Earn` | ✅ | Facebook Page `1027674570438216` | ✅ Owned by `AutomatedEmpires`; Jackson Cole full access | Assigned and verified in group `1128100470395624`; founder completed the identity prompt |
 | `AE | Sweepza` | ✅ | None | N/A | Created empty; brand preparation only; default campaign status `legal_review_required` |
 | `AE | LogLoads` | ✅ | None | N/A | Created empty |
 | `AE | BidSpace` | ✅ | None | N/A | Created empty |
 | `AE | Lake & Pine` | ✅ | None | N/A | Created empty |
 | `AE | ORAN` | ✅ | None | N/A | Created empty; no Pixel or tracking dataset |
 | `AE | Komfort Killz` | ✅ | Facebook Page `329566720232752`; Instagram `@komfort.killz` | ✅ | Assigned and verified; Jackson Cole retains full portfolio access |
-| `AE | Just Jesus Bro` | ✅ | None yet | Not yet checked in the connection wizard | Start only after Explore&Earn clears; fresh founder identity may be required |
+| `AE | Just Jesus Bro` | ✅ | Facebook Page `330382103492515` | ✅ Owned by `AutomatedEmpires`; Jackson Cole full access | Assigned and verified in group `1276673322186756`; no additional identity prompt occurred |
 | `AE | Archive / Legacy` | ✅ | None | N/A | Created empty; no assets deleted or moved |
+
+## Empty-group founder decision register
+
+The following seven groups remain intentionally empty. No Page or Instagram profile should be created or connected until the listed founder decision is recorded.
+
+| Empty group | Founder decision required before any asset action |
+|---|---|
+| `AE | Parent` | Prove control of public `@automatedempires` or approve a reviewed, non-conflicting parent identity. |
+| `AE | Sweepza` | Approve the Page/handle and conservative business/software/marketing category after the Facebook collision review; this does not authorize ads, Pixels, data, payments, or campaigns. |
+| `AE | LogLoads` | Choose a collision-safe name/handle and approve the entity/legal model before any public profile is created. |
+| `AE | BidSpace` | Decide the collision-safe name, domain, marketplace model, Connect/payment posture, and legal model before creation. |
+| `AE | Lake & Pine` | Approve name-conflict handling, service area, current availability, and contact routing. |
+| `AE | ORAN` | Approve the public name and civic-resource scope; the group must remain free of Pixels and tracking datasets. |
+| `AE | Archive / Legacy` | Keep empty unless the founder explicitly approves a specific legacy-asset move and records the reason; never use it as a deletion queue. |
 
 ## Governance rules
 
