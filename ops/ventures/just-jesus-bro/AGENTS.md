@@ -1,6 +1,6 @@
 # Just Jesus Bro — Brand Placeholder Agent Contract
 
-This contract governs Just Jesus Bro work recorded in the AutomatedEmpires parent repository. It supplements the parent contract; this more specific contract controls brand scope. Snapshot facts are dated 2026-07-12; refresh only the facts material to the assigned change rather than blocking private draft work on a portfolio-wide audit.
+This contract governs Just Jesus Bro work recorded in the AutomatedEmpires parent repository. It supplements the parent contract and controls brand-specific detail only; the parent `ops/ventures/AGENTS.md` and the canonical `docs/VENTURE_OPERATING_DEFINITIONS.md` prevail wherever product scope or definitions conflict — including the destination and stage described in Sections 3–4. Snapshot facts are dated 2026-07-12; refresh only the facts material to the assigned change rather than blocking private draft work on a portfolio-wide audit.
 
 ## 1. Venture thesis
 
@@ -35,7 +35,7 @@ Within the parent repository and any explicitly assigned private draft workspace
 - editorial canon, voice guides, source/citation rules, visual systems, unpublished copy, storyboards, moodboards, templates, and source-asset inventories;
 - code, tests, UI, static prototypes, creative tooling, accessibility checks, and protected previews that explore a brand question without declaring a canonical app or ministry;
 - reversible edits to duplicated draft assets while preserving originals and provenance;
-- local/dev work, protected previews, additive or reversible dev/preview migrations, synthetic test data, and disposable accounts when a scoped prototype genuinely needs them;
+- local/dev work, protected previews, additive or reversible dev/preview migrations, synthetic test data, and local synthetic fixtures when a scoped prototype genuinely needs them; creating any external provider or authentication account requires an explicitly approved workflow, and the no-authentication-records boundary in Section 10 still applies;
 - sandbox payment plumbing with test instruments only when a future approved non-fundraising concept needs a technical spike; never frame it as giving, tithing, fundraising, or donations;
 - internal email tests sent only to controlled team addresses, never a congregation, supporter, or audience list;
 - dependency, security, privacy, licensing, metadata, citation, CI, and link checks; and
