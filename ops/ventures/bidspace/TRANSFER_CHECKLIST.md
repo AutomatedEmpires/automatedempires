@@ -18,10 +18,12 @@ Complete with two people where the provider supports role transfer. Record names
 
 ## Runtime providers
 
-- [ ] Vercel project `bidspace`, team, root directory, aliases, Preview, and Production access are verified; current release evidence is Preview `dpl_3vFJAPyiQqWr95woTY51mKBT1W1S` and `main` `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8` / production `dpl_GQ2yhiJjwchgt7rJDSbU8Y8JuVDp`, both `READY`.
+- [ ] Recipient acknowledges BidSpace is a non-live host–vendor temporary-space marketplace; production-class artifacts do not authorize public bidding/booking, live payments, or Stripe Connect.
+- [ ] Host/vendor profiles, temporary-space listings, maps where relevant, bidding/application, communication/outreach, methods/terms verification, and marketplace-trust responsibilities are handed off.
+- [ ] Vercel project `bidspace`, team, root directory, aliases, Preview, and Production access are verified; current source includes #64 at `69a53c4`, while last-deployed release evidence is `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8` with Preview `dpl_3vFJAPyiQqWr95woTY51mKBT1W1S` and production `dpl_GQ2yhiJjwchgt7rJDSbU8Y8JuVDp`, both `READY`.
 - [ ] Supabase fingerprint `…fsqslgxcv`, database ownership, backups, migration ledger, storage, and RLS are reviewed.
 - [ ] Clerk application identity, domains, OAuth providers, webhook endpoint, and admin users are recorded.
-- [ ] Stripe Connect platform/account ownership, legal entity, payout settings, products, webhook endpoints, and restricted access are reviewed by the recorded business/billing owner.
+- [ ] If a later approved host-fee model uses Stripe/Connect, recipient reviews the legal entity, operating/payment model, platform/account ownership, products, webhooks, payouts, refunds/disputes, and restricted access. Otherwise record a product-approved `no resource` state.
 - [ ] Sentry/PostHog/Mapbox venture resources exist; Mapbox origin/local proof is green. Complete authorized protected-Preview verification, PostHog event proof, retention, and explicit Cloudinary non-use before transfer.
 
 ## Domain and communications
@@ -33,6 +35,7 @@ Complete with two people where the provider supports role transfer. Record names
 ## Acceptance
 
 - [ ] Recipient can run a names-only environment audit without revealing values.
-- [ ] Preview smoke test passes with BidSpace-only resources.
+- [ ] Preview smoke test passes with BidSpace-only resources and synthetic/demo-only host, vendor, space, bidding/application, and communication fixtures.
+- [ ] Recipient confirms no real bids, bookings, charges, payouts, or connected accounts are accepted or represented as live.
 - [ ] Production rollback owner and escalation contacts are recorded.
 - [ ] Sender and recipient sign off that no credential was exchanged in this repository.

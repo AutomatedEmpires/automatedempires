@@ -7,7 +7,7 @@
 
 The existing organization remains on PostHog PAYG with a verified `$0` base, `$0` current cost, and `$0` projected cost after this pass. Six projects are included without a plan upgrade. All twelve product billing caps are `$0`; no paid add-on, plan upgrade, or billable feature was enabled. Pass 5 added `$0` recurring spend.
 
-Explore&Earn project `291166` was preserved unchanged. Five separate projects were created for AutomatedEmpires `509081`, Sweepza `509084`, LogLoads `509086`, BidSpace `509087`, and Lake & Pine `509088`. ORAN remains intentionally deferred for civic-product privacy and deployment reasons.
+Explore&Earn project `291166` was preserved unchanged. Five separate projects were created for AutomatedEmpires `509081`, Sweepza `509084`, LogLoads `509086`, BidSpace `509087`, and Lake & Pine `509088`. ORAN has no project because its MVP prohibits user/behavioral analytics and pixels; this is a product-required `no resource` state, not a deferred provider gap.
 
 Autocapture, session replay, and console capture are disabled on all five new projects. Explore&Earn retains its pre-existing project/settings; its source-level replay and console protections remain documented separately.
 
@@ -27,10 +27,10 @@ Each matching Vercel project now has both variables in Development and in the pr
 | LogLoads | `LogLoads` / `509086` | Autocapture, replay, console capture off | Own key/host present in all Doppler lanes; Vercel `logloads` Development + combined Preview/Production populated write-only | Production source `9c9e107082942e5bce782eac2ce71aa63eb7d9c0` consumes the pair | Provider and environment boundary **safely fixed now**; runtime **pending deployment / production-risk gated** | Fresh exact-SHA deployment only after runtime gates permit it, then controlled event and ingestion check |
 | BidSpace | `BidSpace` / `509087` | Autocapture, replay, console capture off | Own key/host present in all Doppler lanes; Vercel `bidspace` Development + combined Preview/Production populated write-only | Production source `2fe90a3eb8cd9bffd43be1ac401d151ae4ad39e8` consumes the pair | Provider and environment boundary **safely fixed now**; runtime **pending deployment** | Fresh controlled Preview, minimal non-sensitive event, ingestion check |
 | Lake & Pine | `Lake & Pine` / `509088` | Autocapture, replay, console capture off | Own key/host present in all Doppler lanes; Vercel `lakeandpine` Development + combined Preview/Production populated write-only | Production source `1b6a877bc054a9239c2a430aaf668996de8a0302` consumes the pair | Provider and environment boundary **safely fixed now**; runtime **pending deployment** | Fresh exact-SHA Preview/Production build, minimal event and ingestion check |
-| ORAN | None | Intentionally deferred | No key/host in Doppler or Vercel | No approved PostHog consumer | **Requires founder/privacy decision**; safe absent state | Prefer Sentry/logs; revisit only after privacy-safe event/consent contract and stable deployment |
+| ORAN | None | Product-prohibited for MVP | No key/host in Doppler or Vercel | No approved PostHog consumer | **`no resource` by canonical product definition** | Keep absent. Privacy-scrubbed operational health logging may support runtime safety only; reopening behavioral analytics/pixels requires a new dated founder product decision |
 
 ## Verification standard
 
 Presence-only checks prove that intended names are populated; a restricted value may remain unreadable by design. AutomatedEmpires `dev` is therefore classified as restricted/presence-write-confirmed, not empty or independently readable. Environment checks do not prove what a running deployment loaded or that an event reached the correct project. Runtime verification requires a fresh deployment, controlled event, and provider-side ingestion/health evidence.
 
-Every active venture has a separate provider project and separately placed key/host pair. No venture may reuse Explore&Earn's project or key, and ORAN remains absent.
+Every approved PostHog consumer has a separate provider project and separately placed key/host pair. No venture may reuse Explore&Earn's project or key. ORAN remains absent because behavioral analytics/pixels are product-prohibited for its MVP.

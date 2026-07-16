@@ -2,6 +2,12 @@
 
 This pack governs the canonical venture slug `lake-and-pine`. The GitHub/Vercel resource spelling `lakeandpine` is a known naming divergence, not a second venture.
 
+## Canonical product boundary
+
+Lake & Pine is an intelligent cleaning/local-service operating system, not merely a marketing site. Phase 1 includes booking requests, service planning, property profiles, room/checklist preferences, pet/access notes, recurring plans, an internal job pipeline, service status/follow-up, customer communication, an admin/operator dashboard, and intelligent estimate/planning direction. Payments are Phase 2.
+
+The open implementation questions concern how to deliver Phase 1 safely. Do not reopen “marketing site versus booking product” as the product decision.
+
 ## Evidence labels
 
 - **Verified current** — confirmed during the 2026-07-10 provider inventory or explicitly supplied to this alignment pass.
@@ -16,10 +22,10 @@ This pack governs the canonical venture slug `lake-and-pine`. The GitHub/Vercel 
 | Canonical slug | **Verified current** | `lake-and-pine` |
 | GitHub repository | **Verified current** | `AutomatedEmpires/lakeandpine` |
 | Secrets boundary | **Verified current** | Doppler project `lake-and-pine`; `dev` contains own Sentry identity beyond metadata, verified runtime values plus Sentry imported/configured in `stg`/`prd` |
-| Deployment boundary | **Fixed and verified** | PR #1 merged as current `main` `1b6a877bc054a9239c2a430aaf668996de8a0302`; clean production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` and exact-source Preview `dpl_BBy…` are `READY` |
+| Deployment boundary | **Current source / prior deployed evidence verified** | Current `main` includes PRs #2/#3 through `e65b3b6`. Clean production `dpl_EHGPmtPpkLu5fYC5jawYA87MDWVk` and exact-source Preview `dpl_BBy…` remain deployed evidence from PR #1 merge `1b6a877bc054a9239c2a430aaf668996de8a0302` |
 | Database boundary | **Verified current** | Supabase project fingerprint `…siwvtmwr` |
 | Domain | **Authenticated owned** | `lakeandpinecleaning.com` full 8-record GoDaddy zone verified; attachment waits for clean exact-SHA release and rollback |
-| Product maturity | **Reviewed foundation** | Source `a55ccff64a7e758b74c13f5d02a7b70bd143ad5c` adds pinned CI/case repair and is merged; product/backend capabilities still require feature-level acceptance |
+| Product maturity | **Reviewed foundation with disposable backend proof** | PRs #2/#3 added DOM-XSS regression coverage plus disposable-PostgreSQL migration/RLS/booking/dashboard smoke through `e65b3b6`; capacity-backed and Production behavior still require feature-level acceptance |
 
 The provider hostname now has reproducible reviewed-main authority. Treat old dirty deployment metadata as historical evidence; complete functional rollback/domain smoke before attachment or transfer work.
 

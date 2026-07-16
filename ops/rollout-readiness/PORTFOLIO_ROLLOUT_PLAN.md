@@ -3,6 +3,7 @@
 - **Evidence baseline:** Passes 1–5 and the July 12, 2026 read-only portfolio synthesis
 - **Operating state:** The Explore&Earn Controlled Production-Readiness Pass is active in a separate lane
 - **This document's authority:** Sequencing and gates; it does not promote a deployment or declare a venture ready
+- **Product authority:** `docs/VENTURE_OPERATING_DEFINITIONS.md`; implementation/provider evidence cannot override it
 
 ## Executive decision
 
@@ -15,7 +16,7 @@ After the active Explore&Earn pass closes, use vertical, evidence-driven rollout
 5. ORAN last
 6. AutomatedEmpires parent dashboard only when the underlying provider evidence is reliable
 
-Sweepza is the default next venture because it is the closest independent revenue product. If the goal changes to the fastest low-complexity public-service launch, Lake & Pine may move ahead of LogLoads. If the active Explore&Earn pass cannot prove the replacement for the foreign Stripe webhook retained in Sweepza, continue the other Sweepza gates without touching that endpoint or move Lake & Pine ahead temporarily.
+Sweepza is the default next venture for a discovery-platform/source-verification preflight because its relatively separated technical boundary makes product drift easy to isolate. This is not revenue, payment, or sweepstakes-operator activation. Lake & Pine may move ahead of LogLoads when the goal is to advance lower-risk Phase 1 booking/planning slices. If the active Explore&Earn pass cannot prove the replacement for the foreign Stripe webhook retained in Sweepza, continue only read-only product/source work or move Lake & Pine ahead temporarily.
 
 No venture is currently proven transfer-ready. A `READY` deployment, a dedicated provider project, or a completed checklist is not equivalent to a functional release or recipient-tested transfer.
 
@@ -39,12 +40,12 @@ The active Explore&Earn agent's final report will supersede older Explore&Earn r
 ### What is structurally established
 
 - Seven canonical repositories and seven canonical Vercel projects/shells are identified.
-- Accepted source for six deployed ventures converged to protected `main`; ORAN remains an intentional draft/non-release.
-- Six Vercel Production artifacts were recorded `READY`; ORAN has zero Vercel deployments. Artifact status is not functional product proof.
+- Accepted source for all seven ventures reached protected `main`; ORAN #67 is merged but remains a protected non-release shell/product candidate.
+- Six Vercel Production artifacts were recorded `READY`; ORAN now has protected noindex Preview `dpl_9QdKsovZZcASrdgCqENysSF9XSNd` at `8da2101`. Artifact status is not functional product proof.
 - Seven venture-specific Doppler projects have `dev`, `stg`, and `prd` config names. Name presence does not prove value authority or lane isolation.
-- Dedicated Supabase projects exist for the six data ventures; AutomatedEmpires correctly has no established data requirement.
+- Dedicated Supabase projects exist for the six current data ventures; AutomatedEmpires' current public surface has no established data requirement, while future command-layer architecture remains undecided.
 - Separate Sentry projects exist for all seven ventures.
-- Six separate PostHog projects were prepared; ORAN remains intentionally without PostHog pending a civic privacy decision.
+- Six separate PostHog projects were prepared; ORAN's MVP prohibits user/behavioral tracking and pixels, so PostHog is not applicable to that MVP.
 - Four venture-specific least-scope, origin-restricted Mapbox tokens were created for Explore&Earn, LogLoads, BidSpace, and Lake & Pine.
 - Explore&Earn and Sweepza have distinct Stripe account boundaries. Sweepza still retains a foreign Explore&Earn webhook and unclassified non-transactional residue.
 - Ten domains were authenticated in prior passes; BidSpace intentionally has no production domain. Public routing and transfer evidence remain mixed.
@@ -71,12 +72,12 @@ Scores below are operational-independence estimates, not sale valuations. They c
 
 | Venture | Independence | Current interpretation | Primary next blocker |
 |---|---:|---|---|
-| Sweepza | **3.5/5** | Closest separated operating/revenue asset | Current-main Preview; Production Clerk; Stripe foreign endpoint/residue; telemetry; email remains deliberately deferred |
-| AutomatedEmpires | **3.0/5** | Clean public-site asset, not a trustworthy parent dashboard | Website Builder versus Vercel authority; rollback; telemetry; support/recovery |
-| Lake & Pine | **2.75/5** | Viable simpler service-site/data asset | Product scope; functional Production/rollback; DNS truth; backup; telemetry |
-| BidSpace | **2.25/5** | Deployable provider-host demo | Domain; Production identity/mail; RLS intent; Stripe Connect legal/operating model |
-| LogLoads | **2.0/5** | Converged source without live data authority | Backup/live-shape upgrade; provenance; distributed rate limiting; rollback; provider activation |
-| ORAN | **1.25/5** | Preserved recovery/redevelopment candidate | Schema/security/check failures; no deployment; broken public target; no recovery artifact |
+| Sweepza | **3.5/5** | Separated technical boundary with unresolved non-operator product drift | Source/status/link-out/disclaimer model; legacy entry/winner/billing disposition; Preview/rollback; Clerk; Stripe residue |
+| AutomatedEmpires | **3.0/5** | Clean current public surface; command layer remains evidence-dependent | Evidence schema/freshness/access; Website Builder versus Vercel authority; rollback; support/recovery |
+| Lake & Pine | **2.75/5** | Cleaning/local-service operating-system foundation | Phase 1 slice/operations decisions; functional Production/rollback; DNS; backup; telemetry |
+| BidSpace | **2.25/5** | Non-live provider-host demo | Domain; Production identity/mail; RLS intent; legal/entity/payment model before real bidding/booking/Connect |
+| LogLoads | **2.0/5** | Converged coordination source without live data authority | Backup/live-shape upgrade; provenance; shared atomic limiter (Supabase-first); rollback; provider activation |
+| ORAN | **1.25/5** | Protected civic-infrastructure recovery candidate | Regional source/provenance/verification/support gates; schema/security/check failures; recovery; no public launch |
 
 Explore&Earn was previously assessed at 3.25/5, but the active controlled pass owns its current score and readiness finding. Do not reuse the older score after that report closes without reconciliation.
 
@@ -102,7 +103,7 @@ This parallel pass intentionally avoided:
 - deployment, merge, branch closure, credential retirement, deletion, purchase, upgrade, or cleanup;
 - implementation of the future Explore&Earn redesign.
 
-The future Explore&Earn design is not final and must not be locked by the readiness pass. The separate future brief records the expected shared Discovery Card, Seek/Swipe/Map modes, pinned Seek/Swipe/Map/Profile navigation, four-category model, mirrored host/seeker cards, map variants, related cards, and premium/simple/beautiful direction.
+The future Explore&Earn design is not final and must not be locked by the readiness pass. Preserve the shared Discovery Card, Seek/Swipe/Map/Profile navigation, exactly four categories, housing/meals/pay clarity, trust, and map/list/swipe discovery. The next design pass prioritizes the homepage, visual hierarchy, typography, color, spacing, layout composition, information placement, premium marketplace feel, dashboard surfaces, and responsive polish. Reopen a core mechanic only with concrete repository evidence of failure and a dated decision.
 
 ## Rollout philosophy
 
@@ -165,28 +166,33 @@ Before opening the next venture pass:
 
 ## Recommended post-Explore&Earn venture order
 
-### 1. Sweepza — independent revenue-product cleanup
+### 1. Sweepza — discovery-platform and source-verification preflight
 
 Why next:
 
-- It has the strongest current independence score.
-- Clean source, owned live domain, dedicated Supabase, and dedicated Stripe live/test boundaries already exist.
+- It has the strongest current operational-independence score, making implementation drift easier to isolate.
+- Clean source, owned domain, and dedicated provider boundaries already exist, but they do not authorize operation, entry collection, payments, or winner selection.
 - `support@sweepza.com` is founder-owned, and additional aliases are available.
-- The remaining pass is bounded enough to reuse the Explore&Earn readiness method.
+- The correction can begin with a bounded, non-mutating product/source audit before any provider decision.
 
 Scope:
 
-- exact-current-main Preview and functional rollback;
-- dark Production Clerk configuration, roles, webhooks, recovery, staging decision, and dev-user handling;
+- inventory every entry, winner, rules, eligibility, partnership, notification, and payment surface against the non-operator definition;
+- define official-source and host/partner provenance, content rights, official rules/entry link-outs, disclaimers, all seven canonical statuses, expiry, and dispute handling;
+- record a keep/repurpose/retire decision for legacy operator-style surfaces and keep them inactive;
+- exact-current-main Preview and functional rollback for the accepted discovery/link-out behavior only;
+- dark Production Clerk configuration only for approved host/partner listing roles, with least privilege, recovery, webhooks, staging, and dev-user handling;
 - Supabase backup/restore, lane, RLS ordinary-user, and cron evidence;
-- Sentry release/event/alert and PostHog controlled event/privacy proof;
-- non-sensitive Stripe residue classification and replacement-before-retirement proof for the foreign Explore&Earn endpoint;
+- privacy-bounded Sentry/PostHog proof for approved discovery behavior;
+- non-sensitive Stripe residue classification and replacement-before-retirement proof for the foreign Explore&Earn endpoint, with no checkout or billing activation;
 - cost, support, incident, and transfer-owner records.
 
 Constraints:
 
 - Do not remove the foreign endpoint unless the active Explore&Earn pass proves the replacement and Sweepza passes its own rollback gate.
 - Do not delete the two unclassified customers or `$0` draft invoice without a separate approved disposition.
+- Do not run promotions, author rules, determine eligibility, process entries/payments, select winners, guarantee legality/odds, imply partnerships, or collect live entries.
+- Do not copy long source descriptions, images, or rules without rights.
 - Mail features remain truthfully disabled. Sweepza email activation, sender domain/key, delivery smoke, and alias configuration are deferred to the later Sweepza-specific email stage, despite mailbox ownership.
 
 ### 2. LogLoads — establish live data/runtime authority
@@ -194,7 +200,7 @@ Constraints:
 Why second:
 
 - Its Supabase-canonical source convergence is recent and should be converted into authoritative runtime evidence before it drifts.
-- The highest risks are knowable and testable: backup/restore, live-shape upgrade, migration ledger, environment provenance, distributed rate limiting, rollback, and provider activation.
+- The highest risks are knowable and testable: backup/restore, live-shape upgrade, migration ledger, environment provenance, shared atomic production rate limiting, rollback, and provider activation.
 - Resolving this gap prevents a `READY` artifact from masking an unauthoritative live service.
 
 Scope:
@@ -202,21 +208,21 @@ Scope:
 - read-only live inventory and encrypted backup;
 - migration/schema diff and restore rehearsal against a safe copy;
 - environment/lane decision, service-role provenance, RLS ordinary-user tests, and production dev-login disposition;
-- distributed rate-limit design/test and exact-main Preview repair;
+- Supabase-first shared atomic limiter evaluation; use Vercel-integrated KV/Upstash only if Supabase is documented as unsuitable, and memory only in local/dev; then exact-SHA multi-instance/outage proof and Preview repair;
 - functional rollback before any migration;
 - then, and only then, Production Clerk, independent email, subscription/account, telemetry, maps, and DNS decisions.
 
 Cost/risk gate: the founder approves the live migration window, operating entity/subscription model, and independent email capacity before those actions.
 
-### 3. Lake & Pine — simpler public-service rollout
+### 3. Lake & Pine — Phase 1 cleaning-service operating-system rollout
 
 Why third:
 
 - It has clean source, owned domain, healthy Supabase/RLS evidence, and the strongest non-Explore&Earn map Preview proof.
-- It can be a materially simpler rollout if the product remains a public marketing/lead service.
-- Its remaining work is mainly functional Production/rollback, DNS truth, backup, telemetry, operator/support ownership, and explicit scope.
+- Its product direction is decided: booking and planning are Phase 1; payments are Phase 2.
+- Phase 1 can be sliced across property/preferences, recurring plans, job pipeline/status, communication, operator dashboard, and intelligent estimate direction while Production/rollback, DNS, backup, telemetry, capacity, and support controls mature.
 
-Founder choice: define marketing/lead-generation versus full booking/operations. For marketing-only scope, unused Clerk, Stripe, Resend, and authenticated-user gates may be documented `not applicable` or intentionally deferred. For a full service, create a separate product/auth/payment pass.
+Founder choices: Phase 1 slice order, estimate methodology, scheduling/capacity, customer/staff roles, communication channels, cancellation/support policy, and domain promotion. Stripe/payment/refund/entity work stays in Phase 2. A provider can be `not applicable` only for a specific approved Phase 1 slice, not because Lake & Pine was reduced to a marketing site.
 
 Ordering exception: move Lake & Pine ahead of LogLoads if the explicit objective is fastest lower-risk public launch rather than highest-risk authority cleanup.
 
@@ -232,17 +238,17 @@ Scope before purchases or live money:
 
 - direct protected-Preview functional proof;
 - environment/migration/RLS intent and generated-type reconciliation;
-- product role/moderation/support model;
+- host profiles; vendor profiles; temporary-space types/listings/maps; synthetic bidding/application; host–vendor communication; host discovery/outreach; methods/terms verification; trust/moderation/support;
 - founder decisions on domain and Connect charge/liability model;
-- test-mode-only payment design after those decisions.
+- host-funded listing/placement/promotion/subscription model and test-mode-only payment design after those decisions.
 
-Do not purchase a guessed domain or create Production email/Stripe resources early.
+Do not purchase a guessed domain, create Production email/Stripe resources early, or accept real bids/bookings/payments. BidSpace is not live.
 
 ### 5. ORAN — recovery-first and last
 
 Why last:
 
-- It has no Vercel deployment and its public Azure target is broken.
+- It has a protected exact-SHA Vercel shell Preview, but runtime provider variables are empty and its public Azure target is broken.
 - Repository/managed/live schema authority is unreconciled across a large database.
 - Security and ancillary checks remain open.
 - Azure, Mailgun, data recovery, renewal, ownership, and cost evidence is incomplete.
@@ -253,20 +259,22 @@ Scope:
 - authenticated read-only Azure/Mailgun/resource/cost inventory;
 - security and ancillary-check triage;
 - backup plus schema/migration-ledger reconciliation without blind replay;
-- safe Preview data/credential lane;
-- exact-SHA Preview for functions, cron, CSP, Leaflet/OpenStreetMap, logs/Sentry, privacy, and rollback;
-- only then consider merge, Production candidate, or reversible DNS cutover.
+- use the existing protected exact-SHA Preview as the shell/build baseline and establish its safe data/credential lane;
+- prove chat-first need/context intake, eligibility/location-aware verified-provider matching, North Idaho/Eastern Washington scope, citations/provenance, stale states, issue reports, agentic sourcing plus human verification, volunteer/admin review, urgent escalation, and no generic resource dump in that controlled candidate;
+- prove no user/behavioral tracking or pixels, no medical/legal/political/emergency advice, no implied partnerships, and named support/correction/removal/escalation ownership;
+- functions, cron, CSP, Leaflet/OpenStreetMap, privacy-scrubbed runtime logs/Sentry, and rollback;
+- only then consider broader access, Production promotion, or reversible DNS cutover.
 
-Keep ORAN PostHog-free unless a civic analytics, consent, retention, and owner decision is approved. Do not treat the broken Azure endpoint as rollback.
+Keep ORAN free of behavioral analytics and pixels for the MVP. Operational health logs/Sentry must avoid user tracking. Do not treat the broken Azure endpoint as rollback or open public access before data/runtime/support gates pass.
 
-### 6. AutomatedEmpires parent dashboard — evidence consumer, not evidence source
+### 6. AutomatedEmpires parent command layer — evidence consumer, not evidence source
 
 Why after provider proof:
 
 - The parent public site's technical cutover is simpler, but a portfolio dashboard can make stale or unauthenticated states look authoritative.
 - Build it only when child venture records use the common evidence schema and have fresh provider/runtime timestamps.
 
-Initial scope should be private and read-only: venture gate state, evidence age, deployment/rollback IDs, spend, risks, provider links, and owners. It must expose no credentials or customer data and must never infer `pass` from resource existence.
+Initial scope should be private and read-only: portfolio status, provider map, rollout board, governance registry, cost/risk visibility, task orchestration, and transfer-readiness state with evidence age, deployment/rollback IDs, links, and owners. It must expose no credentials or customer data and must never infer `pass` from resource existence. Do not turn it into a generic AI agency surface.
 
 The parent public domain/Website Builder cutover, Sentry/PostHog proof, rollback, privacy/support, and transfer packet remain a distinct AutomatedEmpires site pass.
 
@@ -301,11 +309,11 @@ Stop promotion and preserve the last-good state when any of these occurs:
 
 ## Founder decisions needed to keep the sequence moving
 
-1. **Sweepza:** approve the later email-independence budget/timing and aliases; decide Clerk staging/dev-user handling and the eventual non-destructive disposition process for Stripe residue.
-2. **LogLoads:** approve the data migration/rollback window, subscription operating entity/pricing, and when independent email capacity should be funded.
-3. **Lake & Pine:** choose marketing/lead service versus full booking product; if full service, name the billing entity, refund/cancellation owner, and support model.
+1. **Sweepza:** approve source classes, verification/moderation ownership, content rights/disclaimers, canonical state transitions, and the legacy-flow keep/repurpose/retire plan; later decide non-operator monetization, email, Clerk roles, and Stripe residue disposition.
+2. **LogLoads:** decide whether Supabase meets shared-limiter requirements and approve a fallback provider/cost only if it does not; approve the data migration/rollback window, subscription operating entity/pricing, and independent email timing.
+3. **Lake & Pine:** choose Phase 1 slices, estimate and scheduling/capacity rules, customer/staff roles, communication channels, cancellation/support ownership, and domain timing; payment/entity/refund decisions are Phase 2.
 4. **BidSpace:** choose the domain and budget, legal entity, Connect charge model, tax, payouts, refunds, and disputes before production provisioning.
-5. **ORAN and parent governance:** approve ORAN schema authority/Azure-Mailgun/civic analytics posture, and keep the AutomatedEmpires dashboard deferred until evidence consumers can trust the source records.
+5. **ORAN and parent governance:** approve ORAN schema authority, source/verification/stale/support policy, and Azure-Mailgun posture; behavioral analytics/pixels remain prohibited for the MVP. Define AutomatedEmpires command-layer access and freshness before it consumes child evidence.
 
 ## Definition of portfolio rollout progress
 

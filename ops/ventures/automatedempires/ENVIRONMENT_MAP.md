@@ -10,7 +10,7 @@ This file maps environment ownership without recording values.
 | --- | --- | --- | --- | --- |
 | Development | Doppler `automatedempires` / `dev` has metadata plus own Sentry identity. | Local Next.js development is documented. | Localhost only. | **Monitoring boundary verified**; broader dev contract absent |
 | Staging | Doppler `automatedempires` / `stg` has metadata plus own Sentry identity. | PR #5 exact-source Preview `dpl_BLh…Xvjyf` was `READY`; PR merged as `bb9a063e0cf4c08175cd698dbc6611abbbbca802`. | Provider preview hostname. | **Source review/merge and Preview verified; Vercel Sentry event open** |
-| Production | Doppler `automatedempires` / `prd` includes metadata plus own Sentry DSN/org/project identifiers. | Clean production `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` from current `main` `664cda67bc7bc91e4f1577d76bbe7758290f3a2d` is `READY`/rollback candidate. | `automatedempires.com` remains Website Builder. | **Source/main provenance fixed**; functional smoke/DNS cutover pending |
+| Production | Doppler `automatedempires` / `prd` includes metadata plus own Sentry DSN/org/project identifiers. | Clean production `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` from last deployed source `664cda67bc7bc91e4f1577d76bbe7758290f3a2d` is `READY`/rollback candidate; current source includes #12 at `408fca3` without a recorded later production deployment. | `automatedempires.com` remains Website Builder. | **Current source and deployed-source boundary recorded**; functional smoke/DNS cutover pending |
 
 ## Runtime configuration surface
 
