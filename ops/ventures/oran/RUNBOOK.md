@@ -1,19 +1,24 @@
 # ORAN migration and operations runbook
 
+> Execution update (2026-07-12): PR #67 merged at `8da2101`; protected noindex Preview `dpl_9QdKsovZZcASrdgCqENysSF9XSNd` serves `/` and `/status` with `200`. Runtime provider variables remain empty. Earlier PR #58/zero-deployment steps are superseded for execution but retained as lineage; the Preview is not public-launch or DNS authority.
+
 ## Safety rules
 
-1. Preserve draft PR #58 at exact head `6d5caf226bb4940c6bc0f270f77c43e3cb30b1da`; it is not production authority while unmerged/undeployed.
-2. Do not mutate the remote database, delete Azure resources, connect Vercel Git, deploy production, or change DNS until the stated gates pass.
+1. Preserve draft PR #58 at exact head `6d5caf226bb4940c6bc0f270f77c43e3cb30b1da` as historical convergence evidence; current source authority is merged PR #67 at `8da2101`.
+2. Do not mutate the remote database, delete Azure resources, open public access, promote Production, or change DNS until the stated gates pass.
 3. Treat openresourceaccessnetwork.com mail records independently from web cutover records.
 4. Never copy another venture's secrets into ORAN.
+5. Keep the MVP protected and limited initially to chat-first North Idaho/Eastern Washington navigation. Intake must understand need, location, age, urgency, eligibility, relevant household context, transportation/access, language/accessibility, and service domain, then route to source-backed verified providers.
+6. Permit no user or behavioral tracking and no pixels. Privacy-scrubbed operational health logging is for runtime safety only, never profiling, attribution, advertising, or product analytics.
+7. Provide no medical, legal, political, or emergency advice; imply no partnerships; and do not open public access before data, runtime, and support gates pass.
 
 ## Gate 1: reconcile the branch
 
-1. Review the convergence history, default `main` `1dc1291d61cc9f27ee830f980e32eabd52248083`, and draft PR #58 exact head `6d5caf226bb4940c6bc0f270f77c43e3cb30b1da`; do not restore stale Azure deployment assumptions or unsafe migration replay.
+1. Review the convergence history through PR #58 and current merged `main`/PR #67 at `8da2101`; do not restore stale Azure deployment assumptions or unsafe migration replay.
 2. Confirm the `d58ea0…` hardening lineage keeps database migration fail-closed and separates uncredentialed validation from the exact-SHA credentialed Preview job.
-3. Keep the PR draft until its data-lane/rollback gate is green; production promotion remains outside this workflow and requires smoke/rollback evidence.
+3. Treat the protected #67 Preview as shell/build evidence only. Production promotion remains outside this workflow and requires product, data, runtime, support, and rollback evidence.
 4. Add `CRON_SECRET`/`INTERNAL_API_KEY` ownership and canonical `NEXT_PUBLIC_SITE_URL`; remove stale Application Insights/Azure CSP assumptions and allow the approved Clerk/map/runtime hosts.
-5. Required Build, Lint, Test, Type Check, Security Audit, and Runtime Readiness are green at the exact PR head. Codecov patch, Visual Regression, and runbook freshness still fail; repair or explicitly disposition them before merge while keeping the data/Preview/rollback gate separate.
+5. Required checks and 15 reviewed visual baselines were accepted through #67. Revalidate current-main checks before later changes while keeping product/data/runtime/rollback gates separate.
 
 ## Gate 2: reconcile data
 
@@ -25,11 +30,11 @@
 
 ## Gate 3: create a safe preview
 
-1. Vercel currently has zero deployments. Keep production disconnected while `main` remains Azure-oriented; build a prebuilt Preview from exact SHA `6d5caf226bb4940c6bc0f270f77c43e3cb30b1da` against project `oran` without a production flag.
+1. Preserve protected Preview `dpl_9QdKsovZZcASrdgCqENysSF9XSNd` at exact SHA `8da2101` as the shell/build baseline. Do not attach the custom domain or treat the provider-classified production target on the same SHA as public authority.
 2. Inject only ORAN-owned `stg` values through Doppler or an approved scoped integration; current non-metadata values are limited to ORAN Sentry identifiers.
-3. Verify pages, Clerk redirects, data boundaries, maps/CSP, mail behavior, logs, and the separate ORAN Sentry event/release while keeping traces `0` unless separately reviewed.
+3. Verify protected access; chat-first guided intake; eligibility/location-aware actionable provider recommendations; regional scope; source citations/provenance; stale-record states; issue reporting; agentic sourcing with human verification; volunteer/admin review; urgent escalation; no generic resource dump; no user/behavioral tracking or pixels; advice/partnership disclaimers; data boundaries; maps/CSP; mail; and privacy-scrubbed runtime logs/Sentry while keeping traces `0`.
 4. Verify cron fail-closed behavior: unauthorized request `401`, absent internal configuration `503`, and approved scheduled execution only with the reviewed configuration.
-5. Record Preview deployment ID, SHA, build settings, smoke results, and rollback owner. Merge only after this gate passes.
+5. Record the Preview deployment ID, SHA, build settings, product/runtime smoke results, and rollback owner. Open broader access only after this gate passes.
 
 ## Gate 4: production cutover
 

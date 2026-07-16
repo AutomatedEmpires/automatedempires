@@ -2,7 +2,13 @@
 
 Last reviewed: 2026-07-10
 
-This pack records Explore & Earn as a standalone marketplace runtime. It is operationally separated from AutomatedEmpires and every sibling venture.
+This pack records Explore&Earn as a seeker-first seasonal/work-travel marketplace runtime. It is operationally separated from AutomatedEmpires and every sibling venture.
+
+## Canonical product boundary
+
+Preserve the Discovery Card; Seek / Swipe / Map / Profile bottom navigation; exactly four categories—Farm, Maritime, Remote, and Seasonal; housing, meals, and pay clarity; host and seeker trust; and map/list/swipe discovery. Future design work should prioritize homepage composition, visual hierarchy, typography, colors, spacing, information placement, premium marketplace feel, dashboard surfaces, and responsive polish. Do not redesign core mechanics without repository evidence of a concrete failure and a dated decision.
+
+Before an overhaul, locate and verify the local checkout and canonical GitHub repository, then inspect the real routes, layouts, components, content/data models, dashboards, responsive states, and current evidence. The result should be visionary and repo-grounded: more than polish, but never a from-scratch concept detached from what exists.
 
 ## Status vocabulary
 
@@ -15,9 +21,9 @@ This pack records Explore & Earn as a standalone marketplace runtime. It is oper
 
 | Area | Status | Current statement | Evidence |
 | --- | --- | --- | --- |
-| GitHub | **Merged/protected** | Canonical repository `AutomatedEmpires/explore-and-earn`; #242/#243 merged, latest `b616b9e10fa434422dd34442f6cb24194cf8d5ec`; strict real-check protection/security configured. | Pass 4 GitHub evidence |
+| GitHub | **Merged/protected** | Canonical repository `AutomatedEmpires/explore-and-earn`; current source includes #244/#245 through `5989853`; strict real-check protection/security configured. | Pass 4 plus execution-log reconciliation |
 | Secrets | **Verified current** | Doppler project exists; scoped Resend identity spans all lanes and Stripe test contract is verified in `dev`/`stg`; broader parity remains incomplete. | Authenticated names-only/write evidence |
-| Hosting | **Verified current** | Canonical project serves clean production `dpl_5HCPaCNCQuyip2iZTHpoMvSxjQFY` from current `main` `b616b9e10fa434422dd34442f6cb24194cf8d5ec`; it is `READY`, and exact-source Preview `dpl_BgD…` was green. | Authenticated Vercel/GitHub evidence |
+| Hosting | **Current source / prior deployed evidence verified** | Canonical project serves clean production `dpl_5HCPaCNCQuyip2iZTHpoMvSxjQFY` from prior source `b616b9e10fa434422dd34442f6cb24194cf8d5ec`; it is `READY`. Current source is later #245 `5989853` and requires deployment revalidation. | Authenticated Vercel/GitHub plus execution evidence |
 | Database | **Verified current** | Dedicated Supabase fingerprint `…clafhmmr`; ledger/isolation proof remains open. | Provider evidence |
 | Domain | **Verified current** | `exploreandearn.com` authenticated GoDaddy control; apex/`www` serve Vercel; Resend DNS is verified. | Authenticated registrar/provider evidence |
 | Runtime surface | **Observed in repository** | Next.js monorepo with Supabase, Clerk, Stripe, Resend, PostHog, Cloudinary, Mapbox, Sentry, and AI integration points. | Explore & Earn `package.json`, `apps/web/package.json`, application and runbook paths |

@@ -7,14 +7,14 @@ Use this checklist when transferring operations to a new maintainer, business ow
 ## Scope and authority
 
 - [ ] **Target state** — Record transferor, transferee, effective date, business owner, technical owner, and emergency contact.
-- [ ] **Target state** — Confirm the transfer covers only the AutomatedEmpires portfolio site and not child-venture production resources.
+- [ ] **Target state** — Confirm the transfer includes the AutomatedEmpires command-layer/public-surface code and non-secret policy, registry, evidence schemas, and operating records, but never child production resources, secrets, or customer data.
 - [ ] **Approval boundary** — Obtain the recorded owner's approval for domain/billing/account transfer and explicit approval for destructive changes.
 
 ## Source and deployment
 
 - [ ] **Observed in repository** — Confirm the canonical repository is `AutomatedEmpires/automatedempires` and review outstanding branches and pull requests.
 - [x] **Verified current** — Strict `verify`/`design`, linear/squash history, conversation resolution, no force push/deletion, automation bypass, vulnerability alerts, Dependabot updates, and Vercel Git integration are configured; recipient access remains transfer-specific.
-- [ ] **Verified current** — Locate Vercel project `automatedempires`, current production `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` from `664cda67bc7bc91e4f1577d76bbe7758290f3a2d`, and its rollback candidate; verify the recipient can view deployments without changing configuration.
+- [ ] **Verified boundary** — Locate Vercel project `automatedempires`, current source #12 at `408fca3`, last verified production `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` from `664cda67bc7bc91e4f1577d76bbe7758290f3a2d`, and its rollback candidate; verify the recipient can view deployments without changing configuration.
 - [ ] **Target state** — Run typecheck and build, deploy a non-production change, and demonstrate rollback to the recipient.
 
 ## Configuration and access

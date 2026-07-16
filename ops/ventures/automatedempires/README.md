@@ -2,7 +2,11 @@
 
 Last reviewed: 2026-07-10
 
-This pack describes the parent portfolio site's runtime boundary. AutomatedEmpires owns portfolio policy and public venture metadata; it must not become the secret store or production runtime identity for a child venture.
+This pack describes the parent runtime boundary. AutomatedEmpires is the portfolio operator and command layer; the checked-in site is its current public surface. It owns portfolio policy and non-secret operating metadata, but it must not become the secret store or production runtime identity for a child venture.
+
+## Canonical product direction
+
+AutomatedEmpires should become the evidence-backed portfolio status dashboard, provider map, rollout board, governance registry, cost/risk view, task-orchestration layer, and venture transfer-readiness tracker. It is not a generic AI agency site. The command layer may identify child resources and evidence, but it must not expose child secrets or customer data.
 
 ## Status vocabulary
 
@@ -15,10 +19,10 @@ This pack describes the parent portfolio site's runtime boundary. AutomatedEmpir
 
 | Area | Status | Current statement | Evidence |
 | --- | --- | --- | --- |
-| Role | **Observed in repository** | Public Next.js studio and portfolio site; not a product application. | `AGENTS.md`, `README.md`, `lib/ventures.ts` |
+| Role | **Founder direction / observed current surface** | Parent operator and command layer; current runtime is a public Next.js portfolio surface, not a child product application. | `docs/VENTURE_OPERATING_DEFINITIONS.md`, `AGENTS.md`, current application |
 | GitHub | **Observed in repository** | Canonical repository is `AutomatedEmpires/automatedempires`. | `EMPIRE_INFRA_ALIGNMENT_PLAN.md` §2 |
 | Secrets inventory | **Verified current** | Doppler project `automatedempires` has `dev`/`stg`/`prd`; own Sentry DSN/org/project identifiers are installed write-only in every lane. | Pass 4 provider evidence |
-| Hosting | **Verified current** | Vercel is connected to canonical repo/main/root. Current `main` is `664cda67bc7bc91e4f1577d76bbe7758290f3a2d`; clean production `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` is `READY`; functional rollback/custom-domain cutover remain. | Pass 5 verification |
+| Hosting | **Current source / prior deployed evidence verified** | Vercel is connected to canonical repo/main/root. Current `main` includes merged #12 at `408fca3`; clean production `dpl_4b8tDpSmz71WTGmrgRigPb7k5bT9` remains last-deployed evidence from `664cda67bc7bc91e4f1577d76bbe7758290f3a2d`; functional rollback/custom-domain cutover remain. | Pass 5 plus execution-log reconciliation |
 | Database | **Verified current** | No Supabase project is required for the current portfolio site. | Provider fact supplied for this alignment pass |
 | Domain | **Verified current** | `automatedempires.com` is registered at GoDaddy and currently serves GoDaddy Website Builder; Outlook MX and a possible duplicate-SPF condition are present. | Public RDAP/DNS and HTTP snapshot |
 | Optional integrations | **Observed in repository** | The repo contract names Resend, PostHog, Cloudinary, and Sentry as the provider family to use if features require them. | `AGENTS.md` §4 |

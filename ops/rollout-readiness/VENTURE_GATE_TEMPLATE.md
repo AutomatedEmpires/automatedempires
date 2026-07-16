@@ -32,6 +32,16 @@ For every row, complete all columns. Prefer immutable evidence tied to the candi
 |---|---|---|---|---|---|
 | Example: exact-main Preview | `blocked` | `<deployment ID; commit; test record>` | `<name>` | `YYYY-MM-DD HH:MM` | `<none or approved exception>` |
 
+## 0. Product boundary
+
+| Check | Status | Evidence / artifact | Owner | Verified (UTC) | Exception / expiry |
+|---|---|---|---|---|---|
+| Candidate is evaluated against `docs/VENTURE_OPERATING_DEFINITIONS.md` and any later dated founder decision | `<status>` | `<definition/decision link>` | `<owner>` | `<time>` | `<note>` |
+| Current claims, roles, routes, providers, data flows, and money flows match the canonical definition and phase | `<status>` | `<scope-to-implementation map>` | `<owner>` | `<time>` | `<note>` |
+| Product-prohibited capabilities are absent or fail closed | `<status>` | `<negative tests/config evidence>` | `<owner>` | `<time>` | `<note>` |
+| Legacy conflicting surfaces have an approved keep/repurpose/retire disposition and are not activated by inference | `<status>` | `<decision record>` | `<owner>` | `<time>` | `<note>` |
+| Public/growth copy states the actual lifecycle and does not imply launch, partnership, legality, safety, odds, payment, or operator authority without evidence | `<status>` | `<content review>` | `<owner>` | `<time>` | `<note>` |
+
 ## 1. Source
 
 | Check | Status | Evidence / artifact | Owner | Verified (UTC) | Exception / expiry |

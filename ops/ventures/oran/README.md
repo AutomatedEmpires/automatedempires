@@ -1,6 +1,14 @@
 # ORAN infrastructure operations
 
-ORAN (Open Resource Access Network) is a standalone civic-infrastructure venture in transition. The public domain points to a broken Azure target. Green/fail-closed Vercel convergence is published in draft PR #58 at exact head `6d5caf226bb4940c6bc0f270f77c43e3cb30b1da`; required core checks are green, three ancillary checks remain red, and Vercel has zero deployments.
+ORAN (Open Resource Access Network) is a chat-first civic resource-navigation venture. An earlier infrastructure snapshot—retained below as historical evidence—recorded a broken Azure target, draft PR #58 at exact head `6d5caf226bb4940c6bc0f270f77c43e3cb30b1da`, three red ancillary checks, and zero Vercel deployments.
+
+## Canonical MVP boundary
+
+ORAN is a chat-first, intelligence-driven civic resource navigation system. A person explains the real problem; guided intake accounts for need, location, age, urgency, eligibility, relevant household context, transportation/access, language/accessibility, and service domain, then routes the person to verified, actionable providers/services.
+
+The protected North Idaho/Eastern Washington MVP includes guided intake, provider/service recommendations, eligibility/location-aware matching, issue reporting, a community volunteer/admin review queue, an agentic sourcing pipeline with human verification, source-backed provider records, provenance/stale handling, and urgent/crisis escalation. It is not a generic resource dump; do not add broad directories unless they answer an evidenced user need. ORAN permits no user or behavioral tracking and no pixels. Privacy-scrubbed operational health logging is for runtime safety only, never profiling, attribution, advertising, or product analytics. Provide no medical, legal, political, or emergency advice; imply no partnerships; and do not open a public launch until data, runtime, and support gates pass.
+
+> Execution supersession note (2026-07-12): the PR #58/zero-deployment records in this pack are preserved as the earlier infrastructure snapshot. Current execution evidence is merged PR #67 at `8da2101` with protected Preview `dpl_9QdKsovZZcASrdgCqENysSF9XSNd`; `/` and `/status` return `200` with `noindex`, runtime provider variables remain empty, and no public rollout or DNS authority exists.
 
 ## Current identity
 
@@ -16,9 +24,9 @@ ORAN (Open Resource Access Network) is a standalone civic-infrastructure venture
 | Domain | openresourceaccessnetwork.com, registered at GoDaddy; current web target returns Azure 404 and invalid TLS |
 | Mail | Public DNS retains Mailgun MX/SPF; preserve until intent is confirmed |
 
-## Operating decision
+## Historical operating decision
 
-Do not reconnect old Azure merely for convenience, and do not deploy the Vercel shell merely for uniformity. Keep PR #58 draft while completing the safe data/credential lane, schema-authority reconciliation, runtime contract, exact-SHA Preview, and functional rollback. Restoring the current broken Azure A record is state restoration, not service recovery.
+The earlier pass required: do not reconnect old Azure merely for convenience, and do not deploy the Vercel shell merely for uniformity; keep PR #58 draft while completing the safe data/credential lane, schema-authority reconciliation, runtime contract, exact-SHA Preview, and functional rollback. Restoring the broken Azure A record was state restoration, not service recovery. Forward work follows the canonical MVP boundary above and the later execution evidence; the protected Preview does not authorize public rollout or DNS.
 
 ## Pack index
 

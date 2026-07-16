@@ -8,15 +8,23 @@ Pass 5 refresh: separate PostHog project and venture-specific Mapbox installatio
 |---|---|---|---|---|
 | Local development | `logloads` / `dev` | Local pnpm workspace | Dedicated Supabase; zero-user Clerk dev; venture-specific public Mapbox; PostHog project `509086`; broad same-team Resend key | **Map local/origin proof green; broader provider gaps remain** |
 | Staging / preview | `logloads` / `stg` | Fresh exact-main Preview at `9c9e107…` is `READY` | Venture-specific Mapbox/PostHog present; data lane separation unproven | **Build/origin proof green; route error boundary and data gates remain** |
-| Production | `logloads` / `prd` | Existing production from `9c9e107…` remains unchanged | Dark Clerk runtime absent; email/data/dev-login gates remain. Venture-specific Mapbox env is staged but no Production deployment occurred | **No production promotion; live data/provider rollback proof remains** |
+| Production | `logloads` / `prd` | Existing production from `9c9e107…` remains unchanged; current source is later #22 `6f7ebcd` | Dark Clerk runtime absent; email/data/dev-login gates remain. Venture-specific Mapbox env is staged but no later Production deployment occurred | **Current source not production-promoted; live data/provider rollback proof remains** |
 
 Live Supabase remains the pre-Pass-4 mirror. Local `135cff6…` makes state canonical, enables RLS, and limits service-role operations to select/insert/update; fresh PostgreSQL 17 reset passes. No live migration occurred. Backup/live-shape upgrade and lane provenance remain before writes.
 
 ## Runtime architecture gate
 
 - **Implemented and merged:** `135cff6…` provides awaited atomic Supabase authority, version/schema compatibility, compare-and-swap/retry, non-production fallback, and concurrency/cold-start tests; final PR #6 source is `f280ef4fef4b992f94457aad61cfe27e8ec91791`.
-- `extended-validation`, `ci/verify`, `migrations`, `dependency-review`, and CodeQL passed; PR #6 merged as current `main` `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`. Final-source Preview and current-main production are `READY`, but live Supabase/provider state is unchanged.
-- Next gates: backup/live upgrade, environment provenance, distributed rate limiting, provider activation, and functional production rollback.
+- `extended-validation`, `ci/verify`, `migrations`, `dependency-review`, and CodeQL passed for PR #6, which merged/deployed at `9c9e107082942e5bce782eac2ce71aa63eb7d9c0`. Current source adds #21/#22 through `6f7ebcd`; the #6 Preview/production are `READY`, but later-source deployment and live Supabase/provider state are unchanged/open.
+- Next gates: backup/live upgrade, environment provenance, Supabase-first shared-limiter evaluation, exact-SHA multi-instance/outage proof, provider activation, and functional production rollback.
+
+## Shared limiter decision order
+
+1. Evaluate an atomic Supabase-backed limiter against concurrency, latency, outage, observability, and cost requirements.
+2. Use Vercel-integrated KV or Upstash Redis only if that evaluation shows Supabase is unsuitable.
+3. Keep instance-local memory confined to local/development behavior.
+
+Existing Redis-shaped variables or adapters do not prove a provider has been selected or should be provisioned.
 
 ## Observed variable-name contract
 

@@ -2,22 +2,25 @@
 
 **Prepared:** 2026-07-10
 **Last reconciled:** 2026-07-10
+
+> Product-definition correction (2026-07-12): `docs/VENTURE_OPERATING_DEFINITIONS.md` is canonical for product scope. This plan's dated provider and implementation observations remain historical evidence, but they do not authorize a conflicting product model.
+
 **Operating model:** Shared ownership. Separated operations.
-**Status:** Active execution plan; facts are updated in `ops/portfolio/` as provider access is verified.
+**Status:** Historical 2026-07-10 alignment baseline. Use `ops/execution/PORTFOLIO_EXECUTION_COMMANDER_LOG.md`, current `ops/portfolio/` records, and the canonical definitions for forward execution.
 
 This plan contains resource names and configuration-variable names only. It must never contain secret values.
 
 ## 1. Ventures discovered
 
-| Venture | Canonical slug | Role | Current implementation state |
+| Venture | Canonical slug | Role | Implementation state observed 2026-07-10 |
 |---|---|---|---|
-| AutomatedEmpires | `automatedempires` | Parent / portfolio authority | Next.js public studio site; protected Vercel PR preview is `READY` after the security dependency patch |
-| Explore&Earn | `explore-and-earn` | Standalone marketplace venture | Mature Next.js monorepo; canonical Vercel production is `READY` and a dedicated Supabase project is healthy |
-| ORAN | `oran` | Standalone civic-infrastructure venture | Mature Next.js application; an unmerged branch intentionally removes Azure deployment assets for Vercel, and an empty Vercel shell is reserved but deliberately unconnected/undeployed |
-| BidSpace | `bidspace` | Standalone auction venture | Early Next.js monorepo; Vercel Git connection and healthy Supabase project verified, initial deployment pending |
-| Lake & Pine | `lake-and-pine` | Standalone service venture | Next.js workspace with `READY` Vercel deployment and healthy Supabase project; owned custom domain is still missing |
-| Sweepza | `sweepza` | Standalone sweepstakes venture | Next.js application; canonical Vercel production is `READY` and a dedicated Supabase project is healthy |
-| LogLoads | `logloads` | Standalone logistics venture | Early Next.js monorepo; Vercel preview is `READY`, production fails with `ENOENT`, and its dedicated Supabase project is healthy |
+| AutomatedEmpires | `automatedempires` | Parent operator and command layer | Current implementation is a Next.js public portfolio surface; protected Vercel PR preview is `READY` after the security dependency patch |
+| Explore&Earn | `explore-and-earn` | Seeker-first seasonal/work-travel marketplace | Mature Next.js monorepo; canonical Vercel production is `READY` and a dedicated Supabase project is healthy |
+| ORAN | `oran` | Civic resource infrastructure | Mature Next.js application; an unmerged branch intentionally removes Azure deployment assets for Vercel, and an empty Vercel shell is reserved but deliberately unconnected/undeployed |
+| BidSpace | `bidspace` | Non-live vendor/temporary-space/auction-like marketplace infrastructure | Early Next.js monorepo; Vercel Git connection and healthy Supabase project verified, initial deployment pending |
+| Lake & Pine | `lake-and-pine` | Intelligent cleaning/local-service operating system | Next.js workspace with `READY` Vercel deployment and healthy Supabase project; owned custom domain is still missing |
+| Sweepza | `sweepza` | Sweepstakes/giveaway discovery and host/partner listing platform; non-operator by default | Next.js application; canonical Vercel production is `READY` and a dedicated Supabase project is healthy |
+| LogLoads | `logloads` | Forestry/logistics coordination software; non-broker/carrier/payment/dispatch-for-hire | Early Next.js monorepo; Vercel preview is `READY`, production fails with `ENOENT`, and its dedicated Supabase project is healthy |
 
 ## 2. Repositories discovered
 
@@ -71,7 +74,7 @@ Domain blockers now verified are:
 
 The BidSpace state is **not discovered**, not proof that the user lacks every possible domain. Public registration results do not prove authenticated registrar-account control for registered domains. Domain changes remain blocked until that control is verified.
 
-## 6. Current cross-contamination
+## 6. Cross-contamination observed at the baseline
 
 - Automated scanning found no committed live-key pattern shared across two venture repositories.
 - No duplicate secret fingerprint was found across tracked files.
@@ -83,7 +86,7 @@ The BidSpace state is **not discovered**, not proof that the user lacks every po
 - Vercel duplicate candidates `sweepza-canary` and `explore-and-earn-vercel-fix` are classified `delete-review` only; neither is authorized for deletion.
 - Other provider-dashboard contamination remains possible until Clerk, Stripe, PostHog, Cloudinary, webhook, and environment ownership are verified.
 
-## 7. Verified and unresolved provider resources
+## 7. Provider resources verified or unresolved at the baseline
 
 The initial all-provider unknown state is no longer current:
 
@@ -96,8 +99,8 @@ The initial all-provider unknown state is no longer current:
 Likely intentional non-requirements:
 
 - ORAN's repository already contains an intentional Azure-to-Vercel convergence branch. Portfolio policy does not authorize connecting/deploying it before merge, preview, schema, CSP, cron, and rollback verification.
-- Lake & Pine now has a Vercel runtime and Supabase project, but auth/payment resources still should not be created blindly without a product and environment decision.
-- AutomatedEmpires is a public portfolio site and does not need the full product-provider spine unless a feature actually uses it.
+- Lake & Pine now has a Vercel runtime and Supabase project. Booking and planning are Phase 1; payments are Phase 2. Auth, communication, and payment resources still require a reviewed consumer and environment plan.
+- AutomatedEmpires' current runtime is a public portfolio surface; its product direction is the parent command layer. Add providers only for reviewed command-layer consumers, never merely for stack symmetry.
 
 ## 8. Unsafe or ambiguous areas
 

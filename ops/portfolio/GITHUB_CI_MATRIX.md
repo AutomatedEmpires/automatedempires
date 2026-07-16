@@ -2,6 +2,8 @@
 
 **Verified snapshot:** 2026-07-10
 
+> Later execution supersession (2026-07-12): current sources advanced through AutomatedEmpires #12 `408fca3`, Explore&Earn #245 `5989853`, ORAN #67 `8da2101`, BidSpace #64 `69a53c4`, Lake & Pine #3 `e65b3b6`, Sweepza #53 `f2977cb`, and LogLoads #22 `6f7ebcd`. The table below preserves the Pass 4 CI/deployment snapshot for those exact earlier SHAs; use the execution log before calling any row current.
+
 All seven canonical repositories are public and owned by AutomatedEmpires. Pass 4 configured real `main` protections/security, converged accepted work, preserved active/unique branches, closed stale PRs, and pruned only proven-obsolete heads. Official GitHub CLI authentication remains pending, but it did not prevent authenticated provider/UI remediation.
 
 Secret values were never requested or displayed. The five Explore&Earn repository secret names remain write-only inventory and must not be deleted until each workflow consumer has a verified Doppler-backed replacement.

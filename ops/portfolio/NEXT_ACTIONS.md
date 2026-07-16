@@ -2,6 +2,8 @@
 
 **Prepared:** 2026-07-12 (Pass 5 execution order)
 
+> Later execution source update: AutomatedEmpires #12 `408fca3`, Explore&Earn #245 `5989853`, ORAN #67 `8da2101`, BidSpace #64 `69a53c4`, Lake & Pine #3 `e65b3b6`, Sweepza #53 `f2977cb`, and LogLoads #22 `6f7ebcd` supersede the Pass 4 “final default/current-main” labels below. Pass 4 deployment IDs remain exact evidence for their older source SHAs.
+
 ## Completed or safely fixed in Pass 5
 
 1. PostHog's existing PAYG plan was verified at `$0` base/current/projected cost with six projects allowed and no upgrade. Explore&Earn `291166` was preserved; separate AutomatedEmpires `509081`, Sweepza `509084`, LogLoads `509086`, BidSpace `509087`, and Lake & Pine `509088` projects were created.
@@ -29,10 +31,10 @@
 
 1. Explore&Earn source/Preview checks are green. Obtain separate authorization for a controlled custom-domain mail smoke; verify reply routing and provider authentication/logging before broad-key retirement.
 2. Prove Explore&Earn's production Stripe account identity without displaying the key; create the correct live webhook and preview it dark. Keep Sweepza's foreign E&E endpoint until that replacement is verified. Classify—but do not delete—the two customers and $0 draft invoice.
-3. GitHub CLI operator authentication is verified and was used to publish ops draft PR #8. Preserve the exact merged-main production evidence for Sweepza and LogLoads. Keep ORAN #58 draft until ancillary checks, its data lane, Preview, and rollback gates are green.
-4. Complete AutomatedEmpires and Lake & Pine functional production-host/rollback smoke before any DNS change. Establish ORAN's scoped Preview data/credential lane and reconcile schema authority before its first deployment.
+3. GitHub CLI operator authentication is verified and was used to publish ops draft PR #8. Preserve the exact deployed-source evidence for Sweepza and LogLoads. Preserve ORAN #58 as historical lineage and #67 at `8da2101` as current merged source; its protected Preview is shell/build evidence only.
+4. Complete AutomatedEmpires and Lake & Pine functional production-host/rollback smoke before any DNS change. Use ORAN's protected exact-SHA Preview to prove the scoped data/credential lane, chat-first MVP, schema authority, support, and rollback before any broader deployment or access.
 5. Configure each DNS/SSL-verified dark Clerk instance in isolated Preview and prove end-to-end auth before replacing any production binding.
-6. LogLoads source, required checks, merge, and clean main-production provenance are green. Next prove backup/live-shape upgrade, environment provenance, distributed rate limiting, production rollback, and live migration safety before activating live data/providers or changing DNS.
+6. LogLoads source, required checks, merge, and clean main-production provenance are green. Next prove backup/live-shape upgrade, environment provenance, and shared atomic production rate-limit state across serverless instances: Supabase first, Vercel-integrated KV/Upstash only if Supabase is unsuitable, memory local/dev only. Then prove multi-instance/outage behavior, production rollback, and live migration safety before provider/DNS activation.
 
 ## Payment, ownership, and destructive-action gates
 
@@ -45,16 +47,16 @@
 ## Provider separation after the gates
 
 1. Mapbox: repair and re-smoke the E&E/Log fresh Preview application paths; obtain authorized BidSpace protected-Preview access; preserve Lake's green Preview. Production remains a separate approval, BidSpace domain work stays deferred, and the old/shared provider token remains rollback until all Production gates and zero-use evidence pass.
-2. PostHog: provider and environment separation are complete for six ventures. Fresh-deploy each exact consuming SHA, send a controlled non-sensitive event, and verify ingestion/environment health before calling runtime activation complete. Keep ORAN deferred and never reuse Explore&Earn's project/key.
+2. PostHog: provider and environment separation are complete for six approved consumers. Fresh-deploy each exact consuming SHA, send a controlled non-sensitive event, and verify ingestion/environment health before calling runtime activation complete. Keep ORAN absent because behavioral analytics/pixels are product-prohibited for its MVP; never reuse Explore&Earn's project/key.
 3. Sentry: retain seven distinct projects/DSNs and completed ownership/one-alert/scrubber/IP controls. Install new-project bindings into Vercel through an authorized write surface, prove controlled events/releases, then replace the owner-grade build token only after the narrow replacement is deployed and verified.
 4. Cloudinary: finish classifying non-E&E objects and the 55 former icon raws, clone environment-specific fixed-prefix presets with overwrite disabled, switch one disposable fixture in Preview, and retire old presets only after zero use. Do not move or delete media until separately approved and reversible.
 
 ## Production and DNS gates
 
 1. Lake & Pine: source/CI/Preview/`main` production are clean; prove functional rollback/DNS smoke before a reversible cutover of owned `lakeandpinecleaning.com`.
-2. LogLoads: preserve default `9c9e107…` / production `dpl_Xxr…8dPtF`, then prove live upgrade/provenance/distributed rate limit, provider activation, and functional rollback before touching GoDaddy web records.
-3. ORAN: repair the failing Codecov patch, Visual Regression, and runbook-freshness gates; then exact-SHA Preview, database reconciliation, observability, production candidate, and functional rollback must all pass before changing web DNS. Preserve Mailgun and other non-web records.
-4. AutomatedEmpires: default `664cda6…` / clean production `dpl_4b8…k5bT9` is `READY`; functional provider-host smoke and rollback must pass before replacing GoDaddy Website Builder.
+2. LogLoads: preserve current source #22 `6f7ebcd` and the prior deployed-source rollback artifact `9c9e107…` / `dpl_Xxr…8dPtF`; revalidate the later source, then prove live upgrade/provenance, the Supabase-first shared atomic limiter decision and multi-instance/outage behavior, provider activation, and functional rollback before touching GoDaddy web records.
+3. ORAN: preserve the later protected exact-SHA candidate evidence from the execution log. Source-cited North Idaho/Eastern Washington resources, provenance, stale handling, verification, no behavioral tracking/pixels, advice/partnership safeguards, support, database reconciliation, recovery, and runtime gates must all pass before public access or web DNS. Preserve Mailgun and other non-web records.
+4. AutomatedEmpires: current source includes #12 at `408fca3`; clean production `dpl_4b8…k5bT9` remains last-deployed evidence from `664cda6…`. Revalidate current source, then pass functional provider-host smoke and rollback before replacing GoDaddy Website Builder.
 
 ## Transfer-ready definition
 

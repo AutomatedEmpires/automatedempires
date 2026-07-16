@@ -2,6 +2,8 @@
 
 Last reviewed: 2026-07-12
 
+> Later execution evidence: PR #67 merged at `8da2101`; protected Preview `dpl_9QdKsovZZcASrdgCqENysSF9XSNd` serves `/` and `/status` with `200` and `noindex`. Runtime provider variables remain empty and no public rollout/DNS authority exists. The PR #58/zero-deployment rows below are preserved as the earlier snapshot.
+
 ## Current and target lanes
 
 | Lane | Doppler | Runtime | Data | Status |
@@ -30,7 +32,7 @@ Pass 4 also created a separate ORAN Sentry project, enabled ownership/one alert/
 
 ## Pass 5 provider posture
 
-Reviewed source has no Mapbox consumer and uses Leaflet/OpenStreetMap. The labeled Mapbox secret authorizer was validated but intentionally unused; no public token or env was added. PostHog remains intentionally deferred for civic privacy/deployment posture.
+Reviewed source has no Mapbox consumer and uses Leaflet/OpenStreetMap. The labeled Mapbox secret authorizer was validated but intentionally unused; no public token or env was added. PostHog behavioral analytics/pixels are product-prohibited for the MVP (`no resource`); privacy-scrubbed Sentry/logging may serve runtime safety only.
 
 ## Preview and rollback contract
 
