@@ -1,3 +1,19 @@
+<!-- ae-control-plane v1 (2026-07-16). Machine operating contract; product docs follow below. -->
+# Operating contract — Automated Empires control plane
+
+- **Canonical clone (the ONLY writable copy):** WSL `Ubuntu-24.04-Recovered` → `/home/jackson/automatedempires/ventures/automatedempires`.
+  Never clone this repository anywhere else on the machine. Parallel work uses controlled
+  worktrees: `ae start automatedempires -t <task> -a <agent> --worktree`.
+- **Sessions:** acquire the single-writer lease first (`ae start automatedempires -t <task> -a <agent>`);
+  end with `ae finish automatedempires`. Work counts as done ONLY when pushed and remote-SHA-verified.
+- **Deploys:** merging `main` auto-deploys production via Vercel.
+- **Validate before merge:** `pnpm typecheck && pnpm lint` (CI must be green; squash merges).
+- **Providers (fixed — never swap or cross-wire):** email=resend (operating docs merged).
+- **Warn before:** merging deploys the public org site
+- Full policy: `github.com/AutomatedEmpires/ae-control` → `POLICY.md`. Briefing: `ae info automatedempires`.
+
+---
+
 # AutomatedEmpires — Parent Operator Agent Contract
 
 > Binding for every agent (human or AI) touching this repo. This repository contains the current public portfolio surface and the operating records for the AutomatedEmpires venture system. Read it fully before doing anything.
