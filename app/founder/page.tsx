@@ -19,9 +19,36 @@ export default function FounderPage() {
           <h1>I learned systems from the physical world.</h1>
           <p>
             AutomatedEmpires comes from seeing machinery, maintenance,
-            operations, remote infrastructure, coordination, and real-world
-            failure up close.
+            construction, logistics, field operations, remote infrastructure,
+            coordination, and real-world failure up close.
           </p>
+        </div>
+      </section>
+
+      <section className="section-block" aria-labelledby="founder-practice">
+        <div className="section-inner">
+          <div className="section-heading">
+            <p className="eyebrow">Operating practice</p>
+            <h2 id="founder-practice">Product ownership with the field still in view.</h2>
+          </div>
+          <div className="profile-grid">
+            <article className="profile-card">
+              <h3>Technical operations</h3>
+              <p>Repository governance, deployment evidence, provider boundaries, runtime health, and the work required to move from code to an operable product.</p>
+            </article>
+            <article className="profile-card">
+              <h3>Project and field operations</h3>
+              <p>Work breakdown, sequencing, handoffs, risk control, and a practical respect for the people compensating for weak systems.</p>
+            </article>
+            <article className="profile-card">
+              <h3>Product ownership</h3>
+              <p>Clear user problems, operating boundaries, workflow design, readiness gates, and honest decisions about what is not finished.</p>
+            </article>
+            <article className="profile-card">
+              <h3>AI-assisted venture execution</h3>
+              <p>Agents accelerate research, implementation, verification, and documentation under explicit evidence, review, provider, and activation controls.</p>
+            </article>
+          </div>
         </div>
       </section>
 

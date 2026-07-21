@@ -16,12 +16,23 @@ export function VentureCard({ venture }: { venture: Venture }) {
         <span>{venture.platformProfile}</span>
       </div>
       <h3>{venture.name}</h3>
+      <p className="venture-category">{venture.category}</p>
       <p className="venture-thesis">{venture.thesis}</p>
+      <div className="venture-readiness" aria-label={`${venture.name} readiness`}>
+        <span>{venture.readiness}</span>
+        <span>{venture.publicAvailability}</span>
+      </div>
       <div className="venture-physics" aria-label={`${venture.name} visual physics`}>
         {venture.visualPhysics.slice(0, 3).map((item) => (
           <span key={item}>{item}</span>
         ))}
       </div>
+      <p className="venture-targets">
+        <strong>For:</strong> {venture.targetUsers.join(", ")}
+      </p>
+      <p className="venture-strength">
+        <strong>Strongest capability:</strong> {venture.strongestCapability}
+      </p>
       <p className="venture-status">{venture.publicStatus}</p>
       <Link
         className="text-link"

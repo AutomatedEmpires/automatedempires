@@ -65,7 +65,7 @@ export default async function VenturePage({ params }: PageProps) {
       <section className="venture-hero">
         <div className="section-inner venture-hero-grid">
           <div>
-            <p className="eyebrow">{venture.stage}</p>
+            <p className="eyebrow">{venture.category}</p>
             <h1>{venture.name}</h1>
             <p className="hero-statement">{venture.humanTruth}</p>
             <p className="hero-body">{venture.thesis}</p>
@@ -78,7 +78,9 @@ export default async function VenturePage({ params }: PageProps) {
                   rel="noreferrer"
                   target="_blank"
                 >
-                  Visit product
+                  {venture.publicAvailability === "Live product"
+                    ? "Open live product"
+                    : "Open public preview"}
                 </a>
               ) : null}
               {venture.repository ? (
@@ -95,6 +97,18 @@ export default async function VenturePage({ params }: PageProps) {
             </div>
           </div>
           <VentureVisual venture={venture} />
+        </div>
+      </section>
+
+      <section className="readiness-band" aria-label={`${venture.name} current readiness`}>
+        <div className="section-inner readiness-grid">
+          <ReadinessBlock label="Build stage" value={venture.readiness} />
+          <ReadinessBlock label="Public access" value={venture.publicAvailability} />
+          <ReadinessBlock label="Pilot" value={venture.pilotReadiness} />
+          <ReadinessBlock
+            label={`Verified ${venture.verifiedAt}`}
+            value={venture.verifiedRevision?.label ?? "Repository placeholder state"}
+          />
         </div>
       </section>
 
@@ -115,6 +129,41 @@ export default async function VenturePage({ params }: PageProps) {
             <h2 id="product-system">What AutomatedEmpires is building.</h2>
           </div>
           <p>{venture.system}</p>
+        </div>
+      </section>
+
+      <section className="case-section" aria-labelledby="core-workflows">
+        <div className="section-inner case-grid">
+          <div>
+            <p className="eyebrow">Core workflows</p>
+            <h2 id="core-workflows">What people can do, or what the approved product is designed to support.</h2>
+          </div>
+          <ul className="detail-list">
+            {venture.coreWorkflows.map((workflow) => (
+              <li key={workflow}>{workflow}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="case-section capability-section" aria-labelledby="capability-state">
+        <div className="section-inner">
+          <div className="section-heading">
+            <p className="eyebrow">Capability state</p>
+            <h2 id="capability-state">Implemented and pending stay visibly separate.</h2>
+          </div>
+          <div className="detail-list-grid">
+            <ListBlock
+              label="Completed or verified on main"
+              items={venture.completedCapabilities}
+              tone="complete"
+            />
+            <ListBlock
+              label="Pending, gated, or unmerged"
+              items={venture.pendingCapabilities}
+              tone="pending"
+            />
+          </div>
         </div>
       </section>
 
@@ -157,6 +206,37 @@ export default async function VenturePage({ params }: PageProps) {
         </div>
       </section>
 
+      <section className="case-section" aria-labelledby="integrations">
+        <div className="section-inner">
+          <div className="section-heading">
+            <p className="eyebrow">Technical and provider state</p>
+            <h2 id="integrations">Configured does not mean activated.</h2>
+            <p>Stack: {venture.techStack.join(" · ")}</p>
+          </div>
+          <div className="integration-grid">
+            {venture.integrations.map((integration) => (
+              <article className="integration-card" key={integration.name}>
+                <div>
+                  <h3>{integration.name}</h3>
+                  <span data-state={integration.state.toLowerCase()}>{integration.state}</span>
+                </div>
+                <p>{integration.detail}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="boundary-section" aria-labelledby="operating-boundary">
+        <div className="section-inner case-grid">
+          <div>
+            <p className="eyebrow">Operating boundary</p>
+            <h2 id="operating-boundary">What this venture must not claim.</h2>
+          </div>
+          <p>{venture.operatingBoundary}</p>
+        </div>
+      </section>
+
       <section className="case-section" aria-labelledby="milestones">
         <div className="section-inner case-grid">
           <div>
@@ -182,11 +262,15 @@ export default async function VenturePage({ params }: PageProps) {
             <h2 id="horizon">{venture.vision}</h2>
           </div>
           <div>
-            <p>
-              The public claim stays bounded by source evidence. The ambition is
-              larger than the current implementation, and the page says which is
-              which.
-            </p>
+            <ul className="detail-list compact-list">
+              {venture.nextMilestones.map((milestone) => (
+                <li key={milestone}>{milestone}</li>
+              ))}
+            </ul>
+            <p className="contact-context">Best contact path: {venture.contactIntent}.</p>
+            <Link className="primary-action compact" href="/contact">
+              Start a relevant conversation
+            </Link>
             <Link className="text-link" href="/ventures">
               Back to portfolio
             </Link>
@@ -194,6 +278,36 @@ export default async function VenturePage({ params }: PageProps) {
         </div>
       </section>
     </main>
+  );
+}
+
+function ReadinessBlock({ label, value }: { label: string; value: string }) {
+  return (
+    <article className="readiness-block">
+      <span>{label}</span>
+      <p>{value}</p>
+    </article>
+  );
+}
+
+function ListBlock({
+  label,
+  items,
+  tone,
+}: {
+  label: string;
+  items: string[];
+  tone: "complete" | "pending";
+}) {
+  return (
+    <article className={`list-block ${tone}`}>
+      <h3>{label}</h3>
+      <ul className="detail-list">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </article>
   );
 }
 

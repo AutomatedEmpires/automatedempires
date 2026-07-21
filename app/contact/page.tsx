@@ -4,7 +4,7 @@ import { contactIntents, mailtoFor, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact AutomatedEmpires by intent: invest, partner, collaborate, product inquiry, work with the company, or general conversation.",
+    "Contact AutomatedEmpires for a controlled pilot, partnership, collaboration, employer conversation, investment inquiry, or venture-specific question.",
   alternates: {
     canonical: "/contact",
   },

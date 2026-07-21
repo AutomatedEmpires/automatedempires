@@ -70,19 +70,19 @@ export function VentureVisual({ venture, compact = false }: { venture: Venture; 
     return (
       <div className="venture-visual sweepza-visual" style={style}>
         <div className="sweep-card card-one">
-          <span>Ending today</span>
-          <strong>Weekend gear drop</strong>
-          <small>Ready again in 4h</small>
+          <span>Source verified</span>
+          <strong>Official promotion listing</strong>
+          <small>Rules and source attached</small>
         </div>
         <div className="sweep-card card-two">
           <span>Saved</span>
-          <strong>Local adventure bundle</strong>
-          <small>Photo-first listing</small>
+          <strong>Third-party giveaway</strong>
+          <small>Transparent listing state</small>
         </div>
         <div className="sweep-card card-three">
-          <span>Winner proof</span>
-          <strong>Real posts, real reactions</strong>
-          <small>Host quality signal</small>
+          <span>Official link</span>
+          <strong>Rules and entry stay with the source</strong>
+          <small>Sweepza does not operate it</small>
         </div>
       </div>
     );
@@ -110,6 +110,36 @@ export function VentureVisual({ venture, compact = false }: { venture: Venture; 
           <span className="score">Score</span>
           <span className="match">Match</span>
           <span className="action">Action</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (venture.slug === "pinnedatlas") {
+    return (
+      <div className="venture-visual pinned-visual" style={style}>
+        <div className="atlas-field">
+          <span className="atlas-pin pin-one">Waterfall</span>
+          <span className="atlas-pin pin-two">Cave</span>
+          <span className="atlas-pin pin-three">Hot spring</span>
+          <span className="atlas-route" />
+        </div>
+      </div>
+    );
+  }
+
+  if (venture.slug === "certstack") {
+    return (
+      <div className="venture-visual interview-visual" style={style}>
+        <div className="rubric-panel">
+          <span>Repository</span>
+          <strong>Reserved</strong>
+          <small>No product claim yet</small>
+        </div>
+        <div className="rubric-panel secondary">
+          <span>Next</span>
+          <strong>Define</strong>
+          <small>User · problem · workflow</small>
         </div>
       </div>
     );

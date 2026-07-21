@@ -15,6 +15,7 @@ export function Footer() {
         </div>
         <div className="footer-links" aria-label="Footer navigation">
           <Link href="/ventures">Ventures</Link>
+          <Link href="/status">Status</Link>
           <Link href="/company">Company</Link>
           <Link href="/build">Build</Link>
           <Link href="/founder">Founder</Link>

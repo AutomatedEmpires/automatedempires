@@ -3,36 +3,72 @@ import { SystemsCanvas } from "@/components/SystemsCanvas";
 import { VentureCard } from "@/components/VentureCard";
 import { VentureVisual } from "@/components/VentureVisual";
 import { buildSignals } from "@/lib/build-log";
-import { activeCompanies, missionSystems, operatingBusinesses, platformProfiles } from "@/lib/ventures";
+import {
+  activeCompanies,
+  missionSystems,
+  operatingBusinesses,
+  platformProfiles,
+  ventures,
+} from "@/lib/ventures";
 
 export default function Home() {
   const oran = missionSystems[0];
   const lakeAndPine = operatingBusinesses[0];
+  const liveVentures = ventures.filter(
+    (venture) => venture.publicAvailability === "Live product",
+  ).length;
+  const previewVentures = ventures.filter(
+    (venture) => venture.publicAvailability === "Public preview",
+  ).length;
+  const placeholderVentures = ventures.filter(
+    (venture) => venture.publicAvailability === "Repository placeholder",
+  ).length;
 
   return (
     <main id="main">
       <section className="hero-section">
         <div className="section-inner hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">Independent venture studio and operating company</p>
+            <p className="eyebrow">Founder-led parent operator and portfolio command layer</p>
             <h1>AutomatedEmpires</h1>
             <p className="hero-statement">
               The world is full of systems that almost work.
             </p>
             <p className="hero-body">
-              Different industries. Same instinct. Find what is fragmented,
-              understand who it fails, and build the system that should exist.
+              Independent products, one operating discipline. Every public claim
+              is tied to current source, deployment, and activation evidence.
             </p>
             <div className="hero-actions" aria-label="Primary actions">
               <Link className="primary-action" data-analytics="hero_ventures" href="/ventures">
                 Explore the portfolio
               </Link>
-              <Link className="secondary-action" data-analytics="hero_build" href="/build">
-                See what shipped
+              <Link className="secondary-action" data-analytics="hero_status" href="/status">
+                See verified status
               </Link>
             </div>
           </div>
           <SystemsCanvas />
+        </div>
+      </section>
+
+      <section className="verification-strip" aria-labelledby="verification-heading">
+        <div className="section-inner verification-grid">
+          <div>
+            <p className="eyebrow">Verified 2026-07-21</p>
+            <h2 id="verification-heading">Readiness is a fact, not a vibe.</h2>
+            <p>
+              Live, preview, gated, and placeholder states are separated so an
+              unfinished venture never borrows credibility from a deployed one.
+            </p>
+          </div>
+          <div className="verification-counts">
+            <span><strong>{liveVentures}</strong> live products</span>
+            <span><strong>{previewVentures}</strong> public previews</span>
+            <span><strong>{placeholderVentures}</strong> repo placeholders</span>
+          </div>
+          <Link className="primary-action compact" href="/status">
+            Open portfolio status
+          </Link>
         </div>
       </section>
 
@@ -54,7 +90,7 @@ export default function Home() {
         <div className="section-inner">
           <div className="section-heading">
             <p className="eyebrow">Active companies</p>
-            <h2 id="active-heading">Different markets, separate product physics.</h2>
+            <h2 id="active-heading">Different markets, independently verified states.</h2>
             <p>
               These are not one template wearing different colors. Each product
               expresses a different world while sharing a disciplined operating
@@ -76,8 +112,8 @@ export default function Home() {
             <h2 id="mission-heading">Some systems are built because failure has a human cost.</h2>
             <p>
               ORAN is treated as civic infrastructure, not a commercial app in a
-              different wrapper. It is retrieval-first, verification-led,
-              crisis-aware, and intentionally Azure-first.
+              different wrapper. It is chat-first, verification-led,
+              crisis-aware, privacy-constrained, and not yet publicly launchable.
             </p>
             <Link className="text-link" data-analytics="home_oran" href="/ventures/oran">
               Open ORAN

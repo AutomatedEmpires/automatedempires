@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { VentureCard } from "@/components/VentureCard";
 import {
@@ -29,6 +30,13 @@ export default function VenturesPage() {
             real-world businesses, and emerging systems so maturity and intent
             stay truthful.
           </p>
+          <p className="verification-note">
+            Repository, GitHub, Vercel, control-plane, and public-surface state
+            last reconciled 2026-07-21.
+          </p>
+          <Link className="primary-action compact" href="/status">
+            Compare current readiness
+          </Link>
         </div>
       </section>
 

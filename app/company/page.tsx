@@ -19,9 +19,10 @@ export default function CompanyPage() {
           <p className="eyebrow">Company</p>
           <h1>We build systems for markets and experiences the internet still handles badly.</h1>
           <p>
-            AutomatedEmpires is an emerging independent venture studio and
-            operating company. The ventures are different because the underlying
-            markets are different. The repeatable instinct is the same.
+            AutomatedEmpires is the parent operator and command layer for a
+            portfolio of independent ventures. Each product keeps its own users,
+            providers, operating boundary, and readiness state; the parent keeps
+            evidence, governance, rollout discipline, and transfer readiness legible.
           </p>
         </div>
       </section>

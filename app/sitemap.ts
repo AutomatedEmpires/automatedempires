@@ -3,7 +3,15 @@ import { site } from "@/lib/site";
 import { ventures } from "@/lib/ventures";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/ventures", "/company", "/founder", "/build", "/contact"];
+  const staticRoutes = [
+    "",
+    "/ventures",
+    "/status",
+    "/company",
+    "/founder",
+    "/build",
+    "/contact",
+  ];
   const now = new Date();
 
   return [
