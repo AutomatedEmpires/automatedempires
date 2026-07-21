@@ -10,6 +10,16 @@ export default function Home() {
   const liveVentureCount = ventures.filter((venture) => venture.stage === "Live").length;
   const activeBuildCount = featuredVentures.filter((venture) => venture.stage !== "Live").length;
   const displayCount = (count: number) => String(count).padStart(2, "0");
+  const latestUpdateDate = portfolioUpdates.reduce(
+    (latest, update) => update.date > latest ? update.date : latest,
+    "",
+  );
+  const latestUpdateLabel = new Intl.DateTimeFormat("en-US", {
+    day: "numeric",
+    month: "long",
+    timeZone: "UTC",
+    year: "numeric",
+  }).format(new Date(`${latestUpdateDate}T00:00:00Z`));
 
   return (
     <main id="main">
@@ -102,7 +112,7 @@ export default function Home() {
             </div>
             <p>
               A current view of product progress across the portfolio, updated
-              July 21, 2026.
+              {` ${latestUpdateLabel}.`}
             </p>
           </div>
           <div className="update-grid">

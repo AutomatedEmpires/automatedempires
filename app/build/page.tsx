@@ -28,7 +28,7 @@ export default function BuildPage() {
                 <div className="update-index">{String(index + 1).padStart(2, "0")}</div>
                 <div className="update-meta"><span>{update.venture}</span><time dateTime={update.date}>{update.date}</time></div>
                 <div><h2>{update.title}</h2><p>{update.summary}</p></div>
-                <a href={update.href} rel="noreferrer" target="_blank">{update.status}<span aria-hidden="true"> ↗</span></a>
+                <a aria-label={`${update.status}: ${update.title}`} href={update.href} rel="noreferrer" target="_blank">{update.status}<span aria-hidden="true"> ↗</span></a>
               </article>
             ))}
           </div>

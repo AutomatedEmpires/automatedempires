@@ -34,7 +34,7 @@ export default function VenturesPage() {
         <div className="section-inner">
           <div className="section-heading split-heading">
             <div><p className="eyebrow">Companies in motion</p><h2 id="active-portfolio-heading">Live products and active builds.</h2></div>
-            <p>Seven distinct products, each designed around the customer, workflow, and market it serves.</p>
+            <p>{activeVentures.length} distinct products, each designed around the customer, workflow, and market it serves.</p>
           </div>
           <div className="venture-grid">
             {activeVentures.map((venture) => <VentureCard key={venture.id} venture={venture} />)}

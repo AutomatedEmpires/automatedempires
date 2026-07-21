@@ -69,10 +69,17 @@ export function VentureVisual({ venture, compact = false }: { venture: Venture; 
   }
 
   if (venture.visual === "lake") {
+    const scheduleDate = new Intl.DateTimeFormat("en-US", {
+      day: "numeric",
+      month: "long",
+      timeZone: "UTC",
+      weekday: "long",
+    }).format(new Date(`${venture.latestDate}T00:00:00Z`));
+
     return (
       <div className="venture-visual lake-visual" style={style}>
         <div className="care-board">
-          <header><span>Tuesday · July 21</span><strong>8 homes in motion</strong></header>
+          <header><span>{scheduleDate}</span><strong>8 homes in motion</strong></header>
           <div><span>09:00</span><strong>Arrival window confirmed</strong><small>Team Cedar</small></div>
           <div><span>11:30</span><strong>Property profile ready</strong><small>3 rooms · 1 pet</small></div>
           <div><span>14:00</span><strong>Recurring care plan</strong><small>Every other week</small></div>
