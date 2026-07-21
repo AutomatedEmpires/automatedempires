@@ -2,48 +2,32 @@ import Link from "next/link";
 import { SystemsCanvas } from "@/components/SystemsCanvas";
 import { VentureCard } from "@/components/VentureCard";
 import { VentureVisual } from "@/components/VentureVisual";
-import { buildSignals } from "@/lib/build-log";
-import {
-  activeCompanies,
-  missionSystems,
-  operatingBusinesses,
-  platformProfiles,
-  ventures,
-} from "@/lib/ventures";
+import { portfolioUpdates } from "@/lib/build-log";
+import { featuredVentures, getVenture, labVentures } from "@/lib/ventures";
 
 export default function Home() {
-  const oran = missionSystems[0];
-  const lakeAndPine = operatingBusinesses[0];
-  const liveVentures = ventures.filter(
-    (venture) => venture.publicAvailability === "Live product",
-  ).length;
-  const previewVentures = ventures.filter(
-    (venture) => venture.publicAvailability === "Public preview",
-  ).length;
-  const placeholderVentures = ventures.filter(
-    (venture) => venture.publicAvailability === "Repository placeholder",
-  ).length;
+  const oran = getVenture("oran");
 
   return (
     <main id="main">
-      <section className="hero-section">
-        <div className="section-inner hero-grid">
-          <div className="hero-copy">
-            <p className="eyebrow">Founder-led parent operator and portfolio command layer</p>
-            <h1>AutomatedEmpires</h1>
-            <p className="hero-statement">
-              The world is full of systems that almost work.
+      <section className="home-hero">
+        <div className="section-inner home-hero-grid">
+          <div className="home-hero-copy">
+            <p className="eyebrow">Founder-led venture company</p>
+            <h1>
+              Companies for the <em>real world.</em>
+            </h1>
+            <p className="home-hero-lead">
+              We build focused products for work, travel, logistics, local
+              services, marketplaces, and civic access—the places where better
+              software changes what people can actually do.
             </p>
-            <p className="hero-body">
-              Independent products, one operating discipline. Every public claim
-              is tied to current source, deployment, and activation evidence.
-            </p>
-            <div className="hero-actions" aria-label="Primary actions">
-              <Link className="primary-action" data-analytics="hero_ventures" href="/ventures">
+            <div className="hero-actions">
+              <Link className="primary-action" href="/ventures">
                 Explore the portfolio
               </Link>
-              <Link className="secondary-action" data-analytics="hero_status" href="/status">
-                See verified status
+              <Link className="secondary-action" href="/contact">
+                Talk to the founder
               </Link>
             </div>
           </div>
@@ -51,166 +35,98 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="verification-strip" aria-labelledby="verification-heading">
-        <div className="section-inner verification-grid">
-          <div>
-            <p className="eyebrow">Verified 2026-07-21</p>
-            <h2 id="verification-heading">Readiness is a fact, not a vibe.</h2>
-            <p>
-              Live, preview, gated, and placeholder states are separated so an
-              unfinished venture never borrows credibility from a deployed one.
-            </p>
-          </div>
-          <div className="verification-counts">
-            <span><strong>{liveVentures}</strong> live products</span>
-            <span><strong>{previewVentures}</strong> public previews</span>
-            <span><strong>{placeholderVentures}</strong> repo placeholders</span>
-          </div>
-          <Link className="primary-action compact" href="/status">
-            Open portfolio status
-          </Link>
+      <section className="portfolio-facts" aria-label="Portfolio facts">
+        <div className="section-inner portfolio-facts-grid">
+          <div><strong>09</strong><span>ventures represented</span></div>
+          <div><strong>02</strong><span>live consumer products</span></div>
+          <div><strong>05</strong><span>products on the build floor</span></div>
+          <div><strong>01</strong><span>operating company behind it all</span></div>
         </div>
       </section>
 
-      <section className="thesis-band" aria-labelledby="thesis-heading">
-        <div className="section-inner thesis-grid">
-          <div>
-            <p className="eyebrow">Company thesis</p>
-            <h2 id="thesis-heading">Different industries. Same instinct.</h2>
-          </div>
-          <div className="manifesto-list" aria-label="AutomatedEmpires manifesto">
-            <p>Find what is fragmented.</p>
-            <p>Understand who it fails.</p>
-            <p>Build the system that should exist.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-block" aria-labelledby="active-heading">
+      <section className="section-block portfolio-section" aria-labelledby="portfolio-heading">
         <div className="section-inner">
-          <div className="section-heading">
-            <p className="eyebrow">Active companies</p>
-            <h2 id="active-heading">Different markets, independently verified states.</h2>
+          <div className="section-heading split-heading">
+            <div>
+              <p className="eyebrow">The portfolio</p>
+              <h2 id="portfolio-heading">One company. Several hard problems worth solving.</h2>
+            </div>
             <p>
-              These are not one template wearing different colors. Each product
-              expresses a different world while sharing a disciplined operating
-              standard.
+              Each venture has its own market, product logic, and identity. What
+              they share is a bias toward useful software, visible progress, and
+              work that holds up outside a pitch deck.
             </p>
           </div>
           <div className="venture-grid">
-            {activeCompanies.map((venture) => (
+            {featuredVentures.map((venture) => (
               <VentureCard key={venture.id} venture={venture} />
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="mission-section" aria-labelledby="mission-heading">
-        <div className="section-inner mission-grid">
-          <div>
-            <p className="eyebrow">Mission system</p>
-            <h2 id="mission-heading">Some systems are built because failure has a human cost.</h2>
-            <p>
-              ORAN is treated as civic infrastructure, not a commercial app in a
-              different wrapper. It is chat-first, verification-led,
-              crisis-aware, privacy-constrained, and not yet publicly launchable.
-            </p>
-            <Link className="text-link" data-analytics="home_oran" href="/ventures/oran">
-              Open ORAN
-            </Link>
-          </div>
-          <VentureVisual venture={oran} compact />
-        </div>
-      </section>
-
-      <section className="section-block split-feature" aria-labelledby="operating-heading">
-        <div className="section-inner split-grid">
-          <VentureVisual venture={lakeAndPine} compact />
-          <div>
-            <p className="eyebrow">Operating business</p>
-            <h2 id="operating-heading">Software judgment grounded in a real service company.</h2>
-            <p>
-              Lake & Pine shows the same systems instinct applied to booking,
-              trust, communication, scheduling, service quality, and repeatable
-              operations in the physical world.
-            </p>
-            <Link
-              className="text-link"
-              data-analytics="home_lake_and_pine"
-              href="/ventures/lake-and-pine"
-            >
-              View Lake & Pine
-            </Link>
+          <div className="lab-line">
+            <span>Also in the studio lab</span>
+            {labVentures.map((venture) => (
+              <Link href={`/ventures/${venture.slug}`} key={venture.id}>{venture.name}</Link>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="section-block" aria-labelledby="platform-heading">
+      {oran ? (
+        <section className="mission-feature" aria-labelledby="oran-heading">
+          <div className="section-inner mission-feature-grid">
+            <div className="mission-feature-copy">
+              <p className="eyebrow">Mission-built</p>
+              <h2 id="oran-heading">Finding help should begin with being understood.</h2>
+              <p>
+                ORAN is civic resource navigation built around a simple idea: a
+                person should be able to explain what is happening and quickly
+                reach a verified next step that fits their need, location, and
+                eligibility.
+              </p>
+              <Link className="light-action" href="/ventures/oran">Meet ORAN</Link>
+            </div>
+            <VentureVisual venture={oran} compact />
+          </div>
+        </section>
+      ) : null}
+
+      <section className="section-block updates-section" aria-labelledby="updates-heading">
         <div className="section-inner">
-          <div className="section-heading">
-            <p className="eyebrow">Architecture posture</p>
-            <h2 id="platform-heading">Shared operating standards. Independent product profiles.</h2>
+          <div className="section-heading split-heading">
+            <div>
+              <p className="eyebrow">Latest momentum</p>
+              <h2 id="updates-heading">What moved this week.</h2>
+            </div>
+            <p>
+              A current view of product progress across the portfolio, updated
+              July 21, 2026.
+            </p>
           </div>
-          <div className="profile-grid">
-            {platformProfiles.map((profile) => (
-              <article className="profile-card" key={profile.name}>
-                <h3>{profile.name}</h3>
-                <p>{profile.description}</p>
-                <div className="profile-members">
-                  {profile.members.map((member) => (
-                    <span key={member}>{member}</span>
-                  ))}
-                </div>
+          <div className="update-grid">
+            {portfolioUpdates.slice(0, 6).map((update) => (
+              <article className="update-card" key={`${update.venture}-${update.title}`}>
+                <div><span>{update.venture}</span><time dateTime={update.date}>{update.date}</time></div>
+                <h3>{update.title}</h3>
+                <p>{update.summary}</p>
+                <Link href="/build">Read portfolio updates</Link>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="build-preview" aria-labelledby="build-heading">
-        <div className="section-inner">
-          <div className="section-heading">
-            <p className="eyebrow">Build evidence</p>
-            <h2 id="build-heading">Recent progress, translated out of commit syntax.</h2>
-          </div>
-          <div className="build-list">
-            {buildSignals.slice(0, 4).map((signal) => (
-              <article className="build-item" key={`${signal.venture}-${signal.title}`}>
-                <time dateTime={signal.date}>{signal.date}</time>
-                <div>
-                  <span>{signal.venture}</span>
-                  <h3>{signal.title}</h3>
-                  <p>{signal.summary}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-          <Link className="primary-action compact" data-analytics="home_build_log" href="/build">
-            Open build log
-          </Link>
-        </div>
-      </section>
-
-      <section className="founder-preview" aria-labelledby="founder-heading">
-        <div className="section-inner founder-grid">
-          <div>
-            <p className="eyebrow">Founder story</p>
-            <h2 id="founder-heading">I learned systems from the physical world.</h2>
-          </div>
+      <section className="founder-cta">
+        <div className="section-inner founder-cta-grid">
+          <p className="eyebrow">Built from operations outward</p>
+          <h2>Software gets better when the builder understands the work.</h2>
           <div>
             <p>
-              Machinery, maintenance, operations, remote infrastructure, and
-              real-world coordination teach a practical lesson: many
-              organizations survive because people manually compensate for poor
-              systems.
+              AutomatedEmpires is led by Jackson Cole—a product builder and
+              operator shaped by machinery, maintenance, construction,
+              logistics, field coordination, and the systems people create when
+              the official process is not good enough.
             </p>
-            <p>
-              AutomatedEmpires is the answer to that pattern: build the systems
-              the work kept proving should exist.
-            </p>
-            <Link className="text-link" data-analytics="home_founder" href="/founder">
-              Read the founder story
-            </Link>
+            <Link className="primary-action" href="/founder">Founder story</Link>
           </div>
         </div>
       </section>

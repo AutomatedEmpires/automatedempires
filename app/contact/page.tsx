@@ -3,42 +3,27 @@ import { contactIntents, mailtoFor, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description:
-    "Contact AutomatedEmpires for a controlled pilot, partnership, collaboration, employer conversation, investment inquiry, or venture-specific question.",
-  alternates: {
-    canonical: "/contact",
-  },
+  description: "Talk with AutomatedEmpires about products, partnerships, investment, and building together.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
   return (
     <main id="main">
-      <section className="page-hero">
-        <div className="section-inner narrow">
-          <p className="eyebrow">Contact</p>
-          <h1>Start the right conversation.</h1>
-          <p>
-            The most reliable contact surface today is direct email with clear
-            intent. No fake form, no silent submission path.
-          </p>
-          <a className="primary-action compact" data-analytics="contact_email" href={`mailto:${site.email}`}>
-            {site.email}
-          </a>
+      <section className="contact-hero">
+        <div className="section-inner contact-hero-grid">
+          <div><p className="eyebrow">Contact</p><h1>Bring the real conversation.</h1></div>
+          <div><p>Tell us which company, customer problem, partnership, or opportunity you have in mind. Clear context gets you to the right conversation faster.</p><a className="contact-email" href={`mailto:${site.email}`}>{site.email}<span aria-hidden="true">↗</span></a></div>
         </div>
       </section>
 
-      <section className="section-block">
+      <section className="section-block" aria-labelledby="contact-paths-heading">
         <div className="section-inner">
+          <div className="section-heading"><p className="eyebrow">Choose a path</p><h2 id="contact-paths-heading">What do you want to move forward?</h2></div>
           <div className="intent-grid">
-            {contactIntents.map((intent) => (
-              <a
-                className="intent-card"
-                data-analytics={`contact_${intent.label.toLowerCase().replaceAll(" ", "_")}`}
-                href={mailtoFor(intent.subject)}
-                key={intent.label}
-              >
-                <span>{intent.label}</span>
-                <p>{intent.description}</p>
+            {contactIntents.map((intent, index) => (
+              <a className="intent-card" href={mailtoFor(intent.subject)} key={intent.label}>
+                <span>{String(index + 1).padStart(2, "0")}</span><h3>{intent.label}</h3><p>{intent.description}</p><strong>Write to us ↗</strong>
               </a>
             ))}
           </div>

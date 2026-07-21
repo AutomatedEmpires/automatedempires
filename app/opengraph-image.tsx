@@ -18,8 +18,8 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#101313",
-          color: "#f4f0e7",
+          background: "#0a0a0b",
+          color: "#f4f1e8",
           padding: 72,
           fontFamily: "Arial, sans-serif",
         }}
@@ -32,17 +32,18 @@ export default function Image() {
             fontSize: 28,
           }}
         >
-          <span>AutomatedEmpires</span>
-          <span style={{ color: "#d2b46e" }}>Venture studio</span>
+          <span>A/E · AutomatedEmpires</span>
+          <span style={{ color: "#d8ff57" }}>Venture company</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
           <div style={{ fontSize: 82, lineHeight: 1.02, maxWidth: 920 }}>
-            The world is full of systems that almost work.
+            Companies for the real world.
           </div>
-          <div style={{ display: "flex", gap: 18, fontSize: 30, color: "#abc0b8" }}>
-            <span>Find fragmentation</span>
-            <span>Understand failure</span>
-            <span>Build the system</span>
+          <div style={{ display: "flex", gap: 18, fontSize: 30, color: "#a7a49b" }}>
+            <span>Products</span>
+            <span>Marketplaces</span>
+            <span>Operations</span>
+            <span>Civic systems</span>
           </div>
         </div>
       </div>

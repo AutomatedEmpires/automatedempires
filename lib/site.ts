@@ -1,81 +1,48 @@
 export const site = {
   name: "AutomatedEmpires",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://automatedempires.vercel.app",
-  intendedDomain: "https://automatedempires.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://automatedempires.com",
   email: "jackson@automatedempires.com",
   description:
-    "AutomatedEmpires is the founder-led parent operator and command layer for a portfolio of independent software, civic, and operating-business ventures.",
-  thesis: "Different industries. Same instinct.",
-  manifesto: [
-    "Find what is fragmented.",
-    "Understand who it fails.",
-    "Build the system that should exist.",
-  ],
-  shortThesis:
-    "We build systems for markets and experiences the internet still handles badly.",
+    "AutomatedEmpires is a founder-led venture company building focused products for work, travel, logistics, local services, marketplaces, and civic access.",
+  headline: "Companies for the real world.",
 };
 
 export const navItems = [
-  { href: "/ventures", label: "Ventures" },
-  { href: "/status", label: "Status" },
-  { href: "/company", label: "Company" },
-  { href: "/build", label: "Build" },
+  { href: "/ventures", label: "Portfolio" },
+  { href: "/company", label: "Studio" },
+  { href: "/build", label: "Updates" },
   { href: "/founder", label: "Founder" },
   { href: "/contact", label: "Contact" },
 ];
 
 export const contactIntents = [
   {
-    label: "Pilot",
-    subject: "Pilot inquiry",
+    label: "Product & pilot",
+    subject: "Product or pilot conversation",
     description:
-      "For controlled pilot conversations tied to a specific venture and its stated readiness gates.",
+      "Talk about a specific venture, early access, a real operating workflow, or becoming a launch partner.",
   },
   {
     label: "Partner",
     subject: "Partnership conversation",
     description:
-      "For venture partnerships, host relationships, civic data, local operations, or strategic distribution.",
-  },
-  {
-    label: "Collaborate",
-    subject: "Collaboration conversation",
-    description:
-      "For builders, designers, operators, product people, and domain experts who want to contribute.",
-  },
-  {
-    label: "Employer",
-    subject: "Employer conversation",
-    description:
-      "For technical operations, product ownership, project delivery, and founder portfolio conversations.",
+      "Bring distribution, industry knowledge, data, operations, or a strategic relationship to a portfolio company.",
   },
   {
     label: "Invest",
-    subject: "Investor conversation",
+    subject: "Investment conversation",
     description:
-      "For investors evaluating the portfolio, operating model, evidence standard, or a specific venture.",
+      "Discuss the portfolio, a specific company, or the operating model behind AutomatedEmpires.",
   },
   {
-    label: "Product inquiry",
-    subject: "Product inquiry",
+    label: "Build with us",
+    subject: "Build with AutomatedEmpires",
     description:
-      "For questions about Explore&Earn, BidSpace, LogLoads, Sweepza, Lake & Pine, ORAN, or emerging systems.",
-  },
-  {
-    label: "Work with AE",
-    subject: "Work with AutomatedEmpires",
-    description:
-      "For future employees, contractors, advisors, and serious operators interested in the build.",
-  },
-  {
-    label: "General",
-    subject: "General conversation",
-    description:
-      "For anything that does not fit neatly into the other routes.",
+      "For exceptional product people, engineers, designers, operators, advisors, and domain experts.",
   },
 ];
 
 export function mailtoFor(subject: string) {
-  const encodedSubject = encodeURIComponent(`AutomatedEmpires - ${subject}`);
+  const encodedSubject = encodeURIComponent(`AutomatedEmpires — ${subject}`);
   return `mailto:${site.email}?subject=${encodedSubject}`;
 }
