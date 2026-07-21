@@ -1,72 +1,74 @@
-export type BuildSignal = {
+export type PortfolioUpdate = {
   date: string;
   venture: string;
   title: string;
   summary: string;
-  state: "Shipped to main" | "Active branch" | "Foundation" | "Documented canon";
-  proof: string;
-  href?: string;
+  status: "Live" | "Shipped" | "In review" | "In development";
+  href: string;
 };
 
-export const buildSignals = [
+export const portfolioUpdates = [
   {
-    date: "2026-07-06",
+    date: "2026-07-21",
     venture: "Explore&Earn",
-    title: "Discovery hardening moved through the launch-convergence branch.",
+    title: "Housing proof became part of the product.",
     summary:
-      "Auth matchers, keyless fallbacks, listing creation survival, resume mobile polish, and migration-guard work tightened the marketplace surface without claiming the product is finished.",
-    state: "Active branch",
-    proof: "Recent repo commits: ca3992d, 4d7997b, 93ac5c9, 7f5cd40.",
-    href: "https://github.com/AutomatedEmpires/explore-and-earn",
+      "Verified housing photos now give seekers a clearer, more credible view of where they would live before they pursue an opportunity.",
+    status: "Shipped",
+    href: "https://github.com/AutomatedEmpires/explore-and-earn/commit/ad2c476ba2b8",
   },
   {
-    date: "2026-07-06",
-    venture: "LogLoads",
-    title: "The timber operating network gained authenticated cockpit depth.",
-    summary:
-      "Driver, fleet, host, admin, map, public, messages, monetization, session identity, and redaction-aware network work landed around the V3 operating model.",
-    state: "Active branch",
-    proof: "Recent repo commits: 6b8ca46, 34d4fd1, f0ee3e9, 37cbe23.",
-    href: "https://github.com/AutomatedEmpires/logloads",
-  },
-  {
-    date: "2026-07-06",
-    venture: "Sweepza",
-    title: "The consumer sweepstakes routine became more cohesive.",
-    summary:
-      "Today, My Sweeps, unified Discover, and hydration-safe render timing moved Sweepza closer to a daily-use consumer surface.",
-    state: "Active branch",
-    proof: "Recent repo commits: 1d492a3 and 494035e.",
-    href: "https://github.com/AutomatedEmpires/sweepza",
-  },
-  {
-    date: "2026-07-06",
-    venture: "BidSpace",
-    title: "Spatial commerce now has a visible marketplace shell.",
-    summary:
-      "The integration branch added public marketplace, explore, map, opportunity, inventory-unit detail, trust provenance, fit engine, listing queries, and a dedicated design system.",
-    state: "Active branch",
-    proof: "Recent repo commits: c6cf6ee, 518ec76, b2d0bfa.",
-    href: "https://github.com/AutomatedEmpires/bidspace",
-  },
-  {
-    date: "2026-07-06",
-    venture: "Lake & Pine",
-    title: "The operating business gained a production application foundation.",
-    summary:
-      "A typed Next.js foundation now preserves the recovered prototype as product truth while avoiding a premature direct-port of the historical HTML artifact.",
-    state: "Foundation",
-    proof: "Recent repo commit: 67b50e2.",
-    href: "https://github.com/AutomatedEmpires/lakeandpine",
-  },
-  {
-    date: "2026-06-09",
+    date: "2026-07-21",
     venture: "ORAN",
-    title: "The mission system published its trust, safety, and platform canon.",
+    title: "A regional release candidate is taking shape.",
     summary:
-      "ORAN documents retrieval-first behavior, crisis hard gates, deterministic scoring, verification workflows, Azure-first deployment, and investor/partner positioning.",
-    state: "Documented canon",
-    proof: "Repo docs: VISION, SCORING_MODEL, INVESTOR_PARTNER_BRIEF, PLATFORM_AZURE.",
-    href: "https://github.com/AutomatedEmpires/Open-Resource-Access-Network",
+      "Trusted seeker journeys, guided intake, and durable privacy work are converging around North Idaho and Eastern Washington.",
+    status: "In review",
+    href: "https://github.com/AutomatedEmpires/Open-Resource-Access-Network/pull/95",
   },
-] satisfies BuildSignal[];
+  {
+    date: "2026-07-21",
+    venture: "LogLoads",
+    title: "Load ownership is stronger from the first post.",
+    summary:
+      "Every posting source is now tied to its organization while direct offers and assignment-ready driver briefings move through review.",
+    status: "Shipped",
+    href: "https://github.com/AutomatedEmpires/logloads/commit/f614eae50119",
+  },
+  {
+    date: "2026-07-21",
+    venture: "Sweepza",
+    title: "The live product is being watched around the clock.",
+    summary:
+      "Scheduled production checks protect the discovery experience, with more durable reminder delivery next in the release path.",
+    status: "Live",
+    href: "https://github.com/AutomatedEmpires/sweepza/pull/93",
+  },
+  {
+    date: "2026-07-21",
+    venture: "Lake & Pine",
+    title: "Booking and operations are becoming one journey.",
+    summary:
+      "Customer scheduling work is connecting the request experience to real service capacity, property context, and team operations.",
+    status: "In review",
+    href: "https://github.com/AutomatedEmpires/lakeandpine/pull/16",
+  },
+  {
+    date: "2026-07-21",
+    venture: "PinnedAtlas",
+    title: "Destination discovery stays open and free.",
+    summary:
+      "The live map continues to lead with real places and lightweight exploration without putting an account wall in the way.",
+    status: "Live",
+    href: "https://pinnedatlas.com",
+  },
+  {
+    date: "2026-07-16",
+    venture: "BidSpace",
+    title: "The host-vendor marketplace foundation reached the product.",
+    summary:
+      "Temporary-space inventory, applications, allocation state, and host-side vendor discovery now form the base for a focused preview.",
+    status: "In development",
+    href: "https://github.com/AutomatedEmpires/bidspace/commit/1341665dc057",
+  },
+] satisfies PortfolioUpdate[];

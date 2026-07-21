@@ -17,9 +17,9 @@ export function SiteHeader() {
       <nav className="nav-shell" aria-label="Primary navigation">
         <Link className="brand-mark" href="/" data-analytics="nav_home">
           <span className="brand-symbol" aria-hidden="true">
-            AE
+            A/E
           </span>
-          <span>AutomatedEmpires</span>
+          <span className="brand-wordmark">Automated<span>Empires</span></span>
         </Link>
 
         <button
@@ -41,6 +41,7 @@ export function SiteHeader() {
               href={item.href}
               key={item.href}
               onClick={() => setOpen(false)}
+              className={item.label === "Contact" ? "nav-contact" : undefined}
             >
               {item.label}
             </Link>
