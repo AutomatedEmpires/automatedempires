@@ -38,7 +38,7 @@ export function VentureVisual({ venture, compact = false }: { venture: Venture; 
           width={1280}
         />
         <div className="route-overlay">
-          <span>Landing</span><i /><span>Assigned</span><i /><span>Mill</span>
+          <span>Landing</span><i aria-hidden="true" /><span>Assigned</span><i aria-hidden="true" /><span>Mill</span>
         </div>
       </div>
     );
@@ -100,7 +100,7 @@ export function VentureVisual({ venture, compact = false }: { venture: Venture; 
           <span className="atlas-pin pin-a">Waterfall</span>
           <span className="atlas-pin pin-b">Hot spring</span>
           <span className="atlas-pin pin-c">Cave</span>
-          <i className="atlas-route" />
+          <i aria-hidden="true" className="atlas-route" />
         </div>
       </div>
     );

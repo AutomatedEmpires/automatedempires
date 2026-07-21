@@ -3,10 +3,13 @@ import { SystemsCanvas } from "@/components/SystemsCanvas";
 import { VentureCard } from "@/components/VentureCard";
 import { VentureVisual } from "@/components/VentureVisual";
 import { portfolioUpdates } from "@/lib/build-log";
-import { featuredVentures, getVenture, labVentures } from "@/lib/ventures";
+import { featuredVentures, getVenture, labVentures, ventures } from "@/lib/ventures";
 
 export default function Home() {
   const oran = getVenture("oran");
+  const liveVentureCount = ventures.filter((venture) => venture.stage === "Live").length;
+  const activeBuildCount = featuredVentures.filter((venture) => venture.stage !== "Live").length;
+  const displayCount = (count: number) => String(count).padStart(2, "0");
 
   return (
     <main id="main">
@@ -37,9 +40,9 @@ export default function Home() {
 
       <section className="portfolio-facts" aria-label="Portfolio facts">
         <div className="section-inner portfolio-facts-grid">
-          <div><strong>09</strong><span>ventures represented</span></div>
-          <div><strong>02</strong><span>live consumer products</span></div>
-          <div><strong>05</strong><span>products on the build floor</span></div>
+          <div><strong>{displayCount(ventures.length)}</strong><span>ventures represented</span></div>
+          <div><strong>{displayCount(liveVentureCount)}</strong><span>live consumer products</span></div>
+          <div><strong>{displayCount(activeBuildCount)}</strong><span>products on the build floor</span></div>
           <div><strong>01</strong><span>operating company behind it all</span></div>
         </div>
       </section>

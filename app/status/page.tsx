@@ -9,11 +9,22 @@ export const metadata: Metadata = {
 };
 
 export default function StatusPage() {
+  const latestDate = ventures.reduce(
+    (latest, venture) => venture.latestDate > latest ? venture.latestDate : latest,
+    "",
+  );
+  const snapshotDate = new Intl.DateTimeFormat("en-US", {
+    day: "numeric",
+    month: "long",
+    timeZone: "UTC",
+    year: "numeric",
+  }).format(new Date(`${latestDate}T00:00:00Z`));
+
   return (
     <main id="main">
       <section className="page-hero snapshot-hero">
         <div className="section-inner page-hero-grid">
-          <div><p className="eyebrow">Portfolio snapshot · July 21, 2026</p><h1>What is live, what is launching, and what is next.</h1></div>
+          <div><p className="eyebrow">Portfolio snapshot · {snapshotDate}</p><h1>What is live, what is launching, and what is next.</h1></div>
           <p>
             A concise view of the portfolio today. Product stages move as the
             work moves; the customer problem and company identity stay clear.
