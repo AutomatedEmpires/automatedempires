@@ -58,8 +58,8 @@ export const ventures: Venture[] = [
     slug: "explore-and-earn",
     name: "Explore&Earn",
     group: "company",
-    stage: "Launch track",
-    tone: "active",
+    stage: "Live",
+    tone: "live",
     category: "Work-travel marketplace",
     tagline: "Go where the work takes you.",
     summary:
@@ -78,16 +78,16 @@ export const ventures: Venture[] = [
       "Marketplace moderation and source provenance",
     ],
     currentFocus:
-      "Hardening the production launch path and proving a trustworthy supply of opportunities with complete housing, meals, and pay information.",
+      "Operating the live marketplace: growing a trustworthy supply of opportunities and keeping housing, meals, and pay complete on every listing.",
     latestUpdate:
-      "Verified housing photo evidence is now part of the marketplace, giving seekers a clearer view of where they would actually live.",
-    latestDate: "2026-07-21",
+      "Explore&Earn is live. The redesigned seeker experience and production payments completed the launch path, and real opportunities are open to browse.",
+    latestDate: "2026-07-29",
     vision: "The opportunity layer for people willing to go where the work is.",
     website: "https://exploreandearn.com",
-    websiteLabel: "Explore the preview",
+    websiteLabel: "Open Explore&Earn",
     repository: "https://github.com/AutomatedEmpires/explore-and-earn",
     customerNote:
-      "Explore&Earn is in launch preparation. Opportunity details come from hosts and source evidence and should be confirmed before making travel or employment decisions.",
+      "Explore&Earn is live. Opportunity details come from hosts and source evidence and should be confirmed before making travel or employment decisions.",
     featured: true,
     visual: "explore",
     palette: { ink: "#15382e", accent: "#b9ff66", soft: "#e9f4d8" },
@@ -117,10 +117,10 @@ export const ventures: Venture[] = [
       "Operational messaging and trip history",
     ],
     currentFocus:
-      "Completing the direct-offer lifecycle, richer landing briefings, and a dedicated media environment for real hauling workflows.",
+      "Hardening the scheduling and assignment loop so published loads, slots, and driver commitments stay truthful end to end.",
     latestUpdate:
-      "Every posting source is now tied to its organization, protecting load ownership as the marketplace grows. Direct offers and driver briefings are in review.",
-    latestDate: "2026-07-21",
+      "Scheduling integrity landed: the network now defines exactly what a slot commitment means — and what driver silence means — so the day's plan can be trusted.",
+    latestDate: "2026-07-24",
     vision: "A connected operating network for timber transportation.",
     website: "https://logloads.com",
     websiteLabel: "Explore the preview",
@@ -158,8 +158,8 @@ export const ventures: Venture[] = [
     currentFocus:
       "Expanding high-quality source coverage and making reminders more dependable across the live discovery experience.",
     latestUpdate:
-      "Sweepza now runs scheduled production checks around the clock, with durable reminder delivery moving through review.",
-    latestDate: "2026-07-21",
+      "A redesigned, mobile-first discovery experience shipped to the live product, refreshing how people find, track, and enter giveaways.",
+    latestDate: "2026-07-29",
     vision: "The trusted discovery layer for promotions worth your attention.",
     website: "https://sweepza.com",
     websiteLabel: "Open Sweepza",
@@ -236,8 +236,8 @@ export const ventures: Venture[] = [
     currentFocus:
       "Preparing a regional release candidate for North Idaho and Eastern Washington with trusted seeker journeys and durable privacy controls.",
     latestUpdate:
-      "The regional release candidate now brings trusted seeker journeys, guided intake, and durable account-erasure work into one launch path.",
-    latestDate: "2026-07-21",
+      "Seeker browsing became clearer: browse-by-area on the map, an honest quota display, and one consistent pagination model across discovery.",
+    latestDate: "2026-07-29",
     vision: "A trusted front door to the help already available in a community.",
     repository: "https://github.com/AutomatedEmpires/Open-Resource-Access-Network",
     customerNote:

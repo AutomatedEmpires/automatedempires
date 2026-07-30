@@ -9,6 +9,42 @@ export type PortfolioUpdate = {
 
 export const portfolioUpdates = [
   {
+    date: "2026-07-29",
+    venture: "Explore&Earn",
+    title: "Explore&Earn went live.",
+    summary:
+      "The production marketplace is open at exploreandearn.com — the redesigned seeker experience and live payments completed the launch path.",
+    status: "Live",
+    href: "https://exploreandearn.com",
+  },
+  {
+    date: "2026-07-29",
+    venture: "Sweepza",
+    title: "The live discovery experience was redesigned.",
+    summary:
+      "A gamified, mobile-first refresh shipped to production, modernizing how people discover, organize, and enter giveaways.",
+    status: "Live",
+    href: "https://github.com/AutomatedEmpires/sweepza/pull/103",
+  },
+  {
+    date: "2026-07-29",
+    venture: "ORAN",
+    title: "Seeker browsing became clearer.",
+    summary:
+      "Browse-by-area on the map, an honest quota display, and one consistent pagination model made discovery easier to trust in the regional preview build.",
+    status: "Shipped",
+    href: "https://github.com/AutomatedEmpires/Open-Resource-Access-Network/pull/107",
+  },
+  {
+    date: "2026-07-24",
+    venture: "LogLoads",
+    title: "A slot commitment now means something.",
+    summary:
+      "Scheduling integrity work defined what a slot means — and what driver silence means — keeping the day's plan truthful for hosts and drivers.",
+    status: "Shipped",
+    href: "https://github.com/AutomatedEmpires/logloads/pull/69",
+  },
+  {
     date: "2026-07-21",
     venture: "Explore&Earn",
     title: "Housing proof became part of the product.",
