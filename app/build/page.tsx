@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import { portfolioUpdates } from "@/lib/build-log";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Updates",
   description: "The latest product progress across the AutomatedEmpires portfolio.",
-  alternates: { canonical: "/build" },
-};
+  path: "/build",
+});
 
 export default function BuildPage() {
   return (

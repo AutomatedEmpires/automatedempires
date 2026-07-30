@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "AutomatedEmpires";
 export const size = {
   width: 1200,
@@ -21,7 +20,6 @@ export default function Image() {
           background: "#0a0a0b",
           color: "#f4f1e8",
           padding: 72,
-          fontFamily: "Arial, sans-serif",
         }}
       >
         <div

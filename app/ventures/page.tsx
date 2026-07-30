@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { VentureCard } from "@/components/VentureCard";
+import { pageMetadata } from "@/lib/site";
 import { activeVentures, labVentures, portfolioLab } from "@/lib/ventures";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Portfolio",
   description:
     "Explore the AutomatedEmpires portfolio across work-travel, forestry logistics, sweepstakes discovery, property care, civic access, vendor space, travel, and new studio concepts.",
-  alternates: { canonical: "/ventures" },
-};
+  path: "/ventures",
+});
 
 export default function VenturesPage() {
   return (

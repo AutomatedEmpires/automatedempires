@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Founder",
   description: "Meet Jackson Cole, founder of AutomatedEmpires.",
-  alternates: { canonical: "/founder" },
-};
+  path: "/founder",
+});
 
 export default function FounderPage() {
   return (

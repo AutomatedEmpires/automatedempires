@@ -20,6 +20,7 @@ export type Venture = {
   id: string;
   slug: string;
   name: string;
+  fullName?: string;
   group: VentureGroup;
   stage: VentureStage;
   tone: VentureTone;
@@ -113,7 +114,7 @@ export const ventures: Venture[] = [
       "Driver, fleet, host, and admin workspaces",
       "Equipment and route-fit workflows",
       "Assignment-aware access and driver briefings",
-      "Direct offers and commitment lifecycle",
+      "Scheduling, slots, and commitment tracking",
       "Operational messaging and trip history",
     ],
     currentFocus:
@@ -126,7 +127,7 @@ export const ventures: Venture[] = [
     websiteLabel: "Explore the preview",
     repository: "https://github.com/AutomatedEmpires/logloads",
     customerNote:
-      "LogLoads is coordination software for forestry logistics teams. Pilot conversations are focused on real operating workflows and regional fit.",
+      "LogLoads is coordination software for forestry logistics teams — not a broker, carrier, dispatch-for-hire operator, or payment processor. It is in pilot; conversations are focused on real operating workflows and regional fit.",
     featured: true,
     visual: "logloads",
     palette: { ink: "#14251b", accent: "#ffb15c", soft: "#e7ecdf" },
@@ -148,12 +149,12 @@ export const ventures: Venture[] = [
     product:
       "Sweepza organizes promotions into a clear discovery feed with source verification, saved items, reminders, transparent listing states, and direct access to official rules and entry pages.",
     capabilities: [
-      "Verified promotion discovery",
-      "Official source and rules links",
+      "Official-source promotion discovery",
+      "Direct links to official rules and entry",
       "Saved giveaways and reminders",
       "Freshness and expiration tracking",
       "Host and sponsor submissions",
-      "Scheduled production health monitoring",
+      "Transparent listing states",
     ],
     currentFocus:
       "Expanding high-quality source coverage and making reminders more dependable across the live discovery experience.",
@@ -175,36 +176,37 @@ export const ventures: Venture[] = [
     slug: "lake-and-pine",
     name: "Lake & Pine",
     group: "operating",
-    stage: "Pilot build",
-    tone: "active",
-    category: "Property care operations",
-    tagline: "A better-run home service company.",
+    stage: "Live",
+    tone: "live",
+    category: "Premium property care",
+    tagline: "Interior care for exceptional properties.",
     summary:
-      "An intelligent operating system for premium cleaning and property care, from first request through repeat service.",
-    audience: "Homeowners, property managers, service teams, and operators",
+      "A premium cleaning and property care company serving homeowners and property managers, with a consultation-first approach to every property.",
+    audience: "Homeowners, property managers, and second-home owners",
     problem:
-      "Home service quality is often held together by texts, memory, scattered notes, and the one person who knows every detail about the property.",
+      "Premium property care is judged on consistency, and consistency is usually held together by texts, memory, and the one person who knows every detail about the house.",
     product:
-      "Lake & Pine brings requests, property profiles, preferences, estimates, planning, scheduling, team coordination, service status, and follow-up into one connected experience.",
+      "Lake & Pine is the operating business itself: a consultative intake that starts with the property, standards written down instead of remembered, and service built around how each home is actually used.",
     capabilities: [
-      "Customer booking requests",
-      "Property and room profiles",
-      "Service planning and intelligent estimates",
-      "Team and workforce operations",
-      "Job pipeline and service status",
-      "Recurring care and customer follow-up",
+      "Consultation-first client intake",
+      "Property-specific care standards",
+      "Recurring and seasonal service",
+      "Second-home and property-manager care",
+      "Direct, accountable communication",
+      "Local service in North Idaho",
     ],
     currentFocus:
-      "Bringing the customer booking journey and scheduling authority into a controlled operating rollout.",
+      "Growing the client base and turning repeatable service standards into the operating discipline behind the business.",
     latestUpdate:
-      "The booking and scheduling journey is being connected to the operational foundation so customer promises and team capacity stay aligned.",
-    latestDate: "2026-07-21",
-    vision: "The operating layer for property care people can trust.",
+      "The public site leads with a consultation-first intake, matching how premium property care actually starts: a conversation about the property, not a checkout.",
+    latestDate: "2026-07-22",
+    vision:
+      "Prove the operating discipline in a real service business before turning it into software.",
     website: "https://lakeandpinecleaning.com",
     websiteLabel: "Visit Lake & Pine",
     repository: "https://github.com/AutomatedEmpires/lakeandpine",
     customerNote:
-      "Lake & Pine is preparing its customer booking experience through a controlled service rollout.",
+      "Lake & Pine is a working service company. Scheduling and pricing are handled through a direct consultation rather than online checkout.",
     featured: true,
     visual: "lake",
     palette: { ink: "#20352f", accent: "#92c7a8", soft: "#e7eee8" },
@@ -213,6 +215,7 @@ export const ventures: Venture[] = [
     id: "oran",
     slug: "oran",
     name: "ORAN",
+    fullName: "Open Resource Access Network",
     group: "mission",
     stage: "Regional preview",
     tone: "building",

@@ -7,6 +7,8 @@ import { getVenture, ventures } from "@/lib/ventures";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return ventures.map((venture) => ({ slug: venture.slug }));
 }
@@ -22,10 +24,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: venture.summary,
     alternates: { canonical: `/ventures/${venture.slug}` },
     openGraph: {
+      type: "website",
+      siteName: "AutomatedEmpires",
       title: `${venture.name} | AutomatedEmpires`,
       description: venture.summary,
       url: `/ventures/${venture.slug}`,
-      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${venture.name} | AutomatedEmpires`,
+      description: venture.summary,
     },
   };
 }
@@ -51,6 +59,9 @@ export default async function VenturePage({ params }: PageProps) {
               <span className="stage-pill">{venture.stage}</span>
             </div>
             <h1>{venture.name}</h1>
+            {venture.fullName ? (
+              <p className="venture-hero-fullname">{venture.fullName}</p>
+            ) : null}
             <p className="venture-hero-tagline">{venture.tagline}</p>
             <p className="venture-hero-summary">{venture.summary}</p>
             <div className="hero-actions">

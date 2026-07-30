@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
 import { ventures } from "@/lib/ventures";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Portfolio Snapshot",
   description: "A current snapshot of every AutomatedEmpires venture and what each team is building next.",
-  alternates: { canonical: "/status" },
-};
+  path: "/status",
+});
 
 export default function StatusPage() {
   const latestDate = ventures.reduce(

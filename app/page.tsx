@@ -3,11 +3,11 @@ import { SystemsCanvas } from "@/components/SystemsCanvas";
 import { VentureCard } from "@/components/VentureCard";
 import { VentureVisual } from "@/components/VentureVisual";
 import { portfolioUpdates } from "@/lib/build-log";
-import { featuredVentures, getVenture, labVentures, ventures } from "@/lib/ventures";
+import { featuredVentures, getVenture, labVentures, liveVentures, ventures } from "@/lib/ventures";
 
 export default function Home() {
   const oran = getVenture("oran");
-  const liveVentureCount = ventures.filter((venture) => venture.stage === "Live").length;
+  const liveVentureCount = liveVentures.length;
   const activeBuildCount = featuredVentures.filter((venture) => venture.stage !== "Live").length;
   const displayCount = (count: number) => String(count).padStart(2, "0");
   const latestUpdateDate = portfolioUpdates.reduce(

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Archivo, Fraunces } from "next/font/google";
 import type { ReactNode } from "react";
 import { Analytics } from "@/components/Analytics";
 import { Footer } from "@/components/Footer";
@@ -6,10 +7,27 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { site } from "@/lib/site";
 import "./globals.css";
 
+// The display system is built on weight 900 and tight tracking; Arial has no
+// 900 face, so the intended cut only renders with a real variable grotesque.
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500", "800", "900"],
+  display: "swap",
+  variable: "--font-display",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  display: "swap",
+  variable: "--font-serif",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "AutomatedEmpires",
+    default: `AutomatedEmpires — ${site.headline}`,
     template: "%s | AutomatedEmpires",
   },
   description: site.description,
@@ -22,24 +40,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: site.url,
+    url: "/",
     siteName: site.name,
-    title: "AutomatedEmpires",
+    title: `AutomatedEmpires — ${site.headline}`,
     description: site.description,
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "AutomatedEmpires",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AutomatedEmpires",
+    title: `AutomatedEmpires — ${site.headline}`,
     description: site.description,
-    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -48,7 +57,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0b",
+  themeColor: "#f2efe6",
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
@@ -61,16 +70,34 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: site.name,
-    url: site.url,
-    email: site.email,
-    description: site.description,
-    sameAs: ["https://github.com/AutomatedEmpires"],
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${site.url}/#organization`,
+        name: site.name,
+        url: site.url,
+        email: site.email,
+        description: site.description,
+        logo: `${site.url}/apple-icon`,
+        founder: {
+          "@type": "Person",
+          name: "Jackson Cole",
+          url: `${site.url}/founder`,
+        },
+        sameAs: ["https://github.com/AutomatedEmpires"],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${site.url}/#website`,
+        name: site.name,
+        url: site.url,
+        publisher: { "@id": `${site.url}/#organization` },
+      },
+    ],
   };
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${archivo.variable} ${fraunces.variable}`}>
       <body>
         <SiteHeader />
         {children}

@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
-import { contactIntents, mailtoFor, site } from "@/lib/site";
+import { contactIntents, mailtoFor, pageMetadata, site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
   description: "Talk with AutomatedEmpires about products, partnerships, investment, and building together.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Studio",
   description: "How AutomatedEmpires turns fragmented real-world work into focused software companies.",
-  alternates: { canonical: "/company" },
-};
+  path: "/company",
+});
 
 const principles = [
   ["Start with the work", "We study the calls, spreadsheets, workarounds, handoffs, and local knowledge holding a market together."],

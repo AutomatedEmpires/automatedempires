@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 export const site = {
   name: "AutomatedEmpires",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://automatedempires.com",
@@ -41,6 +43,35 @@ export const contactIntents = [
       "For exceptional product people, engineers, designers, operators, advisors, and domain experts.",
   },
 ];
+
+export function pageMetadata({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}): Metadata {
+  const socialTitle = `${title} | ${site.name}`;
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      siteName: site.name,
+      title: socialTitle,
+      description,
+      url: path,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: socialTitle,
+      description,
+    },
+  };
+}
 
 export function mailtoFor(subject: string) {
   const encodedSubject = encodeURIComponent(`AutomatedEmpires — ${subject}`);
