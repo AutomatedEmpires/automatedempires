@@ -24,6 +24,7 @@ carried Explore&Earn as "Launch track / in launch preparation".
 ## What was fixed
 
 ### Content truth
+
 | Venture | Was | Now |
 |---|---|---|
 | Explore&Earn | "Launch track", "in launch preparation", "Explore the preview" | **Live**, launch milestone dated 2026-07-29 |
@@ -39,6 +40,7 @@ Live product count on the home page went from 2 to 4 — it derives from stage,
 so it corrected itself once the stages were true.
 
 ### Accessibility — every fix verified by computed contrast in a browser
+
 | Surface | Before | After |
 |---|---|---|
 | `/build` hero copy | 1.70:1 | 6.41:1 |

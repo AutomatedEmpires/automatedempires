@@ -1,11 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { pageMetadata } from "@/lib/site";
 
-export const metadata = pageMetadata({
+// Deliberately not pageMetadata(): a 404 must not claim a canonical URL or
+// share card for a page that does not exist.
+export const metadata: Metadata = {
   title: "Page not found",
   description: "This route is not part of the public AutomatedEmpires site.",
-  path: "/",
-});
+};
 
 export default function NotFound() {
   return (

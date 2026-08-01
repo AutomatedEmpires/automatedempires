@@ -16,20 +16,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     `${latestUpdate > latestVentureChange ? latestUpdate : latestVentureChange}T00:00:00Z`,
   );
 
-  const staticRoutes: Array<{ route: string; lastModified: Date }> = [
+  // Only routes whose content derives from the venture registry or build log
+  // get a lastModified; hand-edited pages carry no reliable date, so they omit it.
+  const staticRoutes: Array<{ route: string; lastModified?: Date }> = [
     { route: "", lastModified: portfolioModified },
-    { route: "/ventures", lastModified: portfolioModified },
-    { route: "/status", lastModified: portfolioModified },
-    { route: "/company", lastModified: portfolioModified },
-    { route: "/founder", lastModified: portfolioModified },
+    { route: "/ventures", lastModified: new Date(`${latestVentureChange}T00:00:00Z`) },
+    { route: "/status", lastModified: new Date(`${latestVentureChange}T00:00:00Z`) },
+    { route: "/company" },
+    { route: "/founder" },
     { route: "/build", lastModified: new Date(`${latestUpdate}T00:00:00Z`) },
-    { route: "/contact", lastModified: portfolioModified },
+    { route: "/contact" },
   ];
 
   return [
     ...staticRoutes.map(({ route, lastModified }) => ({
       url: `${site.url}${route}`,
-      lastModified,
+      ...(lastModified ? { lastModified } : {}),
       changeFrequency: "monthly" as const,
       priority: route === "" ? 1 : 0.8,
     })),

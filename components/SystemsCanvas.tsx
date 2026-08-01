@@ -7,7 +7,7 @@ const portfolioYear = ventures.reduce(
 
 export function SystemsCanvas() {
   return (
-    <div className="portfolio-stage" aria-label="AutomatedEmpires portfolio overview">
+    <section className="portfolio-stage" aria-label="AutomatedEmpires portfolio overview">
       <div className="portfolio-stage-top">
         <span>Portfolio / {portfolioYear}</span>
         <span className="live-indicator">Building now</span>

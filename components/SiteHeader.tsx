@@ -15,7 +15,12 @@ export function SiteHeader() {
         Skip to content
       </a>
       <nav className="nav-shell" aria-label="Primary navigation">
-        <Link className="brand-mark" href="/" data-analytics="nav_home">
+        <Link
+          aria-label="AutomatedEmpires home"
+          className="brand-mark"
+          href="/"
+          data-analytics="nav_home"
+        >
           <span className="brand-symbol" aria-hidden="true">
             A/E
           </span>

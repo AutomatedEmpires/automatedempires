@@ -42,7 +42,9 @@ export default function StatusPage() {
                 <div><p>{venture.category}</p><h3>{venture.name}</h3></div>
                 <span className="stage-pill">{venture.stage}</span>
                 <p>{venture.currentFocus}</p>
-                <Link href={`/ventures/${venture.slug}`}>View venture</Link>
+                <Link aria-label={`View ${venture.name}`} href={`/ventures/${venture.slug}`}>
+                  View venture
+                </Link>
               </article>
             ))}
           </div>

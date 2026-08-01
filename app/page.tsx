@@ -51,7 +51,7 @@ export default function Home() {
       <section className="portfolio-facts" aria-label="Portfolio facts">
         <div className="section-inner portfolio-facts-grid">
           <div><strong>{displayCount(ventures.length)}</strong><span>ventures represented</span></div>
-          <div><strong>{displayCount(liveVentureCount)}</strong><span>live consumer products</span></div>
+          <div><strong>{displayCount(liveVentureCount)}</strong><span>ventures live in production</span></div>
           <div><strong>{displayCount(activeBuildCount)}</strong><span>products on the build floor</span></div>
           <div><strong>01</strong><span>operating company behind it all</span></div>
         </div>
