@@ -33,6 +33,6 @@ export function SystemsCanvas() {
         <span>Operations</span>
         <span>Civic systems</span>
       </div>
-    </div>
+    </section>
   );
 }
