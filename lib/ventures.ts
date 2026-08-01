@@ -79,10 +79,10 @@ export const ventures: Venture[] = [
       "Marketplace moderation and source provenance",
     ],
     currentFocus:
-      "Operating the live marketplace: growing a trustworthy supply of opportunities and keeping housing, meals, and pay complete on every listing.",
+      "Winning first supply: recruiting the first hosts so the live feed carries real opportunities with housing, meals, and pay complete on every listing.",
     latestUpdate:
-      "Explore&Earn is live. The redesigned seeker experience and production payments completed the launch path, and real opportunities are open to browse.",
-    latestDate: "2026-07-29",
+      "The platform is live end to end — redesigned seeker experience, production sign-in, and billing rails built and deliberately gated. The public feed shows exactly what hosts have published, and the first listings are the current milestone.",
+    latestDate: "2026-07-31",
     vision: "The opportunity layer for people willing to go where the work is.",
     website: "https://exploreandearn.com",
     websiteLabel: "Open Explore&Earn",
@@ -196,17 +196,17 @@ export const ventures: Venture[] = [
       "Local service in North Idaho",
     ],
     currentFocus:
-      "Growing the client base and turning repeatable service standards into the operating discipline behind the business.",
+      "Activating direct contact channels for the consultation intake, then turning repeatable service standards into the operating discipline behind the business.",
     latestUpdate:
-      "The public site leads with a consultation-first intake, matching how premium property care actually starts: a conversation about the property, not a checkout.",
-    latestDate: "2026-07-22",
+      "The public site leads with a consultation-first intake, matching how premium property care actually starts: a conversation about the property, not a checkout. Direct phone and email are being activated.",
+    latestDate: "2026-07-30",
     vision:
       "Prove the operating discipline in a real service business before turning it into software.",
     website: "https://lakeandpinecleaning.com",
     websiteLabel: "Visit Lake & Pine",
     repository: "https://github.com/AutomatedEmpires/lakeandpine",
     customerNote:
-      "Lake & Pine is a working service company. Scheduling and pricing are handled through a direct consultation rather than online checkout.",
+      "Lake & Pine works consultation-first: scheduling and pricing are handled through a direct conversation rather than online checkout.",
     featured: true,
     visual: "lake",
     palette: { ink: "#20352f", accent: "#92c7a8", soft: "#e7eee8" },
