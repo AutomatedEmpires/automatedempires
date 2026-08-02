@@ -2,6 +2,7 @@ export type VentureGroup = "company" | "mission" | "operating" | "lab";
 
 export type VentureStage =
   | "Live"
+  | "Live site"
   | "Launch track"
   | "Pilot build"
   | "Regional preview"
@@ -281,7 +282,7 @@ export const ventures: Venture[] = [
     slug: "lake-and-pine",
     name: "Lake & Pine",
     group: "operating",
-    stage: "Live",
+    stage: "Live site",
     tone: "live",
     category: "Premium property care",
     tagline: "Interior care for exceptional properties.",
@@ -442,9 +443,9 @@ export const ventures: Venture[] = [
     verified: {
       date: "2026-07-31",
       status:
-        "Built end to end — host cockpit, vendor cockpit, and the full bid, award, booking, payment, and settlement loop proven in test mode. The public preview is offline pending identity-provider provisioning.",
+        "Built end to end — host cockpit, vendor cockpit, and the full bid, award, booking, payment, and settlement loop proven in a recorded 2026-07-07 test run. The public preview is offline pending identity-provider provisioning.",
       evidence: [
-        "The complete money loop (bid → counter → award → booking → payment → settlement) passed a recorded test-mode run",
+        "The complete money loop (bid → counter → award → booking → payment → settlement) passed a recorded test-mode run on 2026-07-07; schema work has landed since, so the money path needs re-verification before launch",
         "Production database schema is provisioned and migrated with a working demo dataset",
         "Remaining launch blockers are account-provisioning actions (auth, payments KYC, maps), not engineering",
       ],
@@ -487,8 +488,8 @@ export const ventures: Venture[] = [
     currentFocus:
       "Improving destination quality, geographic coverage, and the context that helps travelers choose the next stop.",
     latestUpdate:
-      "PinnedAtlas is live and free, with real-destination quality work now at the center of the map experience.",
-    latestDate: "2026-07-21",
+      "PinnedAtlas shipped live and free with real destination data; since mid-July the product has run on its own automation while development is paused.",
+    latestDate: "2026-07-16",
     vision: "A lightweight atlas for the places that make a trip memorable.",
     website: "https://pinnedatlas.com",
     websiteLabel: "Open PinnedAtlas",
@@ -508,7 +509,7 @@ export const ventures: Venture[] = [
     },
     businessModel:
       "Free today. A premium tier is designed and built but deliberately not activated; no payment provider is connected.",
-    ask: "No external ask — the next step is activating usage telemetry to establish a traction baseline.",
+    ask: "None — the next step is internal: activating usage telemetry to establish a traction baseline.",
     openRisks: [
       "No analytics or error monitoring is active yet, so no usage evidence exists in either direction",
       "Development has been idle since mid-July; the product currently coasts on automation",
@@ -619,7 +620,7 @@ export const liveVentures = ventures.filter((venture) => venture.stage === "Live
 export const portfolioLab = [
   { name: "Workproof", note: "Early studio reservation" },
   { name: "Traffic", note: "Early studio reservation" },
-  { name: "Just Jesus Bro", note: "Brand system in private development" },
+  { name: "Just Jesus Bro", note: "Brand concept — docs only" },
   { name: "Komfort Killz", note: "Brand system in private development" },
 ];
 

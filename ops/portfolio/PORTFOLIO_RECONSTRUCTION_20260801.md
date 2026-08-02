@@ -109,14 +109,14 @@ Governance and hygiene:
     archive them.
 11. **Vercel cleanup** — delete/classify `sweepza-canary`, `you`, `co-7`,
     `explore-and-earn-vercel-fix` (empty/unlinked projects).
-12. **GoDaddy account access** — recorded as blocked; renewal continuity for
-    ten domains (incl. automatedinterviewer.com, theresumebot.com) is
-    unprovable until restored.
+12. **Domain governance** — complete the registrar-account verification noted
+    in the provider-governance records so renewal continuity across the domain
+    portfolio is confirmed.
 13. **TheResumeBot domain** — DNS points at Vercel apex with no claiming
-    project; Google Workspace MX may be receiving mail. Check both.
-14. **Dependabot backlog** — meta repo showed 24 alerts pre-merge (the #24
-    next bump + #25 postcss address part); bidspace carries 29 open alerts with
-    its auto-update jobs failing.
+    project; a workspace mailbox may be receiving mail. Check both.
+14. **Dependency-update backlog** — work through the pending dependency
+    updates across the estate (details in each repo's private security view);
+    bidspace's automated update jobs need attention.
 15. **Lake & Pine strategic fork** — ops-platform canon vs. local lead-capture
     direction; `docs/VENTURE_OPERATING_DEFINITIONS.md` still encodes the
     former. The public page describes observable reality; the fork needs a

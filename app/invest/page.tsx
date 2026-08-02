@@ -33,8 +33,9 @@ const relationships = [
 ];
 
 export default function InvestPage() {
+  // "None — ..." is the explicit no-external-ask sentinel in the registry.
   const askVentures = ventures.filter(
-    (venture) => venture.ask && !venture.ask.startsWith("None"),
+    (venture) => venture.ask && !/^None\b/.test(venture.ask),
   );
 
   return (
@@ -71,7 +72,11 @@ export default function InvestPage() {
               <article key={relationship.title}>
                 <h3>{relationship.title}</h3>
                 <p>{relationship.body}</p>
-                <a className="light-action" href={mailtoFor(relationship.subject)}>
+                <a
+                  aria-label={`Start this conversation — ${relationship.title}`}
+                  className="light-action"
+                  href={mailtoFor(relationship.subject)}
+                >
                   Start this conversation
                 </a>
               </article>

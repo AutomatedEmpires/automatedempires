@@ -14,7 +14,7 @@ const capabilities = [
   {
     title: "Marketplace systems",
     proof:
-      "Four distinct two-sided marketplaces are built and deployed: seasonal work (Explore&Earn, live), promotion discovery (Sweepza, live), forestry logistics (LogLoads, pre-launch), and temporary vendor space (BidSpace, built end-to-end in test). Each has real listing, application or bidding, and moderation workflows — not shared boilerplate.",
+      "Four distinct two-sided marketplaces are built: seasonal work (Explore&Earn, live), promotion discovery (Sweepza, live), forestry logistics (LogLoads, serving pre-launch), and temporary vendor space (BidSpace, complete end-to-end in test while its public preview awaits provisioning). Each has real listing, application or bidding, and moderation workflows — not shared boilerplate.",
   },
   {
     title: "Payments engineering, activated honestly",
@@ -122,7 +122,11 @@ export default function CapabilitiesPage() {
                 <h3>{caseStudy.title}</h3>
                 <p>{caseStudy.body}</p>
                 {caseStudy.venture ? (
-                  <Link className="light-action" href={`/ventures/${caseStudy.venture}`}>
+                  <Link
+                    aria-label={`See the ${caseStudy.venture} venture`}
+                    className="light-action"
+                    href={`/ventures/${caseStudy.venture}`}
+                  >
                     See the venture
                   </Link>
                 ) : (

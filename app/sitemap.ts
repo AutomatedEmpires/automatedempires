@@ -8,8 +8,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     (latest, update) => (update.date > latest ? update.date : latest),
     "",
   );
+  // A venture page's content date is the latest of its update, verification,
+  // and evidence-capture dates — all derivable from the registry.
+  const ventureContentDate = (venture: (typeof ventures)[number]) =>
+    [venture.latestDate, venture.verified?.date ?? "", venture.screenshot?.capturedAt ?? ""]
+      .sort()
+      .at(-1)!;
   const latestVentureChange = ventures.reduce(
-    (latest, venture) => (venture.latestDate > latest ? venture.latestDate : latest),
+    (latest, venture) =>
+      ventureContentDate(venture) > latest ? ventureContentDate(venture) : latest,
     "",
   );
   const portfolioModified = new Date(
@@ -39,7 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...ventures.map((venture) => ({
       url: `${site.url}/ventures/${venture.slug}`,
-      lastModified: new Date(`${venture.latestDate}T00:00:00Z`),
+      lastModified: new Date(`${ventureContentDate(venture)}T00:00:00Z`),
       changeFrequency: "monthly" as const,
       priority: venture.featured ? 0.85 : 0.6,
     })),
