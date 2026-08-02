@@ -78,7 +78,7 @@ export default function RootLayout({
         url: site.url,
         email: site.email,
         description: site.description,
-        logo: `${site.url}/apple-icon`,
+        logo: `${site.url}/apple-icon.png`,
         founder: {
           "@type": "Person",
           name: "Jackson Cole",

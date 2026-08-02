@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
@@ -126,6 +127,70 @@ export default async function VenturePage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {venture.verified ? (
+        <section className="verified-section" aria-labelledby="verified-heading">
+          <div className="section-inner">
+            <div className="section-heading split-heading">
+              <div>
+                <p className="eyebrow">Verified {venture.verified.date}</p>
+                <h2 id="verified-heading">What is actually true in production.</h2>
+              </div>
+              <p>{venture.verified.status}</p>
+            </div>
+            <ul className="evidence-list">
+              {venture.verified.evidence.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            {venture.screenshot ? (
+              <figure className="venture-shot">
+                <Image
+                  alt={venture.screenshot.alt}
+                  height={venture.screenshot.height}
+                  src={venture.screenshot.src}
+                  width={venture.screenshot.width}
+                />
+                <figcaption>
+                  {venture.screenshot.environment} · captured {venture.screenshot.capturedAt}
+                </figcaption>
+              </figure>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
+      {venture.businessModel || venture.ask || venture.openRisks ? (
+        <section className="commercial-section" aria-labelledby="commercial-heading">
+          <div className="section-inner commercial-grid">
+            <h2 className="sr-only" id="commercial-heading">
+              Business model, current ask, and open risks
+            </h2>
+            {venture.businessModel ? (
+              <div>
+                <p className="eyebrow">Business model</p>
+                <p>{venture.businessModel}</p>
+              </div>
+            ) : null}
+            {venture.ask ? (
+              <div>
+                <p className="eyebrow">Current ask</p>
+                <p>{venture.ask}</p>
+              </div>
+            ) : null}
+            {venture.openRisks?.length ? (
+              <div>
+                <p className="eyebrow">Open risks</p>
+                <ul className="risk-list">
+                  {venture.openRisks.map((risk) => (
+                    <li key={risk}>{risk}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
 
       <section className="venture-vision" aria-labelledby="vision-heading">
         <div className="section-inner venture-vision-grid">

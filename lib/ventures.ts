@@ -2,6 +2,7 @@ export type VentureGroup = "company" | "mission" | "operating" | "lab";
 
 export type VentureStage =
   | "Live"
+  | "Live site"
   | "Launch track"
   | "Pilot build"
   | "Regional preview"
@@ -39,6 +40,30 @@ export type Venture = {
   websiteLabel?: string;
   repository?: string;
   customerNote?: string;
+  /**
+   * Point-in-time production verification. `date` is when the evidence was
+   * gathered against the live system; `status` is one precise sentence; every
+   * `evidence` entry must be independently checkable (a URL, a route, a public
+   * behavior) — never aspiration.
+   */
+  verified?: {
+    date: string;
+    status: string;
+    evidence: string[];
+  };
+  businessModel?: string;
+  /** The single current need — operator, pilot, partner, investment discussion, or none. */
+  ask?: string;
+  /** Public-safe open risks. Material, honest, non-exploitable. */
+  openRisks?: string[];
+  screenshot?: {
+    src: string;
+    alt: string;
+    capturedAt: string;
+    environment: string;
+    width: number;
+    height: number;
+  };
   featured: boolean;
   visual:
     | "explore"
@@ -89,6 +114,33 @@ export const ventures: Venture[] = [
     repository: "https://github.com/AutomatedEmpires/explore-and-earn",
     customerNote:
       "Explore&Earn is live. Opportunity details come from hosts and source evidence and should be confirmed before making travel or employment decisions.",
+    verified: {
+      date: "2026-07-31",
+      status:
+        "Live at exploreandearn.com with production sign-in, a public listings API, and billing rails built and deliberately gated. The marketplace feed is empty until the first hosts publish.",
+      evidence: [
+        "Production domain serves the full product with per-page metadata; the public seeker browse surface works without an account",
+        "Production authentication runs on a dedicated live identity instance at clerk.exploreandearn.com",
+        "Billing is implemented end to end (checkout, portal, tiers) and intentionally cannot charge until founder activation — no real card has ever been charged",
+        "The public feed reports exactly what hosts have published — zero listings today, disclosed on the page itself",
+        "A public API and machine-readable interfaces (llms.txt, MCP server, JSON-LD) ship in production",
+      ],
+    },
+    businessModel:
+      "Hosts pay for placement through subscription tiers and announcement products (built and gated); the marketplace is free for seekers.",
+    ask: "First hosts: seasonal employers who want real opportunities in front of seekers at launch.",
+    openRisks: [
+      "Marketplace cold start — supply has to arrive before the engineering maturity matters commercially",
+      "Revenue activation is founder-gated behind a payment-account verification step",
+    ],
+    screenshot: {
+      src: "/evidence/2026-08-01/explore-and-earn-1440.png",
+      alt: "Explore&Earn production homepage: seeker-first search over housing, meals, and pay",
+      capturedAt: "2026-08-01",
+      environment: "Production — exploreandearn.com",
+      width: 1440,
+      height: 900,
+    },
     featured: true,
     visual: "explore",
     palette: { ink: "#15382e", accent: "#b9ff66", soft: "#e9f4d8" },
@@ -128,6 +180,33 @@ export const ventures: Venture[] = [
     repository: "https://github.com/AutomatedEmpires/logloads",
     customerNote:
       "LogLoads is coordination software for forestry logistics teams — not a broker, carrier, dispatch-for-hire operator, or payment processor. It is in pilot; conversations are focused on real operating workflows and regional fit.",
+    verified: {
+      date: "2026-07-31",
+      status:
+        "Live at logloads.com: the full public product — pricing, role pages, legal set, sign-up — with an honestly empty public load board while pilot activation stays founder-gated.",
+      evidence: [
+        "Public site serves marketing, pricing, legal, and sign-in surfaces in production",
+        "Published pricing is real: drivers free forever, Dispatch Pro $499/mo for fleets, metered host Network plans billed on completed loads only",
+        "Subscription billing is implemented and proven in test mode; collection is disabled until a founder-led pilot activation ledger completes",
+        "The public board states plainly when no loads are public — no fabricated activity",
+        "Public pages state pay is set by the host; no platform-invented driver-pay figures remain",
+      ],
+    },
+    businessModel:
+      "Hosts pay metered Network subscriptions on completed load movements only; drivers are free. Strictly non-custodial: LogLoads is not a broker, carrier, dispatcher-for-hire, or payment processor.",
+    ask: "A pilot: one regional timber operation ready to run its real loads through the network.",
+    openRisks: [
+      "Zero customers today; enterprise-scale pricing is published ahead of the first pilot",
+      "A transitional data layer is being replaced in-flight as part of an active reconstruction program",
+    ],
+    screenshot: {
+      src: "/evidence/2026-08-01/logloads-1440.png",
+      alt: "LogLoads production homepage: the public timber load board and operating network",
+      capturedAt: "2026-08-01",
+      environment: "Production — logloads.com",
+      width: 1440,
+      height: 900,
+    },
     featured: true,
     visual: "logloads",
     palette: { ink: "#14251b", accent: "#ffb15c", soft: "#e7ecdf" },
@@ -167,6 +246,33 @@ export const ventures: Venture[] = [
     repository: "https://github.com/AutomatedEmpires/sweepza",
     customerNote:
       "Promotions are offered by their original sponsors. Sweepza helps people discover them and links to the official source for rules and entry.",
+    verified: {
+      date: "2026-07-31",
+      status:
+        "Live at sweepza.com: discovery feed, listing detail, winner wall, and host submission all serve in production. Inventory is deliberately small while source ingestion awaits compliance activation.",
+      evidence: [
+        "The live feed renders real, curated sweepstakes with direct links to official rules and entry",
+        "A scheduled production smoke check probes the live site every six hours and has passed continuously",
+        "The ingestion engine is built but dark behind explicit compliance gates — today's listings are curated manually",
+        "The winner wall shows only what members have actually posted; empty states are honest",
+        "Billing is built and deliberately inactive; seekers are free by design",
+      ],
+    },
+    businessModel:
+      "Host-funded subscriptions and listing add-ons (built, not yet activated). Sweepza links out to official sponsors and never operates promotions itself.",
+    ask: "Official promotion sources and partners as ingestion activates.",
+    openRisks: [
+      "Inventory depth depends on the founder's ingestion activation decision",
+      "Entry streaks are self-reported and winner posts are moderated, not independently verified — and the product says so",
+    ],
+    screenshot: {
+      src: "/evidence/2026-08-01/sweepza-1440.png",
+      alt: "Sweepza production homepage: the daily sweepstakes discovery run",
+      capturedAt: "2026-08-01",
+      environment: "Production — sweepza.com",
+      width: 1440,
+      height: 900,
+    },
     featured: true,
     visual: "sweepza",
     palette: { ink: "#24122f", accent: "#ff4fa3", soft: "#f7e2f1" },
@@ -176,7 +282,7 @@ export const ventures: Venture[] = [
     slug: "lake-and-pine",
     name: "Lake & Pine",
     group: "operating",
-    stage: "Live",
+    stage: "Live site",
     tone: "live",
     category: "Premium property care",
     tagline: "Interior care for exceptional properties.",
@@ -207,6 +313,32 @@ export const ventures: Venture[] = [
     repository: "https://github.com/AutomatedEmpires/lakeandpine",
     customerNote:
       "Lake & Pine works consultation-first: scheduling and pricing are handled through a direct conversation rather than online checkout.",
+    verified: {
+      date: "2026-07-31",
+      status:
+        "The consultative site is live at lakeandpinecleaning.com. Direct contact channels and the consultation intake are the current activation step, so the site cannot yet capture a lead.",
+      evidence: [
+        "Live branded site with LocalBusiness structured data across service, area, and booking pages",
+        "Operating gates (consultation intake, cleaner applications, payments) are deliberately fail-closed until contact channels activate — stated on the site itself",
+        "A full operations platform (crew workspace, scheduling, care standards, refund ledger) exists in code ahead of first use",
+        "No online checkout by design: pricing is a custom proposal after a consultation",
+      ],
+    },
+    businessModel:
+      "Clients pay for recurring and seasonal property care via custom proposals after a consultation; no self-serve checkout.",
+    ask: "First consultations in North Idaho once direct phone and email activate.",
+    openRisks: [
+      "Lead capture is not yet active — organic demand cannot be recorded until intake and contact channels turn on",
+      "The venture's long-term shape (local service business vs. property-care operating platform) is an open founder decision",
+    ],
+    screenshot: {
+      src: "/evidence/2026-08-01/lake-and-pine-1440.png",
+      alt: "Lake & Pine production homepage: consultation-first premium property care",
+      capturedAt: "2026-08-01",
+      environment: "Production — lakeandpinecleaning.com",
+      width: 1440,
+      height: 900,
+    },
     featured: true,
     visual: "lake",
     palette: { ink: "#20352f", accent: "#92c7a8", soft: "#e7eee8" },
@@ -245,6 +377,32 @@ export const ventures: Venture[] = [
     repository: "https://github.com/AutomatedEmpires/Open-Resource-Access-Network",
     customerNote:
       "ORAN is preparing a regional preview. It routes people toward verified services and appropriate crisis resources; it is not an emergency service.",
+    verified: {
+      date: "2026-07-31",
+      status:
+        "The full product runs on a production preview deployment with real verified-provider data flowing through the actual retrieval engine. A public regional launch has not happened yet.",
+      evidence: [
+        "The production API returns real published services — government-sourced health and community providers with addresses, coordinates, verification timestamps, and confidence scores",
+        "Six scheduled jobs run daily in production: ingestion, freshness scanning, SLA checks, coverage-gap detection, confidence regression, and account erasure",
+        "CI enforces an accessibility gate, visual regression, and a bundle-size budget on every change",
+        "Records carry source provenance and stale-record detection rather than unqualified accuracy claims",
+      ],
+    },
+    businessModel:
+      "Pre-revenue civic infrastructure; sustainability model (grants, institutional partnerships) is an open question being answered with partners, not assumed.",
+    ask: "Community organizations and institutional partners in North Idaho and Eastern Washington for the regional preview.",
+    openRisks: [
+      "All published records so far come from bulk verified-source ingestion; organic provider participation is still to be earned",
+      "Mobile bundle weight is above target; a measured reduction program is underway",
+    ],
+    screenshot: {
+      src: "/evidence/2026-08-01/oran-1440.png",
+      alt: "ORAN production preview: plain-language intake that turns a situation into verified service matches",
+      capturedAt: "2026-08-01",
+      environment: "Production preview — oran-sandy.vercel.app",
+      width: 1440,
+      height: 900,
+    },
     featured: true,
     visual: "oran",
     palette: { ink: "#102d39", accent: "#6de0cf", soft: "#ddf2ef" },
@@ -282,6 +440,23 @@ export const ventures: Venture[] = [
     repository: "https://github.com/AutomatedEmpires/bidspace",
     customerNote:
       "BidSpace is in development. Early conversations are centered on host workflows, vendor fit, and trustworthy allocation.",
+    verified: {
+      date: "2026-07-31",
+      status:
+        "Built end to end — host cockpit, vendor cockpit, and the full bid, award, booking, payment, and settlement loop proven in a recorded 2026-07-07 test run. The public preview is offline pending identity-provider provisioning.",
+      evidence: [
+        "The complete money loop (bid → counter → award → booking → payment → settlement) passed a recorded test-mode run on 2026-07-07; schema work has landed since, so the money path needs re-verification before launch",
+        "Production database schema is provisioned and migrated with a working demo dataset",
+        "Remaining launch blockers are account-provisioning actions (auth, payments KYC, maps), not engineering",
+      ],
+    },
+    businessModel:
+      "Host-side fees on placements (application-fee model designed, sandbox-only); no live payments approved or configured.",
+    ask: "A first venue or market operator to pilot host workflows when the public preview opens.",
+    openRisks: [
+      "The public preview deployment currently fails to serve until auth is provisioned",
+      "The product's .app domain is held by an unrelated third party — the public name and domain need a founder decision",
+    ],
     featured: true,
     visual: "bidspace",
     palette: { ink: "#122b3a", accent: "#55bfff", soft: "#e1f0f7" },
@@ -313,14 +488,40 @@ export const ventures: Venture[] = [
     currentFocus:
       "Improving destination quality, geographic coverage, and the context that helps travelers choose the next stop.",
     latestUpdate:
-      "PinnedAtlas is live and free, with real-destination quality work now at the center of the map experience.",
-    latestDate: "2026-07-21",
+      "PinnedAtlas shipped live and free with real destination data; since mid-July the product has run on its own automation while development is paused.",
+    latestDate: "2026-07-16",
     vision: "A lightweight atlas for the places that make a trip memorable.",
     website: "https://pinnedatlas.com",
     websiteLabel: "Open PinnedAtlas",
     repository: "https://github.com/AutomatedEmpires/pinnedatlas",
     customerNote:
       "PinnedAtlas is free to explore. Travelers should confirm current access, land rules, weather, and safety information with official sources.",
+    verified: {
+      date: "2026-07-31",
+      status:
+        "Live and free at pinnedatlas.com: 228 real destinations render from a geographic data layer, with live conditions scoring refreshed hourly. Premium code exists but is dormant by design.",
+      evidence: [
+        "The destination index server-renders 228 real, named places drawn from an OpenStreetMap-derived geographic database",
+        "An hourly production job refreshes live 'Go Score' conditions from USGS and weather sources",
+        "The product works with no account, ships offline support, and publishes a full sitemap of geographic discovery hubs",
+        "Premium and billing code paths exist but no payment provider is connected — the product is genuinely free today",
+      ],
+    },
+    businessModel:
+      "Free today. A premium tier is designed and built but deliberately not activated; no payment provider is connected.",
+    ask: "None — the next step is internal: activating usage telemetry to establish a traction baseline.",
+    openRisks: [
+      "No analytics or error monitoring is active yet, so no usage evidence exists in either direction",
+      "Development has been idle since mid-July; the product currently coasts on automation",
+    ],
+    screenshot: {
+      src: "/evidence/2026-08-01/pinnedatlas-1440.png",
+      alt: "PinnedAtlas destination index: verified waterfalls, caves, and hot springs with difficulty and trust badges",
+      capturedAt: "2026-08-01",
+      environment: "Production — pinnedatlas.com/spots",
+      width: 1440,
+      height: 900,
+    },
     featured: true,
     visual: "atlas",
     palette: { ink: "#11343b", accent: "#61d6bd", soft: "#dff2eb" },
@@ -354,6 +555,16 @@ export const ventures: Venture[] = [
     latestDate: "2026-07-21",
     vision: "A reusable evidence layer for decisions that deserve more than loose notes.",
     repository: "https://github.com/AutomatedEmpires/AutomatedInterviewer",
+    verified: {
+      date: "2026-07-31",
+      status:
+        "A reserved concept. The public repository has no committed implementation and the domain is parked — nothing has been built yet, and this page says so.",
+      evidence: [
+        "The public repository is empty: no code, no branches, no commits",
+        "automatedinterviewer.com is parked on a registrar placeholder page",
+      ],
+    },
+    ask: "None — the concept is parked until the studio commits to a first workflow.",
     featured: false,
     visual: "interviewer",
     palette: { ink: "#272536", accent: "#9f93ff", soft: "#eceafa" },
@@ -382,6 +593,19 @@ export const ventures: Venture[] = [
     latestDate: "2026-07-21",
     vision: "Define the right problem, then build the product that earns the name.",
     repository: "https://github.com/AutomatedEmpires/certstack",
+    verified: {
+      date: "2026-07-31",
+      status:
+        "A reserved product space. The repository is empty; no domain, deployment, or code exists.",
+      evidence: [
+        "The public repository has no commits",
+        "No deployment or domain exists for this concept",
+      ],
+    },
+    ask: "None — discovery precedes any public commitment.",
+    openRisks: [
+      "The working name overlaps with an unrelated operating company in an adjacent space; the final name is undecided",
+    ],
     featured: false,
     visual: "certstack",
     palette: { ink: "#283130", accent: "#a8d8c7", soft: "#e7efeb" },
@@ -396,7 +620,7 @@ export const liveVentures = ventures.filter((venture) => venture.stage === "Live
 export const portfolioLab = [
   { name: "Workproof", note: "Early studio reservation" },
   { name: "Traffic", note: "Early studio reservation" },
-  { name: "Just Jesus Bro", note: "Brand system in private development" },
+  { name: "Just Jesus Bro", note: "Brand concept — docs only" },
   { name: "Komfort Killz", note: "Brand system in private development" },
 ];
 

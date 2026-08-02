@@ -1,0 +1,167 @@
+[
+  {
+    "venture": "explore-and-earn",
+    "route": "https://exploreandearn.com/",
+    "environment": "Production — exploreandearn.com",
+    "viewport": "390x844",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:24:08.478Z",
+    "file": "evidence/2026-08-01/explore-and-earn-390.png"
+  },
+  {
+    "venture": "explore-and-earn",
+    "route": "https://exploreandearn.com/",
+    "environment": "Production — exploreandearn.com",
+    "viewport": "768x1024",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:24:13.985Z",
+    "file": "evidence/2026-08-01/explore-and-earn-768.png"
+  },
+  {
+    "venture": "explore-and-earn",
+    "route": "https://exploreandearn.com/",
+    "environment": "Production — exploreandearn.com",
+    "viewport": "1440x900",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:24:19.168Z",
+    "file": "evidence/2026-08-01/explore-and-earn-1440.png"
+  },
+  {
+    "venture": "sweepza",
+    "route": "https://sweepza.com/",
+    "environment": "Production — sweepza.com",
+    "viewport": "390x844",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:24:24.306Z",
+    "file": "evidence/2026-08-01/sweepza-390.png"
+  },
+  {
+    "venture": "sweepza",
+    "route": "https://sweepza.com/",
+    "environment": "Production — sweepza.com",
+    "viewport": "768x1024",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:24:28.699Z",
+    "file": "evidence/2026-08-01/sweepza-768.png"
+  },
+  {
+    "venture": "sweepza",
+    "route": "https://sweepza.com/",
+    "environment": "Production — sweepza.com",
+    "viewport": "1440x900",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:24:33.242Z",
+    "file": "evidence/2026-08-01/sweepza-1440.png"
+  },
+  {
+    "venture": "pinnedatlas",
+    "route": "https://pinnedatlas.com/spots",
+    "environment": "Production — pinnedatlas.com",
+    "viewport": "390x844",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-02T01:18:09.036Z",
+    "file": "evidence/2026-08-01/pinnedatlas-390.png",
+    "note": "captured on /spots (server-rendered destination index); the map-first homepage needs client WebGL that headless capture cannot render"
+  },
+  {
+    "venture": "pinnedatlas",
+    "route": "https://pinnedatlas.com/spots",
+    "environment": "Production — pinnedatlas.com",
+    "viewport": "768x1024",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-02T01:18:28.526Z",
+    "file": "evidence/2026-08-01/pinnedatlas-768.png",
+    "note": "captured on /spots (server-rendered destination index); the map-first homepage needs client WebGL that headless capture cannot render"
+  },
+  {
+    "venture": "pinnedatlas",
+    "route": "https://pinnedatlas.com/spots",
+    "environment": "Production — pinnedatlas.com",
+    "viewport": "1440x900",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-02T01:18:48.141Z",
+    "file": "evidence/2026-08-01/pinnedatlas-1440.png",
+    "note": "captured on /spots (server-rendered destination index); the map-first homepage needs client WebGL that headless capture cannot render"
+  },
+  {
+    "venture": "lake-and-pine",
+    "route": "https://lakeandpinecleaning.com/",
+    "environment": "Production — lakeandpinecleaning.com",
+    "viewport": "390x844",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:24:58.822Z",
+    "file": "evidence/2026-08-01/lake-and-pine-390.png"
+  },
+  {
+    "venture": "lake-and-pine",
+    "route": "https://lakeandpinecleaning.com/",
+    "environment": "Production — lakeandpinecleaning.com",
+    "viewport": "768x1024",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:25:03.354Z",
+    "file": "evidence/2026-08-01/lake-and-pine-768.png"
+  },
+  {
+    "venture": "lake-and-pine",
+    "route": "https://lakeandpinecleaning.com/",
+    "environment": "Production — lakeandpinecleaning.com",
+    "viewport": "1440x900",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:25:08.558Z",
+    "file": "evidence/2026-08-01/lake-and-pine-1440.png"
+  },
+  {
+    "venture": "logloads",
+    "route": "https://logloads.com/",
+    "environment": "Production — logloads.com",
+    "viewport": "390x844",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:25:15.761Z",
+    "file": "evidence/2026-08-01/logloads-390.png"
+  },
+  {
+    "venture": "logloads",
+    "route": "https://logloads.com/",
+    "environment": "Production — logloads.com",
+    "viewport": "768x1024",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:25:20.162Z",
+    "file": "evidence/2026-08-01/logloads-768.png"
+  },
+  {
+    "venture": "logloads",
+    "route": "https://logloads.com/",
+    "environment": "Production — logloads.com",
+    "viewport": "1440x900",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:25:26.397Z",
+    "file": "evidence/2026-08-01/logloads-1440.png"
+  },
+  {
+    "venture": "oran",
+    "route": "https://oran-sandy.vercel.app/",
+    "environment": "Production preview — oran-sandy.vercel.app",
+    "viewport": "390x844",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:25:32.614Z",
+    "file": "evidence/2026-08-01/oran-390.png"
+  },
+  {
+    "venture": "oran",
+    "route": "https://oran-sandy.vercel.app/",
+    "environment": "Production preview — oran-sandy.vercel.app",
+    "viewport": "768x1024",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:25:37.424Z",
+    "file": "evidence/2026-08-01/oran-768.png"
+  },
+  {
+    "venture": "oran",
+    "route": "https://oran-sandy.vercel.app/",
+    "environment": "Production preview — oran-sandy.vercel.app",
+    "viewport": "1440x900",
+    "httpStatus": "200",
+    "capturedAt": "2026-08-01T15:25:43.903Z",
+    "file": "evidence/2026-08-01/oran-1440.png"
+  }
+]

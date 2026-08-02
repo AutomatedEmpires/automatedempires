@@ -13,6 +13,8 @@ export function Footer() {
         <p>© {new Date().getFullYear()} AutomatedEmpires</p>
         <nav aria-label="Footer navigation">
           <Link href="/ventures">Portfolio</Link>
+          <Link href="/capabilities">Capabilities</Link>
+          <Link href="/invest">Invest</Link>
           <Link href="/status">Snapshot</Link>
           <Link href="/company">Studio</Link>
           <Link href="/build">Updates</Link>

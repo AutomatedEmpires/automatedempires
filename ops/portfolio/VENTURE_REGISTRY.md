@@ -1,5 +1,11 @@
 # AutomatedEmpires Venture Registry
 
+> **Superseded for product status (2026-08-01):** current venture stages,
+> production verification, and the founder-action ledger live in
+> [`PORTFOLIO_RECONSTRUCTION_20260801.md`](PORTFOLIO_RECONSTRUCTION_20260801.md),
+> and the public registry is `lib/ventures.ts`. This file remains the dated
+> infrastructure snapshot below.
+
 **Verified snapshot:** 2026-07-10
 **Operating model:** Shared ownership. Separated operations.
 
