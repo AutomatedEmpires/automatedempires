@@ -12,6 +12,7 @@ export const site = {
 export const navItems = [
   { href: "/ventures", label: "Portfolio" },
   { href: "/company", label: "Studio" },
+  { href: "/invest", label: "Invest" },
   { href: "/build", label: "Updates" },
   { href: "/founder", label: "Founder" },
   { href: "/contact", label: "Contact" },

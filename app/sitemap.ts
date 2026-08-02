@@ -23,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: "/ventures", lastModified: new Date(`${latestVentureChange}T00:00:00Z`) },
     { route: "/status", lastModified: new Date(`${latestVentureChange}T00:00:00Z`) },
     { route: "/company" },
+    { route: "/capabilities" },
+    { route: "/invest", lastModified: new Date(`${latestVentureChange}T00:00:00Z`) },
     { route: "/founder" },
     { route: "/build", lastModified: new Date(`${latestUpdate}T00:00:00Z`) },
     { route: "/contact" },
